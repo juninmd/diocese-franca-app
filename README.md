@@ -2,6 +2,8 @@
 
 Aplicativo completo para a Diocese de Franca com backend API e app React Native.
 
+> 🚀 **[Veja o Guia Rápido de Início](./QUICK_START.md)** para começar em minutos!
+
 ## 📋 Estrutura do Projeto
 
 Este projeto é dividido em duas partes principais:
