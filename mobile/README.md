@@ -32,6 +32,26 @@ const API_BASE_URL = 'http://localhost:3000'; // URL do backend
 
 **Nota**: Para testar no dispositivo físico ou emulador, use o IP da sua máquina em vez de `localhost`.
 
+### Descobrir seu IP local:
+
+**No Windows:**
+```bash
+ipconfig
+# Procure por "IPv4 Address" na seção da sua rede ativa
+```
+
+**No Mac/Linux:**
+```bash
+ifconfig
+# Ou use: hostname -I
+# Procure por um IP no formato 192.168.x.x ou 10.0.x.x
+```
+
+**Configurações por tipo de emulador:**
+- Emulador Android: `http://10.0.2.2:3000`
+- Emulador iOS: `http://localhost:3000` ou o IP da máquina
+- Dispositivo físico: `http://SEU_IP:3000` (ex: `http://192.168.1.100:3000`)
+
 ## Executar o app
 
 ```bash
