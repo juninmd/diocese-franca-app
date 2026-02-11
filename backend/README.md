@@ -24,13 +24,13 @@ API REST para consulta de informações da Diocese de Franca, incluindo igrejas,
 ## Instalação
 
 ```bash
-npm install
+pnpm install
 ```
 
 ## Executar o servidor
 
 ```bash
-npm start
+pnpm start
 ```
 
 O servidor estará disponível em `http://localhost:3000`
