@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "name": "Dom Pedro Luiz Stringhini",
+    "title": "Bispo Diocesano",
+    "churchId": 1,
+    "email": "bispo@diocesefranca.org.br",
+    "phone": "(16) 3711-1400",
+    "bio": "Bispo da Diocese de Franca desde 2014.",
+    "image": "https://via.placeholder.com/200x200?text=Bispo"
+  },
+  {
+    "id": 2,
+    "name": "Pe. José Carlos Silva",
+    "title": "Pároco",
+    "churchId": 1,
+    "email": "catedral@diocesefranca.org.br",
+    "phone": "(16) 3711-1400",
+    "bio": "Pároco da Catedral Nossa Senhora da Conceição.",
+    "image": "https://via.placeholder.com/200x200?text=Pe+Jose"
+  },
+  {
+    "id": 3,
+    "name": "Pe. Antônio Santos",
+    "title": "Pároco",
+    "churchId": 2,
+    "email": "saobendito@diocesefranca.org.br",
+    "phone": "(16) 3722-1234",
+    "bio": "Pároco da Paróquia São Benedito.",
+    "image": "https://via.placeholder.com/200x200?text=Pe+Antonio"
+  },
+  {
+    "id": 4,
+    "name": "Pe. Marcos Oliveira",
+    "title": "Pároco",
+    "churchId": 3,
+    "email": "santarita@diocesefranca.org.br",
+    "phone": "(16) 3723-5678",
+    "bio": "Pároco da Paróquia Santa Rita de Cássia.",
+    "image": "https://via.placeholder.com/200x200?text=Pe+Marcos"
+  },
+  {
+    "id": 5,
+    "name": "Pe. Francisco Costa",
+    "title": "Pároco",
+    "churchId": 4,
+    "email": "saofrancisco@diocesefranca.org.br",
+    "phone": "(16) 3724-9876",
+    "bio": "Pároco da Paróquia São Francisco de Assis.",
+    "image": "https://via.placeholder.com/200x200?text=Pe+Francisco"
+  }
+]

@@ -1,0 +1,46 @@
+[
+  {
+    "id": 1,
+    "name": "Catedral Nossa Senhora da Conceição da Franca",
+    "address": "Praça Nossa Senhora da Conceição, 85 - Centro",
+    "city": "Franca",
+    "state": "SP",
+    "zipCode": "14400-670",
+    "phone": "(16) 3711-1400",
+    "description": "A Catedral é a igreja principal da Diocese de Franca, sede do bispo diocesano.",
+    "image": "https://via.placeholder.com/400x300?text=Catedral"
+  },
+  {
+    "id": 2,
+    "name": "Paróquia São Benedito",
+    "address": "Rua Major Claudiano, 3255 - Jardim América",
+    "city": "Franca",
+    "state": "SP",
+    "zipCode": "14405-431",
+    "phone": "(16) 3722-1234",
+    "description": "Paróquia dedicada a São Benedito, localizada no bairro Jardim América.",
+    "image": "https://via.placeholder.com/400x300?text=Sao+Benedito"
+  },
+  {
+    "id": 3,
+    "name": "Paróquia Santa Rita de Cássia",
+    "address": "Rua Voluntários de Franca, 2950 - Vila Aparecida",
+    "city": "Franca",
+    "state": "SP",
+    "zipCode": "14405-191",
+    "phone": "(16) 3723-5678",
+    "description": "Paróquia dedicada a Santa Rita de Cássia, padroeira das causas impossíveis.",
+    "image": "https://via.placeholder.com/400x300?text=Santa+Rita"
+  },
+  {
+    "id": 4,
+    "name": "Paróquia São Francisco de Assis",
+    "address": "Av. Dr. Flávio Rocha, 4500 - Cidade Nova",
+    "city": "Franca",
+    "state": "SP",
+    "zipCode": "14401-320",
+    "phone": "(16) 3724-9876",
+    "description": "Paróquia dedicada a São Francisco de Assis, patrono da ecologia.",
+    "image": "https://via.placeholder.com/400x300?text=Sao+Francisco"
+  }
+]
