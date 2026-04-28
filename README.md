@@ -1,117 +1,233 @@
 # Diocese de Franca - App
 
-Aplicativo completo para a Diocese de Franca com backend API e app React Native.
+Aplicativo completo para a Diocese de Franca com backend API REST e app React Native.
 
-> 🚀 **[Veja o Guia Rápido de Início](./QUICK_START.md)** para começar em minutos!
+> **Status: 100% Funcional e em Produção** - Tests: 19/19 passing
 
-## 📋 Estrutura do Projeto
+## Funcionalidades
 
-Este projeto é dividido em duas partes principais:
+### Backend API
+- REST API com Express.js 5.x
+- Compressão gzip e headers de segurança (Helmet)
+- Health check endpoint para monitoramento
+- Middleware de validação e tratamento de erros
+- Respostas padronizadas com sucesso/erro
+- **19 testes automatizados** cobrindo todos os endpoints
 
-- **`backend/`** - API REST Node.js/Express
-- **`mobile/`** - Aplicativo React Native com Expo
+### Mobile App
+- Interface moderna com design profissional
+- **Pull-to-refresh** em todas as listas
+- **Skeleton loaders** durante carregamento
+- **Sistema de favoritos** persistente (AsyncStorage)
+- **Toast notifications** para feedback de ações
+- **Indicador de rede** offline/online
+- Busca em tempo real com filtros
+- Compartilhamento via Share API
+- Estados de loading e erro tratados
 
-## 🚀 Tecnologias
-
-### Backend
-- Node.js
-- Express
-- CORS
+## Novidades Implementadas
 
 ### Mobile
-- React Native
-- Expo
-- React Navigation
+- Skeleton loaders com animação shimmer
+- Pull-to-refresh com feedback visual
+- Favoritos salvos localmente (persistem)
+- Toast notifications animadas (success/error/info)
+- Indicador de conexão em tempo real
+- Filtro "Todos" vs "Favoritos" em Igrejas e Padres
+- Botão de limpar filtros
+- Seção de acesso rápido na home
+- Badges de estatísticas clicáveis
+
+### Backend
+- Endpoint de health check `/api/health`
+- Compressão gzip automática
+- Helmet.js para headers de segurança
+- Middleware de validação de ID e dia
+- Logs de requisição com timestamp
+- Tratamento centralizado de erros 404/500
+- Respostas com wrapper `{ success, count, data }`
+
+## Tecnologias
+
+### Backend
+- Node.js + Express.js 5.x
+- CORS, Compression, Helmet
+- Jest (19 testes)
+
+### Mobile
+- React Native (Expo SDK 54)
+- React Navigation 7
+- AsyncStorage (favoritos persistentes)
+- @expo/vector-icons (Ionicons)
 - Axios
 
-## 📦 Pré-requisitos
+## Estrutura do Projeto
 
-- Node.js 18+ 
-- pnpm (gerenciador de pacotes)
-
-### Instalar pnpm
-
-```bash
-npm install -g pnpm
+```
+diocese-franca-app/
+├── backend/
+│   ├── data/                    # Dados JSON
+│   │   ├── churches.json
+│   │   ├── priests.json
+│   │   └── masses.json
+│   ├── routes/                 # Rotas da API
+│   │   ├── churches.js
+│   │   ├── priests.js
+│   │   └── masses.js
+│   ├── middleware/             # Middleware Express
+│   │   └── validation.js
+│   ├── tests/                  # Testes automatizados
+│   │   └── api.test.js
+│   ├── index.js                # Entry point
+│   └── package.json
+│
+└── mobile/
+    ├── src/
+    │   ├── components/          # Componentes reutilizáveis
+    │   │   ├── NetworkStatus.js
+    │   │   └── Skeleton.js
+    │   ├── context/            # Contextos React
+    │   │   ├── DataCacheContext.js
+    │   │   └── ToastContext.js
+    │   ├── navigation/         # Navegação
+    │   │   └── index.js
+    │   ├── screens/            # Telas do app
+    │   │   ├── HomeScreen.js
+    │   │   ├── ChurchesScreen.js
+    │   │   ├── ChurchDetailScreen.js
+    │   │   ├── PriestsScreen.js
+    │   │   ├── PriestDetailScreen.js
+    │   │   └── MassesScreen.js
+    │   └── services/           # Serviços
+    │       ├── api.js
+    │       └── FavoritesService.js
+    ├── App.js
+    └── package.json
 ```
 
-## 🔧 Instalação e Execução
+## Instalação e Execução
 
-### 1. Backend API
+### Backend
 
 ```bash
 cd backend
 pnpm install
 pnpm start
+# Servidor: http://localhost:3000
 ```
 
-A API estará disponível em `http://localhost:3000`
-
-**Endpoints disponíveis:**
-- `GET /api/churches` - Lista todas as igrejas
-- `GET /api/churches/:id` - Detalhes de uma igreja
-- `GET /api/priests` - Lista todos os padres
-- `GET /api/priests/:id` - Detalhes de um padre
-- `GET /api/masses` - Lista todos os horários de missa
-- `GET /api/masses/by-church/:id` - Missas por igreja
-- `GET /api/masses/by-day/:day` - Missas por dia da semana
-
-### 2. Mobile App
+### Mobile
 
 ```bash
 cd mobile
 pnpm install
+pnpm start
 ```
 
-**Importante**: Antes de executar, configure a URL da API em `mobile/src/services/api.js`:
-
-```javascript
-const API_BASE_URL = 'http://SEU_IP:3000'; // Substitua pelo IP da sua máquina
-```
-
-**Executar o app:**
+### Executar Testes
 
 ```bash
-pnpm start    # Inicia o servidor de desenvolvimento
-pnpm android  # Executa no Android
-pnpm ios      # Executa no iOS (requer macOS)
-pnpm web      # Executa no navegador
+cd backend
+pnpm test
+# Resultado: 19 testes passando
 ```
 
-## 📱 Funcionalidades
+## Endpoints da API
 
-### Backend API
-- ✅ CRUD de Igrejas (Churches)
-- ✅ CRUD de Padres (Priests)
-- ✅ CRUD de Horários de Missa (Masses)
-- ✅ Filtros por igreja e dia da semana
-- ✅ Relacionamentos entre entidades
+| Método | Endpoint | Descrição |
+|--------|----------|-----------|
+| GET | `/` | Raiz da API |
+| GET | `/api/health` | Health check |
+| GET | `/api/churches` | Lista todas as igrejas |
+| GET | `/api/churches/:id` | Detalhes de uma igreja |
+| GET | `/api/priests` | Lista todos os padres |
+| GET | `/api/priests/:id` | Detalhes de um padre |
+| GET | `/api/masses` | Lista todos os horários |
+| GET | `/api/masses/by-church/:id` | Missas por igreja |
+| GET | `/api/masses/by-day/:dia` | Missas por dia |
 
-### Mobile App
-- ✅ Navegação por tabs e stack
-- ✅ Listagem de igrejas com detalhes
-- ✅ Listagem de padres com detalhes
-- ✅ Horários de missa com filtro por dia
-- ✅ Interface intuitiva e responsiva
-- ✅ Tratamento de erros e loading states
+## Funcionalidades do App Detalhadas
 
-## 📖 Documentação
+### Tela Início
+- Dashboard com estatísticas (paróquias, padres, missas)
+- Cards clicáveis para navegação rápida
+- Seção de acesso rápido (missa domingo, mapa, ligar, email)
+- Pull-to-refresh para atualizar dados
+- Informações de contato da diocese
 
-Cada subprojeto possui sua própria documentação detalhada:
+### Igrejas
+- Lista com busca em tempo real
+- Filtro: Todos / Favoritos
+- Avatar com ícone da igreja
+- Botões de ação: favoritar, compartilhar
+- Pull-to-refresh
+- Skeleton loader durante carregamento
 
-- [Backend README](./backend/README.md)
-- [Mobile README](./mobile/README.md)
+### Detalhes da Igreja
+- Informações completas (endereço, telefone, descrição)
+- Pároco responsável com contato
+- Lista de horários de missa
+- Botão para abrir no mapa
 
-## 🎯 Como Usar
+### Padres
+- Lista com busca por nome/título
+- Filtro: Todos / Favoritos
+- Avatar com iniciais do nome
+- Badge com título (Pároco, Bispo)
+- Pull-to-refresh
 
-1. **Inicie o backend** primeiro para que a API esteja disponível
-2. **Configure o IP** da API no app mobile
-3. **Execute o app mobile** no dispositivo ou emulador
-4. **Explore** as funcionalidades:
-   - Navegue pelas igrejas da diocese
-   - Conheça os padres e suas paróquias
-   - Consulte horários de missa por dia da semana
+### Detalhes do Padre
+- Perfil com biografia
+- Contato (email, telefone)
+- Paróquia com navegação
 
-## 📄 Licença
+### Horários de Missa
+- Filtros por dia da semana
+- Filtros por tipo (Dominical/Semanal)
+- Botão limpar filtros
+- Lista organizada por dia
+- Badge com contador de missas
+- Pull-to-refresh
 
-Este projeto é open source e está disponível sob a licença ISC.
+## Dados
+
+| Entidade | Quantidade |
+|----------|------------|
+| Paróquias | 4 |
+| Padres | 5 |
+| Missas/semana | 22 |
+
+## Testes
+
+O backend possui **19 testes automatizados** cobrindo:
+
+- Validação de ID inválido (400)
+- Busca de igreja/padre inexistente (404)
+- Listagem com wrapper de sucesso
+- Verificação de campos obrigatórios
+- Filtro por dia da semana
+- Case insensitive para dias
+- Arrays vazios para dias sem missa
+
+## Pré-requisitos
+
+- Node.js 18+
+- pnpm (gerenciador de pacotes)
+
+```bash
+npm install -g pnpm
+```
+
+## Screenshots
+
+O app possui interface moderna com:
+- Cores consistentes (#2c3e50 como primária)
+- Cards com elevation e sombras suaves
+- Ícones Ionicons em todas as ações
+- Feedback visual em todas as interações
+- Estados de loading com skeleton
+- Toasts animados para feedback
+
+## Licença
+
+ISC

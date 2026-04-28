@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, ActivityIndicator, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, ActivityIndicator, TouchableOpacity, Linking } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { getChurchById } from '../services/api';
 
 export default function ChurchDetailScreen({ route }) {
@@ -20,16 +21,29 @@ export default function ChurchDetailScreen({ route }) {
       setError(null);
     } catch (err) {
       setError('Erro ao carregar detalhes da igreja.');
-      console.error(err);
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleCall = (phone) => {
+    Linking.openURL(`tel:${phone.replace(/\D/g, '')}`);
+  };
+
+  const handleEmail = (email) => {
+    Linking.openURL(`mailto:${email}`);
+  };
+
+  const handleMap = (address) => {
+    const query = encodeURIComponent(address);
+    Linking.openURL(`https://maps.google.com/?q=${query}`);
   };
 
   if (loading) {
     return (
       <View style={styles.centerContainer}>
         <ActivityIndicator size="large" color="#2c3e50" />
+        <Text style={styles.loadingText}>Carregando...</Text>
       </View>
     );
   }
@@ -37,6 +51,7 @@ export default function ChurchDetailScreen({ route }) {
   if (error || !church) {
     return (
       <View style={styles.centerContainer}>
+        <Ionicons name="alert-circle-outline" size={64} color="#e74c3c" />
         <Text style={styles.errorText}>{error || 'Igreja não encontrada'}</Text>
         <TouchableOpacity style={styles.retryButton} onPress={loadChurchDetail}>
           <Text style={styles.retryButtonText}>Tentar Novamente</Text>
@@ -45,45 +60,123 @@ export default function ChurchDetailScreen({ route }) {
     );
   }
 
+  const groupedMasses = church.masses?.reduce((acc, mass) => {
+    if (!acc[mass.dayOfWeek]) {
+      acc[mass.dayOfWeek] = [];
+    }
+    acc[mass.dayOfWeek].push(mass);
+    return acc;
+  }, {}) || {};
+
+  const dayOrder = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
+  const sortedDays = Object.keys(groupedMasses).sort((a, b) => {
+    return dayOrder.indexOf(a) - dayOrder.indexOf(b);
+  });
+
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <View style={styles.header}>
+        <View style={styles.iconBadge}>
+          <Ionicons name="church" size={40} color="#fff" />
+        </View>
         <Text style={styles.title}>{church.name}</Text>
-      </View>
-
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Informações</Text>
-        <Text style={styles.info}>{church.description}</Text>
-        <Text style={styles.label}>Endereço:</Text>
-        <Text style={styles.info}>{church.address}</Text>
-        <Text style={styles.info}>{church.city} - {church.state}</Text>
-        <Text style={styles.info}>CEP: {church.zipCode}</Text>
-        <Text style={styles.label}>Telefone:</Text>
-        <Text style={styles.info}>{church.phone}</Text>
-      </View>
-
-      {church.priest && (
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Pároco</Text>
-          <Text style={styles.priestName}>{church.priest.name}</Text>
-          <Text style={styles.info}>{church.priest.title}</Text>
-          {church.priest.email && <Text style={styles.info}>Email: {church.priest.email}</Text>}
-          {church.priest.bio && <Text style={styles.info}>{church.priest.bio}</Text>}
+        <View style={styles.locationBadge}>
+          <Ionicons name="location" size={14} color="#ecf0f1" />
+          <Text style={styles.locationText}>{church.city} - {church.state}</Text>
         </View>
-      )}
+      </View>
 
-      {church.masses && church.masses.length > 0 && (
+      <View style={styles.content}>
+        {church.description && (
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>Sobre</Text>
+            <Text style={styles.description}>{church.description}</Text>
+          </View>
+        )}
+
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Horários de Missa</Text>
-          {church.masses.map((mass) => (
-            <View key={mass.id} style={styles.massItem}>
-              <Text style={styles.massDay}>{mass.dayOfWeek}</Text>
-              <Text style={styles.massTime}>{mass.time}</Text>
-              <Text style={styles.massType}>{mass.type}</Text>
+          <Text style={styles.sectionTitle}>Informações</Text>
+          <View style={styles.infoCard}>
+            <TouchableOpacity style={styles.infoRow} onPress={() => handleMap(church.address)}>
+              <View style={styles.infoIconContainer}>
+                <Ionicons name="map-outline" size={20} color="#2c3e50" />
+              </View>
+              <View style={styles.infoContent}>
+                <Text style={styles.infoLabel}>Endereço</Text>
+                <Text style={styles.infoValue}>{church.address}</Text>
+                <Text style={styles.infoSecondary}>{church.city} - {church.state}, CEP: {church.zipCode}</Text>
+              </View>
+              <Ionicons name="open-outline" size={18} color="#3498db" />
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.infoRow} onPress={() => handleCall(church.phone)}>
+              <View style={styles.infoIconContainer}>
+                <Ionicons name="call-outline" size={20} color="#2c3e50" />
+              </View>
+              <View style={styles.infoContent}>
+                <Text style={styles.infoLabel}>Telefone</Text>
+                <Text style={styles.infoValue}>{church.phone}</Text>
+              </View>
+              <Ionicons name="open-outline" size={18} color="#3498db" />
+            </TouchableOpacity>
+          </View>
+        </View>
+
+        {church.priest && (
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>Pároco</Text>
+            <View style={styles.priestCard}>
+              <View style={styles.priestAvatar}>
+                <Ionicons name="person" size={32} color="#fff" />
+              </View>
+              <View style={styles.priestInfo}>
+                <Text style={styles.priestName}>{church.priest.name}</Text>
+                <Text style={styles.priestTitle}>{church.priest.title}</Text>
+                {church.priest.bio && <Text style={styles.priestBio}>{church.priest.bio}</Text>}
+              </View>
             </View>
-          ))}
-        </View>
-      )}
+            <View style={styles.priestContact}>
+              {church.priest.email && (
+                <TouchableOpacity style={styles.contactButton} onPress={() => handleEmail(church.priest.email)}>
+                  <Ionicons name="mail-outline" size={18} color="#fff" />
+                  <Text style={styles.contactButtonText}>Email</Text>
+                </TouchableOpacity>
+              )}
+              {church.priest.phone && (
+                <TouchableOpacity style={styles.contactButton} onPress={() => handleCall(church.priest.phone)}>
+                  <Ionicons name="call-outline" size={18} color="#fff" />
+                  <Text style={styles.contactButtonText}>Ligar</Text>
+                </TouchableOpacity>
+              )}
+            </View>
+          </View>
+        )}
+
+        {church.masses && church.masses.length > 0 && (
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>Horários de Missa</Text>
+            <Text style={styles.massCount}>{church.masses.length} missas cadastradas</Text>
+            {sortedDays.map((day) => (
+              <View key={day} style={styles.dayCard}>
+                <View style={styles.dayHeader}>
+                  <Ionicons name="calendar" size={18} color="#2c3e50" />
+                  <Text style={styles.dayName}>{day}</Text>
+                </View>
+                {groupedMasses[day].map((mass) => (
+                  <View key={mass.id} style={styles.massRow}>
+                    <View style={styles.massTimeContainer}>
+                      <Text style={styles.massTime}>{mass.time}</Text>
+                    </View>
+                    <View style={styles.massDetails}>
+                      <Text style={styles.massType}>{mass.type}</Text>
+                    </View>
+                  </View>
+                ))}
+              </View>
+            ))}
+          </View>
+        )}
+      </View>
     </ScrollView>
   );
 }
@@ -91,96 +184,234 @@ export default function ChurchDetailScreen({ route }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#f8f9fa',
   },
   centerContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
+    backgroundColor: '#f8f9fa',
   },
   header: {
     backgroundColor: '#2c3e50',
-    padding: 20,
+    paddingTop: 20,
+    paddingBottom: 30,
+    alignItems: 'center',
+    borderBottomLeftRadius: 30,
+    borderBottomRightRadius: 30,
+  },
+  iconBadge: {
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    backgroundColor: 'rgba(255,255,255,0.15)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 16,
   },
   title: {
-    fontSize: 24,
+    fontSize: 22,
     fontWeight: 'bold',
     color: '#fff',
+    textAlign: 'center',
+    paddingHorizontal: 20,
+  },
+  locationBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 10,
+    backgroundColor: 'rgba(255,255,255,0.15)',
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 20,
+  },
+  locationText: {
+    fontSize: 13,
+    color: '#ecf0f1',
+    marginLeft: 6,
+  },
+  content: {
+    padding: 16,
   },
   section: {
-    backgroundColor: '#fff',
-    margin: 16,
-    padding: 16,
-    borderRadius: 12,
-    elevation: 3,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
+    marginBottom: 20,
   },
   sectionTitle: {
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: 'bold',
     color: '#2c3e50',
     marginBottom: 12,
   },
-  label: {
+  description: {
     fontSize: 14,
-    fontWeight: 'bold',
-    color: '#34495e',
-    marginTop: 8,
-    marginBottom: 4,
+    color: '#5d6d7e',
+    lineHeight: 22,
+    backgroundColor: '#fff',
+    padding: 16,
+    borderRadius: 12,
   },
-  info: {
-    fontSize: 14,
-    color: '#34495e',
-    marginBottom: 4,
-    lineHeight: 20,
+  infoCard: {
+    backgroundColor: '#fff',
+    borderRadius: 16,
+    overflow: 'hidden',
+  },
+  infoRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: '#f0f4f8',
+  },
+  infoIconContainer: {
+    width: 40,
+    height: 40,
+    borderRadius: 10,
+    backgroundColor: '#f0f4f8',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  infoContent: {
+    flex: 1,
+    marginLeft: 12,
+  },
+  infoLabel: {
+    fontSize: 12,
+    color: '#7f8c8d',
+  },
+  infoValue: {
+    fontSize: 15,
+    fontWeight: '600',
+    color: '#2c3e50',
+    marginTop: 2,
+  },
+  infoSecondary: {
+    fontSize: 12,
+    color: '#95a5a6',
+    marginTop: 2,
+  },
+  priestCard: {
+    backgroundColor: '#fff',
+    borderRadius: 16,
+    padding: 16,
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+  },
+  priestAvatar: {
+    width: 64,
+    height: 64,
+    borderRadius: 32,
+    backgroundColor: '#2c3e50',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  priestInfo: {
+    flex: 1,
+    marginLeft: 14,
   },
   priestName: {
     fontSize: 18,
     fontWeight: 'bold',
     color: '#2c3e50',
-    marginBottom: 4,
   },
-  massItem: {
+  priestTitle: {
+    fontSize: 14,
+    color: '#d35400',
+    marginTop: 2,
+  },
+  priestBio: {
+    fontSize: 13,
+    color: '#7f8c8d',
+    marginTop: 8,
+    lineHeight: 18,
+  },
+  priestContact: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    marginTop: 12,
+    gap: 10,
+  },
+  contactButton: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#2c3e50',
+    paddingVertical: 12,
+    borderRadius: 10,
+    gap: 8,
+  },
+  contactButtonText: {
+    color: '#fff',
+    fontSize: 14,
+    fontWeight: '600',
+  },
+  massCount: {
+    fontSize: 12,
+    color: '#7f8c8d',
+    marginBottom: 12,
+    marginTop: -8,
+  },
+  dayCard: {
+    backgroundColor: '#fff',
+    borderRadius: 12,
+    padding: 14,
+    marginBottom: 10,
+  },
+  dayHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 10,
+    paddingBottom: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#f0f4f8',
+  },
+  dayName: {
+    fontSize: 15,
+    fontWeight: 'bold',
+    color: '#2c3e50',
+    marginLeft: 8,
+  },
+  massRow: {
+    flexDirection: 'row',
     alignItems: 'center',
     paddingVertical: 8,
-    borderBottomWidth: 1,
-    borderBottomColor: '#ecf0f1',
   },
-  massDay: {
-    fontSize: 14,
-    color: '#2c3e50',
-    flex: 2,
+  massTimeContainer: {
+    backgroundColor: '#e8f4f8',
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 8,
   },
   massTime: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#3498db',
+    color: '#2c3e50',
+  },
+  massDetails: {
     flex: 1,
-    textAlign: 'center',
+    marginLeft: 12,
   },
   massType: {
-    fontSize: 12,
+    fontSize: 14,
     color: '#7f8c8d',
-    flex: 1,
-    textAlign: 'right',
+  },
+  loadingText: {
+    marginTop: 12,
+    fontSize: 14,
+    color: '#7f8c8d',
   },
   errorText: {
     fontSize: 16,
     color: '#e74c3c',
     textAlign: 'center',
-    marginBottom: 16,
+    marginTop: 16,
+    marginBottom: 20,
   },
   retryButton: {
     backgroundColor: '#2c3e50',
     paddingHorizontal: 24,
     paddingVertical: 12,
-    borderRadius: 8,
+    borderRadius: 10,
   },
   retryButtonText: {
     color: '#fff',

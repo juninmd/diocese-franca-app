@@ -2,25 +2,36 @@ const express = require('express');
 const router = express.Router();
 const priests = require('../data/priests.json');
 const churches = require('../data/churches.json');
+const { validateId } = require('../middleware/validation');
 
-// Get all priests
 router.get('/', (req, res) => {
-  res.json(priests);
+  res.json({
+    success: true,
+    count: priests.length,
+    data: priests
+  });
 });
 
-// Get priest by ID
-router.get('/:id', (req, res) => {
-  const priest = priests.find(p => p.id === parseInt(req.params.id));
+router.get('/:id', validateId('id'), (req, res) => {
+  const priestId = parseInt(req.params.id);
+  const priest = priests.find(p => p.id === priestId);
+
   if (!priest) {
-    return res.status(404).json({ error: 'Priest not found' });
+    return res.status(404).json({
+      error: 'Priest not found',
+      message: `Padre com ID ${priestId} não encontrado`,
+      priestId
+    });
   }
-  
-  // Include church information
+
   const church = churches.find(c => c.id === priest.churchId);
-  
+
   res.json({
-    ...priest,
-    church
+    success: true,
+    data: {
+      ...priest,
+      church
+    }
   });
 });
 

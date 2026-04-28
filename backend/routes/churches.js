@@ -3,27 +3,38 @@ const router = express.Router();
 const churches = require('../data/churches.json');
 const masses = require('../data/masses.json');
 const priests = require('../data/priests.json');
+const { validateId } = require('../middleware/validation');
 
-// Get all churches
 router.get('/', (req, res) => {
-  res.json(churches);
+  res.json({
+    success: true,
+    count: churches.length,
+    data: churches
+  });
 });
 
-// Get church by ID
-router.get('/:id', (req, res) => {
-  const church = churches.find(c => c.id === parseInt(req.params.id));
+router.get('/:id', validateId('id'), (req, res) => {
+  const churchId = parseInt(req.params.id);
+  const church = churches.find(c => c.id === churchId);
+
   if (!church) {
-    return res.status(404).json({ error: 'Church not found' });
+    return res.status(404).json({
+      error: 'Church not found',
+      message: `Igreja com ID ${churchId} não encontrada`,
+      churchId
+    });
   }
-  
-  // Include masses and priest for this church
+
   const churchMasses = masses.filter(m => m.churchId === church.id);
   const churchPriest = priests.find(p => p.churchId === church.id);
-  
+
   res.json({
-    ...church,
-    masses: churchMasses,
-    priest: churchPriest
+    success: true,
+    data: {
+      ...church,
+      masses: churchMasses,
+      priest: churchPriest
+    }
   });
 });
 

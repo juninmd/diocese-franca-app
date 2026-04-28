@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, ActivityIndicator, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, ActivityIndicator, TouchableOpacity, Linking } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { getPriestById } from '../services/api';
 
 export default function PriestDetailScreen({ route }) {
@@ -20,9 +21,23 @@ export default function PriestDetailScreen({ route }) {
       setError(null);
     } catch (err) {
       setError('Erro ao carregar detalhes do padre.');
-      console.error(err);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleCall = (phone) => {
+    Linking.openURL(`tel:${phone.replace(/\D/g, '')}`);
+  };
+
+  const handleEmail = (email) => {
+    Linking.openURL(`mailto:${email}`);
+  };
+
+  const handleMap = (church) => {
+    if (church && church.address) {
+      const query = encodeURIComponent(`${church.name}, ${church.address}, ${church.city}`);
+      Linking.openURL(`https://maps.google.com/?q=${query}`);
     }
   };
 
@@ -30,6 +45,7 @@ export default function PriestDetailScreen({ route }) {
     return (
       <View style={styles.centerContainer}>
         <ActivityIndicator size="large" color="#2c3e50" />
+        <Text style={styles.loadingText}>Carregando...</Text>
       </View>
     );
   }
@@ -37,6 +53,7 @@ export default function PriestDetailScreen({ route }) {
   if (error || !priest) {
     return (
       <View style={styles.centerContainer}>
+        <Ionicons name="alert-circle-outline" size={64} color="#e74c3c" />
         <Text style={styles.errorText}>{error || 'Padre não encontrado'}</Text>
         <TouchableOpacity style={styles.retryButton} onPress={loadPriestDetail}>
           <Text style={styles.retryButtonText}>Tentar Novamente</Text>
@@ -46,39 +63,82 @@ export default function PriestDetailScreen({ route }) {
   }
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <View style={styles.header}>
-        <Text style={styles.title}>{priest.name}</Text>
-        <Text style={styles.subtitle}>{priest.title}</Text>
-      </View>
-
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Informações</Text>
-        {priest.bio && <Text style={styles.bio}>{priest.bio}</Text>}
-        
-        {priest.email && (
-          <>
-            <Text style={styles.label}>Email:</Text>
-            <Text style={styles.info}>{priest.email}</Text>
-          </>
-        )}
-        
-        {priest.phone && (
-          <>
-            <Text style={styles.label}>Telefone:</Text>
-            <Text style={styles.info}>{priest.phone}</Text>
-          </>
-        )}
-      </View>
-
-      {priest.church && (
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Paróquia</Text>
-          <Text style={styles.churchName}>{priest.church.name}</Text>
-          <Text style={styles.info}>{priest.church.address}</Text>
-          <Text style={styles.info}>{priest.church.city} - {priest.church.state}</Text>
+        <View style={styles.avatarLarge}>
+          <Text style={styles.avatarText}>
+            {priest.name.split(' ').map(n => n[0]).join('').slice(0, 2)}
+          </Text>
         </View>
-      )}
+        <Text style={styles.title}>{priest.name}</Text>
+        <View style={styles.titleBadge}>
+          <Ionicons name="star" size={14} color="#f39c12" />
+          <Text style={styles.titleBadgeText}>{priest.title}</Text>
+        </View>
+      </View>
+
+      <View style={styles.content}>
+        {priest.bio && (
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>Biografia</Text>
+            <View style={styles.bioCard}>
+              <Text style={styles.bioText}>{priest.bio}</Text>
+            </View>
+          </View>
+        )}
+
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Contato</Text>
+          <View style={styles.contactCard}>
+            {priest.email && (
+              <TouchableOpacity style={styles.contactRow} onPress={() => handleEmail(priest.email)}>
+                <View style={styles.contactIconContainer}>
+                  <Ionicons name="mail-outline" size={20} color="#2c3e50" />
+                </View>
+                <View style={styles.contactContent}>
+                  <Text style={styles.contactLabel}>Email</Text>
+                  <Text style={styles.contactValue}>{priest.email}</Text>
+                </View>
+                <Ionicons name="open-outline" size={18} color="#3498db" />
+              </TouchableOpacity>
+            )}
+
+            {priest.phone && (
+              <TouchableOpacity style={styles.contactRow} onPress={() => handleCall(priest.phone)}>
+                <View style={styles.contactIconContainer}>
+                  <Ionicons name="call-outline" size={20} color="#2c3e50" />
+                </View>
+                <View style={styles.contactContent}>
+                  <Text style={styles.contactLabel}>Telefone</Text>
+                  <Text style={styles.contactValue}>{priest.phone}</Text>
+                </View>
+                <Ionicons name="open-outline" size={18} color="#3498db" />
+              </TouchableOpacity>
+            )}
+          </View>
+        </View>
+
+        {priest.church && (
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>Paróquia</Text>
+            <TouchableOpacity style={styles.churchCard} onPress={() => handleMap(priest.church)} activeOpacity={0.8}>
+              <View style={styles.churchIconContainer}>
+                <Ionicons name="church" size={28} color="#fff" />
+              </View>
+              <View style={styles.churchInfo}>
+                <Text style={styles.churchName}>{priest.church.name}</Text>
+                {priest.church.address && (
+                  <Text style={styles.churchAddress} numberOfLines={2}>{priest.church.address}</Text>
+                )}
+                {priest.church.city && (
+                  <Text style={styles.churchCity}>{priest.church.city} - {priest.church.state}</Text>
+                )}
+              </View>
+              <Ionicons name="navigate-outline" size={24} color="#3498db" />
+            </TouchableOpacity>
+          </View>
+        )}
+      </View>
     </ScrollView>
   );
 }
@@ -86,81 +146,166 @@ export default function PriestDetailScreen({ route }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#f8f9fa',
   },
   centerContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
+    backgroundColor: '#f8f9fa',
   },
   header: {
     backgroundColor: '#2c3e50',
-    padding: 20,
+    paddingTop: 30,
+    paddingBottom: 40,
     alignItems: 'center',
+    borderBottomLeftRadius: 30,
+    borderBottomRightRadius: 30,
+  },
+  avatarLarge: {
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    backgroundColor: 'rgba(255,255,255,0.15)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 16,
+  },
+  avatarText: {
+    fontSize: 36,
+    fontWeight: 'bold',
+    color: '#fff',
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
     color: '#fff',
-    marginBottom: 4,
+    textAlign: 'center',
+    paddingHorizontal: 20,
   },
-  subtitle: {
-    fontSize: 16,
+  titleBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 12,
+    backgroundColor: 'rgba(255,255,255,0.15)',
+    paddingHorizontal: 14,
+    paddingVertical: 6,
+    borderRadius: 20,
+  },
+  titleBadgeText: {
+    fontSize: 14,
     color: '#ecf0f1',
+    marginLeft: 6,
+  },
+  content: {
+    padding: 16,
   },
   section: {
-    backgroundColor: '#fff',
-    margin: 16,
-    padding: 16,
-    borderRadius: 12,
-    elevation: 3,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
+    marginBottom: 20,
   },
   sectionTitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#2c3e50',
-    marginBottom: 12,
-  },
-  label: {
-    fontSize: 14,
-    fontWeight: 'bold',
-    color: '#34495e',
-    marginTop: 8,
-    marginBottom: 4,
-  },
-  info: {
-    fontSize: 14,
-    color: '#34495e',
-    marginBottom: 4,
-  },
-  bio: {
-    fontSize: 14,
-    color: '#34495e',
-    marginBottom: 12,
-    lineHeight: 20,
-  },
-  churchName: {
     fontSize: 18,
     fontWeight: 'bold',
     color: '#2c3e50',
-    marginBottom: 8,
+    marginBottom: 12,
+  },
+  bioCard: {
+    backgroundColor: '#fff',
+    borderRadius: 16,
+    padding: 16,
+  },
+  bioText: {
+    fontSize: 15,
+    color: '#5d6d7e',
+    lineHeight: 24,
+  },
+  contactCard: {
+    backgroundColor: '#fff',
+    borderRadius: 16,
+    overflow: 'hidden',
+  },
+  contactRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: '#f0f4f8',
+  },
+  contactIconContainer: {
+    width: 44,
+    height: 44,
+    borderRadius: 12,
+    backgroundColor: '#f0f4f8',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  contactContent: {
+    flex: 1,
+    marginLeft: 14,
+  },
+  contactLabel: {
+    fontSize: 12,
+    color: '#7f8c8d',
+  },
+  contactValue: {
+    fontSize: 15,
+    fontWeight: '600',
+    color: '#2c3e50',
+    marginTop: 2,
+  },
+  churchCard: {
+    backgroundColor: '#fff',
+    borderRadius: 16,
+    padding: 16,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  churchIconContainer: {
+    width: 56,
+    height: 56,
+    borderRadius: 14,
+    backgroundColor: '#2c3e50',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  churchInfo: {
+    flex: 1,
+    marginLeft: 14,
+    marginRight: 10,
+  },
+  churchName: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#2c3e50',
+    marginBottom: 4,
+  },
+  churchAddress: {
+    fontSize: 13,
+    color: '#7f8c8d',
+    marginBottom: 2,
+  },
+  churchCity: {
+    fontSize: 12,
+    color: '#95a5a6',
+  },
+  loadingText: {
+    marginTop: 12,
+    fontSize: 14,
+    color: '#7f8c8d',
   },
   errorText: {
     fontSize: 16,
     color: '#e74c3c',
     textAlign: 'center',
-    marginBottom: 16,
+    marginTop: 16,
+    marginBottom: 20,
   },
   retryButton: {
     backgroundColor: '#2c3e50',
     paddingHorizontal: 24,
     paddingVertical: 12,
-    borderRadius: 8,
+    borderRadius: 10,
   },
   retryButtonText: {
     color: '#fff',
