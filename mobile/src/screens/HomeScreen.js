@@ -232,7 +232,7 @@ export default function HomeScreen({ navigation }) {
         </View>
 
         <View style={styles.footer}>
-          <Text style={styles.footerText}>Diocese de Franca - SP</Text>
+          <Text style={styles.footerText}>Bem-vindo, Fiel!</Text>
           <Text style={styles.footerSubtext}>Paróquia em Cristo</Text>
           <View style={styles.footerBadges}>
             <View style={styles.footerBadge}>

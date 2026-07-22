@@ -28,6 +28,9 @@ Aplicativo completo para a Diocese de Franca com backend API REST e app React Na
 ## Novidades Implementadas
 
 ### Mobile
+- Notificações locais agendadas para missas via `expo-notifications`
+- Aprimoramentos de UI/UX (Mensagem "Bem-vindo, Fiel!")
+- Correção de duplicação de variáveis na renderização do banner offline
 - Skeleton loaders com animação shimmer
 - Pull-to-refresh com feedback visual
 - Favoritos salvos localmente (persistem)
@@ -37,8 +40,11 @@ Aplicativo completo para a Diocese de Franca com backend API REST e app React Na
 - Botão de limpar filtros
 - Seção de acesso rápido na home
 - Badges de estatísticas clicáveis
+- Deploy web pronto com configuração do Netlify (`netlify.toml`)
+- Testes E2E com Playwright para verificação no ambiente web
 
 ### Backend
+- Scraper autônomo da Diocese (`backend/scraper.js`) usando `axios` e `cheerio`
 - Endpoint de health check `/api/health`
 - Compressão gzip automática
 - Helmet.js para headers de segurança
@@ -227,6 +233,9 @@ O app possui interface moderna com:
 - Feedback visual em todas as interações
 - Estados de loading com skeleton
 - Toasts animados para feedback
+
+### Screenshot (Web Output E2E Test)
+![Home Screen](mobile/screenshots/home_full.png)
 
 ## Licença
 

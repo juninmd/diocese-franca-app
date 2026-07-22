@@ -1,0 +1,8 @@
+[build]
+  command = "cd mobile && pnpm install && npx expo export -p web"
+  publish = "mobile/dist"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

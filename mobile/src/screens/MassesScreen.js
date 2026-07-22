@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { View, Text, StyleSheet, FlatList, ActivityIndicator, TouchableOpacity, RefreshControl, SectionList } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import * as Notifications from 'expo-notifications';
 import { getMasses } from '../services/api';
 import { useToast } from '../context/ToastContext';
 import { NetworkStatus } from '../components/NetworkStatus';
@@ -119,6 +120,26 @@ export default function MassesScreen() {
           </>
         )}
       </View>
+      <TouchableOpacity
+        style={styles.notificationButton}
+        onPress={async () => {
+          const { status } = await Notifications.requestPermissionsAsync();
+          if (status === 'granted') {
+             await Notifications.scheduleNotificationAsync({
+               content: {
+                 title: 'Lembrete de Missa',
+                 body: `Missa às ${item.time} na ${item.church ? item.church.name : 'Paróquia'}.`,
+               },
+               trigger: { seconds: 2 },
+             });
+             toast.success('Lembrete configurado!');
+          } else {
+             toast.error('Permissão de notificação negada.');
+          }
+        }}
+      >
+        <Ionicons name="notifications-outline" size={20} color="#3498db" />
+      </TouchableOpacity>
     </View>
   );
 
@@ -443,6 +464,10 @@ const styles = StyleSheet.create({
   },
   massInfo: {
     flex: 1,
+  },
+  notificationButton: {
+    padding: 10,
+    marginLeft: 10,
   },
   typeBadge: {
     flexDirection: 'row',
