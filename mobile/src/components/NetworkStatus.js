@@ -28,7 +28,7 @@ export function NetworkStatus() {
       }
     } catch (error) {
       setIsOffline(true);
-      showIndicator();
+      displayIndicator();
     }
   };
 
@@ -38,7 +38,7 @@ export function NetworkStatus() {
     }
   };
 
-  const showIndicator = () => {
+  const displayIndicator = () => {
     setShowIndicator(true);
     Animated.spring(slideAnim, {
       toValue: 0,

@@ -75,5 +75,17 @@ These guidelines are designed to ensure the consistent, efficient, and high-qual
 *   Keep dependencies up-to-date to minimize security risks.
 *   Manage dependencies effectively to ensure stability and repeatability.
 
+## 11. Playwright E2E Testing
+
+*   All mobile web deployments must have coverage with Playwright.
+*   Tests reside in `mobile/e2e/`.
+*   Always test against the exported web bundle `npx expo export -p web` running on a local server.
+*   Use `page.screenshot` to keep the visual documentation up to date.
+
+## 12. App Features & Services
+
+*   **Scraper**: A scraper uses `axios` and `cheerio` to extract the latest Diocese data (`backend/scraper.js`). Updates here must be parsed carefully according to the live DOM.
+*   **Notifications**: We utilize `expo-notifications` for scheduled local notifications (e.g. Mass reminders).
+
 These guidelines are intended to provide a framework for the development of AGENTS.md. Continuous review and adaptation are encouraged to ensure the project remains effective and aligned with evolving needs.
 ```
