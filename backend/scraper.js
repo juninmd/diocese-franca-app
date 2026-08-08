@@ -22,36 +22,49 @@ const scrapeNews = async () => {
     // As a proof-of-concept, we'll try to find common title tags (h2, h3, etc) or specifically look for "Leia mais" links
     // and grab their previous sibling or parent elements' titles.
 
-    // For this POC, let's grab text from any 'h2' or 'h3' that seems to have a link
-    $('h2 a, h3 a').each((i, el) => {
-        const title = $(el).text().trim();
-        const link = $(el).attr('href');
-        if (title && title.length > 5 && link && link.includes('noticia_detalhe')) {
-            news.push({ title, link });
+    $('.scale_image_container').each((i, el) => {
+        const aTag = $(el).find('a').first();
+        const link = aTag.attr('href');
+        const imgTag = aTag.find('img.scale_image').first();
+        let image = imgTag.attr('src');
+
+        let title = '';
+
+        // Find title inside the caption
+        const captionInner = $(el).find('.caption_inner');
+        if (captionInner.length > 0) {
+            const h3 = captionInner.find('h3');
+            if (h3.length > 0) {
+                title = h3.text().trim();
+            } else {
+                const btn = captionInner.find('.button.banner_button');
+                if (btn.length > 0) {
+                    title = btn.text().trim();
+                }
+            }
+        } else {
+            // Find in adjacent post_image_buttons
+            const nextDiv = $(el).next('.post_image_buttons');
+            if (nextDiv.length > 0) {
+                const btn = nextDiv.find('.button.banner_button');
+                if (btn.length > 0) {
+                    title = btn.text().trim();
+                }
+            }
+        }
+
+        if (title && link && link.includes('noticia_detalhe') && image) {
+             // Make link absolute
+            const fullLink = `https://diocesefranca.org.br/${link}`;
+            const fullImage = `https://diocesefranca.org.br/${image}`;
+
+            // Check for duplicates
+            const isDuplicate = news.some(n => n.link === fullLink);
+            if (!isDuplicate) {
+                 news.push({ id: news.length + 1, title, link: fullLink, image: fullImage });
+            }
         }
     });
-
-    // If the above doesn't yield much, let's look for elements containing "Leia mais" and grab the closest title
-    if (news.length === 0) {
-        $('a:contains("Leia mais")').each((i, el) => {
-            const container = $(el).closest('div'); // Guessing it's in a div container
-            const titleEl = container.find('h2, h3, strong').first();
-            let title = titleEl.text().trim();
-
-            // fallback if no title element is found inside container
-            if (!title) {
-                // let's try getting the text node just before the paragraph containing the link
-                const parentText = container.text().trim();
-                // attempt to extract the first line
-                title = parentText.split('\n')[0].trim();
-            }
-
-            const link = $(el).attr('href');
-            if (title) {
-                news.push({ title, link });
-            }
-        });
-    }
 
     const outputPath = path.join(__dirname, 'data', 'news.json');
     fs.writeFileSync(outputPath, JSON.stringify(news, null, 2));

@@ -1,22 +1,50 @@
 [
   {
-    "title": "\"CÂNTICO DAS CRIATURAS” EM HOMENAGEM AOS 800 ANOS  DA PÁSCOA DE SÃO FRANCISCO DE ASSIS",
-    "link": "?menu=noticia_detalhe&id=6007&id_orgao=1"
+    "id": 1,
+    "title": "Homilia",
+    "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6018&id_orgao=1",
+    "image": "https://diocesefranca.org.br/images/20260804212339_1000332563.png"
   },
   {
-    "title": "Dom Paulo celebra Missa da Pedra Fundamental da futura Capela Nossa Senhora do Carmo",
-    "link": "?menu=noticia_detalhe&id=6005&id_orgao=1"
+    "id": 2,
+    "title": "Homilia",
+    "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6012&id_orgao=1",
+    "image": "https://diocesefranca.org.br/images/20260729122950_1000000529.jpg"
   },
   {
-    "title": "Conselhos de Pastoral refletem sobre sua missão à luz dos documentos da Igreja em encontro provincial",
-    "link": "?menu=noticia_detalhe&id=6003&id_orgao=1"
+    "id": 3,
+    "title": "Homilia",
+    "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6008&id_orgao=1",
+    "image": "https://diocesefranca.org.br/images/20260720192217_1000000529.jpg"
   },
   {
-    "title": "Candidato ao Diaconato Permanente da Diocese de Franca defende doutorado com pesquisa sobre a saúde mental de padres católicos",
-    "link": "?menu=noticia_detalhe&id=6002&id_orgao=1"
+    "id": 4,
+    "title": "Diocese de Franca celebra a Ordenação Diaconal de Antônio",
+    "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6019&id_orgao=1",
+    "image": "https://diocesefranca.org.br/images/20260803180719_1000330848.png"
   },
   {
-    "title": "Comunidade celebra o início da construção da futura Capela São Bento  com bênção da pedra fundamental",
-    "link": "?menu=noticia_detalhe&id=5996&id_orgao=1"
+    "id": 5,
+    "title": "Inscrições abertas para o Encontro Diocesano da Pastoral da Saúde",
+    "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6015&id_orgao=1",
+    "image": "https://diocesefranca.org.br/images/20260730125229_1000324786.png"
+  },
+  {
+    "id": 6,
+    "title": "Paróquias",
+    "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=2013&id_orgao=1",
+    "image": "https://diocesefranca.org.br/images/20210403030607_catedral-franca-1.jpg"
+  },
+  {
+    "id": 7,
+    "title": "Sé Catedral Nossa Senhora da Conceição (Franca-SP)",
+    "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=2080&id_orgao=1",
+    "image": "https://diocesefranca.org.br/images/20210413021455_33.jpg"
+  },
+  {
+    "id": 8,
+    "title": "Padres",
+    "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=2001&id_orgao=1",
+    "image": "https://diocesefranca.org.br/images/20210516224220_padre.png"
   }
 ]

@@ -151,13 +151,15 @@ pnpm test
 | GET | `/api/masses` | Lista todos os horários |
 | GET | `/api/masses/by-church/:id` | Missas por igreja |
 | GET | `/api/masses/by-day/:dia` | Missas por dia |
+| GET | `/api/news` | Notícias da Diocese (scraped) |
 
 ## Funcionalidades do App Detalhadas
 
 ### Tela Início
 - Dashboard com estatísticas (paróquias, padres, missas)
+- **NOVO:** Sessão "Notícias da Diocese" que exibe os destaques raspados diretamente do portal da Diocese com imagens e links
 - Cards clicáveis para navegação rápida
-- Seção de acesso rápido (missa domingo, mapa, ligar, email)
+- Seção de acesso rápido (Missa domingo, **Lembrete diário com notificações locais**, ligar, email)
 - Pull-to-refresh para atualizar dados
 - Informações de contato da diocese
 

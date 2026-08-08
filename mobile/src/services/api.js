@@ -51,4 +51,10 @@ export const getMassesByDay = async (day) => {
   return response.data;
 };
 
+// News
+export const getNews = async () => {
+  const response = await api.get('/api/news');
+  return response.data;
+};
+
 export default api;
