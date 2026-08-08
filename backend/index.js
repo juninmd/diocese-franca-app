@@ -5,6 +5,7 @@ const helmet = require('helmet');
 const churchesRouter = require('./routes/churches');
 const priestsRouter = require('./routes/priests');
 const massesRouter = require('./routes/masses');
+const newsRouter = require('./routes/news');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -29,7 +30,8 @@ app.get('/api/health', (req, res) => {
     endpoints: {
       churches: '/api/churches',
       priests: '/api/priests',
-      masses: '/api/masses'
+      masses: '/api/masses',
+      news: '/api/news'
     }
   });
 });
@@ -37,6 +39,7 @@ app.get('/api/health', (req, res) => {
 app.use('/api/churches', churchesRouter);
 app.use('/api/priests', priestsRouter);
 app.use('/api/masses', massesRouter);
+app.use('/api/news', newsRouter);
 
 app.get('/', (req, res) => {
   res.json({
@@ -47,7 +50,8 @@ app.get('/', (req, res) => {
       health: '/api/health',
       churches: '/api/churches',
       priests: '/api/priests',
-      masses: '/api/masses'
+      masses: '/api/masses',
+      news: '/api/news'
     }
   });
 });

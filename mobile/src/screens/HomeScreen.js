@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Linking, RefreshControl } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Linking, RefreshControl, FlatList, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { getChurches, getPriests, getMasses } from '../services/api';
+import * as Notifications from 'expo-notifications';
+import { getChurches, getPriests, getMasses, getNews } from '../services/api';
 import { useToast } from '../context/ToastContext';
 import { NetworkStatus } from '../components/NetworkStatus';
 
@@ -9,11 +10,30 @@ export default function HomeScreen({ navigation }) {
   const [stats, setStats] = useState({ churches: 0, priests: 0, masses: 0 });
   const [refreshing, setRefreshing] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [news, setNews] = useState([]);
+  const [loadingNews, setLoadingNews] = useState(true);
   const toast = useToast();
 
   useEffect(() => {
     loadStats();
+    fetchNews();
   }, []);
+
+  const fetchNews = async () => {
+    try {
+      setLoadingNews(true);
+      const data = await getNews();
+      if (data && data.success && data.data) {
+        setNews(data.data);
+      } else {
+        setNews([]);
+      }
+    } catch (err) {
+      console.error("Failed to load news", err);
+    } finally {
+      setLoadingNews(false);
+    }
+  };
 
   const loadStats = async () => {
     try {
@@ -37,7 +57,7 @@ export default function HomeScreen({ navigation }) {
 
   const onRefresh = async () => {
     setRefreshing(true);
-    await loadStats();
+    await Promise.all([loadStats(), fetchNews()]);
     setRefreshing(false);
     toast.success('Dados atualizados!');
   };
@@ -110,6 +130,35 @@ export default function HomeScreen({ navigation }) {
           </TouchableOpacity>
         </View>
 
+        <View style={styles.newsContainer}>
+          <Text style={styles.sectionTitle}>Notícias da Diocese</Text>
+          {loadingNews ? (
+             <Text style={styles.loadingText}>Carregando notícias...</Text>
+          ) : news.length > 0 ? (
+            <FlatList
+              horizontal
+              data={news}
+              keyExtractor={(item) => item.id.toString()}
+              showsHorizontalScrollIndicator={false}
+              contentContainerStyle={styles.newsList}
+              renderItem={({ item }) => (
+                <TouchableOpacity
+                  style={styles.newsCard}
+                  onPress={() => Linking.openURL(item.link)}
+                  activeOpacity={0.8}
+                >
+                  <Image source={{ uri: item.image }} style={styles.newsImage} />
+                  <View style={styles.newsContent}>
+                    <Text style={styles.newsTitle} numberOfLines={2}>{item.title}</Text>
+                  </View>
+                </TouchableOpacity>
+              )}
+            />
+          ) : (
+            <Text style={styles.emptyText}>Nenhuma notícia encontrada.</Text>
+          )}
+        </View>
+
         <View style={styles.menuContainer}>
           <Text style={styles.sectionTitle}>Navegue</Text>
 
@@ -177,10 +226,24 @@ export default function HomeScreen({ navigation }) {
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.quickItem}
-              onPress={() => navigation.navigate('Churches')}
+              onPress={async () => {
+                const { status } = await Notifications.requestPermissionsAsync();
+                if (status === 'granted') {
+                  await Notifications.scheduleNotificationAsync({
+                    content: {
+                      title: 'Lembrete da Diocese',
+                      body: 'Não se esqueça da leitura do Evangelho de hoje!',
+                    },
+                    trigger: { seconds: 5 },
+                  });
+                  toast.success('Lembrete agendado!');
+                } else {
+                  toast.error('Permissão de notificação negada.');
+                }
+              }}
             >
-              <Ionicons name="map" size={28} color="#3498db" />
-              <Text style={styles.quickText}>Ver{'\n'}Mapa</Text>
+              <Ionicons name="notifications" size={28} color="#e74c3c" />
+              <Text style={styles.quickText}>Lembrete{'\n'}Diário</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.quickItem}
@@ -412,6 +475,48 @@ const styles = StyleSheet.create({
   },
   menuArrow: {
     paddingLeft: 8,
+  },
+  newsContainer: {
+    marginTop: 20,
+  },
+  newsList: {
+    paddingHorizontal: 16,
+    gap: 16,
+  },
+  newsCard: {
+    backgroundColor: '#fff',
+    borderRadius: 12,
+    width: 240,
+    elevation: 3,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 6,
+    overflow: 'hidden',
+    marginRight: 16,
+  },
+  newsImage: {
+    width: '100%',
+    height: 140,
+    backgroundColor: '#ecf0f1',
+    resizeMode: 'cover',
+  },
+  newsContent: {
+    padding: 12,
+  },
+  newsTitle: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: '#2c3e50',
+    lineHeight: 20,
+  },
+  loadingText: {
+    paddingHorizontal: 16,
+    color: '#7f8c8d',
+  },
+  emptyText: {
+    paddingHorizontal: 16,
+    color: '#7f8c8d',
   },
   quickAccess: {
     paddingHorizontal: 16,

@@ -9,9 +9,10 @@ test('Home screen displays welcome and takes a screenshot', async ({ page }) => 
   await page.waitForLoadState('networkidle');
   await page.waitForTimeout(2000);
 
-  // Take a full page screenshot to see what's actually rendered
-  await page.screenshot({ path: 'screenshots/home_full.png', fullPage: true });
-
   // Then try to assert the text
   await expect(page.locator('text=Bem-vindo, Fiel!')).toBeVisible({ timeout: 15000 });
+  await expect(page.locator('text=Notícias da Diocese')).toBeVisible({ timeout: 15000 });
+
+  // Take a full page screenshot to see what's actually rendered
+  await page.screenshot({ path: 'screenshots/home_full.png', fullPage: true });
 });
