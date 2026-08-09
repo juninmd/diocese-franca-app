@@ -7,54 +7,24 @@ const scrapeNews = async () => {
   try {
     const { data } = await axios.get('https://diocesefranca.org.br/');
     const $ = cheerio.load(data);
-
-    // the layout suggests that news items are within some structure where the title might be wrapped in specific elements,
-    // let's grab the titles that precede the "Leia mais" links or similar news headers.
     const news = [];
 
-    // Find all links that might be news articles based on their parent structure
-    // Let's get the text of paragraphs just before the "Leia mais" link.
-    // By looking at the view_text_website output, there are blocks of text describing the news
-    // followed by "Leia mais". Let's extract any elements that look like titles.
-    // In many Joomla/WordPress sites, titles are in h2, h3, or a tags with specific classes.
-    // Let's use a generic approach to find headlines.
+    // The layout has list items (li) containing the news.
+    // Inside, there is <div class="scale_image_container"> and <div class="post_text">.
+    $('.post_text').each((i, el) => {
+        const titleElement = $(el).find('h2.post_title a');
+        if (titleElement.length === 0) return;
 
-    // As a proof-of-concept, we'll try to find common title tags (h2, h3, etc) or specifically look for "Leia mais" links
-    // and grab their previous sibling or parent elements' titles.
+        const title = titleElement.text().trim();
+        let link = titleElement.attr('href');
 
-    $('.scale_image_container').each((i, el) => {
-        const aTag = $(el).find('a').first();
-        const link = aTag.attr('href');
-        const imgTag = aTag.find('img.scale_image').first();
+        // Find the image in the previous sibling or parent context
+        const parentLi = $(el).closest('li');
+        const imgTag = parentLi.find('.scale_image_container img.scale_image');
         let image = imgTag.attr('src');
 
-        let title = '';
-
-        // Find title inside the caption
-        const captionInner = $(el).find('.caption_inner');
-        if (captionInner.length > 0) {
-            const h3 = captionInner.find('h3');
-            if (h3.length > 0) {
-                title = h3.text().trim();
-            } else {
-                const btn = captionInner.find('.button.banner_button');
-                if (btn.length > 0) {
-                    title = btn.text().trim();
-                }
-            }
-        } else {
-            // Find in adjacent post_image_buttons
-            const nextDiv = $(el).next('.post_image_buttons');
-            if (nextDiv.length > 0) {
-                const btn = nextDiv.find('.button.banner_button');
-                if (btn.length > 0) {
-                    title = btn.text().trim();
-                }
-            }
-        }
-
         if (title && link && link.includes('noticia_detalhe') && image) {
-             // Make link absolute
+            // Make link absolute
             const fullLink = `https://diocesefranca.org.br/${link}`;
             const fullImage = `https://diocesefranca.org.br/${image}`;
 

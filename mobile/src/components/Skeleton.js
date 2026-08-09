@@ -86,6 +86,18 @@ export function MassCardSkeleton() {
   );
 }
 
+export function NewsCardSkeleton() {
+  return (
+    <View style={styles.newsCard}>
+      <Skeleton width="100%" height={140} borderRadius={0} />
+      <View style={styles.newsContent}>
+        <Skeleton width="100%" height={14} style={{ marginBottom: 4 }} />
+        <Skeleton width="60%" height={14} />
+      </View>
+    </View>
+  );
+}
+
 export function ListSkeleton({ count = 5, type = 'church' }) {
   const renderItem = () => {
     switch (type) {
@@ -93,6 +105,8 @@ export function ListSkeleton({ count = 5, type = 'church' }) {
         return <PriestCardSkeleton key={Math.random()} />;
       case 'mass':
         return <MassCardSkeleton key={Math.random()} />;
+      case 'news':
+        return <NewsCardSkeleton key={Math.random()} />;
       default:
         return <ChurchCardSkeleton key={Math.random()} />;
     }
@@ -142,6 +156,21 @@ const styles = StyleSheet.create({
   massContent: {
     flex: 1,
     marginLeft: 14,
+  },
+  newsCard: {
+    backgroundColor: '#fff',
+    borderRadius: 12,
+    width: 240,
+    elevation: 3,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 6,
+    overflow: 'hidden',
+    marginRight: 16,
+  },
+  newsContent: {
+    padding: 12,
   },
   list: {
     padding: 16,
