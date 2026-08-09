@@ -5,6 +5,7 @@ import * as Notifications from 'expo-notifications';
 import { getChurches, getPriests, getMasses, getNews } from '../services/api';
 import { useToast } from '../context/ToastContext';
 import { NetworkStatus } from '../components/NetworkStatus';
+import { NewsCardSkeleton } from '../components/Skeleton';
 
 export default function HomeScreen({ navigation }) {
   const [stats, setStats] = useState({ churches: 0, priests: 0, masses: 0 });
@@ -133,7 +134,11 @@ export default function HomeScreen({ navigation }) {
         <View style={styles.newsContainer}>
           <Text style={styles.sectionTitle}>Notícias da Diocese</Text>
           {loadingNews ? (
-             <Text style={styles.loadingText}>Carregando notícias...</Text>
+             <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.newsList}>
+               <NewsCardSkeleton />
+               <NewsCardSkeleton />
+               <NewsCardSkeleton />
+             </ScrollView>
           ) : news.length > 0 ? (
             <FlatList
               horizontal

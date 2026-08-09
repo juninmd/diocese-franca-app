@@ -1,50 +1,32 @@
 [
   {
     "id": 1,
-    "title": "Homilia",
-    "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6018&id_orgao=1",
-    "image": "https://diocesefranca.org.br/images/20260804212339_1000332563.png"
+    "title": "Diocese de Franca celebra Missa em honra a São Lourenço, padroeiro dos  diáconos",
+    "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6022&id_orgao=1",
+    "image": "https://diocesefranca.org.br/images/20260805202820_1000333720.png"
   },
   {
     "id": 2,
-    "title": "Homilia",
-    "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6012&id_orgao=1",
-    "image": "https://diocesefranca.org.br/images/20260729122950_1000000529.jpg"
+    "title": "Jovens da Diocese de Franca são homenageados em Sessão Solene da Câmara Municipal",
+    "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6020&id_orgao=1",
+    "image": "https://diocesefranca.org.br/images/20260804211503_1000332483.png"
   },
   {
     "id": 3,
-    "title": "Homilia",
-    "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6008&id_orgao=1",
-    "image": "https://diocesefranca.org.br/images/20260720192217_1000000529.jpg"
-  },
-  {
-    "id": 4,
     "title": "Diocese de Franca celebra a Ordenação Diaconal de Antônio",
     "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6019&id_orgao=1",
     "image": "https://diocesefranca.org.br/images/20260803180719_1000330848.png"
   },
   {
+    "id": 4,
+    "title": "Assembleia Diocesana da Pastoral da Criança define prioridades para fortalecer a missão na Diocese de Franca",
+    "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6017&id_orgao=1",
+    "image": "https://diocesefranca.org.br/images/20260731151120_1000326187.png"
+  },
+  {
     "id": 5,
-    "title": "Inscrições abertas para o Encontro Diocesano da Pastoral da Saúde",
-    "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6015&id_orgao=1",
-    "image": "https://diocesefranca.org.br/images/20260730125229_1000324786.png"
-  },
-  {
-    "id": 6,
-    "title": "Paróquias",
-    "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=2013&id_orgao=1",
-    "image": "https://diocesefranca.org.br/images/20210403030607_catedral-franca-1.jpg"
-  },
-  {
-    "id": 7,
-    "title": "Sé Catedral Nossa Senhora da Conceição (Franca-SP)",
-    "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=2080&id_orgao=1",
-    "image": "https://diocesefranca.org.br/images/20210413021455_33.jpg"
-  },
-  {
-    "id": 8,
-    "title": "Padres",
-    "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=2001&id_orgao=1",
-    "image": "https://diocesefranca.org.br/images/20210516224220_padre.png"
+    "title": "Estão abertas as inscrições para o Despertar Vocacional 2026 na Diocese de Franca",
+    "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6016&id_orgao=1",
+    "image": "https://diocesefranca.org.br/images/20260730144209_1000324959.png"
   }
 ]
