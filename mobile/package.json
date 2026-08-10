@@ -28,7 +28,8 @@
   "private": true,
   "description": "Aplicativo React Native para consulta de informações da Diocese de Franca.",
   "devDependencies": {
-    "@playwright/test": "^1.61.1"
+    "@playwright/test": "^1.61.1",
+    "serve": "^14.2.6"
   },
   "keywords": [],
   "author": "",

@@ -86,7 +86,7 @@ These guidelines are designed to ensure the consistent, efficient, and high-qual
 
 *   **Scraper**: A scraper uses `axios` and `cheerio` to extract the latest Diocese data (`backend/scraper.js`). Updates here must be parsed carefully according to the live DOM. Note: When scraping the website, it uses selectors like `.post_text` and `.scale_image_container` to fetch news cards reliably from the markup without duplicates.
 *   **Web Metro Bundler**: For proper deployment on the web via Metro Bundler (e.g., Netlify), we require `react-native-web`, `react-dom`, and `@expo/metro-runtime` to be installed in the mobile directory.
-*   **Notifications**: We utilize `expo-notifications` for scheduled local notifications (e.g. Mass reminders, daily readings) in `HomeScreen` and `MassesScreen`.
+*   **Notifications**: We utilize `expo-notifications` for scheduled local notifications (e.g. Mass reminders, daily readings) in `HomeScreen` and `MassesScreen`. Note: We automatically request permission and schedule a repeating daily Liturgy reminder on app mount (`HomeScreen.js`).
 
 These guidelines are intended to provide a framework for the development of AGENTS.md. Continuous review and adaptation are encouraged to ensure the project remains effective and aligned with evolving needs.
 ```

@@ -29,8 +29,8 @@ Aplicativo completo para a Diocese de Franca com backend API REST e app React Na
 
 ### Mobile
 - Deploy web 100% funcional no Netlify com Metro bundler suportando `react-native-web`
-- Notificações locais agendadas para missas via `expo-notifications` configuradas
-- Aprimoramentos de UI/UX (Mensagem "Bem-vindo, Fiel!")
+- Notificações locais automáticas e agendadas diariamente (Leitura do Evangelho) via `expo-notifications` no HomeScreen
+- Aprimoramentos de UI/UX para Empty States (Mensagem "Bem-vindo, Fiel!" e telas sem dados com ícones claros)
 - Skeletons Loaders (Animação Shimmer) em diversas áreas como Notícias e Listas
 - Correção de duplicação de variáveis na renderização do banner offline
 - Pull-to-refresh com feedback visual
