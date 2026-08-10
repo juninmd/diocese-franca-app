@@ -18,7 +18,27 @@ export default function HomeScreen({ navigation }) {
   useEffect(() => {
     loadStats();
     fetchNews();
+    setupDailyNotification();
   }, []);
+
+  const setupDailyNotification = async () => {
+    const { status } = await Notifications.requestPermissionsAsync();
+    if (status === 'granted') {
+      // Cancel previous scheduled notifications to avoid duplicates if mounted multiple times
+      await Notifications.cancelAllScheduledNotificationsAsync();
+      await Notifications.scheduleNotificationAsync({
+        content: {
+          title: '📖 Liturgia Diária',
+          body: 'Não se esqueça da leitura do Evangelho de hoje!',
+        },
+        trigger: {
+          hour: 8,
+          minute: 0,
+          repeats: true,
+        },
+      });
+    }
+  };
 
   const fetchNews = async () => {
     try {
@@ -160,7 +180,10 @@ export default function HomeScreen({ navigation }) {
               )}
             />
           ) : (
-            <Text style={styles.emptyText}>Nenhuma notícia encontrada.</Text>
+            <View style={styles.emptyNewsContainer}>
+              <Ionicons name="alert-circle-outline" size={32} color="#95a5a6" />
+              <Text style={styles.emptyNewsText}>Nenhuma notícia encontrada no momento.</Text>
+            </View>
           )}
         </View>
 
@@ -519,9 +542,24 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     color: '#7f8c8d',
   },
-  emptyText: {
-    paddingHorizontal: 16,
+  emptyNewsContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 20,
+    backgroundColor: '#fff',
+    marginHorizontal: 16,
+    borderRadius: 12,
+    elevation: 2,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+  },
+  emptyNewsText: {
+    marginTop: 8,
     color: '#7f8c8d',
+    fontSize: 14,
+    textAlign: 'center',
   },
   quickAccess: {
     paddingHorizontal: 16,

@@ -1,32 +1,32 @@
 [
   {
     "id": 1,
+    "title": "A Voz da Diocese - Edição Agosto/2026",
+    "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6023&id_orgao=1",
+    "image": "https://diocesefranca.org.br/images/20260809190044_1000336853.png"
+  },
+  {
+    "id": 2,
     "title": "Diocese de Franca celebra Missa em honra a São Lourenço, padroeiro dos  diáconos",
     "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6022&id_orgao=1",
     "image": "https://diocesefranca.org.br/images/20260805202820_1000333720.png"
   },
   {
-    "id": 2,
+    "id": 3,
     "title": "Jovens da Diocese de Franca são homenageados em Sessão Solene da Câmara Municipal",
     "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6020&id_orgao=1",
     "image": "https://diocesefranca.org.br/images/20260804211503_1000332483.png"
   },
   {
-    "id": 3,
+    "id": 4,
     "title": "Diocese de Franca celebra a Ordenação Diaconal de Antônio",
     "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6019&id_orgao=1",
     "image": "https://diocesefranca.org.br/images/20260803180719_1000330848.png"
   },
   {
-    "id": 4,
+    "id": 5,
     "title": "Assembleia Diocesana da Pastoral da Criança define prioridades para fortalecer a missão na Diocese de Franca",
     "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6017&id_orgao=1",
     "image": "https://diocesefranca.org.br/images/20260731151120_1000326187.png"
-  },
-  {
-    "id": 5,
-    "title": "Estão abertas as inscrições para o Despertar Vocacional 2026 na Diocese de Franca",
-    "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6016&id_orgao=1",
-    "image": "https://diocesefranca.org.br/images/20260730144209_1000324959.png"
   }
 ]

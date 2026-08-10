@@ -5,7 +5,11 @@ const path = require('path');
 
 const scrapeNews = async () => {
   try {
-    const { data } = await axios.get('https://diocesefranca.org.br/');
+    const { data } = await axios.get('https://diocesefranca.org.br/', {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36'
+      }
+    });
     const $ = cheerio.load(data);
     const news = [];
 
@@ -42,6 +46,9 @@ const scrapeNews = async () => {
 
   } catch (error) {
     console.error('Error scraping news:', error.message);
+    if (error.response) {
+      console.error('Response status:', error.response.status);
+    }
   }
 };
 

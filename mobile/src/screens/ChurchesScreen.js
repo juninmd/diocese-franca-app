@@ -138,18 +138,23 @@ export default function ChurchesScreen({ navigation }) {
 
   const renderEmptyList = () => (
     <View style={styles.emptyContainer}>
-      <Ionicons name={showFavorites ? 'heart-outline' : 'search-outline'} size={64} color="#bdc3c7" />
+      <Ionicons name={error ? 'alert-circle-outline' : (showFavorites ? 'heart-outline' : 'search-outline')} size={64} color="#bdc3c7" />
       <Text style={styles.emptyTitle}>
-        {showFavorites ? 'Nenhuma igreja favorita' : 'Nenhuma igreja encontrada'}
+        {error ? 'Erro ao carregar' : (showFavorites ? 'Nenhuma igreja favorita' : 'Nenhuma igreja encontrada')}
       </Text>
       <Text style={styles.emptyText}>
-        {showFavorites
+        {error ? error : (showFavorites
           ? 'Adicione igrejas aos favoritos para acessá-las rapidamente'
-          : searchQuery ? 'Tente buscar com outros termos' : 'Não foi possível carregar as igrejas'}
+          : searchQuery ? 'Tente buscar com outros termos' : 'Não foi possível carregar as igrejas')}
       </Text>
-      {showFavorites && (
+      {showFavorites && !error && (
         <TouchableOpacity style={styles.emptyButton} onPress={() => setShowFavorites(false)}>
           <Text style={styles.emptyButtonText}>Ver todas as igrejas</Text>
+        </TouchableOpacity>
+      )}
+      {error && (
+        <TouchableOpacity style={styles.emptyButton} onPress={onRefresh}>
+          <Text style={styles.emptyButtonText}>Tentar Novamente</Text>
         </TouchableOpacity>
       )}
     </View>
