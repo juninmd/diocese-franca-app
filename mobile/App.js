@@ -13,7 +13,29 @@ Notifications.setNotificationHandler({
   }),
 });
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 export default function App() {
+  React.useEffect(() => {
+    async function requestPermissionsAndWelcome() {
+      const { status } = await Notifications.requestPermissionsAsync();
+      if (status === 'granted') {
+        const hasSeenWelcome = await AsyncStorage.getItem('hasSeenWelcomeNotification');
+        if (!hasSeenWelcome) {
+          await Notifications.scheduleNotificationAsync({
+            content: {
+              title: 'Bem-vindo!',
+              body: 'Que a paz esteja com você.',
+            },
+            trigger: { seconds: 2 },
+          });
+          await AsyncStorage.setItem('hasSeenWelcomeNotification', 'true');
+        }
+      }
+    }
+    requestPermissionsAndWelcome();
+  }, []);
+
   return (
     <SafeAreaProvider>
       <ToastProvider>

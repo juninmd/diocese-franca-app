@@ -37,4 +37,17 @@ test.describe('Diocese App E2E', () => {
     const screenshotPath = path.join(__dirname, '../screenshots/churches_full.png');
     await page.screenshot({ path: screenshotPath, fullPage: true });
   });
+
+  test('should display masses screen and capture screenshot', async ({ page }) => {
+    await expect(page.locator('text=Diocese de Franca').first()).toBeVisible();
+
+    const massesButton = page.locator('text=Consulte os horários por dia da semana');
+    await massesButton.click();
+
+    // Wait for the API to load
+    await page.waitForTimeout(3000);
+
+    const screenshotPath = path.join(__dirname, '../screenshots/masses_full.png');
+    await page.screenshot({ path: screenshotPath, fullPage: true });
+  });
 });

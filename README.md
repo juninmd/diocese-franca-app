@@ -29,8 +29,8 @@ Aplicativo completo para a Diocese de Franca com backend API REST e app React Na
 
 ### Mobile
 - Deploy web 100% funcional no Netlify com Metro bundler suportando `react-native-web`
-- Notificações locais automáticas e agendadas diariamente (Leitura do Evangelho) via `expo-notifications` no HomeScreen
-- Aprimoramentos de UI/UX para Empty States (Mensagem "Bem-vindo, Fiel!" e telas sem dados com ícones claros)
+- Notificações locais automáticas de boas-vindas na inicialização do app (`App.js`) e agendadas diariamente via `expo-notifications` no `HomeScreen`
+- Aprimoramentos de UI/UX: Renderização de descrições nas notícias do `HomeScreen`, aumento da largura dos cards e melhoria do Empty State com botão de "Tentar Novamente"
 - Skeletons Loaders (Animação Shimmer) em diversas áreas como Notícias e Listas
 - Correção de duplicação de variáveis na renderização do banner offline
 - Pull-to-refresh com feedback visual
@@ -44,7 +44,7 @@ Aplicativo completo para a Diocese de Franca com backend API REST e app React Na
 - Testes E2E com Playwright para verificação no ambiente web
 
 ### Backend
-- Scraper autônomo aprimorado (`backend/scraper.js`) prevenindo duplicidades e falhas nas imagens/textos
+- Scraper autônomo aprimorado (`backend/scraper.js`) extraindo descrições das notícias, prevenindo duplicidades por checagem de link e falhas nas imagens/textos
 - Endpoint de health check `/api/health`
 - Compressão gzip automática
 - Helmet.js para headers de segurança
@@ -242,6 +242,9 @@ O app possui interface moderna com:
 
 **Igrejas Screen**
 ![Igrejas Screen](mobile/screenshots/churches_full.png)
+
+**Missas Screen**
+![Missas Screen](mobile/screenshots/masses_full.png)
 
 ## Licença
 
