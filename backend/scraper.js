@@ -27,6 +27,9 @@ const scrapeNews = async () => {
         const imgTag = parentLi.find('.scale_image_container img.scale_image');
         let image = imgTag.attr('src');
 
+        const descriptionElement = $(el).find('p').first();
+        const description = descriptionElement.text().trim();
+
         if (title && link && link.includes('noticia_detalhe') && image) {
             // Make link absolute
             const fullLink = `https://diocesefranca.org.br/${link}`;
@@ -35,7 +38,7 @@ const scrapeNews = async () => {
             // Check for duplicates
             const isDuplicate = news.some(n => n.link === fullLink);
             if (!isDuplicate) {
-                 news.push({ id: news.length + 1, title, link: fullLink, image: fullImage });
+                 news.push({ id: news.length + 1, title, description, link: fullLink, image: fullImage });
             }
         }
     });

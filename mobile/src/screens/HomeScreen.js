@@ -175,6 +175,9 @@ export default function HomeScreen({ navigation }) {
                   <Image source={{ uri: item.image }} style={styles.newsImage} />
                   <View style={styles.newsContent}>
                     <Text style={styles.newsTitle} numberOfLines={2}>{item.title}</Text>
+                    {item.description ? (
+                      <Text style={styles.newsDescription} numberOfLines={3}>{item.description}</Text>
+                    ) : null}
                   </View>
                 </TouchableOpacity>
               )}
@@ -183,6 +186,10 @@ export default function HomeScreen({ navigation }) {
             <View style={styles.emptyNewsContainer}>
               <Ionicons name="alert-circle-outline" size={32} color="#95a5a6" />
               <Text style={styles.emptyNewsText}>Nenhuma notícia encontrada no momento.</Text>
+              <TouchableOpacity style={styles.refreshButtonSmall} onPress={fetchNews}>
+                <Ionicons name="refresh" size={16} color="#fff" />
+                <Text style={styles.refreshButtonSmallText}>Tentar Novamente</Text>
+              </TouchableOpacity>
             </View>
           )}
         </View>
@@ -514,7 +521,7 @@ const styles = StyleSheet.create({
   newsCard: {
     backgroundColor: '#fff',
     borderRadius: 12,
-    width: 240,
+    width: 280,
     elevation: 3,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
@@ -538,6 +545,12 @@ const styles = StyleSheet.create({
     color: '#2c3e50',
     lineHeight: 20,
   },
+  newsDescription: {
+    fontSize: 12,
+    color: '#7f8c8d',
+    marginTop: 4,
+    lineHeight: 18,
+  },
   loadingText: {
     paddingHorizontal: 16,
     color: '#7f8c8d',
@@ -560,6 +573,21 @@ const styles = StyleSheet.create({
     color: '#7f8c8d',
     fontSize: 14,
     textAlign: 'center',
+    marginBottom: 12,
+  },
+  refreshButtonSmall: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#2c3e50',
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    borderRadius: 8,
+    gap: 6,
+  },
+  refreshButtonSmallText: {
+    color: '#fff',
+    fontSize: 13,
+    fontWeight: '600',
   },
   quickAccess: {
     paddingHorizontal: 16,

@@ -84,7 +84,7 @@ These guidelines are designed to ensure the consistent, efficient, and high-qual
 
 ## 12. App Features & Services
 
-*   **Scraper**: A scraper uses `axios` and `cheerio` to extract the latest Diocese data (`backend/scraper.js`). Updates here must be parsed carefully according to the live DOM. Note: When scraping the website, it uses selectors like `.post_text` and `.scale_image_container` to fetch news cards reliably from the markup without duplicates.
+*   **Scraper**: A scraper uses `axios` and `cheerio` to extract the latest Diocese data (`backend/scraper.js`). Updates here must be parsed carefully according to the live DOM. Note: When scraping the website, it uses selectors like `.post_text` and `.scale_image_container` to fetch news cards reliably from the markup. It now extracts title, link, image, and the description (first paragraph), and checks against duplicate links before inserting.
 *   **Web Metro Bundler**: For proper deployment on the web via Metro Bundler (e.g., Netlify), we require `react-native-web`, `react-dom`, and `@expo/metro-runtime` to be installed in the mobile directory.
 *   **Notifications**: We utilize `expo-notifications` for scheduled local notifications (e.g. Mass reminders, daily readings) in `HomeScreen` and `MassesScreen`. Note: We automatically request permission and schedule a repeating daily Liturgy reminder on app mount (`HomeScreen.js`).
 
