@@ -521,14 +521,14 @@ const styles = StyleSheet.create({
   newsCard: {
     backgroundColor: '#fff',
     borderRadius: 12,
-    width: 280,
+    width: 300,
     elevation: 3,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 6,
     overflow: 'hidden',
-    marginRight: 16,
+    marginRight: 20,
   },
   newsImage: {
     width: '100%',
@@ -558,7 +558,7 @@ const styles = StyleSheet.create({
   emptyNewsContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 20,
+    paddingVertical: 24,
     backgroundColor: '#fff',
     marginHorizontal: 16,
     borderRadius: 12,
