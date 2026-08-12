@@ -373,7 +373,7 @@ const styles = StyleSheet.create({
   typeFilterButton: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 14,
+    paddingHorizontal: 16,
     paddingVertical: 8,
     marginRight: 8,
     borderRadius: 16,
@@ -449,6 +449,8 @@ const styles = StyleSheet.create({
     padding: 14,
     borderBottomWidth: 1,
     borderBottomColor: '#f0f4f8',
+    elevation: 2,
+    backgroundColor: '#fff',
   },
   massTimeContainer: {
     backgroundColor: '#2c3e50',

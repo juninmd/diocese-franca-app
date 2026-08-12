@@ -1,0 +1,31 @@
+ INFO  Accepting connections at http://localhost:3001
+ HTTP  8/12/2026 1:48:29 AM ::1 GET /
+ HTTP  8/12/2026 1:48:29 AM ::1 Returned 200 in 308 ms
+ HTTP  8/12/2026 1:48:30 AM ::1 GET /_expo/static/js/web/index-6a05529e8c9bccc62105e50767338840.js
+ HTTP  8/12/2026 1:48:30 AM ::1 Returned 200 in 17 ms
+ HTTP  8/12/2026 1:48:30 AM ::1 GET /assets/node_modules/.pnpm/@expo+vector-icons@15.0.3_expo-font@14.0.11_expo@54.0.33_react-native@0.81.5_@babel+cor_c4febbf40863ea7f4f42b89187881cf6/node_modules/@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/Ionicons.b4eb097d35f44ed943676fd56f6bdc51.ttf
+ HTTP  8/12/2026 1:48:30 AM ::1 Returned 200 in 4 ms
+ HTTP  8/12/2026 1:48:32 AM ::1 GET /
+ HTTP  8/12/2026 1:48:32 AM ::1 Returned 200 in 2 ms
+ HTTP  8/12/2026 1:48:33 AM ::1 GET /_expo/static/js/web/index-6a05529e8c9bccc62105e50767338840.js
+ HTTP  8/12/2026 1:48:33 AM ::1 Returned 200 in 2 ms
+ HTTP  8/12/2026 1:48:33 AM ::1 GET /assets/node_modules/.pnpm/@expo+vector-icons@15.0.3_expo-font@14.0.11_expo@54.0.33_react-native@0.81.5_@babel+cor_c4febbf40863ea7f4f42b89187881cf6/node_modules/@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/Ionicons.b4eb097d35f44ed943676fd56f6bdc51.ttf
+ HTTP  8/12/2026 1:48:33 AM ::1 Returned 200 in 2 ms
+ HTTP  8/12/2026 1:48:36 AM ::1 GET /
+ HTTP  8/12/2026 1:48:36 AM ::1 Returned 200 in 1 ms
+ HTTP  8/12/2026 1:48:36 AM ::1 GET /_expo/static/js/web/index-6a05529e8c9bccc62105e50767338840.js
+ HTTP  8/12/2026 1:48:36 AM ::1 Returned 200 in 1 ms
+ HTTP  8/12/2026 1:48:37 AM ::1 GET /assets/node_modules/.pnpm/@expo+vector-icons@15.0.3_expo-font@14.0.11_expo@54.0.33_react-native@0.81.5_@babel+cor_c4febbf40863ea7f4f42b89187881cf6/node_modules/@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/Ionicons.b4eb097d35f44ed943676fd56f6bdc51.ttf
+ HTTP  8/12/2026 1:48:37 AM ::1 Returned 200 in 2 ms
+ HTTP  8/12/2026 1:56:33 AM ::1 GET /
+ HTTP  8/12/2026 1:56:33 AM ::1 Returned 200 in 1 ms
+ HTTP  8/12/2026 1:56:33 AM ::1 GET /_expo/static/js/web/index-6a05529e8c9bccc62105e50767338840.js
+ HTTP  8/12/2026 1:56:33 AM ::1 Returned 200 in 1 ms
+ HTTP  8/12/2026 1:56:34 AM ::1 GET /assets/node_modules/.pnpm/@expo+vector-icons@15.0.3_expo-font@14.0.11_expo@54.0.33_react-native@0.81.5_@babel+cor_c4febbf40863ea7f4f42b89187881cf6/node_modules/@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/Ionicons.b4eb097d35f44ed943676fd56f6bdc51.ttf
+ HTTP  8/12/2026 1:56:34 AM ::1 Returned 200 in 2 ms
+ HTTP  8/12/2026 2:00:47 AM ::1 GET /
+ HTTP  8/12/2026 2:00:47 AM ::1 Returned 200 in 1 ms
+ HTTP  8/12/2026 2:00:47 AM ::1 GET /_expo/static/js/web/index-6a05529e8c9bccc62105e50767338840.js
+ HTTP  8/12/2026 2:00:47 AM ::1 Returned 200 in 0 ms
+ HTTP  8/12/2026 2:00:47 AM ::1 GET /assets/node_modules/.pnpm/@expo+vector-icons@15.0.3_expo-font@14.0.11_expo@54.0.33_react-native@0.81.5_@babel+cor_c4febbf40863ea7f4f42b89187881cf6/node_modules/@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/Ionicons.b4eb097d35f44ed943676fd56f6bdc51.ttf
+ HTTP  8/12/2026 2:00:47 AM ::1 Returned 200 in 1 ms

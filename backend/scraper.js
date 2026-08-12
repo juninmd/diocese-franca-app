@@ -16,30 +16,38 @@ const scrapeNews = async () => {
     // The layout has list items (li) containing the news.
     // Inside, there is <div class="scale_image_container"> and <div class="post_text">.
     $('.post_text').each((i, el) => {
-        const titleElement = $(el).find('h2.post_title a');
-        if (titleElement.length === 0) return;
+        try {
+            const titleElement = $(el).find('h2.post_title a');
+            if (titleElement.length === 0) return;
 
-        const title = titleElement.text().trim();
-        let link = titleElement.attr('href');
+            const title = titleElement.text().trim();
+            let link = titleElement.attr('href') || '';
 
-        // Find the image in the previous sibling or parent context
-        const parentLi = $(el).closest('li');
-        const imgTag = parentLi.find('.scale_image_container img.scale_image');
-        let image = imgTag.attr('src');
+            // Find the image in the previous sibling or parent context
+            const parentLi = $(el).closest('li');
+            const imgTag = parentLi.find('.scale_image_container img.scale_image');
+            let image = imgTag.attr('src') || '';
 
-        const descriptionElement = $(el).find('p').first();
-        const description = descriptionElement.text().trim();
+            // Attempt to find a date if available, typically in small or span tags inside post_title or similar
+            const dateElement = parentLi.find('.post_date').first();
+            const date = dateElement.length > 0 ? dateElement.text().trim() : '';
 
-        if (title && link && link.includes('noticia_detalhe') && image) {
-            // Make link absolute
-            const fullLink = `https://diocesefranca.org.br/${link}`;
-            const fullImage = `https://diocesefranca.org.br/${image}`;
+            const descriptionElement = $(el).find('p').first();
+            const description = descriptionElement.length > 0 ? descriptionElement.text().trim() : '';
 
-            // Check for duplicates
-            const isDuplicate = news.some(n => n.link === fullLink);
-            if (!isDuplicate) {
-                 news.push({ id: news.length + 1, title, description, link: fullLink, image: fullImage });
+            if (title && link && link.includes('noticia_detalhe')) {
+                // Make link absolute
+                const fullLink = link.startsWith('http') ? link : `https://diocesefranca.org.br/${link}`;
+                const fullImage = image ? (image.startsWith('http') ? image : `https://diocesefranca.org.br/${image}`) : '';
+
+                // Check for duplicates
+                const isDuplicate = news.some(n => n.link === fullLink);
+                if (!isDuplicate) {
+                    news.push({ id: news.length + 1, title, description, link: fullLink, image: fullImage, date });
+                }
             }
+        } catch (err) {
+            console.error('Error parsing individual news element:', err.message);
         }
     });
 
