@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity, ActivityIndicator, TextInput, RefreshControl, Share } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import * as Notifications from 'expo-notifications';
 import { getPriests } from '../services/api';
 import { FavoritesService } from '../services/FavoritesService';
 import { useToast } from '../context/ToastContext';
@@ -77,6 +78,16 @@ export default function PriestsScreen({ navigation }) {
       await FavoritesService.addFavoritePriest(priest);
       setFavorites(prev => [...prev, priest.id]);
       toast.success(`${priest.name} adicionado aos favoritos!`);
+      const { status } = await Notifications.requestPermissionsAsync();
+      if (status === 'granted') {
+         await Notifications.scheduleNotificationAsync({
+           content: {
+             title: 'Padre Favoritado! 🙏',
+             body: `Você favoritou o ${priest.title} ${priest.name}.`,
+           },
+           trigger: null,
+         });
+      }
     }
   };
 

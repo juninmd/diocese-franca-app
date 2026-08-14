@@ -79,14 +79,14 @@ These guidelines are designed to ensure the consistent, efficient, and high-qual
 
 *   All mobile web deployments must have coverage with Playwright.
 *   Tests reside in `mobile/e2e/`.
-*   Always test against the exported web bundle `npx expo export -p web` running on a local server.
-*   Use `page.screenshot` to keep the visual documentation up to date.
+*   Always test against the exported web bundle `npx expo export -p web` running on a local server (e.g., using `npx serve dist -p 3001`).
+*   Use `page.screenshot` to keep the visual documentation up to date in `screenshots/`. Make sure to configure exact matches for text locators (`getByText(..., { exact: true })`) to avoid strict mode violations.
 
 ## 12. App Features & Services
 
-*   **Scraper**: A scraper uses `axios` and `cheerio` to extract the latest Diocese data (`backend/scraper.js`). Updates here must be parsed carefully according to the live DOM. Note: When scraping the website, it uses selectors like `.post_text` and `.scale_image_container` to fetch news cards reliably from the markup. It now extracts title, link, image, description (first paragraph), and date, checking against duplicate links before inserting, with resilient `try/catch` wrapping individual node parsings.
+*   **Scraper**: A scraper uses `axios` and `cheerio` to extract the latest Diocese data (`backend/scraper.js`). Updates here must be parsed carefully according to the live DOM. Note: When scraping the website, it uses selectors like `.post_text` and `.scale_image_container` to fetch news cards reliably from the markup. It extracts title, link, image, description (first paragraph), and date, checking against duplicate links before inserting. We rely on robust fallbacks and request timeouts to maintain stability.
 *   **Web Metro Bundler**: For proper deployment on the web via Metro Bundler (e.g., Netlify), we require `react-native-web`, `react-dom`, and `@expo/metro-runtime` to be installed in the mobile directory.
-*   **Notifications**: We utilize `expo-notifications` for scheduled local notifications in `App.js`, `HomeScreen.js`, and `MassesScreen.js`. We offer individual tap-to-remind icon buttons inside the Masses list.
+*   **Notifications**: We utilize `expo-notifications` for scheduled local notifications in `App.js`, `HomeScreen.js`, `MassesScreen.js`, `PriestsScreen.js` and `ChurchesScreen.js`. We offer individual tap-to-remind icon buttons and feedback upon favoriting entities.
 
 These guidelines are intended to provide a framework for the development of AGENTS.md. Continuous review and adaptation are encouraged to ensure the project remains effective and aligned with evolving needs.
 ```

@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity, ActivityIndicator, TextInput, RefreshControl, Share } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import * as Notifications from 'expo-notifications';
 import { getChurches } from '../services/api';
 import { FavoritesService } from '../services/FavoritesService';
 import { useToast } from '../context/ToastContext';
@@ -77,6 +78,16 @@ export default function ChurchesScreen({ navigation }) {
       await FavoritesService.addFavoriteChurch(church);
       setFavorites(prev => [...prev, church.id]);
       toast.success(`${church.name} adicionado aos favoritos!`);
+      const { status } = await Notifications.requestPermissionsAsync();
+      if (status === 'granted') {
+         await Notifications.scheduleNotificationAsync({
+           content: {
+             title: 'Igreja Favoritada! ❤️',
+             body: `Você favoritou a paróquia ${church.name}.`,
+           },
+           trigger: null,
+         });
+      }
     }
   };
 
@@ -296,7 +307,7 @@ const styles = StyleSheet.create({
   card: {
     backgroundColor: '#fff',
     borderRadius: 16,
-    padding: 16,
+    padding: 20,
     marginBottom: 12,
     elevation: 3,
     shadowColor: '#000',

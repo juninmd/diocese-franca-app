@@ -446,7 +446,8 @@ const styles = StyleSheet.create({
   massCard: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 14,
+    paddingHorizontal: 18,
+    paddingVertical: 14,
     borderBottomWidth: 1,
     borderBottomColor: '#f0f4f8',
     elevation: 2,
