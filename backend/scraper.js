@@ -8,7 +8,8 @@ const scrapeNews = async () => {
     const { data } = await axios.get('https://diocesefranca.org.br/', {
       headers: {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36'
-      }
+      },
+      timeout: 10000
     });
     const $ = cheerio.load(data);
     const news = [];
@@ -30,10 +31,10 @@ const scrapeNews = async () => {
 
             // Attempt to find a date if available, typically in small or span tags inside post_title or similar
             const dateElement = parentLi.find('.post_date').first();
-            const date = dateElement.length > 0 ? dateElement.text().trim() : '';
+            const date = dateElement.length > 0 ? dateElement.text().trim() : 'Sem informação de data';
 
             const descriptionElement = $(el).find('p').first();
-            const description = descriptionElement.length > 0 ? descriptionElement.text().trim() : '';
+            const description = descriptionElement.length > 0 ? descriptionElement.text().trim() : 'Sem descrição disponível';
 
             if (title && link && link.includes('noticia_detalhe')) {
                 // Make link absolute

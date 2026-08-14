@@ -29,8 +29,8 @@ Aplicativo completo para a Diocese de Franca com backend API REST e app React Na
 
 ### Mobile
 - Deploy web 100% funcional no Netlify com Metro bundler suportando `react-native-web`
-- Notificações locais automáticas de boas-vindas na inicialização do app (`App.js`), lembretes no acesso rápido do `HomeScreen`, e **novo:** Lembretes de Missa individuais no `MassesScreen` via `expo-notifications`
-- Aprimoramentos de UI/UX: Modificações de design na lista de Padres, Igrejas, e filtros de Missas. Botão "Tentar Novamente" incluído na lista de notícias vazia (`HomeScreen.js`). Aumento da largura e padding dos cards para maior legibilidade
+- Notificações locais automáticas de boas-vindas na inicialização do app (`App.js`), lembretes no acesso rápido do `HomeScreen`, e **novo:** Lembretes de Missa individuais no `MassesScreen` via `expo-notifications`, além de alertas locais para quando favoritar uma paróquia ou padre.
+- Aprimoramentos de UI/UX: Modificações de design na lista de Padres, Igrejas, e filtros de Missas. Botão "Tentar Novamente" incluído na lista de notícias vazia (`HomeScreen.js`). Aumento da largura e padding dos cards para maior legibilidade, além de ajustes no border-radius.
 - Skeletons Loaders (Animação Shimmer) em diversas áreas como Notícias e Listas
 - Correção de duplicação de variáveis na renderização do banner offline
 - Pull-to-refresh com feedback visual
@@ -44,7 +44,7 @@ Aplicativo completo para a Diocese de Franca com backend API REST e app React Na
 - Testes E2E com Playwright para verificação no ambiente web
 
 ### Backend
-- Scraper autônomo aprimorado (`backend/scraper.js`) extraindo descrições das notícias e data, prevenindo duplicidades por checagem de link e garantindo fallback vazio (empty string) em imagens/textos, e envolvendo em bloco `try/catch` individual
+- Scraper autônomo aprimorado (`backend/scraper.js`) extraindo descrições das notícias e data, prevenindo duplicidades por checagem de link e garantindo fallbacks mais robustos ('Sem informação de data', 'Sem descrição disponível'), e envolvendo em bloco `try/catch` individual com novo `timeout` para evitar travamentos.
 - Endpoint de health check `/api/health`
 - Compressão gzip automática
 - Helmet.js para headers de segurança
@@ -136,6 +136,10 @@ pnpm start
 cd backend
 pnpm test
 # Resultado: 19 testes passando
+
+cd ../mobile
+npx playwright test
+# Testes E2E (Web) validando Home, Igrejas e Missas
 ```
 
 ## Endpoints da API
