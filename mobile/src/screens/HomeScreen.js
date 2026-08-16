@@ -521,7 +521,7 @@ const styles = StyleSheet.create({
   newsCard: {
     backgroundColor: '#fff',
     borderRadius: 16,
-    width: 300,
+    width: 320,
     elevation: 4,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 3 },
@@ -537,7 +537,7 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
   },
   newsContent: {
-    padding: 12,
+    padding: 16,
   },
   newsTitle: {
     fontSize: 14,

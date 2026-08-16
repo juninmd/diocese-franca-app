@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, ActivityIndicator, TouchableOpacity, Linking } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import * as Notifications from 'expo-notifications';
 import { getChurchById } from '../services/api';
+import { useToast } from '../context/ToastContext';
 
 export default function ChurchDetailScreen({ route }) {
   const { churchId } = route.params;
   const [church, setChurch] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const toast = useToast();
 
   useEffect(() => {
     loadChurchDetail();
@@ -118,6 +121,33 @@ export default function ChurchDetailScreen({ route }) {
                 <Text style={styles.infoValue}>{church.phone}</Text>
               </View>
               <Ionicons name="open-outline" size={18} color="#3498db" />
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.infoRow}
+              onPress={async () => {
+                const { status } = await Notifications.requestPermissionsAsync();
+                if (status === 'granted') {
+                  await Notifications.scheduleNotificationAsync({
+                    content: {
+                      title: 'Lembrete de Visita',
+                      body: `Lembrete: Visitar a paróquia ${church.name}.`,
+                    },
+                    trigger: { seconds: 5 },
+                  });
+                  toast.success('Lembrete de visita agendado!');
+                } else {
+                  toast.error('Permissão de notificação negada.');
+                }
+              }}
+            >
+              <View style={styles.infoIconContainer}>
+                <Ionicons name="calendar-outline" size={20} color="#27ae60" />
+              </View>
+              <View style={styles.infoContent}>
+                <Text style={styles.infoLabel}>Agendar Visita</Text>
+                <Text style={styles.infoValue}>Receber um lembrete</Text>
+              </View>
+              <Ionicons name="notifications-outline" size={18} color="#27ae60" />
             </TouchableOpacity>
           </View>
         </View>
