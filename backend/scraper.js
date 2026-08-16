@@ -9,14 +9,14 @@ const scrapeNews = async () => {
       headers: {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36'
       },
-      timeout: 10000
+      timeout: 15000
     });
     const $ = cheerio.load(data);
     const news = [];
 
     // The layout has list items (li) containing the news.
     // Inside, there is <div class="scale_image_container"> and <div class="post_text">.
-    $('.post_text').each((i, el) => {
+    $('.section_post_left').each((i, el) => {
         try {
             const titleElement = $(el).find('h2.post_title a');
             if (titleElement.length === 0) return;
@@ -24,16 +24,15 @@ const scrapeNews = async () => {
             const title = titleElement.text().trim();
             let link = titleElement.attr('href') || '';
 
-            // Find the image in the previous sibling or parent context
-            const parentLi = $(el).closest('li');
-            const imgTag = parentLi.find('.scale_image_container img.scale_image');
+            // Find the image in the context
+            const imgTag = $(el).find('.scale_image_container img.scale_image');
             let image = imgTag.attr('src') || '';
 
             // Attempt to find a date if available, typically in small or span tags inside post_title or similar
-            const dateElement = parentLi.find('.post_date').first();
+            const dateElement = $(el).find('.post_date').first();
             const date = dateElement.length > 0 ? dateElement.text().trim() : 'Sem informação de data';
 
-            const descriptionElement = $(el).find('p').first();
+            const descriptionElement = $(el).find('.post_text p').first();
             const description = descriptionElement.length > 0 ? descriptionElement.text().trim() : 'Sem descrição disponível';
 
             if (title && link && link.includes('noticia_detalhe')) {

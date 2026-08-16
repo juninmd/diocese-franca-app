@@ -29,8 +29,8 @@ Aplicativo completo para a Diocese de Franca com backend API REST e app React Na
 
 ### Mobile
 - Deploy web 100% funcional no Netlify com Metro bundler suportando `react-native-web`
-- Notificações locais automáticas de boas-vindas na inicialização do app (`App.js`), lembretes no acesso rápido do `HomeScreen`, e **novo:** Lembretes de Missa individuais no `MassesScreen` via `expo-notifications`, além de alertas locais para quando favoritar uma paróquia ou padre.
-- Aprimoramentos de UI/UX: Modificações de design na lista de Padres, Igrejas, e filtros de Missas. Botão "Tentar Novamente" incluído na lista de notícias vazia (`HomeScreen.js`). Aumento da largura e padding dos cards para maior legibilidade, além de ajustes no border-radius.
+- Notificações locais automáticas de boas-vindas na inicialização do app (`App.js`), lembretes no acesso rápido do `HomeScreen`, e **novo:** Lembretes de Missa individuais no `MassesScreen` via `expo-notifications`, além de alertas locais para quando favoritar uma paróquia ou padre. Novos lembretes locais para Agendar Visita (`ChurchDetailScreen.js`) e Lembrete Confissão (`PriestDetailScreen.js`).
+- Aprimoramentos de UI/UX: Modificações de design na lista de Padres, Igrejas, e filtros de Missas. Botão "Tentar Novamente" incluído na lista de notícias vazia (`HomeScreen.js`). Aumento da largura (`width: 320`) do card de notícias (`HomeScreen.js`), e de padding e elevação nos cards de igrejas e padres (`ChurchesScreen.js`, `PriestsScreen.js`).
 - Skeletons Loaders (Animação Shimmer) em diversas áreas como Notícias e Listas
 - Correção de duplicação de variáveis na renderização do banner offline
 - Pull-to-refresh com feedback visual
@@ -44,7 +44,7 @@ Aplicativo completo para a Diocese de Franca com backend API REST e app React Na
 - Testes E2E com Playwright para verificação no ambiente web
 
 ### Backend
-- Scraper autônomo aprimorado (`backend/scraper.js`) extraindo descrições das notícias e data, prevenindo duplicidades por checagem de link e garantindo fallbacks mais robustos ('Sem informação de data', 'Sem descrição disponível'), e envolvendo em bloco `try/catch` individual com novo `timeout` para evitar travamentos.
+- Scraper autônomo aprimorado (`backend/scraper.js`) alterando a seleção dos artigos para a classe `.section_post_left` para maior confiabilidade na raspagem. Extraindo descrições das notícias e data, prevenindo duplicidades por checagem de link e garantindo fallbacks mais robustos ('Sem informação de data', 'Sem descrição disponível'), e envolvendo em bloco `try/catch` individual com novo `timeout` de 15s para evitar travamentos.
 - Endpoint de health check `/api/health`
 - Compressão gzip automática
 - Helmet.js para headers de segurança
@@ -246,6 +246,9 @@ O app possui interface moderna com:
 
 **Igrejas Screen**
 ![Igrejas Screen](mobile/screenshots/churches_full.png)
+
+**Padres Screen**
+![Padres Screen](mobile/screenshots/priests_full.png)
 
 **Missas Screen**
 ![Missas Screen](mobile/screenshots/masses_full.png)

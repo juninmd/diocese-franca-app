@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, ActivityIndicator, TouchableOpacity, Linking } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import * as Notifications from 'expo-notifications';
 import { getPriestById } from '../services/api';
+import { useToast } from '../context/ToastContext';
 
 export default function PriestDetailScreen({ route }) {
   const { priestId } = route.params;
   const [priest, setPriest] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const toast = useToast();
 
   useEffect(() => {
     loadPriestDetail();
@@ -115,6 +118,33 @@ export default function PriestDetailScreen({ route }) {
                 <Ionicons name="open-outline" size={18} color="#3498db" />
               </TouchableOpacity>
             )}
+            <TouchableOpacity
+              style={styles.contactRow}
+              onPress={async () => {
+                const { status } = await Notifications.requestPermissionsAsync();
+                if (status === 'granted') {
+                  await Notifications.scheduleNotificationAsync({
+                    content: {
+                      title: 'Lembrete de Confissão',
+                      body: `Agendar confissão ou atendimento com ${priest.title} ${priest.name}.`,
+                    },
+                    trigger: { seconds: 5 },
+                  });
+                  toast.success('Lembrete configurado!');
+                } else {
+                  toast.error('Permissão de notificação negada.');
+                }
+              }}
+            >
+              <View style={styles.contactIconContainer}>
+                <Ionicons name="time-outline" size={20} color="#8e44ad" />
+              </View>
+              <View style={styles.contactContent}>
+                <Text style={styles.contactLabel}>Lembrete Confissão</Text>
+                <Text style={styles.contactValue}>Configurar alerta</Text>
+              </View>
+              <Ionicons name="notifications-outline" size={18} color="#8e44ad" />
+            </TouchableOpacity>
           </View>
         </View>
 

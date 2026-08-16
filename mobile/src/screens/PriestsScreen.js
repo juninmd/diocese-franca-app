@@ -296,7 +296,7 @@ const styles = StyleSheet.create({
   card: {
     backgroundColor: '#fff',
     borderRadius: 16,
-    padding: 16,
+    padding: 20,
     marginBottom: 12,
     flexDirection: 'row',
     alignItems: 'center',
@@ -307,9 +307,9 @@ const styles = StyleSheet.create({
     shadowRadius: 8,
   },
   avatarContainer: {
-    width: 64,
-    height: 64,
-    borderRadius: 32,
+    width: 70,
+    height: 70,
+    borderRadius: 35,
     backgroundColor: '#2c3e50',
     justifyContent: 'center',
     alignItems: 'center',
