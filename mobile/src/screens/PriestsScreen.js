@@ -325,10 +325,10 @@ const styles = StyleSheet.create({
     marginRight: 8,
   },
   priestName: {
-    fontSize: 16,
+    fontSize: 17,
     fontWeight: 'bold',
     color: '#2c3e50',
-    marginBottom: 4,
+    marginBottom: 6,
   },
   titleBadge: {
     flexDirection: 'row',
@@ -338,10 +338,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     paddingVertical: 3,
     borderRadius: 6,
-    marginBottom: 6,
+    marginBottom: 8,
   },
   priestTitle: {
-    fontSize: 12,
+    fontSize: 13,
     color: '#d35400',
     fontWeight: '600',
     marginLeft: 4,
@@ -349,9 +349,10 @@ const styles = StyleSheet.create({
   contactRow: {
     flexDirection: 'row',
     alignItems: 'center',
+    marginTop: 2,
   },
   contactText: {
-    fontSize: 12,
+    fontSize: 13,
     color: '#7f8c8d',
     marginLeft: 4,
     flex: 1,

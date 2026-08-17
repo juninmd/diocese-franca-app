@@ -29,8 +29,8 @@ Aplicativo completo para a Diocese de Franca com backend API REST e app React Na
 
 ### Mobile
 - Deploy web 100% funcional no Netlify com Metro bundler suportando `react-native-web`
-- Notificações locais automáticas de boas-vindas na inicialização do app (`App.js`), lembretes no acesso rápido do `HomeScreen`, e **novo:** Lembretes de Missa individuais no `MassesScreen` via `expo-notifications`, além de alertas locais para quando favoritar uma paróquia ou padre. Novos lembretes locais para Agendar Visita (`ChurchDetailScreen.js`) e Lembrete Confissão (`PriestDetailScreen.js`).
-- Aprimoramentos de UI/UX: Modificações de design na lista de Padres, Igrejas, e filtros de Missas. Botão "Tentar Novamente" incluído na lista de notícias vazia (`HomeScreen.js`). Aumento da largura (`width: 320`) do card de notícias (`HomeScreen.js`), e de padding e elevação nos cards de igrejas e padres (`ChurchesScreen.js`, `PriestsScreen.js`).
+- Notificações locais automáticas de boas-vindas na inicialização do app (`App.js`), lembretes no acesso rápido do `HomeScreen`, e **novo:** Lembretes de Missa individuais no `MassesScreen` via `expo-notifications`, além de alertas locais para quando favoritar uma paróquia ou padre (`ChurchesScreen.js` e `PriestsScreen.js`). Novos lembretes locais para Agendar Visita (`ChurchDetailScreen.js`) e Lembrete Confissão (`PriestDetailScreen.js`).
+- Aprimoramentos de UI/UX: Refinamento na listagem de Padres e Igrejas (`ChurchesScreen.js`, `PriestsScreen.js`) melhorando a legibilidade dos nomes e endereços, e ajuste no padding/margin do componente quando não há notícias retornadas (`HomeScreen.js`). Aumento da largura (`width: 320`) do card de notícias (`HomeScreen.js`).
 - Skeletons Loaders (Animação Shimmer) em diversas áreas como Notícias e Listas
 - Correção de duplicação de variáveis na renderização do banner offline
 - Pull-to-refresh com feedback visual
@@ -41,10 +41,10 @@ Aplicativo completo para a Diocese de Franca com backend API REST e app React Na
 - Botão de limpar filtros
 - Seção de acesso rápido na home
 - Badges de estatísticas clicáveis
-- Testes E2E com Playwright para verificação no ambiente web
+- Testes E2E atualizados e screenshots regeradas com sucesso com Playwright.
 
 ### Backend
-- Scraper autônomo aprimorado (`backend/scraper.js`) alterando a seleção dos artigos para a classe `.section_post_left` para maior confiabilidade na raspagem. Extraindo descrições das notícias e data, prevenindo duplicidades por checagem de link e garantindo fallbacks mais robustos ('Sem informação de data', 'Sem descrição disponível'), e envolvendo em bloco `try/catch` individual com novo `timeout` de 15s para evitar travamentos.
+- Scraper autônomo aprimorado (`backend/scraper.js`) para capturar data e descrição (`.event_date` e `.post_text p`) garantindo fallbacks robustos se vazios ('Sem informação de data' ou 'Sem descrição disponível'). Usa a classe `.section_post_left` para maior confiabilidade e bloca a execução individual em `try/catch` com timeout de 15s.
 - Endpoint de health check `/api/health`
 - Compressão gzip automática
 - Helmet.js para headers de segurança
