@@ -29,11 +29,13 @@ const scrapeNews = async () => {
             let image = imgTag.attr('src') || '';
 
             // Attempt to find a date if available, typically in small or span tags inside post_title or similar
-            const dateElement = $(el).find('.post_date').first();
-            const date = dateElement.length > 0 ? dateElement.text().trim() : 'Sem informação de data';
+            const dateElement = $(el).find('.event_date').first();
+            const dateText = dateElement.length > 0 ? dateElement.text().trim() : '';
+            const date = dateText ? dateText : 'Sem informação de data';
 
             const descriptionElement = $(el).find('.post_text p').first();
-            const description = descriptionElement.length > 0 ? descriptionElement.text().trim() : 'Sem descrição disponível';
+            const descriptionText = descriptionElement.length > 0 ? descriptionElement.text().trim() : '';
+            const description = descriptionText ? descriptionText : 'Sem descrição disponível';
 
             if (title && link && link.includes('noticia_detalhe')) {
                 // Make link absolute

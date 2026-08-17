@@ -333,17 +333,19 @@ const styles = StyleSheet.create({
     marginRight: 8,
   },
   churchName: {
-    fontSize: 16,
+    fontSize: 17,
     fontWeight: 'bold',
     color: '#2c3e50',
-    marginBottom: 4,
+    marginBottom: 6,
+    lineHeight: 22,
   },
   locationRow: {
     flexDirection: 'row',
     alignItems: 'center',
+    marginTop: 2,
   },
   churchLocation: {
-    fontSize: 13,
+    fontSize: 14,
     color: '#7f8c8d',
     marginLeft: 4,
   },
