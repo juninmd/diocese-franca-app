@@ -151,7 +151,7 @@ export default function ChurchesScreen({ navigation }) {
     <View style={styles.emptyContainer}>
       <Ionicons name={error ? 'alert-circle-outline' : (showFavorites ? 'heart-outline' : 'search-outline')} size={64} color="#bdc3c7" />
       <Text style={styles.emptyTitle}>
-        {error ? 'Erro ao carregar' : (showFavorites ? 'Nenhuma igreja favorita' : 'Nenhuma igreja encontrada')}
+        {error ? 'Erro ao carregar' : (showFavorites ? 'Nenhuma igreja favorita' : 'Nenhuma paróquia encontrada, tente buscar outro nome')}
       </Text>
       <Text style={styles.emptyText}>
         {error ? error : (showFavorites

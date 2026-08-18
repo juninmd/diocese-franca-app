@@ -521,14 +521,14 @@ const styles = StyleSheet.create({
   newsCard: {
     backgroundColor: '#fff',
     borderRadius: 16,
-    width: 320,
+    width: 300,
     elevation: 4,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 3 },
     shadowOpacity: 0.15,
     shadowRadius: 8,
     overflow: 'hidden',
-    marginRight: 24,
+    marginRight: 16,
   },
   newsImage: {
     width: '100%',
