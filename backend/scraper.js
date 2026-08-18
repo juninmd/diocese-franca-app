@@ -30,11 +30,11 @@ const scrapeNews = async () => {
 
             // Attempt to find a date if available, typically in small or span tags inside post_title or similar
             const dateElement = $(el).find('.event_date').first();
-            const dateText = dateElement.length > 0 ? dateElement.text().trim() : '';
+            const dateText = dateElement.length > 0 && dateElement.text().trim() !== '' ? dateElement.text().trim() : $(el).text().match(/\d{2} de [a-z]+ de \d{4}/i)?.[0] || '';
             const date = dateText ? dateText : 'Sem informação de data';
 
             const descriptionElement = $(el).find('.post_text p').first();
-            const descriptionText = descriptionElement.length > 0 ? descriptionElement.text().trim() : '';
+            const descriptionText = descriptionElement.length > 0 && descriptionElement.text().trim() !== '' ? descriptionElement.text().trim() : $(el).text().substring(0, 100).trim();
             const description = descriptionText ? descriptionText : 'Sem descrição disponível';
 
             if (title && link && link.includes('noticia_detalhe')) {
@@ -66,3 +66,4 @@ const scrapeNews = async () => {
 };
 
 scrapeNews();
+setInterval(scrapeNews, 3600000);

@@ -132,7 +132,7 @@ export default function ChurchDetailScreen({ route }) {
                       title: 'Lembrete de Visita',
                       body: `Lembrete: Visitar a paróquia ${church.name}.`,
                     },
-                    trigger: { seconds: 5 },
+                    trigger: { seconds: 2 },
                   });
                   toast.success('Lembrete de visita agendado!');
                 } else {

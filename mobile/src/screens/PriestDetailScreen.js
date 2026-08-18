@@ -128,7 +128,7 @@ export default function PriestDetailScreen({ route }) {
                       title: 'Lembrete de Confissão',
                       body: `Agendar confissão ou atendimento com ${priest.title} ${priest.name}.`,
                     },
-                    trigger: { seconds: 5 },
+                    trigger: { seconds: 2 },
                   });
                   toast.success('Lembrete configurado!');
                 } else {
