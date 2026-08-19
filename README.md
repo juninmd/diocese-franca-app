@@ -44,7 +44,7 @@ Aplicativo completo para a Diocese de Franca com backend API REST e app React Na
 - Testes E2E atualizados e screenshots regeradas com sucesso com Playwright.
 
 ### Backend
-- Scraper autônomo aprimorado (`backend/scraper.js`) para capturar data e descrição (`.event_date` e `.post_text p`) garantindo fallbacks robustos inclusive utilizando regex se os campos estiverem vazios. O script agora é autônomo rodando a cada 1 hora via `setInterval`. Usa a classe `.section_post_left` para maior confiabilidade e bloca a execução individual em `try/catch` com timeout de 15s.
+- Scraper autônomo aprimorado (`backend/scraper.js`) para capturar data e descrição (`.event_date` e `.post_text p`) garantindo fallbacks robustos inclusive utilizando regex combinando a descrição ou o título, se os campos estiverem vazios. O script era autônomo rodando a cada 1 hora via `setInterval` (desativado para execuções inline). Usa a classe `.section_post_left` para maior confiabilidade e bloca a execução individual em `try/catch` com timeout de 15s.
 - Endpoint de health check `/api/health`
 - Compressão gzip automática
 - Helmet.js para headers de segurança
