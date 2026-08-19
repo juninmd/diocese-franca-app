@@ -28,14 +28,26 @@ const scrapeNews = async () => {
             const imgTag = $(el).find('.scale_image_container img.scale_image');
             let image = imgTag.attr('src') || '';
 
-            // Attempt to find a date if available, typically in small or span tags inside post_title or similar
-            const dateElement = $(el).find('.event_date').first();
-            const dateText = dateElement.length > 0 && dateElement.text().trim() !== '' ? dateElement.text().trim() : $(el).text().match(/\d{2} de [a-z]+ de \d{4}/i)?.[0] || '';
-            const date = dateText ? dateText : 'Sem informação de data';
-
             const descriptionElement = $(el).find('.post_text p').first();
             const descriptionText = descriptionElement.length > 0 && descriptionElement.text().trim() !== '' ? descriptionElement.text().trim() : $(el).text().substring(0, 100).trim();
             const description = descriptionText ? descriptionText : 'Sem descrição disponível';
+
+            // Attempt to find a date if available, typically in small or span tags inside post_title or similar
+            const dateElement = $(el).find('.event_date').first();
+            let dateText = dateElement.length > 0 ? dateElement.text().trim() : '';
+            if (!dateText) {
+                // Try parsing the date from the description or title
+                const dateMatch = (description + ' ' + title).match(/\d{1,2} de [a-zA-Zç]+( de \d{4})?/i);
+                if (dateMatch) {
+                    dateText = dateMatch[0];
+                } else {
+                    const monthYearMatch = title.match(/[a-zA-Zç]+\/\d{4}/i);
+                    if (monthYearMatch) {
+                        dateText = monthYearMatch[0];
+                    }
+                }
+            }
+            const date = dateText ? dateText : 'Sem informação de data';
 
             if (title && link && link.includes('noticia_detalhe')) {
                 // Make link absolute
