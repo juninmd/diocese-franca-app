@@ -185,7 +185,7 @@ export default function HomeScreen({ navigation }) {
           ) : (
             <View style={styles.emptyNewsContainer}>
               <Ionicons name="alert-circle-outline" size={32} color="#95a5a6" />
-              <Text style={styles.emptyNewsText}>Nenhuma notícia encontrada no momento.</Text>
+              <Text style={styles.emptyNewsText}>No momento não há novas notícias. Volte mais tarde!</Text>
               <TouchableOpacity style={styles.refreshButtonSmall} onPress={fetchNews}>
                 <Ionicons name="refresh" size={16} color="#fff" />
                 <Text style={styles.refreshButtonSmallText}>Tentar Novamente</Text>
@@ -521,14 +521,15 @@ const styles = StyleSheet.create({
   newsCard: {
     backgroundColor: '#fff',
     borderRadius: 16,
-    width: 300,
+    width: 320,
     elevation: 4,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 3 },
     shadowOpacity: 0.15,
     shadowRadius: 8,
     overflow: 'hidden',
-    marginRight: 16,
+    marginRight: 20,
+    paddingBottom: 8,
   },
   newsImage: {
     width: '100%',

@@ -29,8 +29,8 @@ Aplicativo completo para a Diocese de Franca com backend API REST e app React Na
 
 ### Mobile
 - Deploy web 100% funcional no Netlify com Metro bundler suportando `react-native-web`
-- Notificações locais automáticas de boas-vindas na inicialização do app (`App.js`), lembretes no acesso rápido do `HomeScreen`, e **novo:** Lembretes de Missa individuais no `MassesScreen` via `expo-notifications`, além de alertas locais para quando favoritar uma paróquia ou padre (`ChurchesScreen.js` e `PriestsScreen.js`). Novos lembretes locais para Agendar Visita (`ChurchDetailScreen.js`) e Lembrete Confissão (`PriestDetailScreen.js`) com triggers mais ágeis.
-- Aprimoramentos de UI/UX: Refinamento na listagem de Padres e Igrejas (`ChurchesScreen.js`, `PriestsScreen.js`) melhorando a legibilidade dos nomes e endereços, e ajuste no padding/margin do componente quando não há notícias retornadas (`HomeScreen.js`). Aumento da largura e margin adequados no card de notícias (`HomeScreen.js`), além de melhorias nos empty states das buscas.
+- Notificações locais automáticas de boas-vindas na inicialização do app (`App.js`), lembretes no acesso rápido do `HomeScreen`, e Lembretes de Missa individuais no `MassesScreen` via `expo-notifications`, além de alertas locais para quando favoritar uma paróquia ou padre (`ChurchesScreen.js` e `PriestsScreen.js`). Lembretes locais para Agendar Visita (`ChurchDetailScreen.js`) e Lembrete Confissão (`PriestDetailScreen.js`) com triggers mais ágeis.
+- Aprimoramentos de UI/UX: Refinamento na listagem de Padres e Igrejas (`ChurchesScreen.js`, `PriestsScreen.js`) melhorando a legibilidade e atualizando os empty states (ex: "Você ainda não possui padres favoritos." em vez do tradicional "Nenhum..."). Aumento da largura e margin adequados no card de notícias (`HomeScreen.js`), além de novos textos customizados que orientam melhor o fiel.
 - Skeletons Loaders (Animação Shimmer) em diversas áreas como Notícias e Listas
 - Correção de duplicação de variáveis na renderização do banner offline
 - Pull-to-refresh com feedback visual
@@ -242,16 +242,16 @@ O app possui interface moderna com:
 
 ### Screenshots (Web Output E2E Test)
 **Home Screen**
-![Home Screen](mobile/screenshots/home_full.png)
+![Home Screen](mobile/screenshots/home_full.png?v=1)
 
 **Igrejas Screen**
-![Igrejas Screen](mobile/screenshots/churches_full.png)
+![Igrejas Screen](mobile/screenshots/churches_full.png?v=1)
 
 **Padres Screen**
-![Padres Screen](mobile/screenshots/priests_full.png)
+![Padres Screen](mobile/screenshots/priests_full.png?v=1)
 
 **Missas Screen**
-![Missas Screen](mobile/screenshots/masses_full.png)
+![Missas Screen](mobile/screenshots/masses_full.png?v=1)
 
 ## Licença
 

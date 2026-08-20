@@ -19,14 +19,12 @@ const scrapeNews = async () => {
     $('.section_post_left').each((i, el) => {
         try {
             const titleElement = $(el).find('h2.post_title a');
-            if (titleElement.length === 0) return;
-
-            const title = titleElement.text().trim();
-            let link = titleElement.attr('href') || '';
+            const title = titleElement.length > 0 ? titleElement.text().trim() : 'Sem título disponível';
+            let link = titleElement.length > 0 ? (titleElement.attr('href') || '#') : '#';
 
             // Find the image in the context
             const imgTag = $(el).find('.scale_image_container img.scale_image');
-            let image = imgTag.attr('src') || '';
+            let image = imgTag.length > 0 ? (imgTag.attr('src') || '') : '';
 
             const descriptionElement = $(el).find('.post_text p').first();
             const descriptionText = descriptionElement.length > 0 && descriptionElement.text().trim() !== '' ? descriptionElement.text().trim() : $(el).text().substring(0, 100).trim();
@@ -49,9 +47,9 @@ const scrapeNews = async () => {
             }
             const date = dateText ? dateText : 'Sem informação de data';
 
-            if (title && link && link.includes('noticia_detalhe')) {
+            if (title && link) {
                 // Make link absolute
-                const fullLink = link.startsWith('http') ? link : `https://diocesefranca.org.br/${link}`;
+                const fullLink = link.startsWith('http') ? link : (link !== '#' ? `https://diocesefranca.org.br/${link}` : link);
                 const fullImage = image ? (image.startsWith('http') ? image : `https://diocesefranca.org.br/${image}`) : '';
 
                 // Check for duplicates
