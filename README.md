@@ -32,6 +32,7 @@ Aplicativo completo para a Diocese de Franca com backend API REST e app React Na
 - Notificações locais automáticas de boas-vindas na inicialização do app (`App.js`), lembretes no acesso rápido do `HomeScreen`, e Lembretes de Missa individuais no `MassesScreen` via `expo-notifications`, além de alertas locais para quando favoritar uma paróquia ou padre (`ChurchesScreen.js` e `PriestsScreen.js`). Lembretes locais para Agendar Visita (`ChurchDetailScreen.js`) e Lembrete Confissão (`PriestDetailScreen.js`) com triggers mais ágeis.
 - Aprimoramentos de UI/UX: Refinamento na listagem de Padres e Igrejas (`ChurchesScreen.js`, `PriestsScreen.js`) melhorando a legibilidade e atualizando os empty states (ex: "Você ainda não possui padres favoritos." em vez do tradicional "Nenhum..."). Aumento da largura e margin adequados no card de notícias (`HomeScreen.js`), além de novos textos customizados que orientam melhor o fiel.
 - Skeletons Loaders (Animação Shimmer) em diversas áreas como Notícias e Listas
+- Melhorias na UI/UX dos empty states, como no `MassesScreen.js`
 - Correção de duplicação de variáveis na renderização do banner offline
 - Pull-to-refresh com feedback visual
 - Favoritos salvos localmente (persistem)
@@ -41,10 +42,10 @@ Aplicativo completo para a Diocese de Franca com backend API REST e app React Na
 - Botão de limpar filtros
 - Seção de acesso rápido na home
 - Badges de estatísticas clicáveis
-- Testes E2E atualizados e screenshots regeradas com sucesso com Playwright.
+- Testes E2E atualizados com Playwright, incluindo cenários específicos para empty states e screenshots regeradas com sucesso.
 
 ### Backend
-- Scraper autônomo aprimorado (`backend/scraper.js`) para capturar data e descrição (`.event_date` e `.post_text p`) garantindo fallbacks robustos inclusive utilizando regex combinando a descrição ou o título, se os campos estiverem vazios. O script era autônomo rodando a cada 1 hora via `setInterval` (desativado para execuções inline). Usa a classe `.section_post_left` para maior confiabilidade e bloca a execução individual em `try/catch` com timeout de 15s.
+- Scraper autônomo aprimorado (`backend/scraper.js`) para capturar data e descrição (`.event_date` e `.post_text p`) garantindo fallbacks robustos inclusive utilizando regex combinando a descrição ou o título, se os campos estiverem vazios. O script agora corre via invocação inline exportando o modulo e finalizando limpo. Usa a classe `.section_post_left` para maior confiabilidade e bloca a execução individual em `try/catch` com timeout de 15s.
 - Endpoint de health check `/api/health`
 - Compressão gzip automática
 - Helmet.js para headers de segurança
@@ -252,6 +253,9 @@ O app possui interface moderna com:
 
 **Missas Screen**
 ![Missas Screen](mobile/screenshots/masses_full.png?v=1)
+
+**Missas (Empty State)**
+![Missas (Empty State)](mobile/screenshots/masses_empty.png?v=1)
 
 ## Licença
 
