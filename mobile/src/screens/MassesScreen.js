@@ -128,11 +128,11 @@ export default function MassesScreen() {
              await Notifications.scheduleNotificationAsync({
                content: {
                  title: 'Lembrete de Missa',
-                 body: `Missa às ${item.time} na ${item.church ? item.church.name : 'Paróquia'}.`,
+                 body: `Que alegria! Lembrete para a Santa Missa às ${item.time} na ${item.church ? item.church.name : 'Paróquia'}.`,
                },
                trigger: { seconds: 2 },
              });
-             toast.success('Lembrete configurado!');
+             toast.success('Lembrete configurado com sucesso!');
           } else {
              toast.error('Permissão de notificação negada.');
           }
@@ -282,9 +282,9 @@ export default function MassesScreen() {
         ListEmptyComponent={
           <View style={styles.emptyContainer}>
             <Ionicons name="calendar-outline" size={64} color="#bdc3c7" />
-            <Text style={styles.emptyTitle}>Nenhuma missa encontrada</Text>
+            <Text style={styles.emptyTitle}>Ops! Nenhuma missa encontrada</Text>
             <Text style={styles.emptyText}>
-              Não há missas cadastradas para os filtros selecionados.
+              Não encontramos missas para os filtros selecionados no momento. Tente limpar os filtros.
             </Text>
             {hasActiveFilters && (
               <TouchableOpacity style={styles.emptyButton} onPress={clearFilters}>

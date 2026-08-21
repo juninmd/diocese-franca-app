@@ -75,5 +75,10 @@ const scrapeNews = async () => {
   }
 };
 
-scrapeNews();
-setInterval(scrapeNews, 3600000);
+if (require.main === module) {
+  scrapeNews().then(() => {
+    console.log('Scraper finished execution.');
+  });
+}
+
+module.exports = scrapeNews;
