@@ -282,7 +282,19 @@ export default function HomeScreen({ navigation }) {
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.quickItem}
-              onPress={() => handleCall('1637111400')}
+              onPress={async () => {
+                const { status } = await Notifications.requestPermissionsAsync();
+                if (status === 'granted') {
+                  await Notifications.scheduleNotificationAsync({
+                    content: {
+                      title: 'Ligando...',
+                      body: 'Iniciando chamada para a Diocese.',
+                    },
+                    trigger: null, // immediate
+                  });
+                }
+                handleCall('1637111400');
+              }}
             >
               <Ionicons name="call" size={28} color="#27ae60" />
               <Text style={styles.quickText}>Ligar{'\n'}Diocese</Text>
