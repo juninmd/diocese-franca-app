@@ -151,12 +151,12 @@ export default function ChurchesScreen({ navigation }) {
     <View style={styles.emptyContainer}>
       <Ionicons name={error ? 'alert-circle-outline' : (showFavorites ? 'heart-outline' : 'search-outline')} size={64} color="#bdc3c7" />
       <Text style={styles.emptyTitle}>
-        {error ? 'Erro ao carregar' : (showFavorites ? 'Você ainda não favoritou nenhuma paróquia.' : 'Ops! Não encontramos paróquias com este nome.')}
+        {error ? 'Puxa, não conseguimos carregar as igrejas agora. Tente novamente!' : (showFavorites ? 'Você ainda não favoritou nenhuma paróquia.' : 'Ops! Não encontramos paróquias com este nome.')}
       </Text>
       <Text style={styles.emptyText}>
         {error ? error : (showFavorites
           ? 'Adicione igrejas aos favoritos para acessá-las rapidamente'
-          : searchQuery ? 'Tente buscar com outros termos' : 'Não foi possível carregar as igrejas')}
+          : searchQuery ? 'Que tal tentar outra busca?' : 'Não foi possível carregar as igrejas no momento.')}
       </Text>
       {showFavorites && !error && (
         <TouchableOpacity style={styles.emptyButton} onPress={() => setShowFavorites(false)}>

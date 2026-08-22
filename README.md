@@ -29,8 +29,8 @@ Aplicativo completo para a Diocese de Franca com backend API REST e app React Na
 
 ### Mobile
 - Deploy web 100% funcional no Netlify com Metro bundler suportando `react-native-web`
-- Notificações locais automáticas de boas-vindas na inicialização do app (`App.js`), lembretes no acesso rápido do `HomeScreen`, e Lembretes de Missa individuais no `MassesScreen` via `expo-notifications`, além de alertas locais para quando favoritar uma paróquia ou padre (`ChurchesScreen.js` e `PriestsScreen.js`). Lembretes locais para Agendar Visita (`ChurchDetailScreen.js`) e Lembrete Confissão (`PriestDetailScreen.js`) com triggers mais ágeis.
-- Aprimoramentos de UI/UX: Refinamento na listagem de Padres e Igrejas (`ChurchesScreen.js`, `PriestsScreen.js`) melhorando a legibilidade e atualizando os empty states (ex: "Você ainda não possui padres favoritos." em vez do tradicional "Nenhum..."). Aumento da largura e margin adequados no card de notícias (`HomeScreen.js`), além de novos textos customizados que orientam melhor o fiel.
+- Notificações locais automáticas de boas-vindas na inicialização do app (`App.js`), lembretes no acesso rápido do `HomeScreen` (incluindo notificação imediata ao clicar em "Ligar Diocese"), e Lembretes de Missa individuais no `MassesScreen` via `expo-notifications`, além de alertas locais para quando favoritar uma paróquia ou padre (`ChurchesScreen.js` e `PriestsScreen.js`). Lembretes locais para Agendar Visita (`ChurchDetailScreen.js`) e Lembrete Confissão (`PriestDetailScreen.js`) com triggers mais ágeis.
+- Aprimoramentos de UI/UX: Refinamento na listagem de Padres e Igrejas (`ChurchesScreen.js`, `PriestsScreen.js`) melhorando a legibilidade e atualizando os empty states para uma linguagem mais acolhedora e empática (ex: "Puxa, não conseguimos carregar as igrejas agora. Tente novamente!").
 - Skeletons Loaders (Animação Shimmer) em diversas áreas como Notícias e Listas
 - Melhorias na UI/UX dos empty states, como no `MassesScreen.js`
 - Correção de duplicação de variáveis na renderização do banner offline
@@ -45,7 +45,7 @@ Aplicativo completo para a Diocese de Franca com backend API REST e app React Na
 - Testes E2E atualizados com Playwright, incluindo cenários específicos para empty states e screenshots regeradas com sucesso.
 
 ### Backend
-- Scraper autônomo aprimorado (`backend/scraper.js`) para capturar data e descrição (`.event_date` e `.post_text p`) garantindo fallbacks robustos inclusive utilizando regex combinando a descrição ou o título, se os campos estiverem vazios. O script agora corre via invocação inline exportando o modulo e finalizando limpo. Usa a classe `.section_post_left` para maior confiabilidade e bloca a execução individual em `try/catch` com timeout de 15s.
+- Scraper autônomo aprimorado (`backend/scraper.js`) para capturar data e descrição (`.event_date` e `.post_text p`) garantindo fallbacks robustos inclusive utilizando regex para reconhecer datas curtas no formato `DD/MM/YYYY` e regex combinando a descrição ou o título, se os campos estiverem vazios. O script agora corre via invocação inline exportando o modulo e finalizando limpo. Usa a classe `.section_post_left` para maior confiabilidade e bloca a execução individual em `try/catch` com timeout de 15s.
 - Endpoint de health check `/api/health`
 - Compressão gzip automática
 - Helmet.js para headers de segurança

@@ -36,8 +36,12 @@ const scrapeNews = async () => {
             if (!dateText) {
                 // Try parsing the date from the description or title
                 const dateMatch = (description + ' ' + title).match(/\d{1,2} de [a-zA-Zç]+( de \d{4})?/i);
+                const shortDateMatch = (description + ' ' + title).match(/\d{1,2}\/\d{1,2}\/\d{2,4}/);
+
                 if (dateMatch) {
                     dateText = dateMatch[0];
+                } else if (shortDateMatch) {
+                    dateText = shortDateMatch[0];
                 } else {
                     const monthYearMatch = title.match(/[a-zA-Zç]+\/\d{4}/i);
                     if (monthYearMatch) {

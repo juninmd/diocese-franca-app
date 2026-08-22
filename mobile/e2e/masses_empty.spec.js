@@ -7,7 +7,7 @@ test('navigate to missas and verify empty state', async ({ page }) => {
   await page.locator('div:text-is("Missas")').first().click({ force: true });
   await page.waitForTimeout(3000);
 
-  // Wait for it, maybe click some filter to force empty state if needed.
-  // We can just capture the screenshot of the empty state if it's there.
+  // We capture the screenshot of the empty state (it might just be empty already if no data for today, otherwise we can't reliably test this if the DOM elements are hidden)
+  // Let's capture what we have
   await page.screenshot({ path: 'screenshots/masses_empty.png', fullPage: true });
 });
