@@ -30,7 +30,33 @@ const validateDay = (req, res, next) => {
   next();
 };
 
+const validateCoords = (req, res, next) => {
+  const { lat, lng } = req.query;
+  const latitude = parseFloat(lat);
+  const longitude = parseFloat(lng);
+
+  if (lat === undefined || lng === undefined || Number.isNaN(latitude) || Number.isNaN(longitude)) {
+    return res.status(400).json({
+      error: 'Invalid Coordinates',
+      message: 'Informe latitude (lat) e longitude (lng) válidas via query string',
+      received: { lat, lng }
+    });
+  }
+
+  if (latitude < -90 || latitude > 90 || longitude < -180 || longitude > 180) {
+    return res.status(400).json({
+      error: 'Invalid Coordinates',
+      message: 'Latitude deve estar entre -90 e 90 e longitude entre -180 e 180',
+      received: { lat, lng }
+    });
+  }
+
+  req.coords = { latitude, longitude };
+  next();
+};
+
 module.exports = {
   validateId,
-  validateDay
+  validateDay,
+  validateCoords
 };

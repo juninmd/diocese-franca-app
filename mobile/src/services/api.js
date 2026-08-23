@@ -24,6 +24,13 @@ export const getChurchById = async (id) => {
   return response.data;
 };
 
+export const getNearbyChurches = async (latitude, longitude) => {
+  const response = await api.get('/api/churches/nearby', {
+    params: { lat: latitude, lng: longitude },
+  });
+  return response.data;
+};
+
 // Priests
 export const getPriests = async () => {
   const response = await api.get('/api/priests');

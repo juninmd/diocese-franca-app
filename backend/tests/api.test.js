@@ -52,6 +52,42 @@ describe('Churches API', () => {
       expect(res.statusCode).toBe(400);
       expect(res.body.error).toBe('Invalid ID');
     });
+
+    it('should include nextMass in the church detail', async () => {
+      const res = await request(app).get('/api/churches/1');
+      expect(res.body.data).toHaveProperty('nextMass');
+    });
+  });
+
+  describe('GET /api/churches/nearby', () => {
+    it('should return churches sorted by distance from the given coordinates', async () => {
+      // Coordenadas bem próximas à Catedral (igreja 1)
+      const res = await request(app).get('/api/churches/nearby?lat=-20.5396&lng=-47.4014');
+      expect(res.statusCode).toBe(200);
+      expect(res.body.success).toBe(true);
+      expect(Array.isArray(res.body.data)).toBe(true);
+      expect(res.body.data.length).toBeGreaterThan(0);
+      expect(res.body.data[0]).toHaveProperty('distanceKm');
+      expect(res.body.data[0].id).toBe(1);
+      expect(res.body.nearest.id).toBe(1);
+
+      // A lista deve estar ordenada por distância crescente
+      const distances = res.body.data.map((c) => c.distanceKm);
+      const sorted = [...distances].sort((a, b) => a - b);
+      expect(distances).toEqual(sorted);
+    });
+
+    it('should return 400 when coordinates are missing', async () => {
+      const res = await request(app).get('/api/churches/nearby');
+      expect(res.statusCode).toBe(400);
+      expect(res.body.error).toBe('Invalid Coordinates');
+    });
+
+    it('should return 400 for out-of-range coordinates', async () => {
+      const res = await request(app).get('/api/churches/nearby?lat=999&lng=-47.4014');
+      expect(res.statusCode).toBe(400);
+      expect(res.body.error).toBe('Invalid Coordinates');
+    });
   });
 });
 

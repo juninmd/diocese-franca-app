@@ -8,7 +8,10 @@
     "zipCode": "14400-670",
     "phone": "(16) 3711-1400",
     "description": "A Catedral é a igreja principal da Diocese de Franca, sede do bispo diocesano.",
-    "image": "https://via.placeholder.com/400x300?text=Catedral"
+    "image": "https://via.placeholder.com/400x300?text=Catedral",
+    "latitude": -20.5396,
+    "longitude": -47.4014,
+    "coordinatesVerified": false
   },
   {
     "id": 2,
@@ -19,7 +22,10 @@
     "zipCode": "14405-431",
     "phone": "(16) 3722-1234",
     "description": "Paróquia dedicada a São Benedito, localizada no bairro Jardim América.",
-    "image": "https://via.placeholder.com/400x300?text=Sao+Benedito"
+    "image": "https://via.placeholder.com/400x300?text=Sao+Benedito",
+    "latitude": -20.5478,
+    "longitude": -47.4102,
+    "coordinatesVerified": false
   },
   {
     "id": 3,
@@ -30,7 +36,10 @@
     "zipCode": "14405-191",
     "phone": "(16) 3723-5678",
     "description": "Paróquia dedicada a Santa Rita de Cássia, padroeira das causas impossíveis.",
-    "image": "https://via.placeholder.com/400x300?text=Santa+Rita"
+    "image": "https://via.placeholder.com/400x300?text=Santa+Rita",
+    "latitude": -20.5324,
+    "longitude": -47.3889,
+    "coordinatesVerified": false
   },
   {
     "id": 4,
@@ -41,6 +50,9 @@
     "zipCode": "14401-320",
     "phone": "(16) 3724-9876",
     "description": "Paróquia dedicada a São Francisco de Assis, patrono da ecologia.",
-    "image": "https://via.placeholder.com/400x300?text=Sao+Francisco"
+    "image": "https://via.placeholder.com/400x300?text=Sao+Francisco",
+    "latitude": -20.5251,
+    "longitude": -47.3947,
+    "coordinatesVerified": false
   }
 ]
