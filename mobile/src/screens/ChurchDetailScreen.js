@@ -4,6 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 import * as Notifications from 'expo-notifications';
 import { getChurchById } from '../services/api';
 import { useToast } from '../context/ToastContext';
+import { formatNextMass } from '../utils/massTime';
 
 export default function ChurchDetailScreen({ route }) {
   const { churchId } = route.params;
@@ -90,6 +91,13 @@ export default function ChurchDetailScreen({ route }) {
       </View>
 
       <View style={styles.content}>
+        {church.nextMass && (
+          <View style={styles.nextMassBanner}>
+            <Ionicons name="time" size={20} color="#fff" />
+            <Text style={styles.nextMassText}>Próxima missa: {formatNextMass(church.nextMass)}</Text>
+          </View>
+        )}
+
         {church.description && (
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Sobre</Text>
@@ -263,6 +271,21 @@ const styles = StyleSheet.create({
   },
   content: {
     padding: 16,
+  },
+  nextMassBanner: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#27ae60',
+    borderRadius: 12,
+    padding: 14,
+    marginBottom: 20,
+    gap: 10,
+  },
+  nextMassText: {
+    color: '#fff',
+    fontSize: 14,
+    fontWeight: '600',
+    flex: 1,
   },
   section: {
     marginBottom: 20,

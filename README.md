@@ -2,7 +2,7 @@
 
 Aplicativo completo para a Diocese de Franca com backend API REST e app React Native.
 
-> **Status: 100% Funcional e em Produção** - Tests: 19/19 passing
+> **Status: 100% Funcional e em Produção** - Tests: 31/31 passing
 
 ## Funcionalidades
 
@@ -12,7 +12,8 @@ Aplicativo completo para a Diocese de Franca com backend API REST e app React Na
 - Health check endpoint para monitoramento
 - Middleware de validação e tratamento de erros
 - Respostas padronizadas com sucesso/erro
-- **19 testes automatizados** cobrindo todos os endpoints
+- **Igrejas próximas** (`/api/churches/nearby`): ordena as paróquias pela distância (fórmula de Haversine) até uma coordenada e calcula a próxima missa de cada uma
+- **31 testes automatizados** cobrindo todos os endpoints, além de utilitários de geolocalização e cálculo da próxima missa
 
 ### Mobile App
 - Interface moderna com design profissional
@@ -43,6 +44,9 @@ Aplicativo completo para a Diocese de Franca com backend API REST e app React Na
 - Seção de acesso rápido na home
 - Badges de estatísticas clicáveis
 - Testes E2E atualizados com Playwright, incluindo cenários específicos para empty states e screenshots regeradas com sucesso.
+- **Igrejas próximas ("Perto de mim")**: novo filtro em `ChurchesScreen.js` que usa `expo-location` (`LocationService.js`) para pedir a localização do usuário e listar as paróquias ordenadas por distância, com badge de distância e a próxima missa de cada uma. Estados vazios acolhedores para permissão negada/timeout, com botão de tentar novamente.
+- **Card "Igreja mais próxima" na Home**: botão que localiza o usuário e destaca a paróquia mais próxima com distância e horário da próxima missa, navegando direto para os detalhes dela.
+- **Próxima missa na tela de detalhes**: banner em `ChurchDetailScreen.js` mostrando a próxima missa (dia, horário e "em quanto tempo"), calculada a partir dos horários cadastrados.
 
 ### Backend
 - Scraper autônomo aprimorado (`backend/scraper.js`) para capturar data e descrição (`.event_date` e `.post_text p`) garantindo fallbacks robustos inclusive utilizando regex para reconhecer datas curtas no formato `DD/MM/YYYY` e regex combinando a descrição ou o título, se os campos estiverem vazios. O script agora corre via invocação inline exportando o modulo e finalizando limpo. Usa a classe `.section_post_left` para maior confiabilidade e bloca a execução individual em `try/catch` com timeout de 15s.
@@ -53,13 +57,14 @@ Aplicativo completo para a Diocese de Franca com backend API REST e app React Na
 - Logs de requisição com timestamp
 - Tratamento centralizado de erros 404/500
 - Respostas com wrapper `{ success, count, data }`
+- **Igrejas próximas e próxima missa**: `backend/utils/geo.js` (distância por Haversine) e `backend/utils/nextMass.js` (próxima ocorrência de missa a partir de agora) alimentam o endpoint `GET /api/churches/nearby` e o campo `nextMass` em `GET /api/churches/:id`
 
 ## Tecnologias
 
 ### Backend
 - Node.js + Express.js 5.x
 - CORS, Compression, Helmet
-- Jest (19 testes)
+- Jest (31 testes)
 
 ### Mobile
 - React Native (Expo SDK 54)
@@ -67,6 +72,7 @@ Aplicativo completo para a Diocese de Franca com backend API REST e app React Na
 - AsyncStorage (favoritos persistentes)
 - @expo/vector-icons (Ionicons)
 - Axios
+- expo-location (geolocalização para "igrejas próximas")
 
 ## Estrutura do Projeto
 
@@ -83,8 +89,13 @@ diocese-franca-app/
 │   │   └── masses.js
 │   ├── middleware/             # Middleware Express
 │   │   └── validation.js
+│   ├── utils/                   # Funções auxiliares
+│   │   ├── geo.js               # Distância entre coordenadas (Haversine)
+│   │   └── nextMass.js          # Próxima ocorrência de missa a partir de agora
 │   ├── tests/                  # Testes automatizados
-│   │   └── api.test.js
+│   │   ├── api.test.js
+│   │   ├── geo.test.js
+│   │   └── nextMass.test.js
 │   ├── index.js                # Entry point
 │   └── package.json
 │
@@ -105,9 +116,12 @@ diocese-franca-app/
     │   │   ├── PriestsScreen.js
     │   │   ├── PriestDetailScreen.js
     │   │   └── MassesScreen.js
-    │   └── services/           # Serviços
-    │       ├── api.js
-    │       └── FavoritesService.js
+    │   ├── services/           # Serviços
+    │   │   ├── api.js
+    │   │   ├── FavoritesService.js
+    │   │   └── LocationService.js  # Permissão e leitura de localização (expo-location)
+    │   └── utils/              # Funções auxiliares de UI
+    │       └── massTime.js     # Formata "próxima missa" e distância em texto
     ├── App.js
     └── package.json
 ```
@@ -136,11 +150,11 @@ pnpm start
 ```bash
 cd backend
 pnpm test
-# Resultado: 19 testes passando
+# Resultado: 31 testes passando
 
 cd ../mobile
 npx playwright test
-# Testes E2E (Web) validando Home, Igrejas e Missas
+# Testes E2E (Web) validando Home, Igrejas, Missas e Igrejas Próximas
 ```
 
 ## Endpoints da API
@@ -150,7 +164,8 @@ npx playwright test
 | GET | `/` | Raiz da API |
 | GET | `/api/health` | Health check |
 | GET | `/api/churches` | Lista todas as igrejas |
-| GET | `/api/churches/:id` | Detalhes de uma igreja |
+| GET | `/api/churches/:id` | Detalhes de uma igreja (inclui a próxima missa) |
+| GET | `/api/churches/nearby?lat=&lng=` | Igrejas ordenadas por distância até uma coordenada, com a próxima missa de cada uma |
 | GET | `/api/priests` | Lista todos os padres |
 | GET | `/api/priests/:id` | Detalhes de um padre |
 | GET | `/api/masses` | Lista todos os horários |
@@ -170,13 +185,14 @@ npx playwright test
 
 ### Igrejas
 - Lista com busca em tempo real
-- Filtro: Todos / Favoritos
+- Filtro: Todos / Favoritos / **Perto de mim** (usa a localização do dispositivo para ordenar por distância e mostrar a próxima missa de cada igreja)
 - Avatar com ícone da igreja
 - Botões de ação: favoritar, compartilhar
 - Pull-to-refresh
 - Skeleton loader durante carregamento
 
 ### Detalhes da Igreja
+- Banner com a próxima missa (dia, horário e "em quanto tempo")
 - Informações completas (endereço, telefone, descrição)
 - Pároco responsável com contato
 - Lista de horários de missa
@@ -210,9 +226,11 @@ npx playwright test
 | Padres | 5 |
 | Missas/semana | 22 |
 
+> **Sobre a origem dos dados:** paróquias, padres e horários de missa (`backend/data/*.json`) são dados de exemplo criados manualmente para o desenvolvimento do app — este ambiente de desenvolvimento não teve acesso à internet para validá-los ou raspá-los diretamente do site oficial da Diocese de Franca (apenas o scraper de notícias, que já roda em produção, alcança o site real). Antes de publicar, homologue paróquias/padres/missas com a Diocese e substitua os dados de exemplo pelos reais; o campo `coordinatesVerified: false` em cada igreja sinaliza que as coordenadas geográficas também são aproximadas, pendentes de geocodificação real.
+
 ## Testes
 
-O backend possui **19 testes automatizados** cobrindo:
+O backend possui **31 testes automatizados** cobrindo:
 
 - Validação de ID inválido (400)
 - Busca de igreja/padre inexistente (404)
@@ -221,6 +239,9 @@ O backend possui **19 testes automatizados** cobrindo:
 - Filtro por dia da semana
 - Case insensitive para dias
 - Arrays vazios para dias sem missa
+- Cálculo de distância entre coordenadas (Haversine) e ordenação de `GET /api/churches/nearby`
+- Cálculo da próxima missa (mesmo dia, dias seguintes e virada de semana)
+- Validação de coordenadas ausentes/fora do intervalo válido
 
 ## Pré-requisitos
 

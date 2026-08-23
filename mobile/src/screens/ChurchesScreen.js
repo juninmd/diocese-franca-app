@@ -2,10 +2,12 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity, ActivityIndicator, TextInput, RefreshControl, Share } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import * as Notifications from 'expo-notifications';
-import { getChurches } from '../services/api';
+import { getChurches, getNearbyChurches } from '../services/api';
+import { LocationService } from '../services/LocationService';
 import { FavoritesService } from '../services/FavoritesService';
 import { useToast } from '../context/ToastContext';
 import { ListSkeleton } from '../components/Skeleton';
+import { formatNextMass, formatDistance } from '../utils/massTime';
 
 export default function ChurchesScreen({ navigation }) {
   const [churches, setChurches] = useState([]);
@@ -15,7 +17,10 @@ export default function ChurchesScreen({ navigation }) {
   const [error, setError] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [favorites, setFavorites] = useState([]);
-  const [showFavorites, setShowFavorites] = useState(false);
+  const [filterMode, setFilterMode] = useState('all'); // 'all' | 'favorites' | 'nearby'
+  const [nearbyChurches, setNearbyChurches] = useState([]);
+  const [nearbyLoading, setNearbyLoading] = useState(false);
+  const [nearbyError, setNearbyError] = useState(null);
   const toast = useToast();
 
   useEffect(() => {
@@ -24,29 +29,57 @@ export default function ChurchesScreen({ navigation }) {
   }, []);
 
   useEffect(() => {
+    const baseList = filterMode === 'nearby'
+      ? nearbyChurches
+      : filterMode === 'favorites'
+        ? churches.filter(c => favorites.includes(c.id))
+        : churches;
+
     if (searchQuery.trim() === '') {
-      setFilteredChurches(showFavorites ? churches.filter(c => favorites.includes(c.id)) : churches);
+      setFilteredChurches(baseList);
     } else {
       const query = searchQuery.toLowerCase();
-      let filtered = churches.filter(
+      setFilteredChurches(baseList.filter(
         (church) =>
           church.name.toLowerCase().includes(query) ||
           church.address.toLowerCase().includes(query) ||
           church.city.toLowerCase().includes(query)
-      );
-      if (showFavorites) {
-        filtered = filtered.filter(c => favorites.includes(c.id));
-      }
-      setFilteredChurches(filtered);
+      ));
     }
-  }, [searchQuery, churches, showFavorites, favorites]);
+  }, [searchQuery, churches, filterMode, favorites, nearbyChurches]);
+
+  const loadNearbyChurches = async () => {
+    setNearbyLoading(true);
+    setNearbyError(null);
+    const { granted, coords } = await LocationService.getCurrentPosition();
+    if (!granted || !coords) {
+      setNearbyError('Precisamos da sua localização para mostrar as igrejas mais próximas. Verifique a permissão de localização nas configurações.');
+      setNearbyLoading(false);
+      return;
+    }
+    try {
+      const data = await getNearbyChurches(coords.latitude, coords.longitude);
+      setNearbyChurches(data && data.success ? data.data : []);
+    } catch (err) {
+      setNearbyError('Não conseguimos calcular as igrejas próximas agora. Tente novamente.');
+    } finally {
+      setNearbyLoading(false);
+    }
+  };
+
+  const selectFilterMode = (mode) => {
+    setFilterMode(mode);
+    if (mode === 'nearby' && nearbyChurches.length === 0 && !nearbyLoading) {
+      loadNearbyChurches();
+    }
+  };
 
   const loadChurches = async () => {
     try {
       setLoading(true);
       const data = await getChurches();
       setChurches(data);
-      setFilteredChurches(showFavorites ? data.filter(c => favorites.includes(c.id)) : data);
+      setFilteredChurches(filterMode === 'favorites' ? data.filter(c => favorites.includes(c.id)) : data);
       setError(null);
     } catch (err) {
       setError('Erro ao carregar igrejas. Verifique sua conexão.');
@@ -121,6 +154,11 @@ export default function ChurchesScreen({ navigation }) {
               <Text style={styles.churchLocation} numberOfLines={1}>
                 {item.city} - {item.state}
               </Text>
+              {item.distanceKm !== undefined && (
+                <View style={styles.distanceBadge}>
+                  <Text style={styles.distanceBadgeText}>{formatDistance(item.distanceKm)}</Text>
+                </View>
+              )}
             </View>
           </View>
           <View style={styles.cardActions}>
@@ -142,34 +180,78 @@ export default function ChurchesScreen({ navigation }) {
             <Ionicons name="call-outline" size={14} color="#3498db" />
             <Text style={styles.footerPhone}>{item.phone}</Text>
           </View>
+          {item.nextMass && (
+            <View style={styles.footerItem}>
+              <Ionicons name="time-outline" size={14} color="#27ae60" />
+              <Text style={styles.footerNextMass}>Próxima missa: {formatNextMass(item.nextMass)}</Text>
+            </View>
+          )}
         </View>
       </TouchableOpacity>
     );
   };
 
-  const renderEmptyList = () => (
-    <View style={styles.emptyContainer}>
-      <Ionicons name={error ? 'alert-circle-outline' : (showFavorites ? 'heart-outline' : 'search-outline')} size={64} color="#bdc3c7" />
-      <Text style={styles.emptyTitle}>
-        {error ? 'Puxa, não conseguimos carregar as igrejas agora. Tente novamente!' : (showFavorites ? 'Você ainda não favoritou nenhuma paróquia.' : 'Ops! Não encontramos paróquias com este nome.')}
-      </Text>
-      <Text style={styles.emptyText}>
-        {error ? error : (showFavorites
-          ? 'Adicione igrejas aos favoritos para acessá-las rapidamente'
-          : searchQuery ? 'Que tal tentar outra busca?' : 'Não foi possível carregar as igrejas no momento.')}
-      </Text>
-      {showFavorites && !error && (
-        <TouchableOpacity style={styles.emptyButton} onPress={() => setShowFavorites(false)}>
-          <Text style={styles.emptyButtonText}>Ver todas as igrejas</Text>
-        </TouchableOpacity>
-      )}
-      {error && (
-        <TouchableOpacity style={styles.emptyButton} onPress={onRefresh}>
-          <Text style={styles.emptyButtonText}>Tentar Novamente</Text>
-        </TouchableOpacity>
-      )}
-    </View>
-  );
+  // "Sem localização ainda" só se aplica quando o modo nearby não tem nenhum resultado
+  // carregado — se já há igrejas próximas e a busca é que não encontrou nada, cai no
+  // caso genérico de busca sem resultados.
+  const isAwaitingLocation = filterMode === 'nearby' && !nearbyError && nearbyChurches.length === 0;
+
+  const renderEmptyList = () => {
+    if (filterMode === 'nearby' && nearbyLoading) {
+      return <ListSkeleton count={3} type="church" />;
+    }
+
+    const icon = error || nearbyError
+      ? 'alert-circle-outline'
+      : isAwaitingLocation
+        ? 'navigate-outline'
+        : filterMode === 'favorites'
+          ? 'heart-outline'
+          : 'search-outline';
+
+    const title = error
+      ? 'Puxa, não conseguimos carregar as igrejas agora. Tente novamente!'
+      : nearbyError
+        ? 'Não conseguimos encontrar igrejas perto de você.'
+        : isAwaitingLocation
+          ? 'Ainda não sabemos onde você está.'
+          : filterMode === 'favorites'
+            ? 'Você ainda não favoritou nenhuma paróquia.'
+            : 'Ops! Não encontramos paróquias com este nome.';
+
+    const subtitle = error
+      ? error
+      : nearbyError
+        ? nearbyError
+        : isAwaitingLocation
+          ? 'Toque em "Tentar novamente" e permita o acesso à localização para ver as igrejas mais próximas de você.'
+          : filterMode === 'favorites'
+            ? 'Adicione igrejas aos favoritos para acessá-las rapidamente'
+            : searchQuery ? 'Que tal tentar outra busca?' : 'Não foi possível carregar as igrejas no momento.';
+
+    return (
+      <View style={styles.emptyContainer}>
+        <Ionicons name={icon} size={64} color="#bdc3c7" />
+        <Text style={styles.emptyTitle}>{title}</Text>
+        <Text style={styles.emptyText}>{subtitle}</Text>
+        {filterMode === 'favorites' && !error && (
+          <TouchableOpacity style={styles.emptyButton} onPress={() => selectFilterMode('all')}>
+            <Text style={styles.emptyButtonText}>Ver todas as igrejas</Text>
+          </TouchableOpacity>
+        )}
+        {filterMode === 'nearby' && !nearbyLoading && (
+          <TouchableOpacity style={styles.emptyButton} onPress={loadNearbyChurches}>
+            <Text style={styles.emptyButtonText}>Tentar Novamente</Text>
+          </TouchableOpacity>
+        )}
+        {error && (
+          <TouchableOpacity style={styles.emptyButton} onPress={onRefresh}>
+            <Text style={styles.emptyButtonText}>Tentar Novamente</Text>
+          </TouchableOpacity>
+        )}
+      </View>
+    );
+  };
 
   if (loading && !refreshing) {
     return (
@@ -203,21 +285,30 @@ export default function ChurchesScreen({ navigation }) {
 
       <View style={styles.filterRow}>
         <TouchableOpacity
-          style={[styles.filterChip, !showFavorites && styles.filterChipActive]}
-          onPress={() => setShowFavorites(false)}
+          style={[styles.filterChip, filterMode === 'all' && styles.filterChipActive]}
+          onPress={() => selectFilterMode('all')}
         >
-          <Ionicons name="business" size={16} color={!showFavorites ? '#fff' : '#7f8c8d'} />
-          <Text style={[styles.filterChipText, !showFavorites && styles.filterChipTextActive]}>
+          <Ionicons name="business" size={16} color={filterMode === 'all' ? '#fff' : '#7f8c8d'} />
+          <Text style={[styles.filterChipText, filterMode === 'all' && styles.filterChipTextActive]}>
             Todas ({churches.length})
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={[styles.filterChip, showFavorites && styles.filterChipActive]}
-          onPress={() => setShowFavorites(true)}
+          style={[styles.filterChip, filterMode === 'favorites' && styles.filterChipActive]}
+          onPress={() => selectFilterMode('favorites')}
         >
-          <Ionicons name="heart" size={16} color={showFavorites ? '#fff' : '#e74c3c'} />
-          <Text style={[styles.filterChipText, showFavorites && styles.filterChipTextActive]}>
+          <Ionicons name="heart" size={16} color={filterMode === 'favorites' ? '#fff' : '#e74c3c'} />
+          <Text style={[styles.filterChipText, filterMode === 'favorites' && styles.filterChipTextActive]}>
             Favoritas ({favorites.length})
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.filterChip, filterMode === 'nearby' && styles.filterChipActive]}
+          onPress={() => selectFilterMode('nearby')}
+        >
+          <Ionicons name="navigate" size={16} color={filterMode === 'nearby' ? '#fff' : '#3498db'} />
+          <Text style={[styles.filterChipText, filterMode === 'nearby' && styles.filterChipTextActive]}>
+            Perto de mim
           </Text>
         </TouchableOpacity>
       </View>
@@ -349,6 +440,18 @@ const styles = StyleSheet.create({
     color: '#7f8c8d',
     marginLeft: 4,
   },
+  distanceBadge: {
+    backgroundColor: '#e8f4f8',
+    paddingHorizontal: 8,
+    paddingVertical: 2,
+    borderRadius: 10,
+    marginLeft: 8,
+  },
+  distanceBadgeText: {
+    fontSize: 11,
+    color: '#3498db',
+    fontWeight: 'bold',
+  },
   cardActions: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -378,6 +481,12 @@ const styles = StyleSheet.create({
     fontSize: 13,
     color: '#3498db',
     marginLeft: 8,
+  },
+  footerNextMass: {
+    fontSize: 13,
+    color: '#27ae60',
+    marginLeft: 8,
+    fontWeight: '600',
   },
   emptyContainer: {
     flex: 1,

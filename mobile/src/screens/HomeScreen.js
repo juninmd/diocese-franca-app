@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Linking, RefreshControl, FlatList, Image } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Linking, RefreshControl, FlatList, Image, ActivityIndicator } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import * as Notifications from 'expo-notifications';
-import { getChurches, getPriests, getMasses, getNews } from '../services/api';
+import { getChurches, getPriests, getMasses, getNews, getNearbyChurches } from '../services/api';
+import { LocationService } from '../services/LocationService';
 import { useToast } from '../context/ToastContext';
 import { NetworkStatus } from '../components/NetworkStatus';
 import { NewsCardSkeleton } from '../components/Skeleton';
+import { formatNextMass, formatDistance } from '../utils/massTime';
 
 export default function HomeScreen({ navigation }) {
   const [stats, setStats] = useState({ churches: 0, priests: 0, masses: 0 });
@@ -13,6 +15,9 @@ export default function HomeScreen({ navigation }) {
   const [loading, setLoading] = useState(true);
   const [news, setNews] = useState([]);
   const [loadingNews, setLoadingNews] = useState(true);
+  const [nearestChurch, setNearestChurch] = useState(null);
+  const [nearestLoading, setNearestLoading] = useState(false);
+  const [nearestError, setNearestError] = useState(null);
   const toast = useToast();
 
   useEffect(() => {
@@ -20,6 +25,25 @@ export default function HomeScreen({ navigation }) {
     fetchNews();
     setupDailyNotification();
   }, []);
+
+  const findNearestChurch = async () => {
+    setNearestLoading(true);
+    setNearestError(null);
+    const { granted, coords } = await LocationService.getCurrentPosition();
+    if (!granted || !coords) {
+      setNearestError('Permita o acesso à localização para descobrir a igreja mais próxima de você.');
+      setNearestLoading(false);
+      return;
+    }
+    try {
+      const data = await getNearbyChurches(coords.latitude, coords.longitude);
+      setNearestChurch(data && data.success ? data.nearest : null);
+    } catch (err) {
+      setNearestError('Não conseguimos encontrar a igreja mais próxima agora. Tente novamente.');
+    } finally {
+      setNearestLoading(false);
+    }
+  };
 
   const setupDailyNotification = async () => {
     const { status } = await Notifications.requestPermissionsAsync();
@@ -123,6 +147,45 @@ export default function HomeScreen({ navigation }) {
             <Ionicons name="refresh" size={18} color="#2c3e50" />
             <Text style={styles.refreshText}>Atualizar dados</Text>
           </TouchableOpacity>
+        </View>
+
+        <View style={styles.nearestCard}>
+          <View style={styles.nearestHeader}>
+            <Ionicons name="navigate" size={20} color="#3498db" />
+            <Text style={styles.nearestTitle}>Igreja mais próxima</Text>
+          </View>
+
+          {nearestLoading ? (
+            <View style={styles.nearestLoadingRow}>
+              <ActivityIndicator size="small" color="#2c3e50" />
+              <Text style={styles.nearestLoadingText}>Localizando você...</Text>
+            </View>
+          ) : nearestChurch ? (
+            <TouchableOpacity
+              style={styles.nearestResult}
+              onPress={() => navigation.navigate('Churches', { screen: 'ChurchDetail', params: { churchId: nearestChurch.id } })}
+              activeOpacity={0.8}
+            >
+              <View style={styles.nearestResultText}>
+                <Text style={styles.nearestChurchName} numberOfLines={1}>{nearestChurch.name}</Text>
+                <Text style={styles.nearestDistance}>{formatDistance(nearestChurch.distanceKm)} de você</Text>
+                {nearestChurch.nextMass && (
+                  <Text style={styles.nearestNextMass}>Próxima missa: {formatNextMass(nearestChurch.nextMass)}</Text>
+                )}
+              </View>
+              <Ionicons name="chevron-forward" size={22} color="#bdc3c7" />
+            </TouchableOpacity>
+          ) : (
+            <View>
+              {nearestError && <Text style={styles.nearestErrorText}>{nearestError}</Text>}
+              <TouchableOpacity style={styles.nearestButton} onPress={findNearestChurch}>
+                <Ionicons name="locate" size={16} color="#fff" />
+                <Text style={styles.nearestButtonText}>
+                  {nearestError ? 'Tentar novamente' : 'Encontrar a igreja mais próxima'}
+                </Text>
+              </TouchableOpacity>
+            </View>
+          )}
         </View>
 
         <View style={styles.statsContainer}>
@@ -435,6 +498,84 @@ const styles = StyleSheet.create({
   refreshText: {
     fontSize: 13,
     color: '#2c3e50',
+    fontWeight: '600',
+  },
+  nearestCard: {
+    backgroundColor: '#fff',
+    marginHorizontal: 16,
+    marginTop: 16,
+    padding: 20,
+    borderRadius: 16,
+    elevation: 4,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+  },
+  nearestHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+    marginBottom: 12,
+  },
+  nearestTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#2c3e50',
+  },
+  nearestLoadingRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 10,
+  },
+  nearestLoadingText: {
+    fontSize: 14,
+    color: '#7f8c8d',
+  },
+  nearestResult: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#f0f4f8',
+    borderRadius: 12,
+    padding: 14,
+  },
+  nearestResultText: {
+    flex: 1,
+    marginRight: 8,
+  },
+  nearestChurchName: {
+    fontSize: 15,
+    fontWeight: 'bold',
+    color: '#2c3e50',
+  },
+  nearestDistance: {
+    fontSize: 13,
+    color: '#3498db',
+    fontWeight: '600',
+    marginTop: 2,
+  },
+  nearestNextMass: {
+    fontSize: 13,
+    color: '#27ae60',
+    marginTop: 4,
+  },
+  nearestErrorText: {
+    fontSize: 13,
+    color: '#e74c3c',
+    marginBottom: 10,
+  },
+  nearestButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#2c3e50',
+    paddingVertical: 12,
+    borderRadius: 10,
+    gap: 8,
+  },
+  nearestButtonText: {
+    color: '#fff',
+    fontSize: 14,
     fontWeight: '600',
   },
   statsContainer: {
