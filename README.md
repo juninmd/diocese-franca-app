@@ -30,7 +30,9 @@ Aplicativo completo para a Diocese de Franca com backend API REST e app React Na
 
 ### Mobile
 - Deploy web 100% funcional no Netlify com Metro bundler suportando `react-native-web`
+- Lembrete diário às 08:00 configurado na Home usando `expo-notifications`.
 - Notificações locais automáticas de boas-vindas na inicialização do app (`App.js`), lembretes no acesso rápido do `HomeScreen` (incluindo notificação imediata ao clicar em "Ligar Diocese"), e Lembretes de Missa individuais no `MassesScreen` via `expo-notifications`, além de alertas locais para quando favoritar uma paróquia ou padre (`ChurchesScreen.js` e `PriestsScreen.js`). Lembretes locais para Agendar Visita (`ChurchDetailScreen.js`) e Lembrete Confissão (`PriestDetailScreen.js`) com triggers mais ágeis.
+- Empty states mais empáticos para erros de rede, utilizando textos encorajadores nas telas de busca e listagem (`ChurchesScreen.js`, `MassesScreen.js`).
 - Aprimoramentos de UI/UX: Refinamento na listagem de Padres e Igrejas (`ChurchesScreen.js`, `PriestsScreen.js`) melhorando a legibilidade e atualizando os empty states para uma linguagem mais acolhedora e empática (ex: "Puxa, não conseguimos carregar as igrejas agora. Tente novamente!").
 - Skeletons Loaders (Animação Shimmer) em diversas áreas como Notícias e Listas
 - Melhorias na UI/UX dos empty states, como no `MassesScreen.js`
@@ -277,6 +279,18 @@ O app possui interface moderna com:
 
 **Missas (Empty State)**
 ![Missas (Empty State)](mobile/screenshots/masses_empty.png?v=1)
+
+**Igrejas (Empty State)**
+![Igrejas (Empty State)](mobile/screenshots/churches_empty.png?v=1)
+
+**Padres (Empty State)**
+![Padres (Empty State)](mobile/screenshots/priests_empty.png?v=1)
+
+**Igreja Próxima**
+![Igreja Próxima](mobile/screenshots/churches_nearby.png?v=1)
+
+**Igreja Próxima (Permissão Negada)**
+![Igreja Próxima Permissão Negada](mobile/screenshots/churches_nearby_denied.png?v=1)
 
 ## Licença
 

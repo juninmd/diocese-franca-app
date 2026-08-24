@@ -43,7 +43,7 @@ export default function MassesScreen() {
       setMasses(data);
       setError(null);
     } catch (err) {
-      setError('Erro ao carregar horários de missa. Verifique sua conexão.');
+      setError('Puxa, não conseguimos carregar os horários das missas agora. Verifique sua conexão e tente novamente!');
     } finally {
       setLoading(false);
     }
