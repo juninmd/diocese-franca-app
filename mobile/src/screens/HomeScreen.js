@@ -332,9 +332,9 @@ export default function HomeScreen({ navigation }) {
                       title: 'Lembrete da Diocese',
                       body: 'Não se esqueça da leitura do Evangelho de hoje!',
                     },
-                    trigger: { seconds: 5 },
+                    trigger: { hour: 8, minute: 0, repeats: true },
                   });
-                  toast.success('Lembrete agendado!');
+                  toast.success('Lembrete diário agendado para as 08:00!');
                 } else {
                   toast.error('Permissão de notificação negada.');
                 }

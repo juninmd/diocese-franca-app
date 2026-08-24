@@ -82,7 +82,7 @@ export default function ChurchesScreen({ navigation }) {
       setFilteredChurches(filterMode === 'favorites' ? data.filter(c => favorites.includes(c.id)) : data);
       setError(null);
     } catch (err) {
-      setError('Erro ao carregar igrejas. Verifique sua conexão.');
+      setError('Puxa, não conseguimos carregar as igrejas agora. Verifique sua conexão e tente novamente!');
     } finally {
       setLoading(false);
     }

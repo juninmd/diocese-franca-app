@@ -46,6 +46,16 @@ const scrapeNews = async () => {
                     const monthYearMatch = title.match(/[a-zA-Zç]+\/\d{4}/i);
                     if (monthYearMatch) {
                         dateText = monthYearMatch[0];
+                    } else if (image) {
+                        // Extract date from image URL (e.g. 20260812223051 -> 12 de agosto)
+                        const imageDateMatch = image.match(/images\/\d{4}(\d{2})(\d{2})\d+/);
+                        if (imageDateMatch) {
+                            const monthStr = imageDateMatch[1];
+                            const dayStr = imageDateMatch[2];
+                            const months = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
+                            const month = months[parseInt(monthStr, 10) - 1];
+                            dateText = `${parseInt(dayStr, 10)} de ${month}`;
+                        }
                     }
                 }
             }
