@@ -31,6 +31,23 @@ export default function App() {
           });
           await AsyncStorage.setItem('hasSeenWelcomeNotification', 'true');
         }
+
+        // Schedule daily reminder
+        const hasScheduledDaily = await AsyncStorage.getItem('hasScheduledDailyReminder');
+        if (!hasScheduledDaily) {
+          await Notifications.scheduleNotificationAsync({
+            content: {
+              title: 'Lembrete Diário 🙏',
+              body: 'Não se esqueça de reservar um momento para oração.',
+            },
+            trigger: {
+              hour: 8,
+              minute: 0,
+              repeats: true,
+            },
+          });
+          await AsyncStorage.setItem('hasScheduledDailyReminder', 'true');
+        }
       }
     }
     requestPermissionsAndWelcome();

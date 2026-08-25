@@ -27,7 +27,7 @@ const scrapeNews = async () => {
             let image = imgTag.length > 0 ? (imgTag.attr('src') || '') : '';
 
             const descriptionElement = $(el).find('.post_text p').first();
-            const descriptionText = descriptionElement.length > 0 && descriptionElement.text().trim() !== '' ? descriptionElement.text().trim() : $(el).text().substring(0, 100).trim();
+            const descriptionText = descriptionElement.length > 0 && descriptionElement.text().trim() !== '' ? descriptionElement.text().trim() : $(el).text().replace(/\s+/g, ' ').substring(0, 100).trim();
             const description = descriptionText ? descriptionText : 'Sem descrição disponível';
 
             // Attempt to find a date if available, typically in small or span tags inside post_title or similar
@@ -62,9 +62,24 @@ const scrapeNews = async () => {
             const date = dateText ? dateText : 'Sem informação de data';
 
             if (title && link) {
-                // Make link absolute
-                const fullLink = link.startsWith('http') ? link : (link !== '#' ? `https://diocesefranca.org.br/${link}` : link);
-                const fullImage = image ? (image.startsWith('http') ? image : `https://diocesefranca.org.br/${image}`) : '';
+                // Make link absolute using URL object
+                let fullLink = link;
+                if (link !== '#') {
+                    try {
+                        fullLink = new URL(link, 'https://diocesefranca.org.br/').href;
+                    } catch (e) {
+                        fullLink = link.startsWith('http') ? link : `https://diocesefranca.org.br/${link}`;
+                    }
+                }
+
+                let fullImage = image;
+                if (image) {
+                    try {
+                        fullImage = new URL(image, 'https://diocesefranca.org.br/').href;
+                    } catch (e) {
+                        fullImage = image.startsWith('http') ? image : `https://diocesefranca.org.br/${image}`;
+                    }
+                }
 
                 // Check for duplicates
                 const isDuplicate = news.some(n => n.link === fullLink);
@@ -73,7 +88,7 @@ const scrapeNews = async () => {
                 }
             }
         } catch (err) {
-            console.error('Error parsing individual news element:', err.message);
+            console.error(`Error parsing individual news element at index ${i}:`, err.message);
         }
     });
 

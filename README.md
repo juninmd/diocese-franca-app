@@ -49,6 +49,10 @@ Aplicativo completo para a Diocese de Franca com backend API REST e app React Na
 - **Igrejas próximas ("Perto de mim")**: novo filtro em `ChurchesScreen.js` que usa `expo-location` (`LocationService.js`) para pedir a localização do usuário e listar as paróquias ordenadas por distância, com badge de distância e a próxima missa de cada uma. Estados vazios acolhedores para permissão negada/timeout, com botão de tentar novamente.
 - **Card "Igreja mais próxima" na Home**: botão que localiza o usuário e destaca a paróquia mais próxima com distância e horário da próxima missa, navegando direto para os detalhes dela.
 - **Próxima missa na tela de detalhes**: banner em `ChurchDetailScreen.js` mostrando a próxima missa (dia, horário e "em quanto tempo"), calculada a partir dos horários cadastrados.
+- **Notificações Locais (Lembrete Diário/Testes)**: Implementação de lembretes diários (8h da manhã) com `expo-notifications` para incentivo à oração, configurado globalmente em `App.js` na inicialização, e um novo botão de teste ("Lembrete Teste 5s") presente no Acesso Rápido na Home.
+
+### Deploy (Web)
+- **Netlify**: O projeto já encontra-se pré-configurado para ser compilado e entregue como Progressive Web App (PWA) / Single Page Application usando `npx expo export -p web` na pasta `mobile/`. A configuração para Netlify está estabelecida na raiz em `netlify.toml`, que mapeia corretamente o redirecionamento `/*` para `/index.html` (resolvendo roteamento client-side) e define a pasta de publicação como `mobile/dist`.
 
 ### Backend
 - Scraper autônomo aprimorado (`backend/scraper.js`) para capturar data e descrição (`.event_date` e `.post_text p`) garantindo fallbacks robustos inclusive utilizando regex para reconhecer datas curtas no formato `DD/MM/YYYY` e regex combinando a descrição ou o título, se os campos estiverem vazios. O script agora corre via invocação inline exportando o modulo e finalizando limpo. Usa a classe `.section_post_left` para maior confiabilidade e bloca a execução individual em `try/catch` com timeout de 15s.
