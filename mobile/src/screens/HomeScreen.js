@@ -247,8 +247,8 @@ export default function HomeScreen({ navigation }) {
             />
           ) : (
             <View style={styles.emptyNewsContainer}>
-              <Ionicons name="alert-circle-outline" size={32} color="#95a5a6" />
-              <Text style={styles.emptyNewsText}>No momento não há novas notícias. Volte mais tarde!</Text>
+              <Ionicons name="newspaper-outline" size={36} color="#bdc3c7" />
+              <Text style={styles.emptyNewsText}>Fique em paz! Não há novas atualizações da diocese por enquanto.</Text>
               <TouchableOpacity style={styles.refreshButtonSmall} onPress={fetchNews}>
                 <Ionicons name="refresh" size={16} color="#fff" />
                 <Text style={styles.refreshButtonSmallText}>Tentar Novamente</Text>
@@ -329,19 +329,19 @@ export default function HomeScreen({ navigation }) {
                 if (status === 'granted') {
                   await Notifications.scheduleNotificationAsync({
                     content: {
-                      title: 'Lembrete da Diocese',
-                      body: 'Não se esqueça da leitura do Evangelho de hoje!',
+                      title: 'Teste de Lembrete',
+                      body: 'A paz do Senhor esteja com você!',
                     },
-                    trigger: { hour: 8, minute: 0, repeats: true },
+                    trigger: { seconds: 5 },
                   });
-                  toast.success('Lembrete diário agendado para as 08:00!');
+                  toast.success('Notificação agendada para daqui a 5 segundos!');
                 } else {
                   toast.error('Permissão de notificação negada.');
                 }
               }}
             >
               <Ionicons name="notifications" size={28} color="#e74c3c" />
-              <Text style={styles.quickText}>Lembrete{'\n'}Diário</Text>
+              <Text style={styles.quickText}>Lembrete{'\n'}Teste (5s)</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.quickItem}
