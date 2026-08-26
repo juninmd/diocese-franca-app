@@ -23,7 +23,7 @@ export default function PriestDetailScreen({ route }) {
       setPriest(data);
       setError(null);
     } catch (err) {
-      setError('Erro ao carregar detalhes do padre.');
+      setError('Puxa, não conseguimos carregar os detalhes do padre agora. Tente novamente!');
     } finally {
       setLoading(false);
     }

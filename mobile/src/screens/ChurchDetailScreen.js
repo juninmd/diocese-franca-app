@@ -24,7 +24,7 @@ export default function ChurchDetailScreen({ route }) {
       setChurch(data);
       setError(null);
     } catch (err) {
-      setError('Erro ao carregar detalhes da igreja.');
+      setError('Puxa, não conseguimos carregar os detalhes da igreja agora. Tente novamente!');
     } finally {
       setLoading(false);
     }

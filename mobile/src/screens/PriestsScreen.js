@@ -49,7 +49,7 @@ export default function PriestsScreen({ navigation }) {
       setFilteredPriests(showFavorites ? data.filter(p => favorites.includes(p.id)) : data);
       setError(null);
     } catch (err) {
-      setError('Erro ao carregar padres. Verifique sua conexão.');
+      setError('Puxa, não conseguimos carregar os padres agora. Verifique sua conexão e tente novamente!');
     } finally {
       setLoading(false);
     }

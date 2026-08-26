@@ -1,6 +1,14 @@
 [
   {
     "id": 1,
+    "title": "75 anos das Irmãs Salvatorianas em São Joaquim da Barra serão celebrados com lançamento de livro e Missa",
+    "description": "Celebração reuniu religiosas que fizeram parte da história da comunidade e marcou o jubileu de 75 anos de missão salvatoriana no município",
+    "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6036&id_orgao=1",
+    "image": "https://diocesefranca.org.br/images/20260824211337_1000352073.png",
+    "date": "24 de agosto"
+  },
+  {
+    "id": 2,
     "title": "Formação diocesana reúne catequistas para aprofundar a Iniciação à Vida Cristã",
     "description": "Encontro será realizado no dia 3 de setembro, em Franca, com assessoria do Pe. Erickson Ramos, da Diocese de Jundiaí",
     "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6034&id_orgao=1",
@@ -8,7 +16,7 @@
     "date": "3 de setembro"
   },
   {
-    "id": 2,
+    "id": 3,
     "title": "Encontro Diocesano da Pastoral da Saúde reúne cerca de 120 agentes em Franca",
     "description": "Momento de formação e partilha aconteceu na Paróquia Santa Luzia e reuniu representantes de diferentes cidades e comunidades da Diocese",
     "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6035&id_orgao=1",
@@ -16,7 +24,7 @@
     "date": "24 de agosto"
   },
   {
-    "id": 3,
+    "id": 4,
     "title": "75 anos das Irmãs Salvatorianas em São Joaquim da Barra serão celebrados com lançamento de livro e Missa",
     "description": "Programação nos dias 22 e 23 de agosto marca o jubileu da presença salvatoriana no município e celebra uma história de fé, serviço e proximidade com a comunidade.",
     "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6032&id_orgao=1",
@@ -24,19 +32,11 @@
     "date": "23 de agosto"
   },
   {
-    "id": 4,
+    "id": 5,
     "title": "3º Encontro Paroquial do Terço dos Homens reúne famílias neste domingo em São Joaquim da Barra",
     "description": "Com o tema “Onde a mãe está, o filho se faz presente”, encontro será realizado no dia 16 de agosto e contará com oração, pregação, testemunho, louvor e Santa Missa com Dom Paulo Roberto",
     "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6027&id_orgao=1",
     "image": "https://diocesefranca.org.br/images/20260813181928_1000343193.png",
     "date": "16 de agosto"
-  },
-  {
-    "id": 5,
-    "title": "Escola de Espiritualidade inicia proposta de formação e aprofundamento da fé no Santuário Santo Antônio",
-    "description": "Primeiro encontro, realizado em 12 de agosto, refletiu sobre o tema “Conhecer, professar e viver a fé da Igreja”; próxima formação será no dia 3 de setembro",
-    "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6028&id_orgao=1",
-    "image": "https://diocesefranca.org.br/images/20260813183122_1000343267.png",
-    "date": "12 de agosto"
   }
 ]
