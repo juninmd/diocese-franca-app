@@ -145,7 +145,7 @@ export default function PriestsScreen({ navigation }) {
     <View style={styles.emptyContainer}>
       <Ionicons name={showFavorites ? 'heart-outline' : 'person-outline'} size={64} color="#bdc3c7" />
       <Text style={styles.emptyTitle}>
-        {showFavorites ? 'Você ainda não possui padres favoritos.' : 'Ops! Não encontramos padres com este termo.'}
+        {showFavorites ? 'Você ainda não possui padres favoritos.' : 'Puxa, não encontramos padres com este termo.'}
       </Text>
       <Text style={styles.emptyText}>
         {showFavorites

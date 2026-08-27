@@ -101,6 +101,14 @@ const scrapeNews = async () => {
     if (error.response) {
       console.error('Response status:', error.response.status);
     }
+    // Provide a graceful fallback to an empty array so that the frontend doesn't crash on undefined
+    const outputPath = path.join(__dirname, 'data', 'news.json');
+    if (!fs.existsSync(outputPath)) {
+        fs.writeFileSync(outputPath, JSON.stringify([], null, 2));
+        console.log(`Fallback: Created empty news.json at ${outputPath}`);
+    } else {
+        console.log(`Fallback: news.json already exists at ${outputPath}, leaving it intact.`);
+    }
   }
 };
 
