@@ -217,7 +217,7 @@ export default function ChurchesScreen({ navigation }) {
           ? 'Ainda não sabemos onde você está.'
           : filterMode === 'favorites'
             ? 'Você ainda não favoritou nenhuma paróquia.'
-            : 'Ops! Não encontramos paróquias com este nome.';
+            : 'Puxa, não encontramos paróquias com este nome.';
 
     const subtitle = error
       ? error
