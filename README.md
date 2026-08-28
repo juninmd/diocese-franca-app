@@ -55,7 +55,7 @@ Aplicativo completo para a Diocese de Franca com backend API REST e app React Na
 - **Netlify**: O projeto já encontra-se pré-configurado para ser compilado e entregue como Progressive Web App (PWA) / Single Page Application usando `npx expo export -p web` na pasta `mobile/`. A configuração para Netlify está estabelecida na raiz em `netlify.toml`, que mapeia corretamente o redirecionamento `/*` para `/index.html` (resolvendo roteamento client-side) e define a pasta de publicação como `mobile/dist`.
 
 ### Backend
-- Scraper autônomo aprimorado (`backend/scraper.js`) para capturar data e descrição (`.event_date` e `.post_text p`) garantindo fallbacks robustos inclusive utilizando regex para reconhecer datas curtas no formato `DD/MM/YYYY` e regex combinando a descrição ou o título, se os campos estiverem vazios. O script agora corre via invocação inline exportando o modulo e finalizando limpo. Usa a classe `.section_post_left` para maior confiabilidade e bloca a execução individual em `try/catch` com timeout de 15s, retornando um array vazio de fallback se o site original estiver inacessível para evitar crashs na API.
+- Scraper autônomo aprimorado (`backend/scraper.js`) para capturar data e descrição (`.event_date` e `.post_text p`) garantindo fallbacks robustos inclusive utilizando regex para reconhecer datas curtas no formato `DD/MM/YYYY` e regex combinando a descrição ou o título, se os campos estiverem vazios. O script agora corre via invocação inline exportando o modulo e finalizando limpo. Usa a classe `.section_post_left` para maior confiabilidade e bloca a execução individual em `try/catch` com timeout de 15s. Foi adicionado também um **mecanismo de tentativas (retry loop)** para a requisição de rede inicial, tentando até 3 vezes caso o site da Diocese apresente falhas intermitentes, retornando um array vazio de fallback apenas se o site original continuar inacessível para evitar crashs na API.
 - Endpoint de health check `/api/health`
 - Compressão gzip automática
 - Helmet.js para headers de segurança
@@ -270,31 +270,31 @@ O app possui interface moderna com:
 
 ### Screenshots (Web Output E2E Test)
 **Home Screen**
-![Home Screen](mobile/screenshots/home_full.png?v=2)
+![Home Screen](mobile/screenshots/home_full.png?v=3)
 
 **Igrejas Screen**
-![Igrejas Screen](mobile/screenshots/churches_full.png?v=2)
+![Igrejas Screen](mobile/screenshots/churches_full.png?v=3)
 
 **Padres Screen**
-![Padres Screen](mobile/screenshots/priests_full.png?v=2)
+![Padres Screen](mobile/screenshots/priests_full.png?v=3)
 
 **Missas Screen**
-![Missas Screen](mobile/screenshots/masses_full.png?v=2)
+![Missas Screen](mobile/screenshots/masses_full.png?v=3)
 
 **Missas (Empty State)**
-![Missas (Empty State)](mobile/screenshots/masses_empty.png?v=2)
+![Missas (Empty State)](mobile/screenshots/masses_empty.png?v=3)
 
 **Igrejas (Empty State)**
-![Igrejas (Empty State)](mobile/screenshots/churches_empty.png?v=2)
+![Igrejas (Empty State)](mobile/screenshots/churches_empty.png?v=3)
 
 **Padres (Empty State)**
-![Padres (Empty State)](mobile/screenshots/priests_empty.png?v=2)
+![Padres (Empty State)](mobile/screenshots/priests_empty.png?v=3)
 
 **Igreja Próxima**
-![Igreja Próxima](mobile/screenshots/churches_nearby.png?v=2)
+![Igreja Próxima](mobile/screenshots/churches_nearby.png?v=3)
 
 **Igreja Próxima (Permissão Negada)**
-![Igreja Próxima Permissão Negada](mobile/screenshots/churches_nearby_denied.png?v=2)
+![Igreja Próxima Permissão Negada](mobile/screenshots/churches_nearby_denied.png?v=3)
 
 ## Licença
 
