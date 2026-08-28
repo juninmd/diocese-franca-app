@@ -3,14 +3,34 @@ const cheerio = require('cheerio');
 const fs = require('fs');
 const path = require('path');
 
+const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
 const scrapeNews = async () => {
+  let data = null;
+  const maxRetries = 3;
+  let attempt = 0;
+
+  while (attempt < maxRetries) {
+      try {
+          const response = await axios.get('https://diocesefranca.org.br/', {
+              headers: {
+                  'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36'
+              },
+              timeout: 15000
+          });
+          data = response.data;
+          break; // success, exit the loop
+      } catch (err) {
+          attempt++;
+          console.error(`Attempt ${attempt} failed to fetch diocesefranca.org.br: ${err.message}`);
+          if (attempt >= maxRetries) {
+              throw err;
+          }
+          await wait(2000);
+      }
+  }
+
   try {
-    const { data } = await axios.get('https://diocesefranca.org.br/', {
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36'
-      },
-      timeout: 15000
-    });
     const $ = cheerio.load(data);
     const news = [];
 
