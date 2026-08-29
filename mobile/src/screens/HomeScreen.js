@@ -232,7 +232,19 @@ export default function HomeScreen({ navigation }) {
               renderItem={({ item }) => (
                 <TouchableOpacity
                   style={styles.newsCard}
-                  onPress={() => Linking.openURL(item.link)}
+                  onPress={async () => {
+                    const { status } = await Notifications.requestPermissionsAsync();
+                    if (status === 'granted') {
+                      await Notifications.scheduleNotificationAsync({
+                        content: {
+                          title: 'Leitura de Notícia 📰',
+                          body: 'Que bom que está se mantendo informado sobre a diocese!',
+                        },
+                        trigger: { seconds: 2 },
+                      });
+                    }
+                    Linking.openURL(item.link);
+                  }}
                   activeOpacity={0.8}
                 >
                   <Image source={{ uri: item.image }} style={styles.newsImage} />
@@ -248,7 +260,7 @@ export default function HomeScreen({ navigation }) {
           ) : (
             <View style={styles.emptyNewsContainer}>
               <Ionicons name="newspaper-outline" size={36} color="#bdc3c7" />
-              <Text style={styles.emptyNewsText}>Fique em paz! Não há novas atualizações da diocese por enquanto.</Text>
+              <Text style={styles.emptyNewsText}>Puxa, não há novas atualizações da diocese no momento. Tente novamente mais tarde!</Text>
               <TouchableOpacity style={styles.refreshButtonSmall} onPress={fetchNews}>
                 <Ionicons name="refresh" size={16} color="#fff" />
                 <Text style={styles.refreshButtonSmallText}>Tentar Novamente</Text>
