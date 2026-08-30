@@ -94,6 +94,7 @@ export default function MassesScreen() {
   const clearFilters = () => {
     setSelectedDay('all');
     setMassType('all');
+    toast.success('Filtros limpos! Veja todos os horários.');
   };
 
   const hasActiveFilters = selectedDay !== 'all' || massType !== 'all';

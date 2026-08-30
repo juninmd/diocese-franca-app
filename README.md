@@ -31,7 +31,7 @@ Aplicativo completo para a Diocese de Franca com backend API REST e app React Na
 ### Mobile
 - Deploy web 100% funcional no Netlify com Metro bundler suportando `react-native-web`
 - Lembrete diário às 08:00 configurado na Home usando `expo-notifications`.
-- Notificações locais automáticas de boas-vindas na inicialização do app (`App.js`), lembretes no acesso rápido do `HomeScreen` (incluindo notificação imediata ao clicar em "Ligar Diocese"), e Lembretes de Missa individuais no `MassesScreen` via `expo-notifications`, além de alertas locais para quando favoritar uma paróquia ou padre (`ChurchesScreen.js` e `PriestsScreen.js`). Lembretes locais para Agendar Visita (`ChurchDetailScreen.js`) e Lembrete Confissão (`PriestDetailScreen.js`) com triggers mais ágeis.
+- Notificações locais automáticas de boas-vindas na inicialização do app (`App.js`), lembretes no acesso rápido do `HomeScreen` (incluindo notificação imediata ao clicar em "Ligar Diocese"), e Lembretes de Missa individuais no `MassesScreen` via `expo-notifications`, além de alertas locais para quando favoritar uma paróquia ou padre (`ChurchesScreen.js` e `PriestsScreen.js`). Lembretes locais para Agendar Visita (`ChurchDetailScreen.js`), Lembrete Confissão (`PriestDetailScreen.js`) com triggers mais ágeis, e notificação local de feedback ao limpar filtros em `MassesScreen.js`.
 - Empty states mais empáticos para erros de rede, utilizando textos encorajadores nas telas de busca e listagem (`ChurchesScreen.js`, `MassesScreen.js`).
 - Aprimoramentos de UI/UX: Refinamento na listagem de Padres e Igrejas (`ChurchesScreen.js`, `PriestsScreen.js`) melhorando a legibilidade e atualizando os empty states para uma linguagem mais acolhedora e empática (ex: "Puxa, não conseguimos carregar as igrejas agora. Tente novamente!"). O uso do tom empático "Puxa..." foi padronizado em todas as telas, incluindo "Puxa, não encontramos paróquias com este nome." nos empty states de busca.
 - Skeletons Loaders (Animação Shimmer) em diversas áreas como Notícias e Listas
@@ -55,7 +55,7 @@ Aplicativo completo para a Diocese de Franca com backend API REST e app React Na
 - **Netlify**: O projeto já encontra-se pré-configurado para ser compilado e entregue como Progressive Web App (PWA) / Single Page Application usando `npx expo export -p web` na pasta `mobile/`. A configuração para Netlify está estabelecida na raiz em `netlify.toml`, que mapeia corretamente o redirecionamento `/*` para `/index.html` (resolvendo roteamento client-side) e define a pasta de publicação como `mobile/dist`.
 
 ### Backend
-- Scraper autônomo aprimorado (`backend/scraper.js`) para capturar data e descrição (`.event_date` e `.post_text p`) garantindo fallbacks robustos inclusive utilizando regex para reconhecer datas curtas no formato `DD/MM/YYYY` e regex combinando a descrição ou o título, se os campos estiverem vazios. O script agora corre via invocação inline exportando o modulo e finalizando limpo. Usa a classe `.section_post_left` para maior confiabilidade e bloca a execução individual em `try/catch` com timeout de 15s. Foi adicionado também um **mecanismo de tentativas (retry loop)** para a requisição de rede inicial, tentando até 3 vezes caso o site da Diocese apresente falhas intermitentes, retornando um array vazio de fallback apenas se o site original continuar inacessível para evitar crashs na API.
+- Scraper autônomo aprimorado (`backend/scraper.js`) para capturar data e descrição (`.event_date` e `.post_text p`) garantindo fallbacks robustos inclusive utilizando regex para reconhecer datas curtas no formato `DD/MM/YYYY` e regex combinando a descrição ou o título, se os campos estiverem vazios. O script agora corre via invocação inline exportando o modulo e finalizando limpo. Usa a classe `.section_post_left` para maior confiabilidade (com fallback adicional extraindo diretamente o texto de `h2.post_title` caso a tag `a` não esteja presente) e bloca a execução individual em `try/catch` com timeout de 15s. Foi adicionado também um **mecanismo de tentativas (retry loop)** para a requisição de rede inicial, tentando até 3 vezes caso o site da Diocese apresente falhas intermitentes, retornando um array vazio de fallback apenas se o site original continuar inacessível para evitar crashs na API.
 - Endpoint de health check `/api/health`
 - Compressão gzip automática
 - Helmet.js para headers de segurança
@@ -270,34 +270,34 @@ O app possui interface moderna com:
 
 ### Screenshots (Web Output E2E Test)
 **Home Screen**
-![Home Screen](mobile/screenshots/home_full.png?v=4)
+![Home Screen](mobile/screenshots/home_full.png?v=5)
 
 **News Section**
-![News Section](mobile/screenshots/news_section.png?v=4)
+![News Section](mobile/screenshots/news_section.png?v=5)
 
 **Igrejas Screen**
-![Igrejas Screen](mobile/screenshots/churches_full.png?v=4)
+![Igrejas Screen](mobile/screenshots/churches_full.png?v=5)
 
 **Padres Screen**
-![Padres Screen](mobile/screenshots/priests_full.png?v=4)
+![Padres Screen](mobile/screenshots/priests_full.png?v=5)
 
 **Missas Screen**
-![Missas Screen](mobile/screenshots/masses_full.png?v=4)
+![Missas Screen](mobile/screenshots/masses_full.png?v=5)
 
 **Missas (Empty State)**
-![Missas (Empty State)](mobile/screenshots/masses_empty.png?v=4)
+![Missas (Empty State)](mobile/screenshots/masses_empty.png?v=5)
 
 **Igrejas (Empty State)**
-![Igrejas (Empty State)](mobile/screenshots/churches_empty.png?v=4)
+![Igrejas (Empty State)](mobile/screenshots/churches_empty.png?v=5)
 
 **Padres (Empty State)**
-![Padres (Empty State)](mobile/screenshots/priests_empty.png?v=4)
+![Padres (Empty State)](mobile/screenshots/priests_empty.png?v=5)
 
 **Igreja Próxima**
-![Igreja Próxima](mobile/screenshots/churches_nearby.png?v=4)
+![Igreja Próxima](mobile/screenshots/churches_nearby.png?v=5)
 
 **Igreja Próxima (Permissão Negada)**
-![Igreja Próxima Permissão Negada](mobile/screenshots/churches_nearby_denied.png?v=4)
+![Igreja Próxima Permissão Negada](mobile/screenshots/churches_nearby_denied.png?v=5)
 
 ## Licença
 

@@ -47,9 +47,15 @@ const scrapeNews = async () => {
     // Inside, there is <div class="scale_image_container"> and <div class="post_text">.
     $('.section_post_left').each((i, el) => {
         try {
-            const titleElement = $(el).find('h2.post_title a');
-            const title = titleElement.length > 0 ? titleElement.text().trim() : 'Sem título disponível';
+            let titleElement = $(el).find('h2.post_title a');
             let link = titleElement.length > 0 ? (titleElement.attr('href') || '#') : '#';
+            let title = titleElement.length > 0 ? titleElement.text().trim() : '';
+
+            if (!title) {
+                // Fallback to the h2 text itself if a tag is empty or missing
+                titleElement = $(el).find('h2.post_title');
+                title = titleElement.length > 0 ? titleElement.text().trim() : 'Sem título disponível';
+            }
 
             // Find the image in the context
             const imgTag = $(el).find('.scale_image_container img.scale_image');
