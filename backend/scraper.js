@@ -25,7 +25,7 @@ const scrapeNews = async () => {
               headers: {
                   'User-Agent': randomUserAgent
               },
-              timeout: 15000
+              timeout: 20000
           });
           data = response.data;
           break; // success, exit the loop
