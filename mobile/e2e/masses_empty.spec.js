@@ -9,7 +9,7 @@ test('navigate to missas and verify empty state', async ({ page }) => {
 
   // Actually, wait for any text to be visible that indicates the empty state is there
   // Using catch because sometimes the data load time vs timeout could be flaky in this test environment
-  await expect(page.getByText('Puxa! Nenhuma missa encontrada')).toBeVisible({ timeout: 10000 }).catch(() => {});
+  await expect(page.getByText('Puxa, não encontramos missas para esses filtros.')).toBeVisible({ timeout: 10000 }).catch(() => {});
 
   // We capture the screenshot of the empty state
   await page.screenshot({ path: 'screenshots/masses_empty.png', fullPage: true });

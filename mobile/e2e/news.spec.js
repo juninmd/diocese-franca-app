@@ -6,7 +6,7 @@ test('navigate to home and verify news section', async ({ page, context }) => {
 
   await expect(page.locator('text=Diocese de Franca').first()).toBeVisible({ timeout: 10000 });
 
-  const emptyState = page.getByText('Puxa, não há novas atualizações da diocese no momento. Tente novamente mais tarde!');
+  const emptyState = page.getByText('Puxa, não conseguimos carregar as notícias agora. Tente novamente!');
 
   if (await emptyState.count() > 0) {
       await expect(emptyState).toBeVisible();

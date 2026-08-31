@@ -283,7 +283,7 @@ export default function MassesScreen() {
         ListEmptyComponent={
           <View style={styles.emptyContainer}>
             <Ionicons name="calendar-outline" size={64} color="#bdc3c7" />
-            <Text style={styles.emptyTitle}>Puxa! Nenhuma missa encontrada</Text>
+            <Text style={styles.emptyTitle}>Puxa, não encontramos missas para esses filtros.</Text>
             <Text style={styles.emptyText}>
               Não encontramos missas para esses filtros. Vamos tentar limpar os filtros e buscar novamente?
             </Text>

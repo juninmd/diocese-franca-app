@@ -260,7 +260,7 @@ export default function HomeScreen({ navigation }) {
           ) : (
             <View style={styles.emptyNewsContainer}>
               <Ionicons name="newspaper-outline" size={36} color="#bdc3c7" />
-              <Text style={styles.emptyNewsText}>Puxa, não há novas atualizações da diocese no momento. Tente novamente mais tarde!</Text>
+              <Text style={styles.emptyNewsText}>Puxa, não conseguimos carregar as notícias agora. Tente novamente!</Text>
               <TouchableOpacity style={styles.refreshButtonSmall} onPress={fetchNews}>
                 <Ionicons name="refresh" size={16} color="#fff" />
                 <Text style={styles.refreshButtonSmallText}>Tentar Novamente</Text>
@@ -375,22 +375,6 @@ export default function HomeScreen({ navigation }) {
               <Text style={styles.quickText}>Ligar{'\n'}Diocese</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity
-              style={styles.quickItem}
-              onPress={async () => {
-                await Notifications.scheduleNotificationAsync({
-                  content: {
-                    title: 'Lembrete de Teste 🔔',
-                    body: 'Este é um lembrete de teste agendado há 5 segundos.',
-                  },
-                  trigger: { seconds: 5 },
-                });
-                toast.success('Notificação agendada para daqui a 5 segundos!');
-              }}
-            >
-              <Ionicons name="alarm" size={28} color="#e74c3c" />
-              <Text style={styles.quickText}>Lembrete Teste 5s</Text>
-            </TouchableOpacity>
             <TouchableOpacity
               style={styles.quickItem}
               onPress={() => handleEmail('contato@diocesefranca.org.br')}
