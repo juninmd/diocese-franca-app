@@ -35,7 +35,7 @@ const scrapeNews = async () => {
           if (attempt >= maxRetries) {
               throw err;
           }
-          await wait(2000);
+          await wait(2000 * Math.pow(2, attempt));
       }
   }
 
