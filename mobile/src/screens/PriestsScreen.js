@@ -78,16 +78,6 @@ export default function PriestsScreen({ navigation }) {
       await FavoritesService.addFavoritePriest(priest);
       setFavorites(prev => [...prev, priest.id]);
       toast.success(`${priest.name} adicionado aos favoritos!`);
-      const { status } = await Notifications.requestPermissionsAsync();
-      if (status === 'granted') {
-         await Notifications.scheduleNotificationAsync({
-           content: {
-             title: 'Padre Favoritado! 🙏',
-             body: `Você favoritou o ${priest.title} ${priest.name}.`,
-           },
-           trigger: { seconds: 2 },
-         });
-      }
     }
   };
 
@@ -277,7 +267,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 14,
-    paddingVertical: 8,
+    paddingVertical: 12,
     borderRadius: 20,
     backgroundColor: '#fff',
     gap: 6,
