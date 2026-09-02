@@ -1,0 +1,19 @@
+$ expo start
+Starting project at /app/mobile
+Starting Metro Bundler
+The following packages should be updated for best compatibility with the installed expo version:
+  @react-native-async-storage/async-storage@3.0.2 - expected version: 2.2.0
+  expo@54.0.33 - expected version: ~54.0.37
+  expo-notifications@57.0.6 - expected version: ~0.32.17
+  react-native-screens@4.23.0 - expected version: ~4.16.0
+Your project may not work correctly until you install the expected versions of the packages.
+Waiting on http://localhost:8081
+Logs for your project will appear below.
+Web ./index.js ░░░░░░░░░░░░░░░░  0.0% (0/1)
+Web ./index.js ▓▓▓▓▓▓▓▓░░░░░░░░ 51.8% (200/330)
+Web ./index.js ▓▓▓▓▓▓▓▓▓▓▓▓░░░░ 81.0% (594/679)
+Web Bundled 8134ms index.js (780 modules)
+ LOG  [web] Logs will appear in the browser console
+Web ./index.js ░░░░░░░░░░░░░░░░  0.0% (0/1)
+Web Bundled 42ms index.js (1 module)
+ LOG  [web] Logs will appear in the browser console

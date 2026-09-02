@@ -53,6 +53,7 @@ const scrapeNews = async () => {
 
             if (!title) {
                 // Fallback to the h2 text itself if a tag is empty or missing
+                console.log('Fallback: h2.post_title a tag missing, using h2 text instead');
                 titleElement = $(el).find('h2.post_title');
                 title = titleElement.length > 0 ? titleElement.text().trim() : 'Sem título disponível';
             }
@@ -69,6 +70,7 @@ const scrapeNews = async () => {
             const dateElement = $(el).find('.event_date').first();
             let dateText = dateElement.length > 0 ? dateElement.text().trim() : '';
             if (!dateText) {
+                console.log('Fallback: date extraction using regex on title/description');
                 // Try parsing the date from the description or title
                 const dateMatch = (description + ' ' + title).match(/\d{1,2} de [a-zA-Zç]+( de \d{4})?/i);
                 const shortDateMatch = (description + ' ' + title).match(/\d{1,2}\/\d{1,2}\/\d{2,4}/);

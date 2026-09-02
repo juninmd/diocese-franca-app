@@ -57,7 +57,7 @@ export default function PriestDetailScreen({ route }) {
     return (
       <View style={styles.centerContainer}>
         <Ionicons name="alert-circle-outline" size={64} color="#e74c3c" />
-        <Text style={styles.errorText}>{error || 'Padre não encontrado'}</Text>
+        <Text style={styles.errorText}>{error || 'Puxa, não encontramos o padre'}</Text>
         <TouchableOpacity style={styles.retryButton} onPress={loadPriestDetail}>
           <Text style={styles.retryButtonText}>Tentar Novamente</Text>
         </TouchableOpacity>
@@ -94,7 +94,7 @@ export default function PriestDetailScreen({ route }) {
           <Text style={styles.sectionTitle}>Contato</Text>
           <View style={styles.contactCard}>
             {priest.email && (
-              <TouchableOpacity style={styles.contactRow} onPress={() => handleEmail(priest.email)}>
+              <TouchableOpacity style={styles.contactRow} onPress={() => handleEmail(priest.email)} activeOpacity={0.8}>
                 <View style={styles.contactIconContainer}>
                   <Ionicons name="mail-outline" size={20} color="#2c3e50" />
                 </View>
@@ -107,7 +107,7 @@ export default function PriestDetailScreen({ route }) {
             )}
 
             {priest.phone && (
-              <TouchableOpacity style={styles.contactRow} onPress={() => handleCall(priest.phone)}>
+              <TouchableOpacity style={styles.contactRow} onPress={() => handleCall(priest.phone)} activeOpacity={0.8}>
                 <View style={styles.contactIconContainer}>
                   <Ionicons name="call-outline" size={20} color="#2c3e50" />
                 </View>
@@ -120,6 +120,7 @@ export default function PriestDetailScreen({ route }) {
             )}
             <TouchableOpacity
               style={styles.contactRow}
+              activeOpacity={0.8}
               onPress={async () => {
                 const { status } = await Notifications.requestPermissionsAsync();
                 if (status === 'granted') {
