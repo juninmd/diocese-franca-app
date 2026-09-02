@@ -56,7 +56,7 @@ export default function ChurchDetailScreen({ route }) {
     return (
       <View style={styles.centerContainer}>
         <Ionicons name="alert-circle-outline" size={64} color="#e74c3c" />
-        <Text style={styles.errorText}>{error || 'Igreja não encontrada'}</Text>
+        <Text style={styles.errorText}>{error || 'Puxa, não encontramos a igreja'}</Text>
         <TouchableOpacity style={styles.retryButton} onPress={loadChurchDetail}>
           <Text style={styles.retryButtonText}>Tentar Novamente</Text>
         </TouchableOpacity>
@@ -108,7 +108,7 @@ export default function ChurchDetailScreen({ route }) {
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Informações</Text>
           <View style={styles.infoCard}>
-            <TouchableOpacity style={styles.infoRow} onPress={() => handleMap(church.address)}>
+            <TouchableOpacity style={styles.infoRow} onPress={() => handleMap(church.address)} activeOpacity={0.8}>
               <View style={styles.infoIconContainer}>
                 <Ionicons name="map-outline" size={20} color="#2c3e50" />
               </View>
@@ -120,7 +120,7 @@ export default function ChurchDetailScreen({ route }) {
               <Ionicons name="open-outline" size={18} color="#3498db" />
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.infoRow} onPress={() => handleCall(church.phone)}>
+            <TouchableOpacity style={styles.infoRow} onPress={() => handleCall(church.phone)} activeOpacity={0.8}>
               <View style={styles.infoIconContainer}>
                 <Ionicons name="call-outline" size={20} color="#2c3e50" />
               </View>
@@ -132,6 +132,7 @@ export default function ChurchDetailScreen({ route }) {
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.infoRow}
+              activeOpacity={0.8}
               onPress={async () => {
                 const { status } = await Notifications.requestPermissionsAsync();
                 if (status === 'granted') {
@@ -175,13 +176,13 @@ export default function ChurchDetailScreen({ route }) {
             </View>
             <View style={styles.priestContact}>
               {church.priest.email && (
-                <TouchableOpacity style={styles.contactButton} onPress={() => handleEmail(church.priest.email)}>
+                <TouchableOpacity style={styles.contactButton} onPress={() => handleEmail(church.priest.email)} activeOpacity={0.8}>
                   <Ionicons name="mail-outline" size={18} color="#fff" />
                   <Text style={styles.contactButtonText}>Email</Text>
                 </TouchableOpacity>
               )}
               {church.priest.phone && (
-                <TouchableOpacity style={styles.contactButton} onPress={() => handleCall(church.priest.phone)}>
+                <TouchableOpacity style={styles.contactButton} onPress={() => handleCall(church.priest.phone)} activeOpacity={0.8}>
                   <Ionicons name="call-outline" size={18} color="#fff" />
                   <Text style={styles.contactButtonText}>Ligar</Text>
                 </TouchableOpacity>
