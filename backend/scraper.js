@@ -70,7 +70,7 @@ const scrapeNews = async () => {
             const dateElement = $(el).find('.event_date').first();
             let dateText = dateElement.length > 0 ? dateElement.text().trim() : '';
             if (!dateText) {
-                console.log('Fallback: date extraction using regex on title/description');
+                console.log('Fallback: date extraction using regex on title/description/image');
                 // Try parsing the date from the description or title
                 const dateMatch = (description + ' ' + title).match(/\d{1,2} de [a-zA-Zç]+( de \d{4})?/i);
                 const shortDateMatch = (description + ' ' + title).match(/\d{1,2}\/\d{1,2}\/\d{2,4}/);

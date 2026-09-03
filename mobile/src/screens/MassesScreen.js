@@ -167,7 +167,7 @@ export default function MassesScreen() {
       <View style={styles.filtersHeader}>
         <Text style={styles.filterLabel}>Dia da semana</Text>
         {hasActiveFilters && (
-          <TouchableOpacity onPress={clearFilters} style={styles.clearButton}>
+          <TouchableOpacity onPress={clearFilters} style={styles.clearButton} activeOpacity={0.8}>
             <Ionicons name="close" size={14} color="#e74c3c" />
             <Text style={styles.clearText}>Limpar filtros</Text>
           </TouchableOpacity>
@@ -179,6 +179,7 @@ export default function MassesScreen() {
         renderItem={({ item }) => (
           <TouchableOpacity
             key={item.key}
+            activeOpacity={0.8}
             style={[
               styles.dayFilterButton,
               selectedDay === item.key && styles.dayFilterButtonActive,
@@ -209,6 +210,7 @@ export default function MassesScreen() {
             renderItem={({ item }) => (
               <TouchableOpacity
                 key={item.key}
+                activeOpacity={0.8}
                 style={[styles.typeFilterButton, massType === item.key && styles.typeFilterButtonActive]}
                 onPress={() => setMassType(item.key)}
               >
@@ -288,7 +290,7 @@ export default function MassesScreen() {
               Não encontramos missas para esses filtros. Vamos tentar limpar os filtros e buscar novamente?
             </Text>
             {hasActiveFilters && (
-              <TouchableOpacity style={styles.emptyButton} onPress={clearFilters}>
+              <TouchableOpacity style={styles.emptyButton} onPress={clearFilters} activeOpacity={0.8}>
                 <Text style={styles.emptyButtonText}>Limpar filtros</Text>
               </TouchableOpacity>
             )}

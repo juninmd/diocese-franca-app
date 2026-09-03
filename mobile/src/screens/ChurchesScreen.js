@@ -162,10 +162,10 @@ export default function ChurchesScreen({ navigation }) {
             </View>
           </View>
           <View style={styles.cardActions}>
-            <TouchableOpacity onPress={() => toggleFavorite(item)} style={styles.actionButton}>
+            <TouchableOpacity onPress={() => toggleFavorite(item)} style={styles.actionButton} activeOpacity={0.8}>
               <Ionicons name={isFavorite ? 'heart' : 'heart-outline'} size={22} color={isFavorite ? '#e74c3c' : '#bdc3c7'} />
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => handleShare(item)} style={styles.actionButton}>
+            <TouchableOpacity onPress={() => handleShare(item)} style={styles.actionButton} activeOpacity={0.8}>
               <Ionicons name="share-outline" size={22} color="#bdc3c7" />
             </TouchableOpacity>
             <Ionicons name="chevron-forward" size={24} color="#bdc3c7" />
@@ -216,7 +216,7 @@ export default function ChurchesScreen({ navigation }) {
         : isAwaitingLocation
           ? 'Ainda não sabemos onde você está.'
           : filterMode === 'favorites'
-            ? 'Você ainda não favoritou nenhuma paróquia.'
+            ? 'Puxa, você ainda não favoritou nenhuma paróquia.'
             : 'Puxa, não encontramos paróquias com este nome.';
 
     const subtitle = error
@@ -235,17 +235,17 @@ export default function ChurchesScreen({ navigation }) {
         <Text style={styles.emptyTitle}>{title}</Text>
         <Text style={styles.emptyText}>{subtitle}</Text>
         {filterMode === 'favorites' && !error && (
-          <TouchableOpacity style={styles.emptyButton} onPress={() => selectFilterMode('all')}>
+          <TouchableOpacity style={styles.emptyButton} onPress={() => selectFilterMode('all')} activeOpacity={0.8}>
             <Text style={styles.emptyButtonText}>Ver todas as igrejas</Text>
           </TouchableOpacity>
         )}
         {filterMode === 'nearby' && !nearbyLoading && (
-          <TouchableOpacity style={styles.emptyButton} onPress={loadNearbyChurches}>
+          <TouchableOpacity style={styles.emptyButton} onPress={loadNearbyChurches} activeOpacity={0.8}>
             <Text style={styles.emptyButtonText}>Tentar Novamente</Text>
           </TouchableOpacity>
         )}
         {error && (
-          <TouchableOpacity style={styles.emptyButton} onPress={onRefresh}>
+          <TouchableOpacity style={styles.emptyButton} onPress={onRefresh} activeOpacity={0.8}>
             <Text style={styles.emptyButtonText}>Tentar Novamente</Text>
           </TouchableOpacity>
         )}
@@ -277,7 +277,7 @@ export default function ChurchesScreen({ navigation }) {
           onChangeText={setSearchQuery}
         />
         {searchQuery.length > 0 && (
-          <TouchableOpacity onPress={() => setSearchQuery('')}>
+          <TouchableOpacity onPress={() => setSearchQuery('')} activeOpacity={0.8}>
             <Ionicons name="close-circle" size={20} color="#95a5a6" />
           </TouchableOpacity>
         )}
@@ -285,6 +285,7 @@ export default function ChurchesScreen({ navigation }) {
 
       <View style={styles.filterRow}>
         <TouchableOpacity
+          activeOpacity={0.8}
           style={[styles.filterChip, filterMode === 'all' && styles.filterChipActive]}
           onPress={() => selectFilterMode('all')}
         >
@@ -294,6 +295,7 @@ export default function ChurchesScreen({ navigation }) {
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
+          activeOpacity={0.8}
           style={[styles.filterChip, filterMode === 'favorites' && styles.filterChipActive]}
           onPress={() => selectFilterMode('favorites')}
         >
@@ -303,6 +305,7 @@ export default function ChurchesScreen({ navigation }) {
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
+          activeOpacity={0.8}
           style={[styles.filterChip, filterMode === 'nearby' && styles.filterChipActive]}
           onPress={() => selectFilterMode('nearby')}
         >
