@@ -329,6 +329,7 @@ export default function HomeScreen({ navigation }) {
           <View style={styles.quickGrid}>
             <TouchableOpacity
               style={styles.quickItem}
+              activeOpacity={0.8}
               onPress={() => navigation.navigate('Masses', { day: 'Domingo' })}
             >
               <Ionicons name="sunny" size={28} color="#f39c12" />
@@ -336,6 +337,7 @@ export default function HomeScreen({ navigation }) {
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.quickItem}
+              activeOpacity={0.8}
               onPress={async () => {
                 const { status } = await Notifications.requestPermissionsAsync();
                 if (status === 'granted') {
@@ -357,6 +359,7 @@ export default function HomeScreen({ navigation }) {
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.quickItem}
+              activeOpacity={0.8}
               onPress={async () => {
                 const { status } = await Notifications.requestPermissionsAsync();
                 if (status === 'granted') {
@@ -377,6 +380,7 @@ export default function HomeScreen({ navigation }) {
 
             <TouchableOpacity
               style={styles.quickItem}
+              activeOpacity={0.8}
               onPress={() => handleEmail('contato@diocesefranca.org.br')}
             >
               <Ionicons name="mail" size={28} color="#9b59b6" />
