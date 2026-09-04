@@ -1,6 +1,22 @@
 [
   {
     "id": 1,
+    "title": "Catequista é chamado a anunciar Jesus e acolher pessoas no caminho da fé, destaca participação em Romaria Nacional",
+    "description": "Representando a Diocese de Franca, Pe. Rodrigo participou da II Romaria Nacional de Catequistas, realizada em Aparecida, e destaca aprendizados para a missão catequética",
+    "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6043&id_orgao=1",
+    "image": "https://diocesefranca.org.br/images/20260903192719_1000356840.png",
+    "date": "3 de setembro"
+  },
+  {
+    "id": 2,
+    "title": "Despertar Vocacional reúne cerca de 250 pessoas em encontro de oração, convivência e discernimento",
+    "description": "Em sua segunda edição, iniciativa reuniu diferentes carismas, comunidades e ministérios para favorecer o conhecimento e o discernimento sobre o chamado de Deus.",
+    "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6042&id_orgao=1",
+    "image": "https://diocesefranca.org.br/images/20260903185323_1000356807.png",
+    "date": "3 de setembro"
+  },
+  {
+    "id": 3,
     "title": "Música, formação e espiritualidade marcam participação de representantes da Diocese de Franca em congresso internacional",
     "description": "Encontro reuniu cerca de mil cantores, regentes e músicos em Campinas e promoveu momentos de formação, espiritualidade e celebração sobre o serviço da música na Liturgia.",
     "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6041&id_orgao=1",
@@ -8,7 +24,7 @@
     "date": "1 de setembro"
   },
   {
-    "id": 2,
+    "id": 4,
     "title": "8º Colo de Mãe promove tarde de oração, reflexão e espiritualidade em Franca",
     "description": "Encontro será realizado no dia 12 de setembro, na Casa de Retiros Jesus Maria José, e terá palestras, partilhas, depoimentos e momentos de oração",
     "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6038&id_orgao=1",
@@ -16,27 +32,11 @@
     "date": "12 de setembro"
   },
   {
-    "id": 3,
+    "id": 5,
     "title": "75 anos das Irmãs Salvatorianas em São Joaquim da Barra serão celebrados com lançamento de livro e Missa",
     "description": "Celebração reuniu religiosas que fizeram parte da história da comunidade e marcou o jubileu de 75 anos de missão salvatoriana no município",
     "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6036&id_orgao=1",
     "image": "https://diocesefranca.org.br/images/20260824211337_1000352073.png",
-    "date": "24 de agosto"
-  },
-  {
-    "id": 4,
-    "title": "Formação diocesana reúne catequistas para aprofundar a Iniciação à Vida Cristã",
-    "description": "Encontro será realizado no dia 3 de setembro, em Franca, com assessoria do Pe. Erickson Ramos, da Diocese de Jundiaí",
-    "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6034&id_orgao=1",
-    "image": "https://diocesefranca.org.br/images/20260824200507_1000351966.png",
-    "date": "3 de setembro"
-  },
-  {
-    "id": 5,
-    "title": "Encontro Diocesano da Pastoral da Saúde reúne cerca de 120 agentes em Franca",
-    "description": "Momento de formação e partilha aconteceu na Paróquia Santa Luzia e reuniu representantes de diferentes cidades e comunidades da Diocese",
-    "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6035&id_orgao=1",
-    "image": "https://diocesefranca.org.br/images/20260824203320_1000352010.png",
     "date": "24 de agosto"
   }
 ]
