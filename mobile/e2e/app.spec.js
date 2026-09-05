@@ -24,4 +24,14 @@ test('navigate and capture screenshots for all screens', async ({ page }) => {
   await page.locator('div:text-is("Missas")').first().click({ force: true });
   await page.waitForTimeout(3000);
   await page.screenshot({ path: 'screenshots/masses_full.png', fullPage: true });
+
+  // Empty State - Missas
+  // Emulate an empty state for missas by clicking "Domingo" when it may be empty,
+  // Or we can simulate it by searching for something that doesn't exist on Igrejas/Padres.
+
+  // Empty states are already tested and screenshoted in separate spec files:
+  // e2e/churches_priests_empty.spec.js
+  // e2e/masses_empty.spec.js
+  // News section is tested in e2e/news.spec.js
+  // We can just rely on the test runner for these other screenshots.
 });
