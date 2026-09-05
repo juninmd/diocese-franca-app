@@ -67,32 +67,37 @@ const scrapeNews = async () => {
             const description = descriptionText ? descriptionText : 'Sem descrição disponível';
 
             // Attempt to find a date if available, typically in small or span tags inside post_title or similar
-            const dateElement = $(el).find('.event_date').first();
+            let dateElement = $(el).find('.event_date, .date, .post_date').first();
             let dateText = dateElement.length > 0 ? dateElement.text().trim() : '';
+
             if (!dateText) {
-                console.log('Fallback: date extraction using regex on title/description/image');
-                // Try parsing the date from the description or title
-                const dateMatch = (description + ' ' + title).match(/\d{1,2} de [a-zA-Zç]+( de \d{4})?/i);
-                const shortDateMatch = (description + ' ' + title).match(/\d{1,2}\/\d{1,2}\/\d{2,4}/);
+                console.log('Fallback: date extraction using regex on title/description/image for: ', title.substring(0, 30) + '...');
+                // Try parsing the date from the description or title using expanded regex
+                // Matches "12 de Agosto", "12 de agosto de 2024", "12/08/2024", "12/08", "Agosto de 2024"
+                const fullText = (description + ' ' + title).replace(/\s+/g, ' ');
+                const dateMatch = fullText.match(/\d{1,2}\s+de\s+[a-zA-ZçÇ]+\s*(de\s*\d{4})?/i);
+                const shortDateMatch = fullText.match(/\d{1,2}\/\d{1,2}(\/\d{2,4})?/);
+                const monthYearMatch = fullText.match(/[a-zA-ZçÇ]+\/\d{4}/i);
 
                 if (dateMatch) {
                     dateText = dateMatch[0];
+                    console.log('  -> Found date via regex (extenso):', dateText);
                 } else if (shortDateMatch) {
                     dateText = shortDateMatch[0];
-                } else {
-                    const monthYearMatch = title.match(/[a-zA-Zç]+\/\d{4}/i);
-                    if (monthYearMatch) {
-                        dateText = monthYearMatch[0];
-                    } else if (image) {
-                        // Extract date from image URL (e.g. 20260812223051 -> 12 de agosto)
-                        const imageDateMatch = image.match(/images\/\d{4}(\d{2})(\d{2})\d+/);
-                        if (imageDateMatch) {
-                            const monthStr = imageDateMatch[1];
-                            const dayStr = imageDateMatch[2];
-                            const months = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
-                            const month = months[parseInt(monthStr, 10) - 1];
-                            dateText = `${parseInt(dayStr, 10)} de ${month}`;
-                        }
+                    console.log('  -> Found date via regex (curto):', dateText);
+                } else if (monthYearMatch) {
+                    dateText = monthYearMatch[0];
+                    console.log('  -> Found date via regex (mês/ano):', dateText);
+                } else if (image) {
+                    // Extract date from image URL (e.g. 20260812223051 -> 12 de agosto)
+                    const imageDateMatch = image.match(/images\/\d{4}(\d{2})(\d{2})\d+/);
+                    if (imageDateMatch) {
+                        const monthStr = imageDateMatch[1];
+                        const dayStr = imageDateMatch[2];
+                        const months = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
+                        const month = months[parseInt(monthStr, 10) - 1];
+                        dateText = `${parseInt(dayStr, 10)} de ${month}`;
+                        console.log('  -> Found date via image URL fallback:', dateText);
                     }
                 }
             }
