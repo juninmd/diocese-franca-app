@@ -360,17 +360,8 @@ export default function HomeScreen({ navigation }) {
             <TouchableOpacity
               style={styles.quickItem}
               activeOpacity={0.8}
-              onPress={async () => {
-                const { status } = await Notifications.requestPermissionsAsync();
-                if (status === 'granted') {
-                  await Notifications.scheduleNotificationAsync({
-                    content: {
-                      title: 'Ligando...',
-                      body: 'Iniciando chamada para a Diocese.',
-                    },
-                    trigger: null, // immediate
-                  });
-                }
+              onPress={() => {
+                toast.success('Ligando para a Diocese...');
                 handleCall('1637111400');
               }}
             >
