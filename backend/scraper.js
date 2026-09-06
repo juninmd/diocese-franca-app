@@ -60,7 +60,7 @@ const scrapeNews = async () => {
 
             // Find the image in the context
             const imgTag = $(el).find('.scale_image_container img.scale_image');
-            let image = imgTag.length > 0 ? (imgTag.attr('src') || '') : '';
+            let image = imgTag.length > 0 ? (imgTag.attr('src') || imgTag.attr('data-src') || '') : '';
 
             const descriptionElement = $(el).find('.post_text p').first();
             const descriptionText = descriptionElement.length > 0 && descriptionElement.text().trim() !== '' ? descriptionElement.text().trim() : $(el).text().replace(/\s+/g, ' ').substring(0, 100).trim();

@@ -111,16 +111,6 @@ export default function ChurchesScreen({ navigation }) {
       await FavoritesService.addFavoriteChurch(church);
       setFavorites(prev => [...prev, church.id]);
       toast.success(`${church.name} adicionado aos favoritos!`);
-      const { status } = await Notifications.requestPermissionsAsync();
-      if (status === 'granted') {
-         await Notifications.scheduleNotificationAsync({
-           content: {
-             title: 'Igreja Favoritada! ❤️',
-             body: `Você favoritou a paróquia ${church.name}.`,
-           },
-           trigger: { seconds: 2 },
-         });
-      }
     }
   };
 
