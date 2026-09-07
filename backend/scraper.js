@@ -77,7 +77,8 @@ const scrapeNews = async () => {
                 const fullText = (description + ' ' + title).replace(/\s+/g, ' ');
                 const dateMatch = fullText.match(/\d{1,2}\s+de\s+[a-zA-ZçÇ]+\s*(de\s*\d{4})?/i);
                 const shortDateMatch = fullText.match(/\d{1,2}\/\d{1,2}(\/\d{2,4})?/);
-                const monthYearMatch = fullText.match(/[a-zA-ZçÇ]+\/\d{4}/i);
+                const monthYearMatch = fullText.match(/[a-zA-ZçÇ]+\s+(de\s+)?\d{4}/i);
+                const fallbackDateMatch = fullText.match(/\d{2}\/\d{2}\/\d{4}/);
 
                 if (dateMatch) {
                     dateText = dateMatch[0];
@@ -85,6 +86,9 @@ const scrapeNews = async () => {
                 } else if (shortDateMatch) {
                     dateText = shortDateMatch[0];
                     console.log('  -> Found date via regex (curto):', dateText);
+                } else if (fallbackDateMatch) {
+                    dateText = fallbackDateMatch[0];
+                    console.log('  -> Found date via regex (fallback d/m/y):', dateText);
                 } else if (monthYearMatch) {
                     dateText = monthYearMatch[0];
                     console.log('  -> Found date via regex (mês/ano):', dateText);

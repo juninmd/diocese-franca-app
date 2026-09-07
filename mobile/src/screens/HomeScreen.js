@@ -232,17 +232,7 @@ export default function HomeScreen({ navigation }) {
               renderItem={({ item }) => (
                 <TouchableOpacity
                   style={styles.newsCard}
-                  onPress={async () => {
-                    const { status } = await Notifications.requestPermissionsAsync();
-                    if (status === 'granted') {
-                      await Notifications.scheduleNotificationAsync({
-                        content: {
-                          title: 'Leitura de Notícia 📰',
-                          body: 'Que bom que está se mantendo informado sobre a diocese!',
-                        },
-                        trigger: { seconds: 2 },
-                      });
-                    }
+                  onPress={() => {
                     Linking.openURL(item.link);
                   }}
                   activeOpacity={0.8}

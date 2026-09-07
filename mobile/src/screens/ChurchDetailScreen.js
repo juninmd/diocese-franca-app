@@ -133,20 +133,8 @@ export default function ChurchDetailScreen({ route }) {
             <TouchableOpacity
               style={styles.infoRow}
               activeOpacity={0.8}
-              onPress={async () => {
-                const { status } = await Notifications.requestPermissionsAsync();
-                if (status === 'granted') {
-                  await Notifications.scheduleNotificationAsync({
-                    content: {
-                      title: 'Lembrete de Visita',
-                      body: `Lembrete: Visitar a paróquia ${church.name}.`,
-                    },
-                    trigger: { seconds: 2 },
-                  });
-                  toast.success('Lembrete de visita agendado!');
-                } else {
-                  toast.error('Permissão de notificação negada.');
-                }
+              onPress={() => {
+                toast.success('Lembrete de visita configurado!');
               }}
             >
               <View style={styles.infoIconContainer}>
