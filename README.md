@@ -289,10 +289,10 @@ O app possui interface moderna com:
 ![Missas (Empty State)](mobile/screenshots/masses_empty.png?v=12)
 
 **Igrejas (Empty State)**
-![Igrejas (Empty State)](mobile/screenshots/churches_empty.png?v=12)
+![Igrejas (Empty State)](mobile/screenshots/churches_empty.png?v=13)
 
 **Padres (Empty State)**
-![Padres (Empty State)](mobile/screenshots/priests_empty.png?v=12)
+![Padres (Empty State)](mobile/screenshots/priests_empty.png?v=13)
 
 **Igreja Próxima**
 ![Igreja Próxima](mobile/screenshots/churches_nearby.png?v=12)

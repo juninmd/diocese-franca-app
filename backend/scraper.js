@@ -23,7 +23,10 @@ const scrapeNews = async () => {
           const randomUserAgent = USER_AGENTS[Math.floor(Math.random() * USER_AGENTS.length)];
           const response = await axios.get('https://diocesefranca.org.br/', {
               headers: {
-                  'User-Agent': randomUserAgent
+                  'User-Agent': randomUserAgent,
+                  'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8',
+                  'Accept-Language': 'pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7',
+                  'Referer': 'https://www.google.com/'
               },
               timeout: 20000
           });
@@ -31,7 +34,8 @@ const scrapeNews = async () => {
           break; // success, exit the loop
       } catch (err) {
           attempt++;
-          console.error(`Attempt ${attempt} failed to fetch diocesefranca.org.br: ${err.message}`);
+          const status = err.response ? err.response.status : 'No response status';
+          console.error(`Attempt ${attempt} failed to fetch diocesefranca.org.br: ${err.message} (Status: ${status})`);
           if (attempt >= maxRetries) {
               throw err;
           }
