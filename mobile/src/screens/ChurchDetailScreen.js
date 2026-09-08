@@ -57,7 +57,7 @@ export default function ChurchDetailScreen({ route }) {
       <View style={styles.centerContainer}>
         <Ionicons name="alert-circle-outline" size={64} color="#e74c3c" />
         <Text style={styles.errorText}>{error || 'Puxa, não encontramos a igreja'}</Text>
-        <TouchableOpacity style={styles.retryButton} onPress={loadChurchDetail}>
+        <TouchableOpacity style={styles.retryButton} onPress={loadChurchDetail} activeOpacity={0.8}>
           <Text style={styles.retryButtonText}>Tentar Novamente</Text>
         </TouchableOpacity>
       </View>

@@ -234,6 +234,7 @@ export default function HomeScreen({ navigation }) {
                   style={styles.newsCard}
                   onPress={() => {
                     Linking.openURL(item.link);
+                    toast.info('Abrindo a notícia...', { duration: 2000 });
                   }}
                   activeOpacity={0.8}
                 >

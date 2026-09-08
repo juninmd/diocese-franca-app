@@ -58,7 +58,7 @@ export default function PriestDetailScreen({ route }) {
       <View style={styles.centerContainer}>
         <Ionicons name="alert-circle-outline" size={64} color="#e74c3c" />
         <Text style={styles.errorText}>{error || 'Puxa, não encontramos o padre'}</Text>
-        <TouchableOpacity style={styles.retryButton} onPress={loadPriestDetail}>
+        <TouchableOpacity style={styles.retryButton} onPress={loadPriestDetail} activeOpacity={0.8}>
           <Text style={styles.retryButtonText}>Tentar Novamente</Text>
         </TouchableOpacity>
       </View>
