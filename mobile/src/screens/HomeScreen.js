@@ -143,7 +143,7 @@ export default function HomeScreen({ navigation }) {
           <Text style={styles.welcomeText}>
             Conheça as paróquias, padres e horários de missa da Diocese de Franca.
           </Text>
-          <TouchableOpacity style={styles.refreshButton} onPress={onRefresh}>
+          <TouchableOpacity style={styles.refreshButton} onPress={onRefresh} activeOpacity={0.8}>
             <Ionicons name="refresh" size={18} color="#2c3e50" />
             <Text style={styles.refreshText}>Atualizar dados</Text>
           </TouchableOpacity>
@@ -178,7 +178,7 @@ export default function HomeScreen({ navigation }) {
           ) : (
             <View>
               {nearestError && <Text style={styles.nearestErrorText}>{nearestError}</Text>}
-              <TouchableOpacity style={styles.nearestButton} onPress={findNearestChurch}>
+              <TouchableOpacity style={styles.nearestButton} onPress={findNearestChurch} activeOpacity={0.8}>
                 <Ionicons name="locate" size={16} color="#fff" />
                 <Text style={styles.nearestButtonText}>
                   {nearestError ? 'Tentar novamente' : 'Encontrar a igreja mais próxima'}
@@ -189,7 +189,7 @@ export default function HomeScreen({ navigation }) {
         </View>
 
         <View style={styles.statsContainer}>
-          <TouchableOpacity style={styles.statItem} onPress={() => navigation.navigate('Churches')}>
+          <TouchableOpacity style={styles.statItem} onPress={() => navigation.navigate('Churches')} activeOpacity={0.8}>
             <View style={[styles.statIcon, { backgroundColor: '#e8f4f8' }]}>
               <Ionicons name="business" size={24} color="#2c3e50" />
             </View>
@@ -197,7 +197,7 @@ export default function HomeScreen({ navigation }) {
             <Text style={styles.statLabel}>Paróquias</Text>
           </TouchableOpacity>
           <View style={styles.statDivider} />
-          <TouchableOpacity style={styles.statItem} onPress={() => navigation.navigate('Priests')}>
+          <TouchableOpacity style={styles.statItem} onPress={() => navigation.navigate('Priests')} activeOpacity={0.8}>
             <View style={[styles.statIcon, { backgroundColor: '#fef5e7' }]}>
               <Ionicons name="person" size={24} color="#d35400" />
             </View>
@@ -205,7 +205,7 @@ export default function HomeScreen({ navigation }) {
             <Text style={styles.statLabel}>Padres</Text>
           </TouchableOpacity>
           <View style={styles.statDivider} />
-          <TouchableOpacity style={styles.statItem} onPress={() => navigation.navigate('Masses')}>
+          <TouchableOpacity style={styles.statItem} onPress={() => navigation.navigate('Masses')} activeOpacity={0.8}>
             <View style={[styles.statIcon, { backgroundColor: '#e8f8f5' }]}>
               <Ionicons name="calendar" size={24} color="#27ae60" />
             </View>
@@ -252,7 +252,7 @@ export default function HomeScreen({ navigation }) {
             <View style={styles.emptyNewsContainer}>
               <Ionicons name="newspaper-outline" size={36} color="#bdc3c7" />
               <Text style={styles.emptyNewsText}>Puxa, não conseguimos carregar as notícias agora. Tente novamente!</Text>
-              <TouchableOpacity style={styles.refreshButtonSmall} onPress={fetchNews}>
+              <TouchableOpacity style={styles.refreshButtonSmall} onPress={fetchNews} activeOpacity={0.8}>
                 <Ionicons name="refresh" size={16} color="#fff" />
                 <Text style={styles.refreshButtonSmallText}>Tentar Novamente</Text>
               </TouchableOpacity>
@@ -374,7 +374,7 @@ export default function HomeScreen({ navigation }) {
         <View style={styles.contactCard}>
           <Text style={styles.contactTitle}>Contato da Diocese</Text>
           <View style={styles.contactRow}>
-            <TouchableOpacity style={styles.contactItem} onPress={() => handleCall('1637111400')}>
+            <TouchableOpacity style={styles.contactItem} onPress={() => handleCall('1637111400')} activeOpacity={0.8}>
               <View style={styles.contactIconWrapper}>
                 <Ionicons name="call-outline" size={20} color="#3498db" />
               </View>
@@ -383,7 +383,7 @@ export default function HomeScreen({ navigation }) {
                 <Text style={styles.contactText}>(16) 3711-1400</Text>
               </View>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.contactItem} onPress={() => handleEmail('contato@diocesefranca.org.br')}>
+            <TouchableOpacity style={styles.contactItem} onPress={() => handleEmail('contato@diocesefranca.org.br')} activeOpacity={0.8}>
               <View style={styles.contactIconWrapper}>
                 <Ionicons name="mail-outline" size={20} color="#3498db" />
               </View>

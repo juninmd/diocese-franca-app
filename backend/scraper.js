@@ -67,7 +67,11 @@ const scrapeNews = async () => {
             let image = imgTag.length > 0 ? (imgTag.attr('src') || imgTag.attr('data-src') || '') : '';
 
             const descriptionElement = $(el).find('.post_text p').first();
-            const descriptionText = descriptionElement.length > 0 && descriptionElement.text().trim() !== '' ? descriptionElement.text().trim() : $(el).text().replace(/\s+/g, ' ').substring(0, 100).trim();
+            let descriptionText = descriptionElement.length > 0 && descriptionElement.text().trim() !== '' ? descriptionElement.text().trim() : $(el).text().trim();
+
+            // Clean up extra whitespaces and newlines
+            descriptionText = descriptionText.replace(/\s+/g, ' ').substring(0, 100).trim();
+
             const description = descriptionText ? descriptionText : 'Sem descrição disponível';
 
             // Attempt to find a date if available, typically in small or span tags inside post_title or similar
@@ -129,6 +133,9 @@ const scrapeNews = async () => {
                     } catch (e) {
                         fullImage = image.startsWith('http') ? image : `https://diocesefranca.org.br/${image}`;
                     }
+                } else {
+                    // Fallback placeholder image
+                    fullImage = 'https://via.placeholder.com/400x200.png?text=Not%C3%ADcia+da+Diocese';
                 }
 
                 // Check for duplicates
