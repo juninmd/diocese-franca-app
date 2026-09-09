@@ -237,7 +237,7 @@ export default function MassesScreen() {
         <View style={styles.centerContainer}>
           <Ionicons name="alert-circle-outline" size={64} color="#e74c3c" />
           <Text style={styles.errorText}>{error}</Text>
-          <TouchableOpacity style={styles.retryButton} onPress={loadMasses}>
+          <TouchableOpacity style={styles.retryButton} onPress={loadMasses} activeOpacity={0.8}>
             <Ionicons name="refresh" size={18} color="#fff" />
             <Text style={styles.retryButtonText}>Tentar Novamente</Text>
           </TouchableOpacity>
