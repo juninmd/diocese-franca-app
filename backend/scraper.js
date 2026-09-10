@@ -62,6 +62,9 @@ const scrapeNews = async () => {
                 title = titleElement.length > 0 ? titleElement.text().trim() : 'Sem título disponível';
             }
 
+            // Sanitize title by removing extra quotes
+            title = title.replace(/["']/g, '');
+
             // Find the image in the context
             const imgTag = $(el).find('.scale_image_container img.scale_image');
             let image = imgTag.length > 0 ? (imgTag.attr('src') || imgTag.attr('data-src') || '') : '';
@@ -131,7 +134,7 @@ const scrapeNews = async () => {
                     try {
                         fullImage = new URL(image, 'https://diocesefranca.org.br/').href;
                     } catch (e) {
-                        fullImage = image.startsWith('http') ? image : `https://diocesefranca.org.br/${image}`;
+                        fullImage = image.startsWith('http') ? image : image.startsWith('//') ? 'https:' + image : `https://diocesefranca.org.br/${image}`;
                     }
                 } else {
                     // Fallback placeholder image
