@@ -251,7 +251,7 @@ export default function HomeScreen({ navigation }) {
           ) : (
             <View style={styles.emptyNewsContainer}>
               <Ionicons name="newspaper-outline" size={36} color="#bdc3c7" />
-              <Text style={styles.emptyNewsText}>Puxa, não conseguimos carregar as notícias agora. Tente novamente!</Text>
+              <Text style={styles.emptyNewsText}>Puxa, não conseguimos encontrar notícias no momento.</Text>
               <TouchableOpacity style={styles.refreshButtonSmall} onPress={fetchNews} activeOpacity={0.8}>
                 <Ionicons name="refresh" size={16} color="#fff" />
                 <Text style={styles.refreshButtonSmallText}>Tentar Novamente</Text>

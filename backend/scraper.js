@@ -65,6 +65,10 @@ const scrapeNews = async () => {
             // Sanitize title by removing extra quotes
             title = title.replace(/["']/g, '');
 
+            // Extract category if available
+            const categoryElement = $(el).find('.buttons_container a.banner_button').first();
+            const category = categoryElement.length > 0 ? categoryElement.text().trim() : 'Geral';
+
             // Find the image in the context
             const imgTag = $(el).find('.scale_image_container img.scale_image');
             let image = imgTag.length > 0 ? (imgTag.attr('src') || imgTag.attr('data-src') || '') : '';
@@ -144,7 +148,7 @@ const scrapeNews = async () => {
                 // Check for duplicates
                 const isDuplicate = news.some(n => n.link === fullLink);
                 if (!isDuplicate) {
-                    news.push({ id: news.length + 1, title, description, link: fullLink, image: fullImage, date });
+                    news.push({ id: news.length + 1, title, category, description, link: fullLink, image: fullImage, date });
                 }
             }
         } catch (err) {
