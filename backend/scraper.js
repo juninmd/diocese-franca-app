@@ -73,7 +73,7 @@ const scrapeNews = async () => {
             let descriptionText = descriptionElement.length > 0 && descriptionElement.text().trim() !== '' ? descriptionElement.text().trim() : $(el).text().trim();
 
             // Clean up extra whitespaces and newlines
-            descriptionText = descriptionText.replace(/\s+/g, ' ').substring(0, 100).trim();
+            descriptionText = descriptionText.replace(/\s{2,}/g, ' ').replace(/\n+/g, ' ').substring(0, 100).trim();
 
             const description = descriptionText ? descriptionText : 'Sem descrição disponível';
 
@@ -84,12 +84,13 @@ const scrapeNews = async () => {
             if (!dateText) {
                 console.log('Fallback: date extraction using regex on title/description/image for: ', title.substring(0, 30) + '...');
                 // Try parsing the date from the description or title using expanded regex
-                // Matches "12 de Agosto", "12 de agosto de 2024", "12/08/2024", "12/08", "Agosto de 2024"
-                const fullText = (description + ' ' + title).replace(/\s+/g, ' ');
+                // Matches "12 de Agosto", "12 de agosto de 2024", "12/08/2024", "12/08", "Agosto de 2024", "12 AGO"
+                const fullText = (description + ' ' + title).replace(/\s{2,}/g, ' ');
                 const dateMatch = fullText.match(/\d{1,2}\s+de\s+[a-zA-ZçÇ]+\s*(de\s*\d{4})?/i);
                 const shortDateMatch = fullText.match(/\d{1,2}\/\d{1,2}(\/\d{2,4})?/);
                 const monthYearMatch = fullText.match(/[a-zA-ZçÇ]+\s+(de\s+)?\d{4}/i);
                 const fallbackDateMatch = fullText.match(/\d{2}\/\d{2}\/\d{4}/);
+                const shortTextMonthMatch = fullText.match(/\d{1,2}\s+(jan|fev|mar|abr|mai|jun|jul|ago|set|out|nov|dez)[a-zA-ZçÇ]*/i);
 
                 if (dateMatch) {
                     dateText = dateMatch[0];
@@ -100,6 +101,9 @@ const scrapeNews = async () => {
                 } else if (fallbackDateMatch) {
                     dateText = fallbackDateMatch[0];
                     console.log('  -> Found date via regex (fallback d/m/y):', dateText);
+                } else if (shortTextMonthMatch) {
+                    dateText = shortTextMonthMatch[0];
+                    console.log('  -> Found date via regex (curto texto):', dateText);
                 } else if (monthYearMatch) {
                     dateText = monthYearMatch[0];
                     console.log('  -> Found date via regex (mês/ano):', dateText);
@@ -167,7 +171,7 @@ const scrapeNews = async () => {
         fs.writeFileSync(outputPath, JSON.stringify([], null, 2));
         console.log(`Fallback: Created empty news.json at ${outputPath}`);
     } else {
-        console.log(`Fallback: news.json already exists at ${outputPath}, leaving it intact.`);
+        console.log(`Fallback: news.json already exists at ${outputPath}, leaving it intact. Logging error fallback behavior for debugging.`);
     }
   }
 };

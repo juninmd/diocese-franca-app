@@ -140,7 +140,7 @@ export default function PriestsScreen({ navigation }) {
       <Text style={styles.emptyText}>
         {showFavorites
           ? 'Adicione padres aos favoritos para acessá-los rapidamente'
-          : searchQuery ? 'Que tal tentar outra busca?' : 'Não foi possível carregar os padres no momento.'}
+          : searchQuery ? 'Que tal tentar outra busca?' : 'Puxa, não conseguimos carregar os padres agora. Verifique sua conexão e tente novamente!'}
       </Text>
       {showFavorites && (
         <TouchableOpacity style={styles.emptyButton} onPress={() => setShowFavorites(false)} activeOpacity={0.8}>

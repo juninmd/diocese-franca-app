@@ -217,7 +217,7 @@ export default function ChurchesScreen({ navigation }) {
           ? 'Toque em "Tentar novamente" e permita o acesso à localização para ver as igrejas mais próximas de você.'
           : filterMode === 'favorites'
             ? 'Adicione igrejas aos favoritos para acessá-las rapidamente'
-            : searchQuery ? 'Que tal tentar outra busca?' : 'Não foi possível carregar as igrejas no momento.';
+            : searchQuery ? 'Que tal tentar outra busca?' : 'Puxa, não conseguimos carregar as igrejas agora. Verifique sua conexão e tente novamente!';
 
     return (
       <View style={styles.emptyContainer}>

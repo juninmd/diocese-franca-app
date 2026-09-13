@@ -368,6 +368,28 @@ export default function HomeScreen({ navigation }) {
               <Ionicons name="mail" size={28} color="#9b59b6" />
               <Text style={styles.quickText}>Enviar{'\n'}Email</Text>
             </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.quickItem}
+            activeOpacity={0.8}
+            onPress={async () => {
+              const { status } = await Notifications.requestPermissionsAsync();
+              if (status === 'granted') {
+                await Notifications.scheduleNotificationAsync({
+                  content: {
+                    title: 'Lembrete de Oração 🙏',
+                    body: 'Este é um lembrete de teste configurado para 5 segundos.',
+                  },
+                  trigger: { seconds: 5 },
+                });
+                toast.success('Lembrete configurado para daqui a 5 segundos!');
+              } else {
+                toast.error('Permissão de notificação negada.');
+              }
+            }}
+          >
+            <Ionicons name="notifications-outline" size={24} color="#9b59b6" />
+            <Text style={styles.quickText}>Lembrete Teste (5s)</Text>
+          </TouchableOpacity>
           </View>
         </View>
 
