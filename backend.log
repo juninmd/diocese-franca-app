@@ -1,0 +1,48 @@
+
+> backend@1.0.0 start /app/backend
+> node index.js
+
+🚀 Server running on port 3000
+📖 API Documentation: http://localhost:3000
+❤️  Health check: http://localhost:3000/api/health
+[2026-09-16T01:15:53.266Z] GET /api/churches
+[2026-09-16T01:15:53.280Z] GET /api/priests
+[2026-09-16T01:15:53.283Z] GET /api/masses
+[2026-09-16T01:15:53.286Z] GET /api/news
+[2026-09-16T01:15:53.301Z] GET /api/churches
+[2026-09-16T01:15:53.307Z] GET /api/priests
+[2026-09-16T01:15:53.309Z] GET /api/masses
+[2026-09-16T01:15:53.330Z] GET /api/news
+[2026-09-16T01:15:53.559Z] GET /api/churches
+[2026-09-16T01:15:56.583Z] GET /api/churches
+[2026-09-16T01:16:02.786Z] GET /api/masses
+[2026-09-16T01:16:06.299Z] GET /api/churches
+[2026-09-16T01:16:06.304Z] GET /api/priests
+[2026-09-16T01:16:06.305Z] GET /api/masses
+[2026-09-16T01:16:06.306Z] GET /api/news
+[2026-09-16T01:16:06.398Z] GET /api/masses
+[2026-09-16T01:16:07.818Z] GET /api/churches
+[2026-09-16T01:16:07.819Z] GET /api/priests
+[2026-09-16T01:16:07.821Z] GET /api/masses
+[2026-09-16T01:16:07.822Z] GET /api/news
+[2026-09-16T01:16:09.837Z] GET /api/priests
+[2026-09-16T01:16:14.394Z] GET /api/churches
+[2026-09-16T01:16:14.399Z] GET /api/priests
+[2026-09-16T01:16:14.399Z] GET /api/masses
+[2026-09-16T01:16:14.401Z] GET /api/news
+[2026-09-16T01:16:14.502Z] GET /api/churches
+[2026-09-16T01:16:16.554Z] GET /api/churches/nearby?lat=-20.5396&lng=-47.4014
+[2026-09-16T01:16:19.898Z] GET /api/churches
+[2026-09-16T01:16:19.901Z] GET /api/priests
+[2026-09-16T01:16:19.903Z] GET /api/masses
+[2026-09-16T01:16:19.903Z] GET /api/news
+[2026-09-16T01:16:20.054Z] GET /api/churches
+[2026-09-16T01:16:20.055Z] GET /api/priests
+[2026-09-16T01:16:20.057Z] GET /api/masses
+[2026-09-16T01:16:20.059Z] GET /api/news
+[2026-09-16T01:16:20.160Z] GET /api/churches
+[2026-09-16T01:16:22.438Z] GET /api/churches
+[2026-09-16T01:16:22.439Z] GET /api/priests
+[2026-09-16T01:16:22.440Z] GET /api/masses
+[2026-09-16T01:16:22.442Z] GET /api/news
+[2026-09-16T01:16:24.533Z] GET /api/masses

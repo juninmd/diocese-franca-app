@@ -29,9 +29,9 @@ Aplicativo completo para a Diocese de Franca com backend API REST e app React Na
 ## Novidades Implementadas
 
 ### Mobile
-- Deploy web 100% funcional no Netlify com Metro bundler suportando `react-native-web`
+- Deploy web 100% funcional no Netlify com Metro bundler suportando `react-native-web` e devidamente validado na configuração.
 - Lembrete diário às 08:00 configurado na Home usando `expo-notifications`.
-- Adição de Notificações Locais (`expo-notifications`) para as interações de agendamento: "Lembrete Confissão" em Detalhes do Padre e notificações em horários de missas (`MassesScreen.js`).
+- Adição de Notificações Locais ativas (`expo-notifications`) em botões: "Lembrete Confissão" em Detalhes do Padre (Lembrete Confissão 5s) e ícone de sino nos horários de missas (`MassesScreen.js`), engajando o usuário no momento.
 - As interações imediatas do usuário na interface (favoritar, ler notícias, etc) continuam utilizando o `Toast` (`useToast`) ou navegação para prover feedback imediato além de escalonar a notificação.
 - Notificações locais automáticas de boas-vindas na inicialização do app (`App.js`) e lembrete diário às 08:00 permanecem utilizando `expo-notifications`.
 - Empty states mais empáticos para erros de rede, utilizando textos encorajadores nas telas de busca e listagem (`ChurchesScreen.js`, `MassesScreen.js`).
@@ -57,7 +57,7 @@ Aplicativo completo para a Diocese de Franca com backend API REST e app React Na
 - **Netlify**: O projeto já encontra-se pré-configurado para ser compilado e entregue como Progressive Web App (PWA) / Single Page Application usando `npx expo export -p web` na pasta `mobile/`. A configuração para Netlify está estabelecida na raiz em `netlify.toml`, que mapeia corretamente o redirecionamento `/*` para `/index.html` (resolvendo roteamento client-side) e define a pasta de publicação como `mobile/dist`.
 
 ### Backend
-- Scraper autônomo aprimorado (`backend/scraper.js`) para capturar data, imagens (`data-src`) e descrição (`.event_date` e `.post_text p`) garantindo fallbacks robustos inclusive com regex para reconhecer datas curtas e gerar logs de debug das etapas para facilitar manutenção. Além de fallback para imagens ausentes e melhor tratamento e limpeza de strings (espaçamentos extras na descrição). O script agora corre via invocação inline exportando o modulo e finalizando limpo. Usa a classe `.section_post_left` para maior confiabilidade (com fallback adicional extraindo diretamente o texto de `h2.post_title` caso a tag `a` não esteja presente) e bloca a execução individual em `try/catch` com timeout de 20s. Foi adicionado também um **mecanismo de tentativas (retry loop)** para a requisição de rede inicial, tentando até 3 vezes caso o site da Diocese apresente falhas intermitentes, retornando um array vazio de fallback apenas se o site original continuar inacessível para evitar crashs na API.
+- Scraper autônomo aprimorado (`backend/scraper.js`) para capturar data, imagens (`data-src`) e descrição (`.event_date` e `.post_text p`) garantindo fallbacks robustos inclusive com regex para reconhecer datas curtas e gerar logs de debug das etapas para facilitar manutenção. Além de fallback para imagens ausentes e melhor tratamento e limpeza de strings, incluindo remoção de espaços em excesso e caracteres remanescentes como elipses ou vírgulas soltas no final das descrições via Regex. O script agora corre via invocação inline exportando o modulo e finalizando limpo. Usa a classe `.section_post_left` para maior confiabilidade (com fallback adicional extraindo diretamente o texto de `h2.post_title` caso a tag `a` não esteja presente) e bloca a execução individual em `try/catch` com timeout de 20s. Foi adicionado também um **mecanismo de tentativas (retry loop)** para a requisição de rede inicial, tentando até 3 vezes caso o site da Diocese apresente falhas intermitentes, retornando um array vazio de fallback apenas se o site original continuar inacessível para evitar crashs na API.
 - Endpoint de health check `/api/health`
 - Compressão gzip automática
 - Helmet.js para headers de segurança
@@ -272,34 +272,34 @@ O app possui interface moderna com:
 
 ### Screenshots (Web Output E2E Test)
 **Home Screen**
-![Home Screen](mobile/screenshots/home_full.png?v=14)
+![Home Screen](mobile/screenshots/home_full.png?v=15)
 
 **News Section**
-![News Section](mobile/screenshots/news_section.png?v=14)
+![News Section](mobile/screenshots/news_section.png?v=15)
 
 **Igrejas Screen**
-![Igrejas Screen](mobile/screenshots/churches_full.png?v=14)
+![Igrejas Screen](mobile/screenshots/churches_full.png?v=15)
 
 **Padres Screen**
-![Padres Screen](mobile/screenshots/priests_full.png?v=14)
+![Padres Screen](mobile/screenshots/priests_full.png?v=15)
 
 **Missas Screen**
-![Missas Screen](mobile/screenshots/masses_full.png?v=14)
+![Missas Screen](mobile/screenshots/masses_full.png?v=15)
 
 **Missas (Empty State)**
-![Missas (Empty State)](mobile/screenshots/masses_empty.png?v=14)
+![Missas (Empty State)](mobile/screenshots/masses_empty.png?v=15)
 
 **Igrejas (Empty State)**
-![Igrejas (Empty State)](mobile/screenshots/churches_empty.png?v=14)
+![Igrejas (Empty State)](mobile/screenshots/churches_empty.png?v=15)
 
 **Padres (Empty State)**
-![Padres (Empty State)](mobile/screenshots/priests_empty.png?v=14)
+![Padres (Empty State)](mobile/screenshots/priests_empty.png?v=15)
 
 **Igreja Próxima**
-![Igreja Próxima](mobile/screenshots/churches_nearby.png?v=14)
+![Igreja Próxima](mobile/screenshots/churches_nearby.png?v=15)
 
 **Igreja Próxima (Permissão Negada)**
-![Igreja Próxima Permissão Negada](mobile/screenshots/churches_nearby_denied.png?v=14)
+![Igreja Próxima Permissão Negada](mobile/screenshots/churches_nearby_denied.png?v=15)
 
 ## Licença
 

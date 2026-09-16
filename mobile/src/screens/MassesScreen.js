@@ -56,6 +56,28 @@ export default function MassesScreen() {
     toast.success('Horários atualizados!');
   }, []);
 
+  const scheduleMassReminder = async (item) => {
+    try {
+      const { status } = await Notifications.requestPermissionsAsync();
+      if (status !== 'granted') {
+        toast.error('Permissão para notificações negada.');
+        return;
+      }
+      await Notifications.scheduleNotificationAsync({
+        content: {
+          title: 'Lembrete de Missa',
+          body: `Missa às ${item.time} na paróquia ${item.church?.name || 'selecionada'}.`,
+          sound: true,
+        },
+        trigger: { seconds: 5 },
+      });
+      toast.success('Lembrete agendado para daqui a 5 segundos!');
+    } catch (err) {
+      console.error(err);
+      toast.error('Não foi possível agendar o lembrete.');
+    }
+  };
+
   const filterMasses = () => {
     let filtered = masses;
 
@@ -123,9 +145,8 @@ export default function MassesScreen() {
       </View>
       <TouchableOpacity
         style={styles.notificationButton}
-        onPress={() => {
-          toast.success('Lembrete configurado com sucesso!');
-        }}
+        activeOpacity={0.8}
+        onPress={() => scheduleMassReminder(item)}
       >
         <Ionicons name="notifications-outline" size={20} color="#3498db" />
       </TouchableOpacity>
@@ -273,7 +294,7 @@ export default function MassesScreen() {
         ListEmptyComponent={
           <View style={styles.emptyContainer}>
             <Ionicons name="calendar-outline" size={64} color="#bdc3c7" />
-            <Text style={styles.emptyTitle}>Puxa, não encontramos missas para esses filtros.</Text>
+            <Text style={styles.emptyTitle}>Puxa!</Text>
             <Text style={styles.emptyText}>
               Não encontramos missas para esses filtros. Vamos tentar limpar os filtros e buscar novamente?
             </Text>
