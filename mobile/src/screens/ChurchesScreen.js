@@ -53,7 +53,7 @@ export default function ChurchesScreen({ navigation }) {
     setNearbyError(null);
     const { granted, coords } = await LocationService.getCurrentPosition();
     if (!granted || !coords) {
-      setNearbyError('Precisamos da sua localização para mostrar as igrejas mais próximas. Verifique a permissão de localização nas configurações.');
+      setNearbyError('Puxa, precisamos da sua localização para mostrar as igrejas mais próximas. Verifique a permissão de localização nas configurações.');
       setNearbyLoading(false);
       return;
     }
@@ -61,7 +61,7 @@ export default function ChurchesScreen({ navigation }) {
       const data = await getNearbyChurches(coords.latitude, coords.longitude);
       setNearbyChurches(data && data.success ? data.data : []);
     } catch (err) {
-      setNearbyError('Não conseguimos calcular as igrejas próximas agora. Tente novamente.');
+      setNearbyError('Puxa, não conseguimos calcular as igrejas próximas agora. Tente novamente.');
     } finally {
       setNearbyLoading(false);
     }
@@ -202,9 +202,9 @@ export default function ChurchesScreen({ navigation }) {
     const title = error
       ? 'Puxa, não conseguimos carregar as igrejas agora. Tente novamente!'
       : nearbyError
-        ? 'Não conseguimos encontrar igrejas perto de você.'
+        ? 'Puxa, não conseguimos encontrar igrejas perto de você.'
         : isAwaitingLocation
-          ? 'Ainda não sabemos onde você está.'
+          ? 'Puxa, ainda não sabemos onde você está.'
           : filterMode === 'favorites'
             ? 'Puxa, você ainda não favoritou nenhuma paróquia.'
             : 'Puxa, não encontramos paróquias com este nome.';

@@ -52,22 +52,25 @@ const scrapeNews = async () => {
     $('.section_post_left').each((i, el) => {
         try {
             let titleElement = $(el).find('h2.post_title a');
-            let link = titleElement.length > 0 ? (titleElement.attr('href') || '#') : '#';
+            let link = titleElement.length > 0 ? (titleElement.attr('href') ? titleElement.attr('href').trim() : '#') : '#';
             let title = titleElement.length > 0 ? titleElement.text().trim() : '';
 
-            if (!title) {
+            if (!title || title === '') {
                 // Fallback to the h2 text itself if a tag is empty or missing
-                console.log('Fallback: h2.post_title a tag missing, using h2 text instead');
+                console.log('Fallback: h2.post_title a tag missing or empty, using h2 text instead');
                 titleElement = $(el).find('h2.post_title');
                 title = titleElement.length > 0 ? titleElement.text().trim() : 'Sem título disponível';
             }
+            if (link === '#') {
+                console.log(`Fallback: Missing href attribute for title "${title.substring(0, 30)}"`);
+            }
 
             // Sanitize title by removing extra quotes
-            title = title.replace(/["']/g, '');
+            title = title.replace(/["']/g, '').trim();
 
             // Find the image in the context
             const imgTag = $(el).find('.scale_image_container img.scale_image');
-            let image = imgTag.length > 0 ? (imgTag.attr('src') || imgTag.attr('data-src') || '') : '';
+            let image = imgTag.length > 0 ? (imgTag.attr('src') ? imgTag.attr('src').trim() : imgTag.attr('data-src') ? imgTag.attr('data-src').trim() : '') : '';
 
             const descriptionElement = $(el).find('.post_text p').first();
             let descriptionText = descriptionElement.length > 0 && descriptionElement.text().trim() !== '' ? descriptionElement.text().trim() : $(el).text().trim();
@@ -75,21 +78,21 @@ const scrapeNews = async () => {
             // Clean up extra whitespaces and newlines
             descriptionText = descriptionText.replace(/\s+/g, ' ').substring(0, 100).trim();
 
-            const description = descriptionText ? descriptionText : 'Sem descrição disponível';
+            const description = descriptionText ? descriptionText.trim() : 'Sem descrição disponível';
 
             // Attempt to find a date if available, typically in small or span tags inside post_title or similar
             let dateElement = $(el).find('.event_date, .date, .post_date').first();
             let dateText = dateElement.length > 0 ? dateElement.text().trim() : '';
 
-            if (!dateText) {
+            if (!dateText || dateText === '') {
                 console.log('Fallback: date extraction using regex on title/description/image for: ', title.substring(0, 30) + '...');
                 // Try parsing the date from the description or title using expanded regex
                 // Matches "12 de Agosto", "12 de agosto de 2024", "12/08/2024", "12/08", "Agosto de 2024"
                 const fullText = (description + ' ' + title).replace(/\s+/g, ' ');
                 const dateMatch = fullText.match(/\d{1,2}\s+de\s+[a-zA-ZçÇ]+\s*(de\s*\d{4})?/i);
-                const shortDateMatch = fullText.match(/\d{1,2}\/\d{1,2}(\/\d{2,4})?/);
+                const shortDateMatch = fullText.match(/\d{1,2}\s*\/\s*\d{1,2}(?:\s*\/\s*\d{2,4})?/);
                 const monthYearMatch = fullText.match(/[a-zA-ZçÇ]+\s+(de\s+)?\d{4}/i);
-                const fallbackDateMatch = fullText.match(/\d{2}\/\d{2}\/\d{4}/);
+                const fallbackDateMatch = fullText.match(/\d{2}\s*\/\s*\d{2}\s*\/\s*\d{4}/);
 
                 if (dateMatch) {
                     dateText = dateMatch[0];
