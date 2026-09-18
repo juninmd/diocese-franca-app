@@ -1,7 +1,7 @@
 const { test, expect } = require('@playwright/test');
 
 test('ui interaction uses toast and triggers local notification schedule', async ({ page }) => {
-  await page.goto('http://localhost:3001/');
+  await page.goto('http://localhost:3002/');
 
   await expect(page.locator('text=Diocese de Franca').first()).toBeVisible({ timeout: 10000 });
   await page.waitForTimeout(1000);
@@ -18,10 +18,38 @@ test('ui interaction uses toast and triggers local notification schedule', async
   await page.locator('div:text-is("Missas")').first().click({ force: true });
   await page.waitForTimeout(2000);
 
-  // Click the notification bell on the first mass item.
-  // There could be multiple elements or it might be empty if the API is down, so we check if there are mass cards first.
-  const notificationButton = page.locator('text="Lembrete configurado com sucesso!"');
-  // It's possible the list is empty during playwright tests depending on seed.
-  // The test just asserts that we don't crash when interacting with UI.
-  // The fact that we navigated without error is good.
+  // Click the notification bell on the first mass item, but if empty, it won't crash
+  const massCard = page.locator('text="Missa Dominical"').first();
+  if (await massCard.count() > 0) {
+      // Find the notification button (bell) within the first mass item context, but we will just target the SVG inside the card.
+      // Since classes are obfuscated, we will click by coordinates roughly or find the nearest SVG.
+      await page.locator('svg[data-file-name="Ionicons.js"]').nth(4).click({ force: true });
+      await page.waitForTimeout(500);
+      const toast = page.getByText('Lembrete configurado com sucesso!');
+      await expect(toast).toBeVisible({ timeout: 5000 });
+  }
+
+  // Navigate back to Home (use URL directly to prevent flakes with nested tab bars in RN Web)
+  await page.goto('http://localhost:3002/');
+  await page.waitForTimeout(1000);
+
+  // Navigate to Padres to test Priest Detail screen notification
+  await page.locator('div:text-is("Padres")').first().click({ force: true });
+  await page.waitForTimeout(2000);
+
+  // Find a priest card and click it
+  const priestCard = page.getByText(/Ver detalhes/i).first();
+  if (await priestCard.count() > 0) {
+      await priestCard.click({ force: true });
+      await page.waitForTimeout(2000);
+
+      // Click the confession reminder button
+      const confessionButton = page.getByText(/Lembrete Confissão/i).first();
+      await confessionButton.click({ force: true });
+
+      await page.waitForTimeout(500);
+      const confToast = page.getByText('Lembrete configurado!');
+      await expect(confToast).toBeVisible({ timeout: 5000 });
+  }
+
 });

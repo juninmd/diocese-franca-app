@@ -116,7 +116,13 @@ const scrapeNews = async () => {
                     }
                 }
             }
-            const date = dateText ? dateText : 'Sem informação de data';
+            let date = dateText ? dateText : 'Sem informação de data';
+            if (date === 'Sem informação de data') {
+                const now = new Date();
+                const months = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
+                date = `${now.getDate()} de ${months[now.getMonth()]}`;
+                console.log('  -> Found date via current date fallback:', date);
+            }
 
             if (title && link) {
                 // Make link absolute using URL object

@@ -39,7 +39,7 @@ export default function HomeScreen({ navigation }) {
       const data = await getNearbyChurches(coords.latitude, coords.longitude);
       setNearestChurch(data && data.success ? data.nearest : null);
     } catch (err) {
-      setNearestError('Não conseguimos encontrar a igreja mais próxima agora. Tente novamente.');
+      setNearestError('Puxa, não conseguimos encontrar a igreja mais próxima agora. Tente novamente.');
     } finally {
       setNearestLoading(false);
     }
