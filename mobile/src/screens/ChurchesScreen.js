@@ -121,7 +121,7 @@ export default function ChurchesScreen({ navigation }) {
         message: `Confira a ${church.name}\nEndereço: ${church.address}\nTelefone: ${church.phone}\n\nCompartilhado via Diocese de Franca`,
       });
     } catch (error) {
-      toast.error('Erro ao compartilhar');
+      toast.error('Puxa, erro ao compartilhar');
     }
   };
 

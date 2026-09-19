@@ -35,7 +35,7 @@ Aplicativo completo para a Diocese de Franca com backend API REST e app React Na
 - As interações imediatas do usuário na interface (favoritar, ler notícias, etc) continuam utilizando o `Toast` (`useToast`) ou navegação para prover feedback imediato além de escalonar a notificação.
 - Notificações locais automáticas de boas-vindas na inicialização do app (`App.js`) e lembrete diário às 08:00 permanecem utilizando `expo-notifications`.
 - Empty states mais empáticos para erros de rede, utilizando textos encorajadores nas telas de busca e listagem (`ChurchesScreen.js`, `MassesScreen.js`).
-- Aprimoramentos de UI/UX: Refinamento na listagem de Padres e Igrejas (`ChurchesScreen.js`, `PriestsScreen.js`) melhorando a legibilidade e atualizando os empty states para uma linguagem mais acolhedora e empática (ex: "Puxa, não conseguimos carregar as igrejas agora. Tente novamente!"). O uso do tom empático "Puxa..." foi padronizado em todas as telas, incluindo "Puxa, não encontramos paróquias com este nome." nos empty states de busca.
+- Aprimoramentos de UI/UX: Refinamento na listagem de Padres e Igrejas (`ChurchesScreen.js`, `PriestsScreen.js`) melhorando a legibilidade e atualizando os empty states para uma linguagem mais acolhedora e empática (ex: "Puxa, não conseguimos carregar as igrejas agora. Tente novamente!"). O uso do tom empático "Puxa..." foi padronizado em todas as telas, incluindo "Puxa, não encontramos paróquias com este nome." nos empty states de busca. Mensagens de erro de compartilhamento também foram atualizadas (ex: "Puxa, erro ao compartilhar").
 - Skeletons Loaders (Animação Shimmer) em diversas áreas como Notícias e Listas
 - Melhorias na UI/UX dos empty states, como no `MassesScreen.js`
 - Correção de duplicação de variáveis na renderização do banner offline
@@ -272,34 +272,34 @@ O app possui interface moderna com:
 
 ### Screenshots (Web Output E2E Test)
 **Home Screen**
-![Home Screen](mobile/screenshots/home_full.png?v=14)
+![Home Screen](mobile/screenshots/home_full.png?v=15)
 
 **News Section**
-![News Section](mobile/screenshots/news_section.png?v=14)
+![News Section](mobile/screenshots/news_section.png?v=15)
 
 **Igrejas Screen**
-![Igrejas Screen](mobile/screenshots/churches_full.png?v=14)
+![Igrejas Screen](mobile/screenshots/churches_full.png?v=15)
 
 **Padres Screen**
-![Padres Screen](mobile/screenshots/priests_full.png?v=14)
+![Padres Screen](mobile/screenshots/priests_full.png?v=15)
 
 **Missas Screen**
-![Missas Screen](mobile/screenshots/masses_full.png?v=14)
+![Missas Screen](mobile/screenshots/masses_full.png?v=15)
 
 **Missas (Empty State)**
-![Missas (Empty State)](mobile/screenshots/masses_empty.png?v=14)
+![Missas (Empty State)](mobile/screenshots/masses_empty.png?v=15)
 
 **Igrejas (Empty State)**
-![Igrejas (Empty State)](mobile/screenshots/churches_empty.png?v=14)
+![Igrejas (Empty State)](mobile/screenshots/churches_empty.png?v=15)
 
 **Padres (Empty State)**
-![Padres (Empty State)](mobile/screenshots/priests_empty.png?v=14)
+![Padres (Empty State)](mobile/screenshots/priests_empty.png?v=15)
 
 **Igreja Próxima**
-![Igreja Próxima](mobile/screenshots/churches_nearby.png?v=14)
+![Igreja Próxima](mobile/screenshots/churches_nearby.png?v=15)
 
 **Igreja Próxima (Permissão Negada)**
-![Igreja Próxima Permissão Negada](mobile/screenshots/churches_nearby_denied.png?v=14)
+![Igreja Próxima Permissão Negada](mobile/screenshots/churches_nearby_denied.png?v=15)
 
 ## Licença
 
