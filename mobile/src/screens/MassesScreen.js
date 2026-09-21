@@ -123,8 +123,20 @@ export default function MassesScreen() {
       </View>
       <TouchableOpacity
         style={styles.notificationButton}
-        onPress={() => {
-          toast.success('Lembrete configurado com sucesso!');
+        onPress={async () => {
+          const { status } = await Notifications.requestPermissionsAsync();
+          if (status === 'granted') {
+            await Notifications.scheduleNotificationAsync({
+              content: {
+                title: 'Lembrete de Missa',
+                body: `Sua missa na ${item.church ? item.church.name : 'paróquia'} começará em breve!`,
+              },
+              trigger: { seconds: 5 }, // Just a 5s mock trigger since this is an example
+            });
+            toast.success('Lembrete configurado com sucesso!');
+          } else {
+            toast.error('Permissão de notificação negada.');
+          }
         }}
       >
         <Ionicons name="notifications-outline" size={20} color="#3498db" />
