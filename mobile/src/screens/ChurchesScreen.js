@@ -128,10 +128,10 @@ export default function ChurchesScreen({ navigation }) {
   const renderChurch = ({ item }) => {
     const isFavorite = favorites.includes(item.id);
     return (
-      <TouchableOpacity
+      <TouchableOpacity activeOpacity={0.8}
         style={styles.card}
         onPress={() => navigation.navigate('ChurchDetail', { churchId: item.id })}
-        activeOpacity={0.8}
+
       >
         <View style={styles.cardHeader}>
           <View style={styles.iconContainer}>
@@ -152,10 +152,10 @@ export default function ChurchesScreen({ navigation }) {
             </View>
           </View>
           <View style={styles.cardActions}>
-            <TouchableOpacity onPress={() => toggleFavorite(item)} style={styles.actionButton} activeOpacity={0.8}>
+            <TouchableOpacity activeOpacity={0.8} onPress={() => toggleFavorite(item)} style={styles.actionButton} >
               <Ionicons name={isFavorite ? 'heart' : 'heart-outline'} size={22} color={isFavorite ? '#e74c3c' : '#bdc3c7'} />
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => handleShare(item)} style={styles.actionButton} activeOpacity={0.8}>
+            <TouchableOpacity activeOpacity={0.8} onPress={() => handleShare(item)} style={styles.actionButton} >
               <Ionicons name="share-outline" size={22} color="#bdc3c7" />
             </TouchableOpacity>
             <Ionicons name="chevron-forward" size={24} color="#bdc3c7" />
@@ -225,17 +225,17 @@ export default function ChurchesScreen({ navigation }) {
         <Text style={styles.emptyTitle}>{title}</Text>
         <Text style={styles.emptyText}>{subtitle}</Text>
         {filterMode === 'favorites' && !error && (
-          <TouchableOpacity style={styles.emptyButton} onPress={() => selectFilterMode('all')} activeOpacity={0.8}>
+          <TouchableOpacity activeOpacity={0.8} style={styles.emptyButton} onPress={() => selectFilterMode('all')} >
             <Text style={styles.emptyButtonText}>Ver todas as igrejas</Text>
           </TouchableOpacity>
         )}
         {filterMode === 'nearby' && !nearbyLoading && (
-          <TouchableOpacity style={styles.emptyButton} onPress={loadNearbyChurches} activeOpacity={0.8}>
+          <TouchableOpacity activeOpacity={0.8} style={styles.emptyButton} onPress={loadNearbyChurches} >
             <Text style={styles.emptyButtonText}>Tentar Novamente</Text>
           </TouchableOpacity>
         )}
         {error && (
-          <TouchableOpacity style={styles.emptyButton} onPress={onRefresh} activeOpacity={0.8}>
+          <TouchableOpacity activeOpacity={0.8} style={styles.emptyButton} onPress={onRefresh} >
             <Text style={styles.emptyButtonText}>Tentar Novamente</Text>
           </TouchableOpacity>
         )}
@@ -267,15 +267,15 @@ export default function ChurchesScreen({ navigation }) {
           onChangeText={setSearchQuery}
         />
         {searchQuery.length > 0 && (
-          <TouchableOpacity onPress={() => setSearchQuery('')} activeOpacity={0.8}>
+          <TouchableOpacity activeOpacity={0.8} onPress={() => setSearchQuery('')} >
             <Ionicons name="close-circle" size={20} color="#95a5a6" />
           </TouchableOpacity>
         )}
       </View>
 
       <View style={styles.filterRow}>
-        <TouchableOpacity
-          activeOpacity={0.8}
+        <TouchableOpacity activeOpacity={0.8}
+
           style={[styles.filterChip, filterMode === 'all' && styles.filterChipActive]}
           onPress={() => selectFilterMode('all')}
         >
@@ -284,8 +284,8 @@ export default function ChurchesScreen({ navigation }) {
             Todas ({churches.length})
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          activeOpacity={0.8}
+        <TouchableOpacity activeOpacity={0.8}
+
           style={[styles.filterChip, filterMode === 'favorites' && styles.filterChipActive]}
           onPress={() => selectFilterMode('favorites')}
         >
@@ -294,8 +294,8 @@ export default function ChurchesScreen({ navigation }) {
             Favoritas ({favorites.length})
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          activeOpacity={0.8}
+        <TouchableOpacity activeOpacity={0.8}
+
           style={[styles.filterChip, filterMode === 'nearby' && styles.filterChipActive]}
           onPress={() => selectFilterMode('nearby')}
         >

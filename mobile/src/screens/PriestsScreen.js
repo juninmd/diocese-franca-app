@@ -95,10 +95,10 @@ export default function PriestsScreen({ navigation }) {
   const renderPriest = ({ item }) => {
     const isFavorite = favorites.includes(item.id);
     return (
-      <TouchableOpacity
+      <TouchableOpacity activeOpacity={0.8}
         style={styles.card}
         onPress={() => navigation.navigate('PriestDetail', { priestId: item.id })}
-        activeOpacity={0.8}
+
       >
         <View style={styles.avatarContainer}>
           <Text style={styles.avatarText}>
@@ -119,10 +119,10 @@ export default function PriestsScreen({ navigation }) {
           )}
         </View>
         <View style={styles.cardActions}>
-          <TouchableOpacity onPress={() => toggleFavorite(item)} style={styles.actionButton} activeOpacity={0.8}>
+          <TouchableOpacity activeOpacity={0.8} onPress={() => toggleFavorite(item)} style={styles.actionButton} >
             <Ionicons name={isFavorite ? 'heart' : 'heart-outline'} size={22} color={isFavorite ? '#e74c3c' : '#bdc3c7'} />
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => handleShare(item)} style={styles.actionButton} activeOpacity={0.8}>
+          <TouchableOpacity activeOpacity={0.8} onPress={() => handleShare(item)} style={styles.actionButton} >
             <Ionicons name="share-outline" size={22} color="#bdc3c7" />
           </TouchableOpacity>
           <Ionicons name="chevron-forward" size={24} color="#bdc3c7" />
@@ -143,7 +143,7 @@ export default function PriestsScreen({ navigation }) {
           : searchQuery ? 'Que tal tentar outra busca?' : 'Não foi possível carregar os padres no momento.'}
       </Text>
       {showFavorites && (
-        <TouchableOpacity style={styles.emptyButton} onPress={() => setShowFavorites(false)} activeOpacity={0.8}>
+        <TouchableOpacity activeOpacity={0.8} style={styles.emptyButton} onPress={() => setShowFavorites(false)} >
           <Text style={styles.emptyButtonText}>Ver todos os padres</Text>
         </TouchableOpacity>
       )}
@@ -174,15 +174,15 @@ export default function PriestsScreen({ navigation }) {
           onChangeText={setSearchQuery}
         />
         {searchQuery.length > 0 && (
-          <TouchableOpacity onPress={() => setSearchQuery('')} activeOpacity={0.8}>
+          <TouchableOpacity activeOpacity={0.8} onPress={() => setSearchQuery('')} >
             <Ionicons name="close-circle" size={20} color="#95a5a6" />
           </TouchableOpacity>
         )}
       </View>
 
       <View style={styles.filterRow}>
-        <TouchableOpacity
-          activeOpacity={0.8}
+        <TouchableOpacity activeOpacity={0.8}
+
           style={[styles.filterChip, !showFavorites && styles.filterChipActive]}
           onPress={() => setShowFavorites(false)}
         >
@@ -191,8 +191,8 @@ export default function PriestsScreen({ navigation }) {
             Todos ({priests.length})
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          activeOpacity={0.8}
+        <TouchableOpacity activeOpacity={0.8}
+
           style={[styles.filterChip, showFavorites && styles.filterChipActive]}
           onPress={() => setShowFavorites(true)}
         >

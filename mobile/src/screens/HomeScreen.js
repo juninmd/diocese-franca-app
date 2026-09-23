@@ -143,7 +143,7 @@ export default function HomeScreen({ navigation }) {
           <Text style={styles.welcomeText}>
             Conheça as paróquias, padres e horários de missa da Diocese de Franca.
           </Text>
-          <TouchableOpacity style={styles.refreshButton} onPress={onRefresh} activeOpacity={0.8}>
+          <TouchableOpacity activeOpacity={0.8} style={styles.refreshButton} onPress={onRefresh} >
             <Ionicons name="refresh" size={18} color="#2c3e50" />
             <Text style={styles.refreshText}>Atualizar dados</Text>
           </TouchableOpacity>
@@ -161,10 +161,10 @@ export default function HomeScreen({ navigation }) {
               <Text style={styles.nearestLoadingText}>Localizando você...</Text>
             </View>
           ) : nearestChurch ? (
-            <TouchableOpacity
+            <TouchableOpacity activeOpacity={0.8}
               style={styles.nearestResult}
               onPress={() => navigation.navigate('Churches', { screen: 'ChurchDetail', params: { churchId: nearestChurch.id } })}
-              activeOpacity={0.8}
+
             >
               <View style={styles.nearestResultText}>
                 <Text style={styles.nearestChurchName} numberOfLines={1}>{nearestChurch.name}</Text>
@@ -178,7 +178,7 @@ export default function HomeScreen({ navigation }) {
           ) : (
             <View>
               {nearestError && <Text style={styles.nearestErrorText}>{nearestError}</Text>}
-              <TouchableOpacity style={styles.nearestButton} onPress={findNearestChurch} activeOpacity={0.8}>
+              <TouchableOpacity activeOpacity={0.8} style={styles.nearestButton} onPress={findNearestChurch} >
                 <Ionicons name="locate" size={16} color="#fff" />
                 <Text style={styles.nearestButtonText}>
                   {nearestError ? 'Tentar novamente' : 'Encontrar a igreja mais próxima'}
@@ -189,7 +189,7 @@ export default function HomeScreen({ navigation }) {
         </View>
 
         <View style={styles.statsContainer}>
-          <TouchableOpacity style={styles.statItem} onPress={() => navigation.navigate('Churches')} activeOpacity={0.8}>
+          <TouchableOpacity activeOpacity={0.8} style={styles.statItem} onPress={() => navigation.navigate('Churches')} >
             <View style={[styles.statIcon, { backgroundColor: '#e8f4f8' }]}>
               <Ionicons name="business" size={24} color="#2c3e50" />
             </View>
@@ -197,7 +197,7 @@ export default function HomeScreen({ navigation }) {
             <Text style={styles.statLabel}>Paróquias</Text>
           </TouchableOpacity>
           <View style={styles.statDivider} />
-          <TouchableOpacity style={styles.statItem} onPress={() => navigation.navigate('Priests')} activeOpacity={0.8}>
+          <TouchableOpacity activeOpacity={0.8} style={styles.statItem} onPress={() => navigation.navigate('Priests')} >
             <View style={[styles.statIcon, { backgroundColor: '#fef5e7' }]}>
               <Ionicons name="person" size={24} color="#d35400" />
             </View>
@@ -205,7 +205,7 @@ export default function HomeScreen({ navigation }) {
             <Text style={styles.statLabel}>Padres</Text>
           </TouchableOpacity>
           <View style={styles.statDivider} />
-          <TouchableOpacity style={styles.statItem} onPress={() => navigation.navigate('Masses')} activeOpacity={0.8}>
+          <TouchableOpacity activeOpacity={0.8} style={styles.statItem} onPress={() => navigation.navigate('Masses')} >
             <View style={[styles.statIcon, { backgroundColor: '#e8f8f5' }]}>
               <Ionicons name="calendar" size={24} color="#27ae60" />
             </View>
@@ -230,13 +230,13 @@ export default function HomeScreen({ navigation }) {
               showsHorizontalScrollIndicator={false}
               contentContainerStyle={styles.newsList}
               renderItem={({ item }) => (
-                <TouchableOpacity
+                <TouchableOpacity activeOpacity={0.8}
                   style={styles.newsCard}
                   onPress={() => {
                     Linking.openURL(item.link);
                     toast.info('Abrindo a notícia...', { duration: 2000 });
                   }}
-                  activeOpacity={0.8}
+
                 >
                   <Image source={{ uri: item.image }} style={styles.newsImage} />
                   <View style={styles.newsContent}>
@@ -252,7 +252,7 @@ export default function HomeScreen({ navigation }) {
             <View style={styles.emptyNewsContainer}>
               <Ionicons name="newspaper-outline" size={36} color="#bdc3c7" />
               <Text style={styles.emptyNewsText}>Puxa, não conseguimos carregar as notícias agora. Tente novamente!</Text>
-              <TouchableOpacity style={styles.refreshButtonSmall} onPress={fetchNews} activeOpacity={0.8}>
+              <TouchableOpacity activeOpacity={0.8} style={styles.refreshButtonSmall} onPress={fetchNews} >
                 <Ionicons name="refresh" size={16} color="#fff" />
                 <Text style={styles.refreshButtonSmallText}>Tentar Novamente</Text>
               </TouchableOpacity>
@@ -263,10 +263,10 @@ export default function HomeScreen({ navigation }) {
         <View style={styles.menuContainer}>
           <Text style={styles.sectionTitle}>Navegue</Text>
 
-          <TouchableOpacity
+          <TouchableOpacity activeOpacity={0.8}
             style={styles.menuCard}
             onPress={() => navigation.navigate('Churches')}
-            activeOpacity={0.8}
+
           >
             <View style={[styles.menuIconContainer, { backgroundColor: '#e8f4f8' }]}>
               <Ionicons name="church-outline" size={32} color="#2c3e50" />
@@ -280,10 +280,10 @@ export default function HomeScreen({ navigation }) {
             </View>
           </TouchableOpacity>
 
-          <TouchableOpacity
+          <TouchableOpacity activeOpacity={0.8}
             style={styles.menuCard}
             onPress={() => navigation.navigate('Priests')}
-            activeOpacity={0.8}
+
           >
             <View style={[styles.menuIconContainer, { backgroundColor: '#fef5e7' }]}>
               <Ionicons name="person-outline" size={32} color="#d35400" />
@@ -297,10 +297,10 @@ export default function HomeScreen({ navigation }) {
             </View>
           </TouchableOpacity>
 
-          <TouchableOpacity
+          <TouchableOpacity activeOpacity={0.8}
             style={styles.menuCard}
             onPress={() => navigation.navigate('Masses')}
-            activeOpacity={0.8}
+
           >
             <View style={[styles.menuIconContainer, { backgroundColor: '#e8f8f5' }]}>
               <Ionicons name="time-outline" size={32} color="#27ae60" />
@@ -318,17 +318,17 @@ export default function HomeScreen({ navigation }) {
         <View style={styles.quickAccess}>
           <Text style={styles.sectionTitle}>Acesso Rápido</Text>
           <View style={styles.quickGrid}>
-            <TouchableOpacity
+            <TouchableOpacity activeOpacity={0.8}
               style={styles.quickItem}
-              activeOpacity={0.8}
+
               onPress={() => navigation.navigate('Masses', { day: 'Domingo' })}
             >
               <Ionicons name="sunny" size={28} color="#f39c12" />
               <Text style={styles.quickText}>Missa{'\n'}Domingo</Text>
             </TouchableOpacity>
-            <TouchableOpacity
+            <TouchableOpacity activeOpacity={0.8}
               style={styles.quickItem}
-              activeOpacity={0.8}
+
               onPress={async () => {
                 const { status } = await Notifications.requestPermissionsAsync();
                 if (status === 'granted') {
@@ -348,9 +348,9 @@ export default function HomeScreen({ navigation }) {
               <Ionicons name="notifications" size={28} color="#e74c3c" />
               <Text style={styles.quickText}>Lembrete{'\n'}Teste (5s)</Text>
             </TouchableOpacity>
-            <TouchableOpacity
+            <TouchableOpacity activeOpacity={0.8}
               style={styles.quickItem}
-              activeOpacity={0.8}
+
               onPress={() => {
                 toast.success('Ligando para a Diocese...');
                 handleCall('1637111400');
@@ -360,9 +360,9 @@ export default function HomeScreen({ navigation }) {
               <Text style={styles.quickText}>Ligar{'\n'}Diocese</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity
+            <TouchableOpacity activeOpacity={0.8}
               style={styles.quickItem}
-              activeOpacity={0.8}
+
               onPress={() => handleEmail('contato@diocesefranca.org.br')}
             >
               <Ionicons name="mail" size={28} color="#9b59b6" />
@@ -374,7 +374,7 @@ export default function HomeScreen({ navigation }) {
         <View style={styles.contactCard}>
           <Text style={styles.contactTitle}>Contato da Diocese</Text>
           <View style={styles.contactRow}>
-            <TouchableOpacity style={styles.contactItem} onPress={() => handleCall('1637111400')} activeOpacity={0.8}>
+            <TouchableOpacity activeOpacity={0.8} style={styles.contactItem} onPress={() => handleCall('1637111400')} >
               <View style={styles.contactIconWrapper}>
                 <Ionicons name="call-outline" size={20} color="#3498db" />
               </View>
@@ -383,7 +383,7 @@ export default function HomeScreen({ navigation }) {
                 <Text style={styles.contactText}>(16) 3711-1400</Text>
               </View>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.contactItem} onPress={() => handleEmail('contato@diocesefranca.org.br')} activeOpacity={0.8}>
+            <TouchableOpacity activeOpacity={0.8} style={styles.contactItem} onPress={() => handleEmail('contato@diocesefranca.org.br')} >
               <View style={styles.contactIconWrapper}>
                 <Ionicons name="mail-outline" size={20} color="#3498db" />
               </View>
