@@ -355,7 +355,7 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   actionButton: {
-    padding: 4,
+    padding: 12,
   },
   emptyContainer: {
     flex: 1,
