@@ -49,7 +49,13 @@ const scrapeNews = async () => {
 
     // The layout has list items (li) containing the news.
     // Inside, there is <div class="scale_image_container"> and <div class="post_text">.
-    $('.section_post_left').each((i, el) => {
+    let targetSelector = '.section_post_left';
+    if ($(targetSelector).length === 0) {
+      targetSelector = '.noticia_item';
+      console.log('Fallback: .section_post_left missing, trying .noticia_item');
+    }
+
+    $(targetSelector).each((i, el) => {
         try {
             let titleElement = $(el).find('h2.post_title a');
             let link = titleElement.length > 0 ? (titleElement.attr('href') || '#') : '#';

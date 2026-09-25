@@ -272,34 +272,34 @@ O app possui interface moderna com:
 
 ### Screenshots (Web Output E2E Test)
 **Home Screen**
-![Home Screen](mobile/screenshots/home_full.png?v=14)
+![Home Screen](mobile/screenshots/home_full.png?v=15)
 
 **News Section**
-![News Section](mobile/screenshots/news_section.png?v=14)
+![News Section](mobile/screenshots/news_section.png?v=15)
 
 **Igrejas Screen**
-![Igrejas Screen](mobile/screenshots/churches_full.png?v=14)
+![Igrejas Screen](mobile/screenshots/churches_full.png?v=15)
 
 **Padres Screen**
-![Padres Screen](mobile/screenshots/priests_full.png?v=14)
+![Padres Screen](mobile/screenshots/priests_full.png?v=15)
 
 **Missas Screen**
-![Missas Screen](mobile/screenshots/masses_full.png?v=14)
+![Missas Screen](mobile/screenshots/masses_full.png?v=15)
 
 **Missas (Empty State)**
-![Missas (Empty State)](mobile/screenshots/masses_empty.png?v=14)
+![Missas (Empty State)](mobile/screenshots/masses_empty.png?v=15)
 
 **Igrejas (Empty State)**
-![Igrejas (Empty State)](mobile/screenshots/churches_empty.png?v=14)
+![Igrejas (Empty State)](mobile/screenshots/churches_empty.png?v=15)
 
 **Padres (Empty State)**
-![Padres (Empty State)](mobile/screenshots/priests_empty.png?v=14)
+![Padres (Empty State)](mobile/screenshots/priests_empty.png?v=15)
 
 **Igreja Próxima**
-![Igreja Próxima](mobile/screenshots/churches_nearby.png?v=14)
+![Igreja Próxima](mobile/screenshots/churches_nearby.png?v=15)
 
 **Igreja Próxima (Permissão Negada)**
-![Igreja Próxima Permissão Negada](mobile/screenshots/churches_nearby_denied.png?v=14)
+![Igreja Próxima Permissão Negada](mobile/screenshots/churches_nearby_denied.png?v=15)
 
 ## Licença
 

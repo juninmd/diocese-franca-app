@@ -13,15 +13,22 @@ test('ui interaction uses toast and triggers local notification schedule', async
   // Wait a bit for the async permission check to finish
   await page.waitForTimeout(1000);
 
-  // By clicking one of the UI interaction elements directly instead of dealing with exact text,
-  // we can ensure the action happens. Let's just click 'Missas' and then a notification button.
-  await page.locator('div:text-is("Missas")').first().click({ force: true });
+  // Navigate to Padres to verify the new notification feature on PriestDetailScreen
+  await page.locator('div:text-is("Padres")').first().click({ force: true });
   await page.waitForTimeout(2000);
 
-  // Click the notification bell on the first mass item.
-  // There could be multiple elements or it might be empty if the API is down, so we check if there are mass cards first.
-  const notificationButton = page.locator('text="Lembrete configurado com sucesso!"');
-  // It's possible the list is empty during playwright tests depending on seed.
-  // The test just asserts that we don't crash when interacting with UI.
-  // The fact that we navigated without error is good.
+  // Click the first priest card to go to detail screen.
+  // Selecting it gracefully if there's an actual list.
+  const priestCard = page.locator('text="Pároco"').first();
+  if (await priestCard.isVisible()) {
+    await priestCard.click({ force: true });
+    await page.waitForTimeout(2000);
+
+    // Verify interaction with the notification config block
+    await page.getByText(/Lembrete\s*Confissão/i).first().click({ force: true });
+    await page.waitForTimeout(1000);
+
+    // Toast should be visible for feedback.
+    await expect(page.locator('text="Lembrete configurado!"').first()).toBeVisible();
+  }
 });
