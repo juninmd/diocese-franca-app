@@ -88,7 +88,7 @@ export default function PriestsScreen({ navigation }) {
         message: `${priest.title}\n${priest.name}\n${priest.bio || ''}\n\nCompartilhado via Diocese de Franca`,
       });
     } catch (error) {
-      toast.error('Erro ao compartilhar');
+      toast.error('Puxa, erro ao compartilhar');
     }
   };
 
