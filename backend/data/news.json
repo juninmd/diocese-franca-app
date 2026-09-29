@@ -1,42 +1,47 @@
 [
   {
     "id": 1,
-    "title": "Eleições 2026",
-    "description": "“Bem-aventurados os que promovem a paz” (Mt 5,9).",
-    "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6045&id_orgao=1",
-    "image": "https://diocesefranca.org.br/images/20260907131840_1000332563.png",
-    "date": "es 2026"
+    "title": "Representantes da Diocese de Franca participam de Congresso Camiliano em São Paulo",
+    "category": "Congresso Camiliano",
+    "description": "Encontro reuniu cerca de 250 agentes da Pastoral da Saúde e marcou os 40 anos da Pastoral da Saúde N",
+    "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6055&id_orgao=1",
+    "image": "https://diocesefranca.org.br/images/20260911174342_1000361705.png",
+    "date": "11 de setembro"
   },
   {
     "id": 2,
-    "title": "Catequista é chamado a anunciar Jesus e acolher pessoas no caminho da fé, destaca participação em Romaria Nacional",
-    "description": "Representando a Diocese de Franca, Pe. Rodrigo participou da II Romaria Nacional de Catequistas, realizada em Aparecida, e destaca aprendizados para a missão catequética",
-    "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6043&id_orgao=1",
-    "image": "https://diocesefranca.org.br/images/20260903192719_1000356840.png",
-    "date": "3 de setembro"
+    "title": "João Monteiro de Barros Filho deixa legado na comunicação a serviço da evangelização",
+    "category": "Evangelização",
+    "description": "Bispo diocesano destaca legado do jornalista e fundador da Rede Vida de Televisão na promoção da eva",
+    "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6054&id_orgao=1",
+    "image": "https://diocesefranca.org.br/images/20260911123403_1000361565.png",
+    "date": "11 de setembro"
   },
   {
     "id": 3,
-    "title": "Despertar Vocacional reúne cerca de 250 pessoas em encontro de oração, convivência e discernimento",
-    "description": "Em sua segunda edição, iniciativa reuniu diferentes carismas, comunidades e ministérios para favorecer o conhecimento e o discernimento sobre o chamado de Deus.",
-    "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6042&id_orgao=1",
-    "image": "https://diocesefranca.org.br/images/20260903185323_1000356807.png",
-    "date": "3 de setembro"
+    "title": "Pastorais Sociais refletem sobre novos desafios e fortalecem ação  conjunta na Diocese de Franca",
+    "category": "Pastorais Sociais",
+    "description": "Encontro promovido pela Cáritas Diocesana reuniu agentes pastorais, candidatos ao diaconato e repres",
+    "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6052&id_orgao=1",
+    "image": "https://diocesefranca.org.br/images/20260910210705_1000361277.png",
+    "date": "10 de setembro"
   },
   {
     "id": 4,
-    "title": "Música, formação e espiritualidade marcam participação de representantes da Diocese de Franca em congresso internacional",
-    "description": "Encontro reuniu cerca de mil cantores, regentes e músicos em Campinas e promoveu momentos de formação, espiritualidade e celebração sobre o serviço da música na Liturgia.",
-    "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6041&id_orgao=1",
-    "image": "https://diocesefranca.org.br/images/20260901201918_1000355911.png",
-    "date": "1 de setembro"
+    "title": "Consagração da Diocese de Franca a São Miguel Arcanjo aconteceu durante o 39º Hallel",
+    "category": "São Miguel Arcanjo",
+    "description": "Celebração realizada no sábado (5) reuniu fiéis diante da imagem peregrina do Arcanjo, vinda do Mont",
+    "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6050&id_orgao=1",
+    "image": "https://diocesefranca.org.br/images/20260910191834_1000361053.png",
+    "date": "10 de setembro"
   },
   {
     "id": 5,
-    "title": "8º Colo de Mãe promove tarde de oração, reflexão e espiritualidade em Franca",
-    "description": "Encontro será realizado no dia 12 de setembro, na Casa de Retiros Jesus Maria José, e terá palestras, partilhas, depoimentos e momentos de oração",
-    "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6038&id_orgao=1",
-    "image": "https://diocesefranca.org.br/images/20260827195605_1000353723.png",
-    "date": "12 de setembro"
+    "title": "Missa no Seminário Diocesano reúne familiares de seminaristas e comunidade em momento de oração",
+    "category": "Seminário Diocesano",
+    "description": "Celebração contou com a presença de familiares dos seminaristas do Propedêutico, que também particip",
+    "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6051&id_orgao=1",
+    "image": "https://diocesefranca.org.br/images/20260910195937_1000361092.png",
+    "date": "10 de setembro"
   }
 ]
