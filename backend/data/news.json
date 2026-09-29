@@ -1,6 +1,22 @@
 [
   {
     "id": 1,
+    "title": "Encontro Vocacional reúne 39 jovens no Seminário Diocesano de Franca",
+    "description": "Participantes de Franca e cidades da região viveram um dia de oração, reflexão e partilha sobre o ch",
+    "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6074&id_orgao=1",
+    "image": "https://diocesefranca.org.br/images/20260923190632_1000369034.png",
+    "date": "23 de setembro"
+  },
+  {
+    "id": 2,
+    "title": "Paróquia Rosa Mística recebe imagem e relíquia de São Carlo Acutis",
+    "description": "Comunidade viveu momentos de oração e devoção com a presença da imagem e de uma relíquia de primeiro",
+    "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6075&id_orgao=1",
+    "image": "https://diocesefranca.org.br/images/20260923194605_1000369067.png",
+    "date": "23 de setembro"
+  },
+  {
+    "id": 3,
     "title": "Santas relíquias de São Padre Pio serão recebidas no Carmelo de Santa Teresa em Franca",
     "description": "Visita acontece no dia 20 de setembro, com Missa presidida por Dom Paulo às 7h30",
     "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6069&id_orgao=1",
@@ -8,7 +24,7 @@
     "date": "20 de setembro"
   },
   {
-    "id": 2,
+    "id": 4,
     "title": "Casa de Formação Nossa Senhora Aparecida acolhe novos responsáveis e futuro pároco da Capelinha",
     "description": "Posse do Prior e Vice-Prior aconteceu nesta quarta-feira (16), que também foi marcada pela acolhida",
     "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6068&id_orgao=1",
@@ -16,27 +32,11 @@
     "date": "18 de setembro"
   },
   {
-    "id": 3,
+    "id": 5,
     "title": "5º Congresso Vocacional do Brasil reforça chamado à construção de comunidades vocacionais",
     "description": "Encontro realizado em Aparecida reuniu cerca de mil animadores vocacionais e promoveu momentos de fo",
     "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6064&id_orgao=1",
     "image": "https://diocesefranca.org.br/images/20260916203628_1000364758.png",
     "date": "16 de setembro"
-  },
-  {
-    "id": 4,
-    "title": "Cursos profissionalizantes da Pastoral do Menor buscam ampliar oportunidades e promover autonomia",
-    "description": "Formações práticas são voltadas à comunidade e procuram contribuir para a qualificação profissional,",
-    "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6057&id_orgao=1",
-    "image": "https://diocesefranca.org.br/images/20260912191745_1000362699.png",
-    "date": "12 de setembro"
-  },
-  {
-    "id": 5,
-    "title": "Diáconos da Diocese de Franca se reúnem para oração e partilha do ministério",
-    "description": "Encontro ordinário aconteceu neste sábado (12), na Paróquia São Sebastião, em Franca",
-    "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6058&id_orgao=1",
-    "image": "https://diocesefranca.org.br/images/20260912192658_1000362721.png",
-    "date": "12 de setembro"
   }
 ]

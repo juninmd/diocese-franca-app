@@ -451,7 +451,7 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   actionButton: {
-    padding: 4,
+    padding: 12,
   },
   cardFooter: {
     marginTop: 14,

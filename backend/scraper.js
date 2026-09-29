@@ -49,7 +49,15 @@ const scrapeNews = async () => {
 
     // The layout has list items (li) containing the news.
     // Inside, there is <div class="scale_image_container"> and <div class="post_text">.
-    $('.section_post_left').each((i, el) => {
+    let elements = $('.section_post_left');
+
+    // Fallback if main selector yields no results
+    if (elements.length === 0) {
+        console.log('Fallback: .section_post_left empty, trying .noticia_item');
+        elements = $('.noticia_item');
+    }
+
+    elements.each((i, el) => {
         try {
             let titleElement = $(el).find('h2.post_title a');
             let link = titleElement.length > 0 ? (titleElement.attr('href') ? titleElement.attr('href').trim() : '#') : '#';
@@ -124,6 +132,16 @@ const scrapeNews = async () => {
                         dateText = `${parseInt(dayStr, 10)} de ${month}`;
                         console.log('  -> Found date via image URL fallback:', dateText);
                     }
+                }
+
+                // Final fallback for date
+                if (!dateText) {
+                    const today = new Date();
+                    const day = String(today.getDate()).padStart(2, '0');
+                    const months = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
+                    const month = months[today.getMonth()];
+                    dateText = `${day} de ${month}`;
+                    console.log('  -> Found date via final fallback (current date):', dateText);
                 }
             }
             let date = dateText ? dateText : 'Sem informação de data';

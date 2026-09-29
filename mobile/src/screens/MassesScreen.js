@@ -145,23 +145,24 @@ export default function MassesScreen() {
       </View>
       <TouchableOpacity activeOpacity={0.8}
         style={styles.notificationButton}
+        activeOpacity={0.8}
         onPress={async () => {
           const { status } = await Notifications.requestPermissionsAsync();
           if (status === 'granted') {
             await Notifications.scheduleNotificationAsync({
               content: {
                 title: 'Lembrete de Missa',
-                body: `Não se esqueça: missa às ${item.time} na paróquia ${item.church?.name || ''}!`,
+                body: `A missa na ${item.church ? item.church.name : 'paróquia'} começará em breve! (${item.time})`,
               },
               trigger: { seconds: 5 },
             });
-            toast.success('Lembrete configurado com sucesso!');
+            toast.success('Lembrete de missa configurado!');
           } else {
             toast.error('Permissão de notificação negada.');
           }
         }}
       >
-        <Ionicons name="notifications-outline" size={20} color="#3498db" />
+        <Ionicons name="notifications-outline" size={24} color="#3498db" />
       </TouchableOpacity>
     </View>
   );
@@ -379,7 +380,7 @@ const styles = StyleSheet.create({
   },
   dayFilterButton: {
     paddingHorizontal: 16,
-    paddingVertical: 8,
+    paddingVertical: 12,
     marginRight: 8,
     borderRadius: 20,
     backgroundColor: '#f0f4f8',
@@ -399,7 +400,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 16,
-    paddingVertical: 8,
+    paddingVertical: 12,
     marginRight: 8,
     borderRadius: 16,
     backgroundColor: '#f0f4f8',
