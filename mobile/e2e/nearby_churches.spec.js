@@ -1,6 +1,6 @@
 const { test, expect } = require('@playwright/test');
 
-const BASE_URL = 'http://localhost:3001/';
+const BASE_URL = 'http://localhost:3002/';
 
 test('shows the nearest church when geolocation is granted', async ({ page, context }) => {
   await context.grantPermissions(['geolocation'], { origin: BASE_URL });

@@ -149,11 +149,11 @@ export default function PriestDetailScreen({ route }) {
                   await Notifications.scheduleNotificationAsync({
                     content: {
                       title: 'Lembrete de Confissão',
-                      body: 'É hora de se preparar para a confissão.',
+                      body: `Seu lembrete para se confessar com ${priest.name} foi ativado!`,
                     },
                     trigger: { seconds: 5 },
                   });
-                  toast.success('Lembrete de confissão configurado para daqui a pouco!');
+                  toast.success('Lembrete configurado!');
                 } else {
                   toast.error('Permissão de notificação negada.');
                 }

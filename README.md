@@ -189,7 +189,7 @@ npx playwright test
 - Dashboard com estatísticas (paróquias, padres, missas)
 - **NOVO:** Sessão "Notícias da Diocese" que exibe os destaques raspados diretamente do portal da Diocese com imagens e links
 - Cards clicáveis para navegação rápida
-- Seção de acesso rápido (Missa domingo, **Lembrete diário com notificações locais**, ligar, email)
+- Seção de acesso rápido (Missa domingo, **Lembrete diário e Lembretes de Confissão/Missa com notificações locais**, ligar, email)
 - Pull-to-refresh para atualizar dados
 - Informações de contato da diocese
 

@@ -151,7 +151,7 @@ export default function MassesScreen() {
             await Notifications.scheduleNotificationAsync({
               content: {
                 title: 'Lembrete de Missa',
-                body: `A missa na ${item.church?.name || 'paróquia'} vai começar em breve!`,
+                body: `Não se esqueça da missa às ${item.time}!`,
               },
               trigger: { seconds: 5 },
             });
@@ -309,7 +309,7 @@ export default function MassesScreen() {
             <Ionicons name="calendar-outline" size={64} color="#bdc3c7" />
             <Text style={styles.emptyTitle}>Puxa!</Text>
             <Text style={styles.emptyText}>
-              Vamos tentar limpar os filtros e buscar novamente?
+              Puxa... Não encontramos missas para esses filtros. Vamos tentar limpar os filtros e buscar novamente?
             </Text>
             {hasActiveFilters && (
               <TouchableOpacity style={styles.emptyButton} onPress={clearFilters} activeOpacity={0.8}>
