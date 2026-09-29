@@ -49,13 +49,15 @@ const scrapeNews = async () => {
 
     // The layout has list items (li) containing the news.
     // Inside, there is <div class="scale_image_container"> and <div class="post_text">.
-    let targetSelector = '.section_post_left';
-    if ($(targetSelector).length === 0) {
-      targetSelector = '.noticia_item';
-      console.log('Fallback: .section_post_left missing, trying .noticia_item');
+    let newsElements = $('.section_post_left');
+
+    // Add fallback for empty section_post_left
+    if (newsElements.length === 0) {
+        console.log('Fallback: .section_post_left is empty, using .noticia_item instead');
+        newsElements = $('.noticia_item');
     }
 
-    $(targetSelector).each((i, el) => {
+    newsElements.each((i, el) => {
         try {
             let titleElement = $(el).find('h2.post_title a');
             let link = titleElement.length > 0 ? (titleElement.attr('href') ? titleElement.attr('href').trim() : '#') : '#';
