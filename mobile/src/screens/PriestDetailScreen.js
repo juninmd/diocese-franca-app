@@ -44,6 +44,28 @@ export default function PriestDetailScreen({ route }) {
     }
   };
 
+  const scheduleConfessionReminder = async () => {
+    try {
+      const { status } = await Notifications.requestPermissionsAsync();
+      if (status !== 'granted') {
+        toast.error('Permissão para notificações negada.');
+        return;
+      }
+      await Notifications.scheduleNotificationAsync({
+        content: {
+          title: 'Lembrete de Confissão',
+          body: `Lembrete para buscar confissão com ${priest.name}.`,
+          sound: true,
+        },
+        trigger: { seconds: 5 },
+      });
+      toast.success('Lembrete agendado para daqui a 5 segundos!');
+    } catch (err) {
+      console.error(err);
+      toast.error('Não foi possível agendar o lembrete.');
+    }
+  };
+
   if (loading) {
     return (
       <View style={styles.centerContainer}>
@@ -121,28 +143,14 @@ export default function PriestDetailScreen({ route }) {
             <TouchableOpacity
               style={styles.contactRow}
               activeOpacity={0.8}
-              onPress={async () => {
-                const { status } = await Notifications.requestPermissionsAsync();
-                if (status === 'granted') {
-                  await Notifications.scheduleNotificationAsync({
-                    content: {
-                      title: 'Lembrete de Confissão',
-                      body: 'Seu momento de confissão está próximo.',
-                    },
-                    trigger: { seconds: 5 },
-                  });
-                  toast.success('Lembrete configurado!');
-                } else {
-                  toast.error('Permissão de notificação negada.');
-                }
-              }}
+              onPress={scheduleConfessionReminder}
             >
               <View style={styles.contactIconContainer}>
                 <Ionicons name="time-outline" size={20} color="#8e44ad" />
               </View>
               <View style={styles.contactContent}>
                 <Text style={styles.contactLabel}>Lembrete Confissão</Text>
-                <Text style={styles.contactValue}>Configurar alerta</Text>
+                <Text style={styles.contactValue}>Configurar alerta (5s)</Text>
               </View>
               <Ionicons name="notifications-outline" size={18} color="#8e44ad" />
             </TouchableOpacity>

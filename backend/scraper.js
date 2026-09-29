@@ -77,7 +77,9 @@ const scrapeNews = async () => {
             let descriptionText = descriptionElement.length > 0 && descriptionElement.text().trim() !== '' ? descriptionElement.text().trim() : $(el).text().trim();
 
             // Clean up extra whitespaces and newlines
-            descriptionText = descriptionText.replace(/\s{2,}/g, ' ').replace(/\n+/g, ' ').substring(0, 100).trim();
+            descriptionText = descriptionText.replace(/\s+/g, ' ').substring(0, 100).trim();
+            // Clean up trailing commas, ellipses, and other non-alphanumeric chars at the end
+            descriptionText = descriptionText.replace(/[,.;\-]+$/g, '').trim();
 
             const description = descriptionText ? descriptionText : 'Sem descrição disponível';
 
