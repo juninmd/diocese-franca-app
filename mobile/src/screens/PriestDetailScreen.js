@@ -142,9 +142,21 @@ export default function PriestDetailScreen({ route }) {
             )}
             <TouchableOpacity activeOpacity={0.8}
               style={styles.contactRow}
-
-              onPress={() => {
-                toast.success('Lembrete configurado!');
+              activeOpacity={0.8}
+              onPress={async () => {
+                const { status } = await Notifications.requestPermissionsAsync();
+                if (status === 'granted') {
+                  await Notifications.scheduleNotificationAsync({
+                    content: {
+                      title: 'Lembrete de Confissão',
+                      body: `Seu lembrete para confissão com ${priest.name} está configurado.`,
+                    },
+                    trigger: { seconds: 5 },
+                  });
+                  toast.success('Lembrete configurado!');
+                } else {
+                  toast.error('Permissão de notificação negada.');
+                }
               }}
             >
               <View style={styles.contactIconContainer}>
