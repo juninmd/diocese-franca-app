@@ -148,12 +148,12 @@ export default function PriestDetailScreen({ route }) {
                 if (status === 'granted') {
                   await Notifications.scheduleNotificationAsync({
                     content: {
-                      title: 'Lembrete de Confissão',
-                      body: `Não se esqueça do seu horário de confissão com o Padre ${priest.name}!`,
+                      title: 'Lembrete Confissão',
+                      body: 'Tempo para confissão com ' + priest.name,
                     },
                     trigger: { seconds: 5 },
                   });
-                  toast.success('Lembrete de confissão configurado!');
+                  toast.success('Lembrete configurado para daqui a 5 segundos!');
                 } else {
                   toast.error('Permissão de notificação negada.');
                 }

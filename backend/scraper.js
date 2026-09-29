@@ -28,7 +28,7 @@ const scrapeNews = async () => {
                   'Accept-Language': 'pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7',
                   'Referer': 'https://www.google.com/'
               },
-              timeout: 20000
+              timeout: 25000
           });
           data = response.data;
           break; // success, exit the loop

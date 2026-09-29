@@ -152,11 +152,11 @@ export default function MassesScreen() {
             await Notifications.scheduleNotificationAsync({
               content: {
                 title: 'Lembrete de Missa',
-                body: `A missa na ${item.church ? item.church.name : 'paróquia'} começará em breve! (${item.time})`,
+                body: `Missa às ${item.time}${item.church ? ' na ' + item.church.name : ''}`,
               },
               trigger: { seconds: 5 },
             });
-            toast.success('Lembrete de missa configurado!');
+            toast.success('Lembrete configurado para daqui a 5 segundos!');
           } else {
             toast.error('Permissão de notificação negada.');
           }
