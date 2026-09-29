@@ -1,14 +1,22 @@
 [
   {
     "id": 1,
+    "title": "5º Congresso Vocacional do Brasil reforça chamado à construção de comunidades vocacionais",
+    "description": "Encontro realizado em Aparecida reuniu cerca de mil animadores vocacionais e promoveu momentos de fo",
+    "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6064&id_orgao=1",
+    "image": "https://diocesefranca.org.br/images/20260916203628_1000364758.png",
+    "date": "16 de setembro"
+  },
+  {
+    "id": 2,
     "title": "Cursos profissionalizantes da Pastoral do Menor buscam ampliar oportunidades e promover autonomia",
-    "description": "Formações práticas são voltadas à comunidade e procuram contribuir para a qualificação profissional",
+    "description": "Formações práticas são voltadas à comunidade e procuram contribuir para a qualificação profissional,",
     "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6057&id_orgao=1",
     "image": "https://diocesefranca.org.br/images/20260912191745_1000362699.png",
     "date": "12 de setembro"
   },
   {
-    "id": 2,
+    "id": 3,
     "title": "Diáconos da Diocese de Franca se reúnem para oração e partilha do ministério",
     "description": "Encontro ordinário aconteceu neste sábado (12), na Paróquia São Sebastião, em Franca",
     "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6058&id_orgao=1",
@@ -16,7 +24,7 @@
     "date": "12 de setembro"
   },
   {
-    "id": 3,
+    "id": 4,
     "title": "Representantes da Diocese de Franca participam de Congresso Camiliano em São Paulo",
     "description": "Encontro reuniu cerca de 250 agentes da Pastoral da Saúde e marcou os 40 anos da Pastoral da Saúde N",
     "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6055&id_orgao=1",
@@ -24,19 +32,11 @@
     "date": "11 de setembro"
   },
   {
-    "id": 4,
+    "id": 5,
     "title": "João Monteiro de Barros Filho deixa legado na comunicação a serviço da evangelização",
     "description": "Bispo diocesano destaca legado do jornalista e fundador da Rede Vida de Televisão na promoção da eva",
     "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6054&id_orgao=1",
     "image": "https://diocesefranca.org.br/images/20260911123403_1000361565.png",
     "date": "11 de setembro"
-  },
-  {
-    "id": 5,
-    "title": "Pastorais Sociais refletem sobre novos desafios e fortalecem ação  conjunta na Diocese de Franca",
-    "description": "Encontro promovido pela Cáritas Diocesana reuniu agentes pastorais, candidatos ao diaconato e repres",
-    "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6052&id_orgao=1",
-    "image": "https://diocesefranca.org.br/images/20260910210705_1000361277.png",
-    "date": "10 de setembro"
   }
 ]

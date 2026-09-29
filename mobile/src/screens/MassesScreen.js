@@ -145,8 +145,21 @@ export default function MassesScreen() {
       </View>
       <TouchableOpacity
         style={styles.notificationButton}
-        activeOpacity={0.8}
-        onPress={() => scheduleMassReminder(item)}
+        onPress={async () => {
+          const { status } = await Notifications.requestPermissionsAsync();
+          if (status === 'granted') {
+            await Notifications.scheduleNotificationAsync({
+              content: {
+                title: 'Lembrete de Missa',
+                body: `A missa na ${item.church?.name || 'paróquia'} vai começar em breve!`,
+              },
+              trigger: { seconds: 5 },
+            });
+            toast.success('Lembrete configurado com sucesso!');
+          } else {
+            toast.error('Permissão de notificação negada.');
+          }
+        }}
       >
         <Ionicons name="notifications-outline" size={20} color="#3498db" />
       </TouchableOpacity>
@@ -296,7 +309,7 @@ export default function MassesScreen() {
             <Ionicons name="calendar-outline" size={64} color="#bdc3c7" />
             <Text style={styles.emptyTitle}>Puxa!</Text>
             <Text style={styles.emptyText}>
-              Não encontramos missas para esses filtros. Vamos tentar limpar os filtros e buscar novamente?
+              Vamos tentar limpar os filtros e buscar novamente?
             </Text>
             {hasActiveFilters && (
               <TouchableOpacity style={styles.emptyButton} onPress={clearFilters} activeOpacity={0.8}>
