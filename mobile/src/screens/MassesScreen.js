@@ -151,9 +151,9 @@ export default function MassesScreen() {
             await Notifications.scheduleNotificationAsync({
               content: {
                 title: 'Lembrete de Missa',
-                body: `Não se esqueça da missa às ${item.time}!`,
+                body: `Sua missa na ${item.church ? item.church.name : 'paróquia'} começará em breve!`,
               },
-              trigger: { seconds: 5 },
+              trigger: { seconds: 5 }, // Just a 5s mock trigger since this is an example
             });
             toast.success('Lembrete configurado com sucesso!');
           } else {

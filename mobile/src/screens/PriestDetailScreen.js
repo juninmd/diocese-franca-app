@@ -148,8 +148,8 @@ export default function PriestDetailScreen({ route }) {
                 if (status === 'granted') {
                   await Notifications.scheduleNotificationAsync({
                     content: {
-                      title: 'Lembrete de Confissão',
-                      body: `Seu lembrete para se confessar com ${priest.name} foi ativado!`,
+                      title: 'Lembrete Confissão',
+                      body: `Hora da sua confissão com ${priest.name}.`,
                     },
                     trigger: { seconds: 5 },
                   });
