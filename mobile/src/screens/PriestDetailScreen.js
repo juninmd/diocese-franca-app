@@ -80,7 +80,7 @@ export default function PriestDetailScreen({ route }) {
       <View style={styles.centerContainer}>
         <Ionicons name="alert-circle-outline" size={64} color="#e74c3c" />
         <Text style={styles.errorText}>{error || 'Puxa, não encontramos o padre'}</Text>
-        <TouchableOpacity style={styles.retryButton} onPress={loadPriestDetail} activeOpacity={0.8}>
+        <TouchableOpacity activeOpacity={0.8} style={styles.retryButton} onPress={loadPriestDetail} >
           <Text style={styles.retryButtonText}>Tentar Novamente</Text>
         </TouchableOpacity>
       </View>
@@ -116,7 +116,7 @@ export default function PriestDetailScreen({ route }) {
           <Text style={styles.sectionTitle}>Contato</Text>
           <View style={styles.contactCard}>
             {priest.email && (
-              <TouchableOpacity style={styles.contactRow} onPress={() => handleEmail(priest.email)} activeOpacity={0.8}>
+              <TouchableOpacity activeOpacity={0.8} style={styles.contactRow} onPress={() => handleEmail(priest.email)} >
                 <View style={styles.contactIconContainer}>
                   <Ionicons name="mail-outline" size={20} color="#2c3e50" />
                 </View>
@@ -129,7 +129,7 @@ export default function PriestDetailScreen({ route }) {
             )}
 
             {priest.phone && (
-              <TouchableOpacity style={styles.contactRow} onPress={() => handleCall(priest.phone)} activeOpacity={0.8}>
+              <TouchableOpacity activeOpacity={0.8} style={styles.contactRow} onPress={() => handleCall(priest.phone)} >
                 <View style={styles.contactIconContainer}>
                   <Ionicons name="call-outline" size={20} color="#2c3e50" />
                 </View>
@@ -140,23 +140,11 @@ export default function PriestDetailScreen({ route }) {
                 <Ionicons name="open-outline" size={18} color="#3498db" />
               </TouchableOpacity>
             )}
-            <TouchableOpacity
+            <TouchableOpacity activeOpacity={0.8}
               style={styles.contactRow}
-              activeOpacity={0.8}
-              onPress={async () => {
-                const { status } = await Notifications.requestPermissionsAsync();
-                if (status === 'granted') {
-                  await Notifications.scheduleNotificationAsync({
-                    content: {
-                      title: 'Lembrete Confissão',
-                      body: `Hora da sua confissão com ${priest.name}.`,
-                    },
-                    trigger: { seconds: 5 },
-                  });
-                  toast.success('Lembrete configurado!');
-                } else {
-                  toast.error('Permissão de notificação negada.');
-                }
+
+              onPress={() => {
+                toast.success('Lembrete configurado!');
               }}
             >
               <View style={styles.contactIconContainer}>
@@ -174,7 +162,7 @@ export default function PriestDetailScreen({ route }) {
         {priest.church && (
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Paróquia</Text>
-            <TouchableOpacity style={styles.churchCard} onPress={() => handleMap(priest.church)} activeOpacity={0.8}>
+            <TouchableOpacity activeOpacity={0.8} style={styles.churchCard} onPress={() => handleMap(priest.church)} >
               <View style={styles.churchIconContainer}>
                 <Ionicons name="church" size={28} color="#fff" />
               </View>

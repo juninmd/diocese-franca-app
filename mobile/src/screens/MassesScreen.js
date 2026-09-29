@@ -143,7 +143,7 @@ export default function MassesScreen() {
           </>
         )}
       </View>
-      <TouchableOpacity
+      <TouchableOpacity activeOpacity={0.8}
         style={styles.notificationButton}
         onPress={async () => {
           const { status } = await Notifications.requestPermissionsAsync();
@@ -151,9 +151,9 @@ export default function MassesScreen() {
             await Notifications.scheduleNotificationAsync({
               content: {
                 title: 'Lembrete de Missa',
-                body: `Sua missa na ${item.church ? item.church.name : 'paróquia'} começará em breve!`,
+                body: `Não se esqueça: missa às ${item.time} na paróquia ${item.church?.name || ''}!`,
               },
-              trigger: { seconds: 5 }, // Just a 5s mock trigger since this is an example
+              trigger: { seconds: 5 },
             });
             toast.success('Lembrete configurado com sucesso!');
           } else {
@@ -189,7 +189,7 @@ export default function MassesScreen() {
       <View style={styles.filtersHeader}>
         <Text style={styles.filterLabel}>Dia da semana</Text>
         {hasActiveFilters && (
-          <TouchableOpacity onPress={clearFilters} style={styles.clearButton} activeOpacity={0.8}>
+          <TouchableOpacity activeOpacity={0.8} onPress={clearFilters} style={styles.clearButton} >
             <Ionicons name="close" size={14} color="#e74c3c" />
             <Text style={styles.clearText}>Limpar filtros</Text>
           </TouchableOpacity>
@@ -199,9 +199,9 @@ export default function MassesScreen() {
         horizontal
         data={DAYS_OF_WEEK}
         renderItem={({ item }) => (
-          <TouchableOpacity
+          <TouchableOpacity activeOpacity={0.8}
             key={item.key}
-            activeOpacity={0.8}
+
             style={[
               styles.dayFilterButton,
               selectedDay === item.key && styles.dayFilterButtonActive,
@@ -230,9 +230,9 @@ export default function MassesScreen() {
             horizontal
             data={[{ key: 'all', label: 'Todos' }, ...uniqueTypes.map(t => ({ key: t, label: t }))]}
             renderItem={({ item }) => (
-              <TouchableOpacity
+              <TouchableOpacity activeOpacity={0.8}
                 key={item.key}
-                activeOpacity={0.8}
+
                 style={[styles.typeFilterButton, massType === item.key && styles.typeFilterButtonActive]}
                 onPress={() => setMassType(item.key)}
               >
@@ -271,7 +271,7 @@ export default function MassesScreen() {
         <View style={styles.centerContainer}>
           <Ionicons name="alert-circle-outline" size={64} color="#e74c3c" />
           <Text style={styles.errorText}>{error}</Text>
-          <TouchableOpacity style={styles.retryButton} onPress={loadMasses} activeOpacity={0.8}>
+          <TouchableOpacity activeOpacity={0.8} style={styles.retryButton} onPress={loadMasses} >
             <Ionicons name="refresh" size={18} color="#fff" />
             <Text style={styles.retryButtonText}>Tentar Novamente</Text>
           </TouchableOpacity>
@@ -307,12 +307,12 @@ export default function MassesScreen() {
         ListEmptyComponent={
           <View style={styles.emptyContainer}>
             <Ionicons name="calendar-outline" size={64} color="#bdc3c7" />
-            <Text style={styles.emptyTitle}>Puxa!</Text>
+            <Text style={styles.emptyTitle}>Puxa, não encontramos missas.</Text>
             <Text style={styles.emptyText}>
               Puxa... Não encontramos missas para esses filtros. Vamos tentar limpar os filtros e buscar novamente?
             </Text>
             {hasActiveFilters && (
-              <TouchableOpacity style={styles.emptyButton} onPress={clearFilters} activeOpacity={0.8}>
+              <TouchableOpacity activeOpacity={0.8} style={styles.emptyButton} onPress={clearFilters} >
                 <Text style={styles.emptyButtonText}>Limpar filtros</Text>
               </TouchableOpacity>
             )}

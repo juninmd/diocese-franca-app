@@ -93,25 +93,23 @@ const scrapeNews = async () => {
             if (!dateText || dateText === '') {
                 console.log('Fallback: date extraction using regex on title/description/image for: ', title.substring(0, 30) + '...');
                 // Try parsing the date from the description or title using expanded regex
-                // Matches "12 de Agosto", "12 de agosto de 2024", "12/08/2024", "12/08", "Agosto de 2024", "12 AGO"
-                const fullText = (description + ' ' + title).replace(/\s{2,}/g, ' ');
-                const dateMatch = fullText.match(/\d{1,2}\s+de\s+[a-zA-ZçÇ]+\s*(de\s*\d{4})?/i);
-                const shortDateMatch = fullText.match(/\d{1,2}\s*\/\s*\d{1,2}(?:\s*\/\s*\d{2,4})?/);
+                // Matches "12 de Agosto", "12 de agosto de 2024", "12/08/2024", "12/08", "Agosto de 2024"
+                const fullText = (description + ' ' + title).replace(/\s+/g, ' ');
+                // Improved regexes to handle extra spaces and more formats
+                const dateMatch = fullText.match(/\d{1,2}\s*de\s*[a-zA-ZçÇ]+\s*(de\s*\d{4})?/i);
+                const shortDateMatch = fullText.match(/\d{1,2}\s*\/\s*\d{1,2}(\s*\/\s*\d{2,4})?/);
                 const monthYearMatch = fullText.match(/[a-zA-ZçÇ]+\s+(de\s+)?\d{4}/i);
                 const fallbackDateMatch = fullText.match(/\d{2}\s*\/\s*\d{2}\s*\/\s*\d{4}/);
 
-                if (dateMatch) {
+                if (fallbackDateMatch) {
+                    dateText = fallbackDateMatch[0];
+                    console.log('  -> Found date via regex (fallback d/m/y):', dateText);
+                } else if (dateMatch) {
                     dateText = dateMatch[0];
                     console.log('  -> Found date via regex (extenso):', dateText);
                 } else if (shortDateMatch) {
                     dateText = shortDateMatch[0];
                     console.log('  -> Found date via regex (curto):', dateText);
-                } else if (fallbackDateMatch) {
-                    dateText = fallbackDateMatch[0];
-                    console.log('  -> Found date via regex (fallback d/m/y):', dateText);
-                } else if (shortTextMonthMatch) {
-                    dateText = shortTextMonthMatch[0];
-                    console.log('  -> Found date via regex (curto texto):', dateText);
                 } else if (monthYearMatch) {
                     dateText = monthYearMatch[0];
                     console.log('  -> Found date via regex (mês/ano):', dateText);
