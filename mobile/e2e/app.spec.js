@@ -2,7 +2,7 @@ const { test, expect } = require('@playwright/test');
 
 test('navigate and capture screenshots for all screens', async ({ page }) => {
   // Wait for the app to be fully ready
-  await page.goto('http://localhost:3002/');
+  await page.goto('http://localhost:3001/');
 
   // Ensure the app is connected to the backend to avoid the offline banner in screenshots
   await expect(page.locator('text=Diocese de Franca').first()).toBeVisible({ timeout: 10000 });
