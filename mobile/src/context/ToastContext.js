@@ -89,7 +89,7 @@ function ToastItem({ toast, onHide }) {
         },
       ]}
     >
-      <TouchableOpacity onPress={onHide} style={styles.toastContent}>
+      <TouchableOpacity activeOpacity={0.8} onPress={onHide} style={styles.toastContent}>
         <Ionicons name={config.icon} size={24} color={config.color} />
         <Text style={[styles.toastText, { color: config.color }]}>{toast.message}</Text>
         <Ionicons name="close" size={18} color={config.color} />

@@ -1,7 +1,7 @@
 const { test, expect } = require('@playwright/test');
 
 test('ui interaction uses toast and triggers local notification schedule', async ({ page }) => {
-  await page.goto('http://localhost:3002/');
+  await page.goto('http://localhost:3001/');
 
   await expect(page.locator('text=Diocese de Franca').first()).toBeVisible({ timeout: 10000 });
   await page.waitForTimeout(1000);

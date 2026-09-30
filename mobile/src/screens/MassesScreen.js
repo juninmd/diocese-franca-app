@@ -310,7 +310,7 @@ export default function MassesScreen() {
             <Ionicons name="calendar-outline" size={64} color="#bdc3c7" />
             <Text style={styles.emptyTitle}>Puxa, não encontramos missas.</Text>
             <Text style={styles.emptyText}>
-              Puxa... Não encontramos missas para esses filtros. Vamos tentar limpar os filtros e buscar novamente?
+              Puxa, não encontramos missas para esses filtros. Vamos tentar limpar os filtros e buscar novamente?
             </Text>
             {hasActiveFilters && (
               <TouchableOpacity activeOpacity={0.8} style={styles.emptyButton} onPress={clearFilters} >
