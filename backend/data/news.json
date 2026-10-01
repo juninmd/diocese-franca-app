@@ -1,6 +1,24 @@
 [
   {
     "id": 1,
+    "title": "Bazar “Juntos para Transformar” arrecada recursos para projetos da Pastoral do Menor",
+    "category": "Pastoral do Menor",
+    "description": "Ação acontece nos dias 2, 3, 9 e 10 de outubro, com calçados masculinos novos a R$ 20",
+    "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6081&id_orgao=1",
+    "image": "https://diocesefranca.org.br/images/20260930195605_1000373322.png",
+    "date": "10 de outubro"
+  },
+  {
+    "id": 2,
+    "title": "Mãe Rainha celebra 25 anos de caminhada com encontro forânico em Pedregulho",
+    "category": "Mãe Rainha",
+    "description": "Cerca de 150 pessoas participaram de um dia de formação, oração, testemunhos e confraternização em t",
+    "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6080&id_orgao=1",
+    "image": "https://diocesefranca.org.br/images/20260930181902_1000373246.png",
+    "date": "30 de setembro"
+  },
+  {
+    "id": 3,
     "title": "COMUNICAR A DIGNIDADE HUMANA",
     "category": "47ª ASSEMBLEIA ECLESIAL",
     "description": "DIOCESE DE FRANCA PARTICIPA DA 47ª ASSEMBLEIA ECLESIAL DO REGIONAL SUL 1",
@@ -9,7 +27,7 @@
     "date": "29 de setembro"
   },
   {
-    "id": 2,
+    "id": 4,
     "title": "Encontro Vocacional reúne 39 jovens no Seminário Diocesano de Franca",
     "category": "Pastoral Vocacional",
     "description": "Participantes de Franca e cidades da região viveram um dia de oração, reflexão e partilha sobre o ch",
@@ -18,30 +36,12 @@
     "date": "23 de setembro"
   },
   {
-    "id": 3,
+    "id": 5,
     "title": "Paróquia Rosa Mística recebe imagem e relíquia de São Carlo Acutis",
     "category": "São Carlo Acutis",
     "description": "Comunidade viveu momentos de oração e devoção com a presença da imagem e de uma relíquia de primeiro",
     "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6075&id_orgao=1",
     "image": "https://diocesefranca.org.br/images/20260923194605_1000369067.png",
     "date": "23 de setembro"
-  },
-  {
-    "id": 4,
-    "title": "Santas relíquias de São Padre Pio serão recebidas no Carmelo de Santa Teresa em Franca",
-    "category": "Relíquias",
-    "description": "Visita acontece no dia 20 de setembro, com Missa presidida por Dom Paulo às 7h30",
-    "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6069&id_orgao=1",
-    "image": "https://diocesefranca.org.br/images/20260919085742_1000366791.png",
-    "date": "20 de setembro"
-  },
-  {
-    "id": 5,
-    "title": "Casa de Formação Nossa Senhora Aparecida acolhe novos responsáveis e futuro pároco da Capelinha",
-    "category": "Capelinha",
-    "description": "Posse do Prior e Vice-Prior aconteceu nesta quarta-feira (16), que também foi marcada pela acolhida",
-    "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6068&id_orgao=1",
-    "image": "https://diocesefranca.org.br/images/20260918172503_1000366417.png",
-    "date": "18 de setembro"
   }
 ]
