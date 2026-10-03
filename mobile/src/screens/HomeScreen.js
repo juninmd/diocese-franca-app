@@ -244,6 +244,28 @@ export default function HomeScreen({ navigation }) {
                     {item.description ? (
                       <Text style={styles.newsDescription} numberOfLines={3}>{item.description}</Text>
                     ) : null}
+                    <TouchableOpacity activeOpacity={0.8}
+                      style={styles.readLaterButton}
+                      onPress={async () => {
+                        const { status } = await Notifications.requestPermissionsAsync();
+                        if (status === 'granted') {
+                          await Notifications.scheduleNotificationAsync({
+                            content: {
+                              title: 'Lembrete de Leitura 📖',
+                              body: item.title,
+                              data: { url: item.link },
+                            },
+                            trigger: { seconds: 10 },
+                          });
+                          showToast('Lembrete configurado para daqui a 10 segundos!', 'success');
+                        } else {
+                          showToast('Permissão de notificação negada.', 'error');
+                        }
+                      }}
+                    >
+                      <Ionicons name="alarm-outline" size={16} color="#3498db" />
+                      <Text style={styles.readLaterText}>Lembrar de Ler (10s)</Text>
+                    </TouchableOpacity>
                   </View>
                 </TouchableOpacity>
               )}
@@ -724,6 +746,22 @@ const styles = StyleSheet.create({
     color: '#7f8c8d',
     marginTop: 4,
     lineHeight: 18,
+  },
+  readLaterButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 12,
+    gap: 4,
+    paddingVertical: 6,
+    paddingHorizontal: 10,
+    backgroundColor: '#e8f4f8',
+    borderRadius: 8,
+    alignSelf: 'flex-start',
+  },
+  readLaterText: {
+    fontSize: 12,
+    color: '#3498db',
+    fontWeight: '600',
   },
   loadingText: {
     paddingHorizontal: 16,

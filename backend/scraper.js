@@ -13,6 +13,21 @@ const USER_AGENTS = [
     'Mozilla/5.0 (iPhone; CPU iPhone OS 16_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.5 Mobile/15E148 Safari/604.1'
 ];
 
+// Helper to decode HTML entities in text
+const decodeHtmlEntities = (text) => {
+    if (!text) return '';
+    return text
+        .replace(/&amp;/g, '&')
+        .replace(/&lt;/g, '<')
+        .replace(/&gt;/g, '>')
+        .replace(/&quot;/g, '"')
+        .replace(/&#039;/g, "'")
+        .replace(/&#8220;/g, '"')
+        .replace(/&#8221;/g, '"')
+        .replace(/&#8211;/g, '-')
+        .replace(/&nbsp;/g, ' ');
+};
+
 const scrapeNews = async () => {
   let data = null;
   const maxRetries = 3;
@@ -73,7 +88,8 @@ const scrapeNews = async () => {
                 console.log(`Fallback: Missing href attribute for title "${title.substring(0, 30)}"`);
             }
 
-            // Sanitize title by removing extra quotes
+            // Decode HTML entities and sanitize title
+            title = decodeHtmlEntities(title);
             title = title.replace(/["']/g, '').trim();
 
             // Extract category if available
@@ -87,6 +103,8 @@ const scrapeNews = async () => {
             const descriptionElement = $(el).find('.post_text p').first();
             let descriptionText = descriptionElement.length > 0 && descriptionElement.text().trim() !== '' ? descriptionElement.text().trim() : $(el).text().trim();
 
+            // Decode HTML entities
+            descriptionText = decodeHtmlEntities(descriptionText);
             // Clean up extra whitespaces and newlines
             descriptionText = descriptionText.replace(/\s+/g, ' ').substring(0, 150).trim();
             // Clean up trailing commas, ellipses, and other non-alphanumeric chars at the end
