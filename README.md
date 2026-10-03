@@ -188,7 +188,7 @@ npx playwright test
 
 ### Tela Início
 - Dashboard com estatísticas (paróquias, padres, missas)
-- **NOVO:** Sessão "Notícias da Diocese" que exibe os destaques raspados diretamente do portal da Diocese com imagens e links
+- **NOVO:** Sessão "Notícias da Diocese" que exibe os destaques raspados diretamente do portal da Diocese com imagens e links. Agora com o novo "Lembrete de Leitura (10s)", usando notificações locais para lembrar de ler a notícia mais tarde.
 - Cards clicáveis para navegação rápida
 - Seção de acesso rápido (Missa domingo, **Lembrete diário e Lembretes de Confissão/Missa com notificações locais**, ligar, email)
 - Pull-to-refresh para atualizar dados
@@ -275,34 +275,34 @@ O app possui interface moderna com:
 
 ### Screenshots (Web Output E2E Test)
 **Home Screen**
-![Home Screen](mobile/screenshots/home_full.png?v=17)
+![Home Screen](mobile/screenshots/home_full.png?v=18)
 
 **News Section**
-![News Section](mobile/screenshots/news_section.png?v=17)
+![News Section](mobile/screenshots/news_section.png?v=18)
 
 **Igrejas Screen**
-![Igrejas Screen](mobile/screenshots/churches_full.png?v=17)
+![Igrejas Screen](mobile/screenshots/churches_full.png?v=18)
 
 **Padres Screen**
-![Padres Screen](mobile/screenshots/priests_full.png?v=17)
+![Padres Screen](mobile/screenshots/priests_full.png?v=18)
 
 **Missas Screen**
-![Missas Screen](mobile/screenshots/masses_full.png?v=17)
+![Missas Screen](mobile/screenshots/masses_full.png?v=18)
 
 **Missas (Empty State)**
-![Missas (Empty State)](mobile/screenshots/masses_empty.png?v=17)
+![Missas (Empty State)](mobile/screenshots/masses_empty.png?v=18)
 
 **Igrejas (Empty State)**
-![Igrejas (Empty State)](mobile/screenshots/churches_empty.png?v=17)
+![Igrejas (Empty State)](mobile/screenshots/churches_empty.png?v=18)
 
 **Padres (Empty State)**
-![Padres (Empty State)](mobile/screenshots/priests_empty.png?v=17)
+![Padres (Empty State)](mobile/screenshots/priests_empty.png?v=18)
 
 **Igreja Próxima**
-![Igreja Próxima](mobile/screenshots/churches_nearby.png?v=17)
+![Igreja Próxima](mobile/screenshots/churches_nearby.png?v=18)
 
 **Igreja Próxima (Permissão Negada)**
-![Igreja Próxima Permissão Negada](mobile/screenshots/churches_nearby_denied.png?v=17)
+![Igreja Próxima Permissão Negada](mobile/screenshots/churches_nearby_denied.png?v=18)
 
 ## Licença
 
