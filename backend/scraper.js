@@ -81,7 +81,7 @@ const scrapeNews = async () => {
             if (!title || title === '') {
                 // Fallback to the h2 text itself if a tag is empty or missing
                 console.log('Fallback: h2.post_title a tag missing or empty, using h2 text instead');
-                titleElement = $(el).find('h2.post_title');
+                titleElement = $(el).find('h1.title, h2.post_title, .title');
                 title = titleElement.length > 0 ? titleElement.text().trim() : 'Sem título disponível';
             }
             if (link === '#') {
@@ -106,9 +106,10 @@ const scrapeNews = async () => {
             // Decode HTML entities
             descriptionText = decodeHtmlEntities(descriptionText);
             // Clean up extra whitespaces and newlines
-            descriptionText = descriptionText.replace(/\s+/g, ' ').substring(0, 150).trim();
-            // Clean up trailing commas, ellipses, and other non-alphanumeric chars at the end
-            descriptionText = descriptionText.replace(/[,.;\-]+$/g, '').trim();
+            descriptionText = descriptionText.replace(/\s+/g, ' ').trim();
+            // Clean up trailing commas, ellipses, and other non-alphanumeric chars at the end, without cutting words in half
+            descriptionText = descriptionText.length > 150 ? descriptionText.substring(0, 150).replace(/\s+\S*$/, '') + '...' : descriptionText;
+            descriptionText = descriptionText.replace(/[,;\-]+$/g, '').trim();
 
             const description = descriptionText ? descriptionText.trim() : 'Sem descrição disponível';
 
@@ -122,7 +123,7 @@ const scrapeNews = async () => {
                 // Matches "12 de Agosto", "12 de agosto de 2024", "12/08/2024", "12/08", "Agosto de 2024"
                 const fullText = (description + ' ' + title).replace(/\s+/g, ' ');
                 // Improved regexes to handle extra spaces and more formats
-                const dateMatch = fullText.match(/(\d{1,2}(,\s*\d{1,2})*\s*e\s*)?\d{1,2}\s*de\s*[a-zA-ZçÇ]+\s*(de\s*\d{4})?/i);
+                const dateMatch = fullText.match(/(?:[A-Za-z]+-feira,\s*)?(\d{1,2}(,\s*\d{1,2})*\s*e\s*)?\d{1,2}\s*de\s*[a-zA-ZçÇ]+\s*(de\s*\d{4})?/i);
                 const shortDateMatch = fullText.match(/\d{1,2}\s*\/\s*\d{1,2}(\s*\/\s*\d{2,4})?/);
                 const monthYearMatch = fullText.match(/[a-zA-ZçÇ]+\s+(de\s+)?\d{4}/i);
                 const fallbackDateMatch = fullText.match(/\d{2}\s*\/\s*\d{2}\s*\/\s*\d{4}/);
