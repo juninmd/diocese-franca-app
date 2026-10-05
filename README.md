@@ -51,6 +51,7 @@ Aplicativo completo para a Diocese de Franca com backend API REST e app React Na
 - Seção de acesso rápido na home
 - Badges de estatísticas clicáveis
 - Testes E2E atualizados com Playwright, incluindo cenários específicos para empty states e screenshots regeradas com sucesso.
+- Scraper (`backend/scraper.js`) aprimorado com blocos de `try...catch` robustos na lógica de extração de data, prevenindo falhas silenciosas na varredura.
 - **Igrejas próximas ("Perto de mim")**: novo filtro em `ChurchesScreen.js` que usa `expo-location` (`LocationService.js`) para pedir a localização do usuário e listar as paróquias ordenadas por distância, com badge de distância e a próxima missa de cada uma. Estados vazios acolhedores para permissão negada/timeout, com botão de tentar novamente.
 - **Card "Igreja mais próxima" na Home**: botão que localiza o usuário e destaca a paróquia mais próxima com distância e horário da próxima missa, navegando direto para os detalhes dela.
 - **Próxima missa na tela de detalhes**: banner em `ChurchDetailScreen.js` mostrando a próxima missa (dia, horário e "em quanto tempo"), calculada a partir dos horários cadastrados.
@@ -275,34 +276,34 @@ O app possui interface moderna com:
 
 ### Screenshots (Web Output E2E Test)
 **Home Screen**
-![Home Screen](mobile/screenshots/home_full.png?v=19)
+![Home Screen](mobile/screenshots/home_full.png?v=20)
 
 **News Section**
-![News Section](mobile/screenshots/news_section.png?v=19)
+![News Section](mobile/screenshots/news_section.png?v=20)
 
 **Igrejas Screen**
-![Igrejas Screen](mobile/screenshots/churches_full.png?v=19)
+![Igrejas Screen](mobile/screenshots/churches_full.png?v=20)
 
 **Padres Screen**
-![Padres Screen](mobile/screenshots/priests_full.png?v=19)
+![Padres Screen](mobile/screenshots/priests_full.png?v=20)
 
 **Missas Screen**
-![Missas Screen](mobile/screenshots/masses_full.png?v=19)
+![Missas Screen](mobile/screenshots/masses_full.png?v=20)
 
 **Missas (Empty State)**
-![Missas (Empty State)](mobile/screenshots/masses_empty.png?v=19)
+![Missas (Empty State)](mobile/screenshots/masses_empty.png?v=20)
 
 **Igrejas (Empty State)**
-![Igrejas (Empty State)](mobile/screenshots/churches_empty.png?v=19)
+![Igrejas (Empty State)](mobile/screenshots/churches_empty.png?v=20)
 
 **Padres (Empty State)**
-![Padres (Empty State)](mobile/screenshots/priests_empty.png?v=19)
+![Padres (Empty State)](mobile/screenshots/priests_empty.png?v=20)
 
 **Igreja Próxima**
-![Igreja Próxima](mobile/screenshots/churches_nearby.png?v=19)
+![Igreja Próxima](mobile/screenshots/churches_nearby.png?v=20)
 
 **Igreja Próxima (Permissão Negada)**
-![Igreja Próxima Permissão Negada](mobile/screenshots/churches_nearby_denied.png?v=19)
+![Igreja Próxima Permissão Negada](mobile/screenshots/churches_nearby_denied.png?v=20)
 
 ## Licença
 
