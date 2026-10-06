@@ -715,7 +715,7 @@ const styles = StyleSheet.create({
   },
   newsCard: {
     backgroundColor: '#fff',
-    borderRadius: 16,
+    borderRadius: 20,
     width: 320,
     elevation: 4,
     shadowColor: '#000',
