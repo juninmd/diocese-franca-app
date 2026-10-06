@@ -61,7 +61,7 @@ Aplicativo completo para a Diocese de Franca com backend API REST e app React Na
 - **Netlify**: O projeto já encontra-se pré-configurado para ser compilado e entregue como Progressive Web App (PWA) / Single Page Application usando `npx expo export -p web` na pasta `mobile/`. A configuração para Netlify está estabelecida na raiz em `netlify.toml`, que mapeia corretamente o redirecionamento `/*` para `/index.html` (resolvendo roteamento client-side) e define a pasta de publicação como `mobile/dist`. Todas as dependências necessárias para Web (`react-native-web`, `react-dom`, `@expo/metro-runtime`) estão mantidas de forma compatível.
 
 ### Backend
-- Scraper autônomo aprimorado (`backend/scraper.js`) para capturar data, imagens (`data-src`) e descrição (`.event_date` e `.post_text p`) garantindo fallbacks robustos inclusive com regex aprimorada para reconhecer dias da semana (e.g. "quarta-feira") junto de múltiplas datas ("2, 3 e 4 de outubro") e datas curtas, gerando logs de debug das etapas para facilitar manutenção. Além de fallback para imagens ausentes e melhor tratamento e limpeza de strings (espaçamentos extras na descrição, usando word-boundary para evitar cortes de palavras no meio ao limitar em 150 caracteres). O script agora corre via invocação inline exportando o modulo e finalizando limpo. Usa a classe `.section_post_left` para maior confiabilidade (com fallback adicional para a classe `.noticia_item` e também extraindo diretamente o texto de `.title`, `h1.title` ou `h2.post_title` caso a tag `a` não esteja presente, além do uso da data atual caso os regex de data falhem) e bloca a execução individual em `try/catch` com timeout de 20s. Foi adicionado também um **mecanismo de tentativas (retry loop)** para a requisição de rede inicial, tentando até 3 vezes caso o site da Diocese apresente falhas intermitentes, retornando um array vazio de fallback apenas se o site original continuar inacessível para evitar crashs na API.
+- Scraper autônomo aprimorado (`backend/scraper.js`) para capturar data, imagens (`data-src`) e descrição (`.event_date` e `.post_text p`) garantindo fallbacks robustos inclusive com regex aprimorada para reconhecer dias da semana (e.g. "quarta-feira") junto de múltiplas datas com preposições como "e" ou "ou" ("2, 3 e 4 de outubro", "12 ou 13 de agosto") e datas curtas, gerando logs de debug das etapas para facilitar manutenção. Além de fallback para imagens ausentes e melhor tratamento e limpeza de strings (espaçamentos extras na descrição, usando word-boundary para evitar cortes de palavras no meio ao limitar em 150 caracteres). O script agora corre via invocação inline exportando o modulo e finalizando limpo. Usa a classe `.section_post_left` para maior confiabilidade (com fallback adicional para a classe `.noticia_item` e também extraindo diretamente o texto de `.title`, `h1.title` ou `h2.post_title` caso a tag `a` não esteja presente, além do uso da data atual caso os regex de data falhem) e bloca a execução individual em `try/catch` com timeout de 20s. Foi adicionado também um **mecanismo de tentativas (retry loop)** para a requisição de rede inicial, tentando até 3 vezes caso o site da Diocese apresente falhas intermitentes, retornando um array vazio de fallback apenas se o site original continuar inacessível para evitar crashs na API.
 - Endpoint de health check `/api/health`
 - Compressão gzip automática
 - Helmet.js para headers de segurança
@@ -276,34 +276,37 @@ O app possui interface moderna com:
 
 ### Screenshots (Web Output E2E Test)
 **Home Screen**
-![Home Screen](mobile/screenshots/home_full.png?v=20)
+![Home Screen](mobile/screenshots/home_full.png?v=21)
 
 **News Section**
-![News Section](mobile/screenshots/news_section.png?v=20)
+![News Section](mobile/screenshots/news_section.png?v=21)
 
 **Igrejas Screen**
-![Igrejas Screen](mobile/screenshots/churches_full.png?v=20)
+![Igrejas Screen](mobile/screenshots/churches_full.png?v=21)
 
 **Padres Screen**
-![Padres Screen](mobile/screenshots/priests_full.png?v=20)
+![Padres Screen](mobile/screenshots/priests_full.png?v=21)
 
 **Missas Screen**
-![Missas Screen](mobile/screenshots/masses_full.png?v=20)
+![Missas Screen](mobile/screenshots/masses_full.png?v=21)
 
 **Missas (Empty State)**
-![Missas (Empty State)](mobile/screenshots/masses_empty.png?v=20)
+![Missas (Empty State)](mobile/screenshots/masses_empty.png?v=21)
+
+**Lembrete de Missa**
+![Lembrete de Missa](mobile/screenshots/masses_lembrete.png?v=21)
 
 **Igrejas (Empty State)**
-![Igrejas (Empty State)](mobile/screenshots/churches_empty.png?v=20)
+![Igrejas (Empty State)](mobile/screenshots/churches_empty.png?v=21)
 
 **Padres (Empty State)**
-![Padres (Empty State)](mobile/screenshots/priests_empty.png?v=20)
+![Padres (Empty State)](mobile/screenshots/priests_empty.png?v=21)
 
 **Igreja Próxima**
-![Igreja Próxima](mobile/screenshots/churches_nearby.png?v=20)
+![Igreja Próxima](mobile/screenshots/churches_nearby.png?v=21)
 
 **Igreja Próxima (Permissão Negada)**
-![Igreja Próxima Permissão Negada](mobile/screenshots/churches_nearby_denied.png?v=20)
+![Igreja Próxima Permissão Negada](mobile/screenshots/churches_nearby_denied.png?v=21)
 
 ## Licença
 

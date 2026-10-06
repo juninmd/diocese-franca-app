@@ -1,6 +1,24 @@
 [
   {
     "id": 1,
+    "title": "Encontro da Mãe Peregrina de Schoenstatt celebra 10 anos do Santuário Paroquial",
+    "category": "Encontro da Mãe Peregrina",
+    "description": "Atividade reuniu fiéis na Paróquia Menino Jesus de Praga e Santa Efigênia e contou com a presença da Imagem Auxiliar Diocesana da Mãe Rainha",
+    "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6083&id_orgao=1",
+    "image": "https://diocesefranca.org.br/images/20261005214341_1000377419.png",
+    "date": "5 de outubro"
+  },
+  {
+    "id": 2,
+    "title": "Ministros da Eucaristia da Forania Santa Gianna renovam compromisso com o serviço litúrgico",
+    "category": "Ministros da Eucaristia",
+    "description": "Encontro realizado na Paróquia São Judas Tadeu promoveu formação sobre liturgia e o exercício do ministério",
+    "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6082&id_orgao=1",
+    "image": "https://diocesefranca.org.br/images/20261005174811_1000377164.png",
+    "date": "5 de outubro"
+  },
+  {
+    "id": 3,
     "title": "Bazar “Juntos para Transformar” arrecada recursos para projetos da Pastoral do Menor",
     "category": "Pastoral do Menor",
     "description": "Ação acontece nos dias 2, 3, 9 e 10 de outubro, com calçados masculinos novos a R$ 20",
@@ -9,7 +27,7 @@
     "date": "2, 3, 9 e 10 de outubro"
   },
   {
-    "id": 2,
+    "id": 4,
     "title": "Mãe Rainha celebra 25 anos de caminhada com encontro forânico em Pedregulho",
     "category": "Mãe Rainha",
     "description": "Cerca de 150 pessoas participaram de um dia de formação, oração, testemunhos e confraternização em torno do Apostolado da Mãe Rainha",
@@ -18,30 +36,12 @@
     "date": "30 de setembro"
   },
   {
-    "id": 3,
+    "id": 5,
     "title": "COMUNICAR A DIGNIDADE HUMANA",
     "category": "47ª ASSEMBLEIA ECLESIAL",
     "description": "DIOCESE DE FRANCA PARTICIPA DA 47ª ASSEMBLEIA ECLESIAL DO REGIONAL SUL 1",
     "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6077&id_orgao=1",
     "image": "https://diocesefranca.org.br/images/20260929221056_Untitled%20design.png",
     "date": "29 de setembro"
-  },
-  {
-    "id": 4,
-    "title": "Encontro Vocacional reúne 39 jovens no Seminário Diocesano de Franca",
-    "category": "Pastoral Vocacional",
-    "description": "Participantes de Franca e cidades da região viveram um dia de oração, reflexão e partilha sobre o chamado de Deus",
-    "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6074&id_orgao=1",
-    "image": "https://diocesefranca.org.br/images/20260923190632_1000369034.png",
-    "date": "23 de setembro"
-  },
-  {
-    "id": 5,
-    "title": "Paróquia Rosa Mística recebe imagem e relíquia de São Carlo Acutis",
-    "category": "São Carlo Acutis",
-    "description": "Comunidade viveu momentos de oração e devoção com a presença da imagem e de uma relíquia de primeiro grau do jovem santo",
-    "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6075&id_orgao=1",
-    "image": "https://diocesefranca.org.br/images/20260923194605_1000369067.png",
-    "date": "23 de setembro"
   }
 ]

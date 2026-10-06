@@ -473,7 +473,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 18,
-    paddingVertical: 14,
+    paddingVertical: 18,
     borderBottomWidth: 1,
     borderBottomColor: '#f0f4f8',
     elevation: 2,

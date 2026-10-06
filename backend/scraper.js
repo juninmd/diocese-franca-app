@@ -124,7 +124,7 @@ const scrapeNews = async () => {
                     // Matches "12 de Agosto", "12 de agosto de 2024", "12/08/2024", "12/08", "Agosto de 2024"
                     const fullText = (description + ' ' + title).replace(/\s+/g, ' ');
                     // Improved regexes to handle extra spaces and more formats
-                    const dateMatch = fullText.match(/(?:[A-Za-z]+-feira,\s*)?(\d{1,2}(,\s*\d{1,2})*\s*e\s*)?\d{1,2}\s*de\s*[a-zA-ZçÇ]+\s*(de\s*\d{4})?/i);
+                    const dateMatch = fullText.match(/(?:[A-Za-z]+-feira,\s*)?(\d{1,2}(,\s*\d{1,2})*\s*(e|ou)\s*)?\d{1,2}\s*de\s*[a-zA-ZçÇ]+\s*(de\s*\d{4})?/i);
                     const shortDateMatch = fullText.match(/\d{1,2}\s*\/\s*\d{1,2}(\s*\/\s*\d{2,4})?/);
                     const monthYearMatch = fullText.match(/[a-zA-ZçÇ]+\s+(de\s+)?\d{4}/i);
                     const fallbackDateMatch = fullText.match(/\d{2}\s*\/\s*\d{2}\s*\/\s*\d{4}/);
