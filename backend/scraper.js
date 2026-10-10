@@ -117,6 +117,16 @@ const scrapeNews = async () => {
             let dateElement = $(el).find('.event_date, .date, .post_date').first();
             let dateText = dateElement.length > 0 ? dateElement.text().trim() : '';
 
+            // Extract from h2 text directly if event_date is empty but h2 text contains a date pattern
+            if (!dateText || dateText === '') {
+                const titleTextForDate = titleElement.length > 0 ? titleElement.text().trim() : '';
+                const h2DateMatch = titleTextForDate.match(/\d{1,2}\s*de\s*[a-zA-ZçÇ]+/i);
+                if (h2DateMatch) {
+                    dateText = h2DateMatch[0];
+                    console.log('  -> Found date via h2 text fallback:', dateText);
+                }
+            }
+
             if (!dateText || dateText === '') {
                 try {
                     console.log('Fallback: date extraction using regex on title/description/image for: ', title.substring(0, 30) + '...');
