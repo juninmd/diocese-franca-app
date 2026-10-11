@@ -411,6 +411,27 @@ export default function HomeScreen({ navigation }) {
               <Ionicons name="notifications" size={28} color="#e67e22" />
               <Text style={styles.quickText}>Lembrete{'\n'}Teste 5s</Text>
             </TouchableOpacity>
+            <TouchableOpacity activeOpacity={0.8}
+              style={styles.quickItem}
+              onPress={async () => {
+                const { status } = await Notifications.requestPermissionsAsync();
+                if (status === 'granted') {
+                  await Notifications.scheduleNotificationAsync({
+                    content: {
+                      title: 'Lembrete Bíblia 📖',
+                      body: 'Não se esqueça de ler o evangelho de hoje!',
+                    },
+                    trigger: { seconds: 5 },
+                  });
+                  toast.success('Lembrete bíblico configurado para 5s!');
+                } else {
+                  toast.error('Permissão para notificações negada.');
+                }
+              }}
+            >
+              <Ionicons name="book" size={28} color="#8e44ad" />
+              <Text style={styles.quickText}>Lembrete{'\n'}Bíblia</Text>
+            </TouchableOpacity>
           </View>
         </View>
 
