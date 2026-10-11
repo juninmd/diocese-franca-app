@@ -98,7 +98,6 @@ export default function PriestsScreen({ navigation }) {
       <TouchableOpacity activeOpacity={0.8}
         style={styles.card}
         onPress={() => navigation.navigate('PriestDetail', { priestId: item.id })}
-
       >
         <View style={styles.avatarContainer}>
           <Text style={styles.avatarText}>
@@ -182,7 +181,6 @@ export default function PriestsScreen({ navigation }) {
 
       <View style={styles.filterRow}>
         <TouchableOpacity activeOpacity={0.8}
-
           style={[styles.filterChip, !showFavorites && styles.filterChipActive]}
           onPress={() => setShowFavorites(false)}
         >
@@ -192,7 +190,6 @@ export default function PriestsScreen({ navigation }) {
           </Text>
         </TouchableOpacity>
         <TouchableOpacity activeOpacity={0.8}
-
           style={[styles.filterChip, showFavorites && styles.filterChipActive]}
           onPress={() => setShowFavorites(true)}
         >
