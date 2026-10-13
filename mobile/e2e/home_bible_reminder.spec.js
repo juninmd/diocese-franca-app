@@ -6,7 +6,7 @@ test.describe('Home Screen Bible Reminder', () => {
     await page.goto('http://localhost:3001');
 
     // Wait for the app to load
-    await expect(page.locator('text=Diocese de Franca').first()).toBeVisible({ timeout: 15000 });
+    await expect(page.getByText(/Diocese de Franca/i).first()).toBeVisible({ timeout: 15000 });
     await page.waitForTimeout(1000);
 
     // Scroll to the Quick Access section

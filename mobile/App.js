@@ -48,6 +48,24 @@ export default function App() {
           });
           await AsyncStorage.setItem('hasScheduledDailyReminder', 'true');
         }
+
+        // Schedule weekend reminder
+        const hasScheduledWeekend = await AsyncStorage.getItem('hasScheduledWeekendReminder');
+        if (!hasScheduledWeekend) {
+          await Notifications.scheduleNotificationAsync({
+            content: {
+              title: 'Fim de semana chegou! 🙏',
+              body: 'Confira os horários de missa da sua paróquia.',
+            },
+            trigger: {
+              weekday: 6,
+              hour: 18,
+              minute: 0,
+              repeats: true,
+            },
+          });
+          await AsyncStorage.setItem('hasScheduledWeekendReminder', 'true');
+        }
       }
     }
     requestPermissionsAndWelcome();

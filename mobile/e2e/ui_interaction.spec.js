@@ -3,7 +3,7 @@ const { test, expect } = require('@playwright/test');
 test('ui interaction uses toast and triggers local notification schedule', async ({ page }) => {
   await page.goto('http://localhost:3001/');
 
-  await expect(page.locator('text=Diocese de Franca').first()).toBeVisible({ timeout: 10000 });
+  await expect(page.getByText(/Diocese de Franca/i).first()).toBeVisible({ timeout: 10000 });
   await page.waitForTimeout(1000);
 
   // React Native Web does not render pure text properly with newlines in text locators easily.
@@ -27,7 +27,7 @@ test('ui interaction uses toast and triggers local notification schedule', async
 
 test('priest detail local notification scheduling works', async ({ page }) => {
   await page.goto('http://localhost:3001/');
-  await expect(page.locator('text=Diocese de Franca').first()).toBeVisible({ timeout: 10000 });
+  await expect(page.getByText(/Diocese de Franca/i).first()).toBeVisible({ timeout: 10000 });
 
   await page.locator('div:text-is("Padres")').first().click({ force: true });
   await page.waitForTimeout(2000);
