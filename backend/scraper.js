@@ -175,11 +175,7 @@ const scrapeNews = async () => {
                     }
                 } catch (dateErr) {
                     console.error('Error during date extraction fallback:', dateErr.message);
-                    const today = new Date();
-                    const day = String(today.getDate()).padStart(2, '0');
-                    const months = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
-                    const month = months[today.getMonth()];
-                    dateText = `${day} de ${month}`;
+                    dateText = '';
                 }
             }
             let date = dateText ? dateText : 'Sem informação de data';

@@ -4,7 +4,7 @@ test('navigate to home and verify news section', async ({ page, context }) => {
   await context.grantPermissions(['notifications']);
   await page.goto('http://localhost:3001/');
 
-  await expect(page.locator('text=Diocese de Franca').first()).toBeVisible({ timeout: 10000 });
+  await expect(page.getByText(/Diocese de Franca/i).first()).toBeVisible({ timeout: 10000 });
 
   const emptyState = page.getByText('Puxa, não conseguimos encontrar notícias no momento.');
 

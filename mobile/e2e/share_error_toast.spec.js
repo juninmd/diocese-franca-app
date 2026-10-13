@@ -2,7 +2,7 @@ const { test, expect } = require('@playwright/test');
 
 test('clicking share button shows empathetic error toast on PriestsScreen', async ({ page }) => {
   await page.goto('http://localhost:3001/');
-  await expect(page.locator('text=Diocese de Franca').first()).toBeVisible({ timeout: 10000 });
+  await expect(page.getByText(/Diocese de Franca/i).first()).toBeVisible({ timeout: 10000 });
 
   // Navigate to Padres
   await page.locator('div:text-is("Padres")').first().click({ force: true });

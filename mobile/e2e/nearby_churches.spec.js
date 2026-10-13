@@ -8,7 +8,7 @@ test('shows the nearest church when geolocation is granted', async ({ page, cont
   await context.setGeolocation({ latitude: -20.5396, longitude: -47.4014 });
 
   await page.goto(BASE_URL);
-  await expect(page.locator('text=Diocese de Franca').first()).toBeVisible({ timeout: 10000 });
+  await expect(page.getByText(/Diocese de Franca/i).first()).toBeVisible({ timeout: 10000 });
 
   await page.locator('text=Igrejas').first().click({ force: true });
   await page.waitForTimeout(2000);
@@ -22,7 +22,7 @@ test('shows the nearest church when geolocation is granted', async ({ page, cont
 test('shows an empathetic message when geolocation permission is denied', async ({ page }) => {
   // Nenhuma permissão de geolocalização concedida neste contexto.
   await page.goto(BASE_URL);
-  await expect(page.locator('text=Diocese de Franca').first()).toBeVisible({ timeout: 10000 });
+  await expect(page.getByText(/Diocese de Franca/i).first()).toBeVisible({ timeout: 10000 });
 
   await page.locator('text=Igrejas').first().click({ force: true });
   await page.waitForTimeout(2000);

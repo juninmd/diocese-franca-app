@@ -738,14 +738,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderRadius: 20,
     width: 320,
-    elevation: 4,
+    elevation: 6,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.15,
-    shadowRadius: 8,
+    shadowOpacity: 0.2,
+    shadowRadius: 10,
     overflow: 'hidden',
     marginRight: 20,
-    paddingBottom: 8,
+    paddingBottom: 12,
   },
   newsImage: {
     width: '100%',
@@ -754,7 +754,7 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
   },
   newsContent: {
-    padding: 16,
+    padding: 20,
   },
   newsTitle: {
     fontSize: 14,

@@ -80,7 +80,7 @@ These guidelines are designed to ensure the consistent, efficient, and high-qual
 *   All mobile web deployments must have coverage with Playwright.
 *   Tests reside in `mobile/e2e/`.
 *   Always test against the exported web bundle `npx expo export -p web` running on a local server (e.g., using `npx serve dist -p 3001`).
-*   Use `page.screenshot` to keep the visual documentation up to date in `screenshots/`. Make sure to configure exact matches for text locators (`getByText(..., { exact: true })`) to avoid strict mode violations.
+*   Use `page.screenshot` to keep the visual documentation up to date in `screenshots/`. Make sure to use robust regex locators (e.g. `getByText(/Diocese de Franca/i)`) for texts because React Native Web renders multiline strings in a way that breaks exact text locators.
 
 ## 12. App Features & Services
 

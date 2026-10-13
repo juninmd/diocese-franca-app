@@ -2,7 +2,7 @@ const { test, expect } = require('@playwright/test');
 
 test('navigate to igrejas and padres and verify empty states', async ({ page }) => {
   await page.goto('http://localhost:3001/');
-  await expect(page.locator('text=Diocese de Franca').first()).toBeVisible({ timeout: 10000 });
+  await expect(page.getByText(/Diocese de Franca/i).first()).toBeVisible({ timeout: 10000 });
 
   // Igrejas Empty State
   await page.locator('div:text-is("Igrejas")').first().click({ force: true });
