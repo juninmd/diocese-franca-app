@@ -277,37 +277,37 @@ O app possui interface moderna com:
 
 ### Screenshots (Web Output E2E Test)
 **Home Screen**
-![Home Screen](mobile/screenshots/home_full.png?v=27)
+![Home Screen](mobile/screenshots/home_full.png?v=28)
 
 **News Section**
-![News Section](mobile/screenshots/news_section.png?v=27)
+![News Section](mobile/screenshots/news_section.png?v=28)
 
 **Igrejas Screen**
-![Igrejas Screen](mobile/screenshots/churches_full.png?v=27)
+![Igrejas Screen](mobile/screenshots/churches_full.png?v=28)
 
 **Padres Screen**
-![Padres Screen](mobile/screenshots/priests_full.png?v=27)
+![Padres Screen](mobile/screenshots/priests_full.png?v=28)
 
 **Missas Screen**
-![Missas Screen](mobile/screenshots/masses_full.png?v=27)
+![Missas Screen](mobile/screenshots/masses_full.png?v=28)
 
 **Missas (Empty State)**
-![Missas (Empty State)](mobile/screenshots/masses_empty.png?v=27)
+![Missas (Empty State)](mobile/screenshots/masses_empty.png?v=28)
 
 **Lembrete de Missa**
-![Lembrete de Missa](mobile/screenshots/masses_lembrete.png?v=27)
+![Lembrete de Missa](mobile/screenshots/masses_lembrete.png?v=28)
 
 **Igrejas (Empty State)**
-![Igrejas (Empty State)](mobile/screenshots/churches_empty.png?v=27)
+![Igrejas (Empty State)](mobile/screenshots/churches_empty.png?v=28)
 
 **Padres (Empty State)**
-![Padres (Empty State)](mobile/screenshots/priests_empty.png?v=27)
+![Padres (Empty State)](mobile/screenshots/priests_empty.png?v=28)
 
 **Igreja Próxima**
-![Igreja Próxima](mobile/screenshots/churches_nearby.png?v=27)
+![Igreja Próxima](mobile/screenshots/churches_nearby.png?v=28)
 
 **Igreja Próxima (Permissão Negada)**
-![Igreja Próxima Permissão Negada](mobile/screenshots/churches_nearby_denied.png?v=27)
+![Igreja Próxima Permissão Negada](mobile/screenshots/churches_nearby_denied.png?v=28)
 
 ## Licença
 
