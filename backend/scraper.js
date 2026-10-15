@@ -25,7 +25,11 @@ const decodeHtmlEntities = (text) => {
         .replace(/&#8220;/g, '"')
         .replace(/&#8221;/g, '"')
         .replace(/&#8211;/g, '-')
-        .replace(/&nbsp;/g, ' ');
+        .replace(/&nbsp;/g, ' ')
+        .replace(/&rsquo;/g, "'")
+        .replace(/&lsquo;/g, "'")
+        .replace(/&rdquo;/g, '"')
+        .replace(/&ldquo;/g, '"');
 };
 
 const scrapeNews = async () => {
