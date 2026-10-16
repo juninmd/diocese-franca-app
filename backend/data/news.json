@@ -1,6 +1,33 @@
 [
   {
     "id": 1,
+    "title": "Frei Agostinho Morosini toma posse como pároco da Paróquia Nossa Senhora Aparecida, em Franca",
+    "category": "Frei Agostinho Morosini",
+    "description": "Celebração aconteceu no dia 10 de outubro, durante a novena em honra à padroeira, e marcou o início de uma nova etapa na comunidade da Capelinha.",
+    "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6089&id_orgao=1",
+    "image": "https://diocesefranca.org.br/images/20261015211307_1000384887.png",
+    "date": "10 de outubro"
+  },
+  {
+    "id": 2,
+    "title": "Carmelo Santa Teresa promove jantar beneficente para arrecadar recursos para sua manutenção",
+    "category": "Carmelo Santa Teresa",
+    "description": "Evento será realizado no dia 14 de novembro, no Salão Paroquial Santa Luzia, em Franca. Os convites custam R$ 60, e crianças de até 10 anos não pagam.",
+    "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6091&id_orgao=1",
+    "image": "https://diocesefranca.org.br/images/20261015214033_1000384949.png",
+    "date": "14 de novembro"
+  },
+  {
+    "id": 3,
+    "title": "Formação reúne 78 salmistas de três foranias da Diocese de Franca",
+    "category": "Salmistas",
+    "description": "Encontro na Paróquia São Vicente de Paulo abordou o Guia Litúrgico-Pastoral, leitura de partituras e técnicas vocais para o canto litúrgico.",
+    "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6090&id_orgao=1",
+    "image": "https://diocesefranca.org.br/images/20261015212615_1000384917.png",
+    "date": "15 de outubro"
+  },
+  {
+    "id": 4,
     "title": "Encontro da Mãe Peregrina de Schoenstatt celebra 10 anos do Santuário Paroquial",
     "category": "Encontro da Mãe Peregrina",
     "description": "Atividade reuniu fiéis na Paróquia Menino Jesus de Praga e Santa Efigênia e contou com a presença da Imagem Auxiliar Diocesana da Mãe Rainha",
@@ -9,39 +36,12 @@
     "date": "5 de outubro"
   },
   {
-    "id": 2,
+    "id": 5,
     "title": "Ministros da Eucaristia da Forania Santa Gianna renovam compromisso com o serviço litúrgico",
     "category": "Ministros da Eucaristia",
     "description": "Encontro realizado na Paróquia São Judas Tadeu promoveu formação sobre liturgia e o exercício do ministério",
     "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6082&id_orgao=1",
     "image": "https://diocesefranca.org.br/images/20261005174811_1000377164.png",
     "date": "5 de outubro"
-  },
-  {
-    "id": 3,
-    "title": "Bazar “Juntos para Transformar” arrecada recursos para projetos da Pastoral do Menor",
-    "category": "Pastoral do Menor",
-    "description": "Ação acontece nos dias 2, 3, 9 e 10 de outubro, com calçados masculinos novos a R$ 20",
-    "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6081&id_orgao=1",
-    "image": "https://diocesefranca.org.br/images/20260930195605_1000373322.png",
-    "date": "2, 3, 9 e 10 de outubro"
-  },
-  {
-    "id": 4,
-    "title": "Mãe Rainha celebra 25 anos de caminhada com encontro forânico em Pedregulho",
-    "category": "Mãe Rainha",
-    "description": "Cerca de 150 pessoas participaram de um dia de formação, oração, testemunhos e confraternização em torno do Apostolado da Mãe Rainha",
-    "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6080&id_orgao=1",
-    "image": "https://diocesefranca.org.br/images/20260930181902_1000373246.png",
-    "date": "30 de setembro"
-  },
-  {
-    "id": 5,
-    "title": "COMUNICAR A DIGNIDADE HUMANA",
-    "category": "47ª ASSEMBLEIA ECLESIAL",
-    "description": "DIOCESE DE FRANCA PARTICIPA DA 47ª ASSEMBLEIA ECLESIAL DO REGIONAL SUL 1",
-    "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6077&id_orgao=1",
-    "image": "https://diocesefranca.org.br/images/20260929221056_Untitled%20design.png",
-    "date": "29 de setembro"
   }
 ]
