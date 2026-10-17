@@ -4,6 +4,7 @@ const fs = require('fs');
 const path = require('path');
 
 const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+const { decode } = require('html-entities');
 
 const USER_AGENTS = [
     'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36',
@@ -16,20 +17,7 @@ const USER_AGENTS = [
 // Helper to decode HTML entities in text
 const decodeHtmlEntities = (text) => {
     if (!text) return '';
-    return text
-        .replace(/&amp;/g, '&')
-        .replace(/&lt;/g, '<')
-        .replace(/&gt;/g, '>')
-        .replace(/&quot;/g, '"')
-        .replace(/&#039;/g, "'")
-        .replace(/&#8220;/g, '"')
-        .replace(/&#8221;/g, '"')
-        .replace(/&#8211;/g, '-')
-        .replace(/&nbsp;/g, ' ')
-        .replace(/&rsquo;/g, "'")
-        .replace(/&lsquo;/g, "'")
-        .replace(/&rdquo;/g, '"')
-        .replace(/&ldquo;/g, '"');
+    return decode(text);
 };
 
 const scrapeNews = async () => {
