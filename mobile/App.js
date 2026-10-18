@@ -66,6 +66,40 @@ export default function App() {
           });
           await AsyncStorage.setItem('hasScheduledWeekendReminder', 'true');
         }
+
+        // Schedule Angelus noon reminder
+        const hasScheduledAngelusNoon = await AsyncStorage.getItem('hasScheduledAngelusNoon');
+        if (!hasScheduledAngelusNoon) {
+          await Notifications.scheduleNotificationAsync({
+            content: {
+              title: 'Hora do Ângelus 🙏',
+              body: 'O Anjo do Senhor anunciou a Maria...',
+            },
+            trigger: {
+              hour: 12,
+              minute: 0,
+              repeats: true,
+            },
+          });
+          await AsyncStorage.setItem('hasScheduledAngelusNoon', 'true');
+        }
+
+        // Schedule Angelus evening reminder
+        const hasScheduledAngelusEvening = await AsyncStorage.getItem('hasScheduledAngelusEvening');
+        if (!hasScheduledAngelusEvening) {
+          await Notifications.scheduleNotificationAsync({
+            content: {
+              title: 'Hora do Ângelus 🙏',
+              body: 'O Anjo do Senhor anunciou a Maria...',
+            },
+            trigger: {
+              hour: 18,
+              minute: 0,
+              repeats: true,
+            },
+          });
+          await AsyncStorage.setItem('hasScheduledAngelusEvening', 'true');
+        }
       }
     }
     requestPermissionsAndWelcome();
