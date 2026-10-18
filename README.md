@@ -56,7 +56,7 @@ Aplicativo completo para a Diocese de Franca com backend API REST e app React Na
 - **Igrejas próximas ("Perto de mim")**: novo filtro em `ChurchesScreen.js` que usa `expo-location` (`LocationService.js`) para pedir a localização do usuário e listar as paróquias ordenadas por distância, com badge de distância e a próxima missa de cada uma. Estados vazios acolhedores para permissão negada/timeout, com botão de tentar novamente.
 - **Card "Igreja mais próxima" na Home**: botão que localiza o usuário e destaca a paróquia mais próxima com distância e horário da próxima missa, navegando direto para os detalhes dela.
 - **Próxima missa na tela de detalhes**: banner em `ChurchDetailScreen.js` mostrando a próxima missa (dia, horário e "em quanto tempo"), calculada a partir dos horários cadastrados.
-- **Notificações Locais (Lembrete Diário/Missa/Testes)**: Implementação de lembretes diários (8h da manhã) com `expo-notifications` para incentivo à oração, configurado globalmente em `App.js` na inicialização, e novos botões de acesso rápido ("Lembrete Teste 5s" e "Lembrete Bíblia") na Home. Além disso, a opção "Agendar Visita" nas paróquias e o ícone de sino na tela de horários de missas (`MassesScreen.js`) disparam uma notificação local contextual. As interfaces de usuário também receberam ajustes nas áreas de toque (`padding`) para garantir maior acessibilidade e ergonomia.
+- **Notificações Locais (Lembrete Diário/Missa/Testes)**: Implementação de lembretes diários (8h da manhã) com `expo-notifications` para incentivo à oração, assim como lembretes para a Hora do Ângelus (12h e 18h), configurados globalmente em `App.js` na inicialização, e novos botões de acesso rápido ("Lembrete Teste 5s", "Lembrete Bíblia" e "Lembrete Ângelus") na Home. Além disso, a opção "Agendar Visita" nas paróquias e o ícone de sino na tela de horários de missas (`MassesScreen.js`) disparam uma notificação local contextual. As interfaces de usuário também receberam ajustes nas áreas de toque (`padding`) para garantir maior acessibilidade e ergonomia.
 
 ### Deploy (Web)
 - **Netlify**: O projeto já encontra-se pré-configurado para ser compilado e entregue como Progressive Web App (PWA) / Single Page Application usando `npx expo export -p web` na pasta `mobile/`. A configuração para Netlify está estabelecida na raiz em `netlify.toml`, que mapeia corretamente o redirecionamento `/*` para `/index.html` (resolvendo roteamento client-side) e define a pasta de publicação como `mobile/dist`. Todas as dependências necessárias para Web (`react-native-web`, `react-dom`, `@expo/metro-runtime`) estão mantidas de forma compatível.
@@ -192,7 +192,7 @@ npx playwright test
 - Dashboard com estatísticas (paróquias, padres, missas)
 - **NOVO:** Sessão "Notícias da Diocese" que exibe os destaques raspados diretamente do portal da Diocese com imagens e links. Agora com o novo "Lembrete de Leitura (10s)", usando notificações locais para lembrar de ler a notícia mais tarde.
 - Cards clicáveis para navegação rápida
-- Seção de acesso rápido (Missa domingo, **Lembrete diário e Lembretes de Confissão/Missa com notificações locais**, ligar, email)
+- Seção de acesso rápido (Missa domingo, **Lembretes diários (incluindo Ângelus) e Lembretes de Confissão/Missa com notificações locais**, ligar, email)
 - Pull-to-refresh para atualizar dados
 - Informações de contato da diocese
 
@@ -277,37 +277,37 @@ O app possui interface moderna com:
 
 ### Screenshots (Web Output E2E Test)
 **Home Screen**
-![Home Screen](mobile/screenshots/home_full.png?v=30)
+![Home Screen](mobile/screenshots/home_full.png?v=31)
 
 **News Section**
-![News Section](mobile/screenshots/news_section.png?v=30)
+![News Section](mobile/screenshots/news_section.png?v=31)
 
 **Igrejas Screen**
-![Igrejas Screen](mobile/screenshots/churches_full.png?v=30)
+![Igrejas Screen](mobile/screenshots/churches_full.png?v=31)
 
 **Padres Screen**
-![Padres Screen](mobile/screenshots/priests_full.png?v=30)
+![Padres Screen](mobile/screenshots/priests_full.png?v=31)
 
 **Missas Screen**
-![Missas Screen](mobile/screenshots/masses_full.png?v=30)
+![Missas Screen](mobile/screenshots/masses_full.png?v=31)
 
 **Missas (Empty State)**
-![Missas (Empty State)](mobile/screenshots/masses_empty.png?v=30)
+![Missas (Empty State)](mobile/screenshots/masses_empty.png?v=31)
 
 **Lembrete de Missa**
-![Lembrete de Missa](mobile/screenshots/masses_lembrete.png?v=30)
+![Lembrete de Missa](mobile/screenshots/masses_lembrete.png?v=31)
 
 **Igrejas (Empty State)**
-![Igrejas (Empty State)](mobile/screenshots/churches_empty.png?v=30)
+![Igrejas (Empty State)](mobile/screenshots/churches_empty.png?v=31)
 
 **Padres (Empty State)**
-![Padres (Empty State)](mobile/screenshots/priests_empty.png?v=30)
+![Padres (Empty State)](mobile/screenshots/priests_empty.png?v=31)
 
 **Igreja Próxima**
-![Igreja Próxima](mobile/screenshots/churches_nearby.png?v=30)
+![Igreja Próxima](mobile/screenshots/churches_nearby.png?v=31)
 
 **Igreja Próxima (Permissão Negada)**
-![Igreja Próxima Permissão Negada](mobile/screenshots/churches_nearby_denied.png?v=30)
+![Igreja Próxima Permissão Negada](mobile/screenshots/churches_nearby_denied.png?v=31)
 
 ## Licença
 

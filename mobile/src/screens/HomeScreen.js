@@ -356,6 +356,28 @@ export default function HomeScreen({ navigation }) {
                 if (status === 'granted') {
                   await Notifications.scheduleNotificationAsync({
                     content: {
+                      title: 'Hora do Ângelus 🙏',
+                      body: 'O Anjo do Senhor anunciou a Maria...',
+                    },
+                    trigger: { seconds: 5 },
+                  });
+                  showToast('Lembrete do Ângelus configurado para daqui a 5 segundos.', 'info');
+                } else {
+                  showToast('Permissão para notificações negada.', 'error');
+                }
+              }}
+            >
+              <Ionicons name="time" size={28} color="#8e44ad" />
+              <Text style={styles.quickText}>Lembrete{'\n'}Ângelus</Text>
+            </TouchableOpacity>
+            <TouchableOpacity activeOpacity={0.8}
+              style={styles.quickItem}
+
+              onPress={async () => {
+                const { status } = await Notifications.requestPermissionsAsync();
+                if (status === 'granted') {
+                  await Notifications.scheduleNotificationAsync({
+                    content: {
                       title: 'Teste de Lembrete',
                       body: 'A paz do Senhor esteja com você!',
                     },

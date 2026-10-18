@@ -11,7 +11,9 @@ const USER_AGENTS = [
     'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.5 Safari/605.1.15',
     'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/114.0',
     'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36',
-    'Mozilla/5.0 (iPhone; CPU iPhone OS 16_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.5 Mobile/15E148 Safari/604.1'
+    'Mozilla/5.0 (iPhone; CPU iPhone OS 16_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.5 Mobile/15E148 Safari/604.1',
+    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36 Edg/115.0.1901.188',
+    'Mozilla/5.0 (iPad; CPU OS 16_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.5 Mobile/15E148 Safari/604.1'
 ];
 
 // Helper to decode HTML entities in text
@@ -130,10 +132,14 @@ const scrapeNews = async () => {
                     const shortDateMatch = fullText.match(/\d{1,2}\s*\/\s*\d{1,2}(\s*\/\s*\d{2,4})?/);
                     const monthYearMatch = fullText.match(/[a-zA-ZçÇ]+\s+(de\s+)?\d{4}/i);
                     const fallbackDateMatch = fullText.match(/\d{2}\s*\/\s*\d{2}\s*\/\s*\d{4}/);
+                    const abbrevMonthMatch = fullText.match(/\d{1,2}\s*de\s*[a-zA-ZçÇ]{3}/i);
 
                     if (fallbackDateMatch) {
                         dateText = fallbackDateMatch[0];
                         console.log('  -> Found date via regex (fallback d/m/y):', dateText);
+                    } else if (abbrevMonthMatch) {
+                        dateText = abbrevMonthMatch[0];
+                        console.log('  -> Found date via regex (mês abreviado):', dateText);
                     } else if (dateMatch) {
                         dateText = dateMatch[0];
                         console.log('  -> Found date via regex (extenso):', dateText);
@@ -218,6 +224,7 @@ const scrapeNews = async () => {
 
   } catch (error) {
     console.error('Error scraping news:', error.message);
+    console.error('Error: fallbacks acionados devidos à falha crítica no scraper.');
     if (error.response) {
       console.error('Response status:', error.response.status);
     }
