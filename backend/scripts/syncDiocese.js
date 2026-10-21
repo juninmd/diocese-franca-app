@@ -20,7 +20,12 @@ const pageUrl = (id) => `${SITE}/?menu=noticia_detalhe&id=${id}&id_orgao=1`;
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 const write = (file, data) => fs.writeFileSync(path.join(DATA, file), `${JSON.stringify(data, null, 2)}\n`);
 
+// SYNC_PAGES_DIR=<pasta>: modo offline, lê só as páginas já baixadas (p<id>.html).
 async function fetchPage(id) {
+  if (process.env.SYNC_PAGES_DIR) {
+    const file = path.join(process.env.SYNC_PAGES_DIR, `p${id}.html`);
+    return fs.existsSync(file) ? fs.readFileSync(file, 'utf8') : '';
+  }
   for (let attempt = 1; attempt <= 3; attempt += 1) {
     try {
       const res = await axios.get(pageUrl(id), { timeout: 25000, headers: { 'User-Agent': 'Mozilla/5.0 diocese-franca-app sync' } });
@@ -90,7 +95,14 @@ const normalizeName = (name) =>
     .trim();
 
 async function main() {
-  const parishes = (await crawlParishes()).sort((a, b) => a.name.localeCompare(b.name, 'pt-BR'));
+  // Franca primeiro (sede da Diocese), depois por cidade e nome; a Sé Catedral abre a lista.
+  const parishes = (await crawlParishes()).sort(
+    (a, b) =>
+      (b.sourceId === SEAT_ID) - (a.sourceId === SEAT_ID) ||
+      (b.city === 'Franca') - (a.city === 'Franca') ||
+      a.city.localeCompare(b.city, 'pt-BR') ||
+      a.name.localeCompare(b.name, 'pt-BR')
+  );
   const coords = await cityCoords([...new Set(parishes.map((p) => `${p.city}|${p.state}`))]);
   const churches = parishes.map(({ sourceId, clergy, masses, ...p }) => {
     const [latitude, longitude] = coords[`${p.city}|${p.state}`] || [null, null];

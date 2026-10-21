@@ -10,6 +10,8 @@ app.use('/api/churches', churchesRouter);
 app.use('/api/priests', priestsRouter);
 app.use('/api/masses', massesRouter);
 
+const CATEDRAL_ID = 2080; // Sé Catedral (id da página no site da Diocese)
+
 describe('Churches API', () => {
   describe('GET /api/churches', () => {
     it('should return all churches with success wrapper', async () => {
@@ -32,7 +34,7 @@ describe('Churches API', () => {
 
   describe('GET /api/churches/:id', () => {
     it('should return church with masses and priest', async () => {
-      const res = await request(app).get('/api/churches/1');
+      const res = await request(app).get(`/api/churches/${CATEDRAL_ID}`);
       expect(res.statusCode).toBe(200);
       expect(res.body.success).toBe(true);
       expect(res.body.data).toHaveProperty('id');
@@ -54,22 +56,22 @@ describe('Churches API', () => {
     });
 
     it('should include nextMass in the church detail', async () => {
-      const res = await request(app).get('/api/churches/1');
+      const res = await request(app).get(`/api/churches/${CATEDRAL_ID}`);
       expect(res.body.data).toHaveProperty('nextMass');
     });
   });
 
   describe('GET /api/churches/nearby', () => {
     it('should return churches sorted by distance from the given coordinates', async () => {
-      // Coordenadas bem próximas à Catedral (igreja 1)
+      // Coordenadas do centro de Franca (as igrejas têm coordenadas por cidade)
       const res = await request(app).get('/api/churches/nearby?lat=-20.5396&lng=-47.4014');
       expect(res.statusCode).toBe(200);
       expect(res.body.success).toBe(true);
       expect(Array.isArray(res.body.data)).toBe(true);
       expect(res.body.data.length).toBeGreaterThan(0);
       expect(res.body.data[0]).toHaveProperty('distanceKm');
-      expect(res.body.data[0].id).toBe(1);
-      expect(res.body.nearest.id).toBe(1);
+      expect(res.body.nearest.city).toBe('Franca');
+      expect(res.body.data[0].distanceKm).toBeLessThan(5);
 
       // A lista deve estar ordenada por distância crescente
       const distances = res.body.data.map((c) => c.distanceKm);
@@ -150,7 +152,7 @@ describe('Masses API', () => {
 
   describe('GET /api/masses/by-church/:churchId', () => {
     it('should return masses for a specific church', async () => {
-      const res = await request(app).get('/api/masses/by-church/1');
+      const res = await request(app).get(`/api/masses/by-church/${CATEDRAL_ID}`);
       expect(res.statusCode).toBe(200);
       expect(res.body.success).toBe(true);
       expect(res.body).toHaveProperty('church');

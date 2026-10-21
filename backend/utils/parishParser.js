@@ -23,7 +23,7 @@ const lines = (text) => text.split('\n').map((l) => l.trim()).filter(Boolean);
 
 // "Pe. A, Pe. B" / "Diácono X, Diácono Y" -> lista (a vírgula de "..., SJS" é preservada)
 const splitPeople = (value) =>
-  value.split(/;\s*|,\s*(?=Pe\.?\s|Padre|Frei|Fr\.|Di[aá]cono|Mons|C[ôo]nego)/i).map((n) => n.trim()).filter(Boolean);
+  value.split(/;\s*|\s+e\s+(?=Pe\.?\s|Frei|Fr\.|Di[aá]cono)|,\s*(?=Pe\.?\s|Padre|Frei|Fr\.|Di[aá]cono|Mons|C[ôo]nego)/i).map((n) => n.trim()).filter(Boolean);
 
 const ZIP = /(\d{2})\s?\.?\s?(\d{3})\s?-?\s?(\d{3})/;
 const formatZip = (text) => {

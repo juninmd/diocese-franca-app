@@ -51,6 +51,11 @@ describe('helpers', () => {
   it('splitPeople preserva a vírgula de siglas ("..., SJS")', () => {
     expect(splitPeople('Pe. A, SJS, Pe. B')).toEqual(['Pe. A, SJS', 'Pe. B']);
   });
+
+  it('splitPeople separa por ";" e por " e " entre tratamentos', () => {
+    expect(splitPeople('Frei A, OAR; Frei B, OAR')).toEqual(['Frei A, OAR', 'Frei B, OAR']);
+    expect(splitPeople('Diácono Everton Pereira e Diácono Maurílio Silva')).toEqual(['Diácono Everton Pereira', 'Diácono Maurílio Silva']);
+  });
 });
 
 describe('parseParish - variações do site', () => {

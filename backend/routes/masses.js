@@ -8,7 +8,7 @@ router.get('/', (req, res) => {
     const church = churches.find(c => c.id === mass.churchId);
     return {
       ...mass,
-      church: church ? { id: church.id, name: church.name, address: church.address } : null
+      church: church ? { id: church.id, name: church.name, address: church.address, city: church.city, state: church.state } : null
     };
   });
 
@@ -48,7 +48,7 @@ router.get('/by-day/:day', validateDay, (req, res) => {
     const church = churches.find(c => c.id === mass.churchId);
     return {
       ...mass,
-      church: church ? { id: church.id, name: church.name, address: church.address } : null
+      church: church ? { id: church.id, name: church.name, address: church.address, city: church.city, state: church.state } : null
     };
   });
 
