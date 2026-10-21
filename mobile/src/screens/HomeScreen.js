@@ -32,7 +32,8 @@ export default function HomeScreen({ navigation }) {
   const loadStats = async () => {
     try {
       const [churches, priests, masses] = await Promise.all([getChurches(), getPriests(), getMasses()]);
-      setStats({ churches: churches.length, priests: priests.length, masses: masses.length });
+      const count = (list) => list.length;
+      setStats({ churches: count(churches), priests: count(priests), masses: count(masses) });
     } catch (error) {
       console.error('Error loading stats:', error);
     }

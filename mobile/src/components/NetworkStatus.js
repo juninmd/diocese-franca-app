@@ -22,11 +22,10 @@ export function NetworkStatus() {
 
   const checkConnection = async () => {
     try {
-      await api.get('/', { timeout: 3000 });
-      if (isOffline) {
-        setIsOffline(false);
-        hideIndicator();
-      }
+      await api.get('/', { timeout: 8000 });
+      // A closure do intervalo guarda o estado antigo: sempre esconde o aviso ao reconectar.
+      setIsOffline(false);
+      hideIndicator();
     } catch (error) {
       setIsOffline(true);
       displayIndicator();

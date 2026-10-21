@@ -9,7 +9,7 @@ import { openCall, openEmail } from './priestUtils';
 // Cartão em destaque do bispo diocesano (dados reais da API).
 export function BishopCard({ priest, isFavorite, onOpen, onFavorite, onShare }) {
   return (
-    <View style={styles.card} accessibilityLabel={priest.title}>
+    <View style={styles.card}>
       <View pointerEvents="none" style={styles.art}>
         <ArchArt width={90} color={colors.goldLight} />
       </View>

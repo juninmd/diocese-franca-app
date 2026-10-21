@@ -8,7 +8,7 @@ import { colors, radius } from '../../theme';
 function NewsCard({ item, onOpen, onRemind }) {
   return (
     <TouchableOpacity activeOpacity={0.8} style={styles.card} onPress={() => onOpen(item)}>
-      <Image source={{ uri: item.image }} style={styles.image} />
+      <Image source={{ uri: item.image }} style={styles.image} resizeMode="cover" />
       <View style={styles.body}>
         <Text variant="heading" numberOfLines={2}>{item.title}</Text>
         {item.description ? <Text variant="caption" numberOfLines={3}>{item.description}</Text> : null}

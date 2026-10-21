@@ -102,14 +102,15 @@ export default function App() {
         }
       }
     }
-    requestPermissionsAndWelcome();
+    // Na web o agendamento nativo não existe; ignora sem derrubar o app.
+    requestPermissionsAndWelcome().catch((e) => console.warn('Notificações indisponíveis:', e.message));
   }, []);
 
   return (
     <SafeAreaProvider>
       <ToastProvider>
         <Navigation />
-        <StatusBar style="light" />
+        <StatusBar style="dark" />
       </ToastProvider>
     </SafeAreaProvider>
   );
