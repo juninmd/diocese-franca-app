@@ -22,8 +22,14 @@ export const colors = {
   danger: '#B3261E',
 };
 
+// Newsreader (títulos) + Figtree (interface), carregadas em App.js via expo-font.
 export const fonts = {
-  serif: Platform.select({ ios: 'Georgia', android: 'serif', default: "Newsreader, Georgia, serif" }),
+  serif: 'Newsreader_500Medium',
+  serifBold: 'Newsreader_600SemiBold',
+  sans: 'Figtree_400Regular',
+  sansMedium: 'Figtree_500Medium',
+  sansSemi: 'Figtree_600SemiBold',
+  sansBold: 'Figtree_700Bold',
 };
 
 export const radius = { sm: 10, md: 16, lg: 22, xl: 28, pill: 999 };

@@ -54,6 +54,7 @@ export default function ChurchDetailScreen({ route, navigation }) {
   return (
     <ScrollView style={styles.container} contentContainerStyle={{ paddingBottom: 110 }} showsVerticalScrollIndicator={false}>
       <DetailHero
+        image={church && church.image}
         topInset={insets.top}
         onBack={() => navigation.goBack()}
         isFavorite={isFavorite}

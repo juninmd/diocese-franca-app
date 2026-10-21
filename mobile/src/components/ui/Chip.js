@@ -1,5 +1,6 @@
 import React from 'react';
-import { Text, TouchableOpacity, View, StyleSheet } from 'react-native';
+import { TouchableOpacity, View, StyleSheet } from 'react-native';
+import { RawText as Text } from './Text';
 import { colors, radius, TOUCH } from '../../theme';
 
 // Filtro selecionável (alvo de toque de 44px).

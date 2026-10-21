@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, TouchableOpacity, StyleSheet } from 'react-native';
-import { Text, ArchArt, Pill, IconButton } from '../ui';
+import { Text, Pill, IconButton } from '../ui';
+import { ChurchPhoto } from './ChurchPhoto';
 import { colors, radius } from '../../theme';
 import { formatNextMass, formatDistance } from '../../utils/massTime';
 
@@ -10,9 +11,7 @@ export function ChurchCard({ church, isFavorite, onPress, onToggleFavorite, onSh
   return (
     <View style={styles.wrap}>
       <TouchableOpacity activeOpacity={0.8} onPress={onPress} style={styles.card}>
-        <View style={styles.thumb}>
-          <ArchArt width={60} stroke={1.5} />
-        </View>
+        <ChurchPhoto uri={church.image} style={styles.thumb} />
         <View style={styles.body}>
           <View style={styles.top}>
             <Text variant="heading" numberOfLines={3}>{church.name}</Text>
@@ -40,7 +39,7 @@ export function ChurchCard({ church, isFavorite, onPress, onToggleFavorite, onSh
 const styles = StyleSheet.create({
   wrap: { position: 'relative' },
   card: { flexDirection: 'row', gap: 14, padding: 12, borderRadius: 24, backgroundColor: colors.surface, borderWidth: 1, borderColor: colors.line },
-  thumb: { width: 84, minHeight: 108, borderRadius: radius.md, backgroundColor: colors.sand, alignItems: 'center', justifyContent: 'flex-end', overflow: 'hidden' },
+  thumb: { width: 84, minHeight: 108, borderRadius: radius.md },
   body: { flex: 1, minWidth: 0, justifyContent: 'space-between', gap: 8 },
   top: { gap: 4, paddingRight: 52 },
   pills: { flexDirection: 'row', flexWrap: 'wrap', gap: 6 },

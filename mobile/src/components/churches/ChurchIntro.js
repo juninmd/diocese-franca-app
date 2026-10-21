@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, Linking, TouchableOpacity, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Text } from '../ui';
 import { colors } from '../../theme';
@@ -13,6 +13,14 @@ export function ChurchIntro({ church }) {
         {church.address}{'\n'}{church.city} - {church.state}, CEP: {church.zipCode}
       </InfoLine>
       <InfoLine icon="call-outline">{church.phone}</InfoLine>
+      {church.email ? <InfoLine icon="mail-outline">{church.email}</InfoLine> : null}
+      {church.foundedAt ? <InfoLine icon="calendar-outline">Fundada em {formatDate(church.foundedAt)}</InfoLine> : null}
+      {church.website ? (
+        <TouchableOpacity activeOpacity={0.8} style={styles.link} onPress={() => Linking.openURL(church.website)}>
+          <Ionicons name="globe-outline" size={18} color={colors.primary} />
+          <Text variant="label" style={{ color: colors.primary }}>Página oficial da paróquia</Text>
+        </TouchableOpacity>
+      ) : null}
       {church.description ? (
         <View style={styles.about}>
           <Text variant="heading">Sobre</Text>
@@ -22,6 +30,9 @@ export function ChurchIntro({ church }) {
     </View>
   );
 }
+
+// "1805-12-03" -> "03/12/1805"
+const formatDate = (iso) => iso.split('-').reverse().join('/');
 
 function InfoLine({ icon, children }) {
   return (
@@ -37,5 +48,6 @@ const styles = StyleSheet.create({
   title: { fontSize: 29, lineHeight: 32 },
   line: { flexDirection: 'row', gap: 8, alignItems: 'flex-start' },
   lineText: { flex: 1, fontSize: 14, lineHeight: 19 },
+  link: { flexDirection: 'row', gap: 8, alignItems: 'center', minHeight: 44 },
   about: { gap: 6, marginTop: 8 },
 });

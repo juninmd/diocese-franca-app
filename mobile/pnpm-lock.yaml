@@ -8,6 +8,12 @@ importers:
 
   .:
     dependencies:
+      '@expo-google-fonts/figtree':
+        specifier: ^0.4.1
+        version: 0.4.1
+      '@expo-google-fonts/newsreader':
+        specifier: ^0.4.1
+        version: 0.4.1
       '@expo/metro-runtime':
         specifier: ^6.1.2
         version: 6.1.2(expo@54.0.33)(react-dom@19.1.0(react@19.1.0))(react-native@0.81.5(@babel/core@7.29.0)(react@19.1.0))(react@19.1.0)
@@ -29,6 +35,9 @@ importers:
       expo:
         specifier: ~54.0.33
         version: 54.0.33(@babel/core@7.29.0)(@expo/dom-webview@57.0.1)(@expo/metro-runtime@6.1.2)(react-native@0.81.5(@babel/core@7.29.0)(react@19.1.0))(react@19.1.0)
+      expo-font:
+        specifier: ~14.0.11
+        version: 14.0.11(expo@54.0.33)(react-native@0.81.5(@babel/core@7.29.0)(react@19.1.0))(react@19.1.0)
       expo-location:
         specifier: ~19.0.8
         version: 19.0.8(expo@54.0.33)
@@ -574,6 +583,12 @@ packages:
   '@egjs/hammerjs@2.0.17':
     resolution: {integrity: sha512-XQsZgjm2EcVUiZQf11UBJQfmZeEmOW8DpI1gsFeln6w0ae0ii4dMQEQ0kjl6DspdWX1aGY1/loyXnP0JS06e/A==}
     engines: {node: '>=0.8.0'}
+
+  '@expo-google-fonts/figtree@0.4.1':
+    resolution: {integrity: sha512-6IQQddGeR3yZBSwiIjy2kd1gA+5s2esF8JAFw6M1qqU4RUlj4Zxkw9J+gixAtZFgd+QIS875EPHqeYlpaRcCRw==}
+
+  '@expo-google-fonts/newsreader@0.4.1':
+    resolution: {integrity: sha512-j96W112+mj/VYP06DCq00w+twyw42w0MY7eHB/XXioNK80BcG0cIk/zogjOENZSY7qejzIFbHE/PZYqlh/6VKQ==}
 
   '@expo/cli@54.0.23':
     resolution: {integrity: sha512-km0h72SFfQCmVycH/JtPFTVy69w6Lx1cHNDmfLfQqgKFYeeHTjx7LVDP4POHCtNxFP2UeRazrygJhlh4zz498g==}
@@ -3731,6 +3746,10 @@ snapshots:
   '@egjs/hammerjs@2.0.17':
     dependencies:
       '@types/hammerjs': 2.0.46
+
+  '@expo-google-fonts/figtree@0.4.1': {}
+
+  '@expo-google-fonts/newsreader@0.4.1': {}
 
   '@expo/cli@54.0.23(expo@54.0.33)(react-native@0.81.5(@babel/core@7.29.0)(react@19.1.0))':
     dependencies:

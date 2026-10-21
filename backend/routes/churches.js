@@ -1,8 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const churches = require('../data/churches.json');
-const masses = require('../data/masses.json');
-const priests = require('../data/priests.json');
+const { churches, masses, priests } = require('../utils/catalog');
 const { validateId, validateCoords } = require('../middleware/validation');
 const { distanceInKm } = require('../utils/geo');
 const { findNextMass } = require('../utils/nextMass');

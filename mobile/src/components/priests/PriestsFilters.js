@@ -2,7 +2,7 @@ import React from 'react';
 import { View, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Chip } from '../ui';
-import { colors, radius, TOUCH } from '../../theme';
+import { colors, fonts, radius, TOUCH } from '../../theme';
 
 // Busca por nome/título e filtros Todos / Favoritos.
 export function PriestsFilters({ query, onQuery, showFavorites, onShowFavorites, total, favCount, loading }) {
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: colors.line,
   },
-  input: { flex: 1, minHeight: TOUCH, fontSize: 16, color: colors.ink, outlineStyle: 'none' },
+  input: { flex: 1, minHeight: TOUCH, fontFamily: fonts.sans, fontSize: 16, color: colors.ink, outlineStyle: 'none' },
   clear: { width: TOUCH, height: TOUCH, alignItems: 'center', justifyContent: 'center', marginRight: -12 },
   chips: { flexDirection: 'row', gap: 10 },
 });

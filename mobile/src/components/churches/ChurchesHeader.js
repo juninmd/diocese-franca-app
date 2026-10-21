@@ -2,7 +2,7 @@ import React from 'react';
 import { View, TextInput, TouchableOpacity, StyleSheet, Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Text, Chip } from '../ui';
-import { colors } from '../../theme';
+import { colors, fonts } from '../../theme';
 
 // Título, busca e filtros da lista de igrejas.
 export function ChurchesHeader({ count, total, favoritesCount, searchQuery, onSearch, filterMode, onFilter, loading }) {
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
   box: { gap: 18, marginBottom: 18 },
   titles: { gap: 4 },
   search: { flexDirection: 'row', alignItems: 'center', gap: 10, height: 52, paddingHorizontal: 16, borderRadius: 18, backgroundColor: colors.surface, borderWidth: 1, borderColor: colors.line },
-  input: { flex: 1, fontSize: 16, color: colors.ink, height: '100%', ...Platform.select({ web: { outlineStyle: 'none' }, default: {} }) },
+  input: { flex: 1, fontFamily: fonts.sans, fontSize: 16, color: colors.ink, height: '100%', ...Platform.select({ web: { outlineStyle: 'none' }, default: {} }) },
   clear: { minWidth: 44, minHeight: 44, alignItems: 'center', justifyContent: 'center', marginRight: -12 },
   chips: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
 });

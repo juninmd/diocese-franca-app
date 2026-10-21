@@ -1,4 +1,9 @@
 import React from 'react';
+import { View } from 'react-native';
+import { useFonts } from 'expo-font';
+import { Newsreader_500Medium, Newsreader_600SemiBold } from '@expo-google-fonts/newsreader';
+import { Figtree_400Regular, Figtree_500Medium, Figtree_600SemiBold, Figtree_700Bold } from '@expo-google-fonts/figtree';
+import { colors } from './src/theme';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { ToastProvider } from './src/context/ToastContext';
@@ -16,6 +21,11 @@ Notifications.setNotificationHandler({
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function App() {
+  const [fontsLoaded, fontError] = useFonts({
+    Newsreader_500Medium, Newsreader_600SemiBold,
+    Figtree_400Regular, Figtree_500Medium, Figtree_600SemiBold, Figtree_700Bold,
+  });
+
   React.useEffect(() => {
     async function requestPermissionsAndWelcome() {
       const { status } = await Notifications.requestPermissionsAsync();
@@ -105,6 +115,9 @@ export default function App() {
     // Na web o agendamento nativo não existe; ignora sem derrubar o app.
     requestPermissionsAndWelcome().catch((e) => console.warn('Notificações indisponíveis:', e.message));
   }, []);
+
+  // Aguarda as fontes (ou o erro) para evitar troca de fonte visível.
+  if (!fontsLoaded && !fontError) return <View style={{ flex: 1, backgroundColor: colors.bg }} />;
 
   return (
     <SafeAreaProvider>

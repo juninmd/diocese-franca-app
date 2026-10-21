@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Animated, AppState } from 'react-native';
+import { View, StyleSheet, Animated, AppState } from 'react-native';
+import { RawText as Text } from './ui/Text';
 import { Ionicons } from '@expo/vector-icons';
 import { api } from '../services/api';
 import { colors } from '../theme';

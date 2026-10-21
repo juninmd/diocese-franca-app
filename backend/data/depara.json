@@ -1,0 +1,42 @@
+{
+  "_meta": {
+    "description": "De-para: dados que complementam/corrigem os JSONs base (churches.json, priests.json) por id. Campos aqui sobrescrevem o registro base; campos ausentes mantêm o valor base. Imagens com placeholder (via.placeholder.com) são descartadas (image = null).",
+    "source": "https://www.diocesefranca.org.br (páginas oficiais de cada paróquia)",
+    "collectedAt": "2026-10-21",
+    "notes": [
+      "Imagens são hospedadas no site oficial da Diocese; confirmar permissão de uso/hotlink antes de publicar.",
+      "Endereços das paróquias 2 e 3 mudaram: latitude/longitude do churches.json não correspondem mais ao endereço (coordinatesVerified permanece false) e precisam ser geocodificadas.",
+      "Paróquia São Francisco de Assis (id 4) não consta no site oficial consultado: sem dados complementares."
+    ]
+  },
+  "churches": {
+    "1": {
+      "image": "https://www.diocesefranca.org.br/images/20210403030607_catedral-franca-1.jpg",
+      "address": "Praça Nossa Senhora da Conceição, S/N - Centro",
+      "zipCode": "14400-970",
+      "phone": "(16) 3721-4085",
+      "email": "catedral@diocesefranca.org.br",
+      "foundedAt": "1805-12-03",
+      "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2080&id_orgao=1"
+    },
+    "2": {
+      "image": "https://www.diocesefranca.org.br/images/20210413015735_20.jpg",
+      "address": "Rua Carlos de Vilhena, 3070 - Chico Júlio",
+      "zipCode": "14405-203",
+      "phone": "(16) 3701-5605",
+      "email": "sbenedito@diocesefranca.org.br",
+      "foundedAt": "1968-05-19",
+      "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2067&id_orgao=1"
+    },
+    "3": {
+      "image": "https://www.diocesefranca.org.br/images/20210413013822_11.jpg",
+      "address": "Alameda Arminda Nogueira, 1735 - Vila Industrial",
+      "zipCode": "14403-374",
+      "phone": "(16) 3702-0877",
+      "email": "santarita@diocesefranca.org.br",
+      "foundedAt": "1968-03-13",
+      "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2059&id_orgao=1"
+    }
+  },
+  "priests": {}
+}

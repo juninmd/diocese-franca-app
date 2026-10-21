@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const priests = require('../data/priests.json');
-const churches = require('../data/churches.json');
+const { priests, churches } = require('../utils/catalog');
 const { validateId } = require('../middleware/validation');
 
 router.get('/', (req, res) => {
