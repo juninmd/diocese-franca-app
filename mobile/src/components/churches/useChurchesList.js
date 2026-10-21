@@ -104,7 +104,7 @@ export function useChurchesList() {
     try {
       await Share.share({
         title: church.name,
-        message: `Confira a ${church.name}\nEndereço: ${church.address}\nTelefone: ${church.phone}\n\nCompartilhado via Diocese de Franca`,
+        message: `Confira a ${church.name}\nEndereço: ${church.address}, ${church.city}/${church.state}${church.phone ? `\nTelefone: ${church.phone}` : ''}\n\nCompartilhado via Diocese de Franca`,
       });
     } catch (err) {
       toast.error('Puxa, erro ao compartilhar');

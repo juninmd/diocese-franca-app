@@ -10,9 +10,9 @@ export function ChurchIntro({ church }) {
     <View style={styles.box}>
       <Text variant="title" accessibilityRole="header" style={styles.title}>{church.name}</Text>
       <InfoLine icon="location-outline">
-        {church.address}{'\n'}{church.city} - {church.state}, CEP: {church.zipCode}
+        {church.address}{'\n'}{church.city} - {church.state}{church.zipCode ? `, CEP: ${church.zipCode}` : ''}
       </InfoLine>
-      <InfoLine icon="call-outline">{church.phone}</InfoLine>
+      {church.phone ? <InfoLine icon="call-outline">{church.phone}</InfoLine> : null}
       {church.email ? <InfoLine icon="mail-outline">{church.email}</InfoLine> : null}
       {church.foundedAt ? <InfoLine icon="calendar-outline">Fundada em {formatDate(church.foundedAt)}</InfoLine> : null}
       {church.website ? (

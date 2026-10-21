@@ -9,7 +9,7 @@ export function ActionTiles({ phone, onMap, onCall, onVisit }) {
   return (
     <View style={styles.row}>
       <Tile icon="navigate-outline" label="Como chegar" onPress={onMap} />
-      <Tile icon="call-outline" label="Ligar" hint={phone} onPress={onCall} />
+      {phone ? <Tile icon="call-outline" label="Ligar" hint={phone} onPress={onCall} /> : null}
       <Tile icon="calendar-outline" label="Agendar Visita" hint="Receber um lembrete" onPress={onVisit} />
     </View>
   );

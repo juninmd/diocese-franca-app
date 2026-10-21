@@ -52,3 +52,21 @@ describe('helpers', () => {
     expect(splitPeople('Pe. A, SJS, Pe. B')).toEqual(['Pe. A, SJS', 'Pe. B']);
   });
 });
+
+describe('parseParish - variações do site', () => {
+  const wrap = (body) => `<h2 class="title">Paróquia Teste (Ituverava/SP)</h2><div class="text_post_block">Local e Contato\n${body}\nCompartilhar</div>`;
+
+  it('lê endereço em várias linhas, CEP com espaços e cidade com "/SP"', () => {
+    const p = parseParish(
+      wrap('Endereço : Rua\nPayaguas, 826. CEP 14 500-000<br>\nCidade/UF : Ituverava/SP<br>\nTelefones: (16)3172 1607 WhatsApp<br>\nDados\nPároco : Pe Alguém<br>\nVigário paroquial : Pe. Um, sjs<br>\nVigário paroquial: Pe. Dois, sjs<br>\nMissas:<br>Domingo: 9h<br>'),
+      7
+    );
+    expect(p).toMatchObject({ address: 'Rua Payaguas - 826', zipCode: '14500-000', city: 'Ituverava', state: 'SP', phone: '(16) 3172-1607' });
+    expect(p.clergy.filter((c) => c.title === 'Vigário Paroquial')).toHaveLength(2);
+  });
+
+  it('remove caixa postal do endereço', () => {
+    const p = parseParish(wrap('Endereço : Praça Hélvio, 193 - C. P. 104<br>\nCidade/UF : Ituverava-SP<br>\nDados\nPároco : Pe. X<br>'), 8);
+    expect(p.address).toBe('Praça Hélvio - 193');
+  });
+});

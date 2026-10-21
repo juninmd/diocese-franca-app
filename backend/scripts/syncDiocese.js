@@ -51,14 +51,17 @@ async function cityCoords(cities) {
   for (const key of cities) {
     if (cache[key]) continue;
     const [city, state] = key.split('|');
-    try {
-      const { data } = await axios.get('https://photon.komoot.io/api/', { params: { q: `${city}, ${state}, Brasil`, limit: 3 }, timeout: 8000 });
-      const hit = data.features.find((f) => f.properties.countrycode === 'BR');
-      if (hit) cache[key] = [hit.geometry.coordinates[1], hit.geometry.coordinates[0]];
-    } catch (error) {
-      console.warn(`Sem coordenadas para ${key}: ${error.message}`);
+    for (let attempt = 1; attempt <= 4 && !cache[key]; attempt += 1) {
+      try {
+        const { data } = await axios.get('https://photon.komoot.io/api/', { params: { q: `${city}, ${state}, Brasil`, limit: 3 }, timeout: 8000 });
+        const hit = data.features.find((f) => f.properties.countrycode === 'BR');
+        if (hit) cache[key] = [hit.geometry.coordinates[1], hit.geometry.coordinates[0]];
+        else break;
+      } catch (error) {
+        if (attempt === 4) console.warn(`Sem coordenadas para ${key}: ${error.message}`);
+      }
+      await sleep(1500);
     }
-    await sleep(1200);
   }
   fs.writeFileSync(CITY_FILE, `${JSON.stringify(cache, null, 2)}\n`);
   return cache;
@@ -77,7 +80,14 @@ async function parseBishop() {
   return { name: name.trim(), phone, bio };
 }
 
-const normalizeName = (name) => name.replace(/^Pe\.?\s+/i, 'Pe. ').replace(/\s+/g, ' ').trim();
+// "Pe Fulano , sjs" -> "Pe. Fulano, SJS"
+const normalizeName = (name) =>
+  name
+    .replace(/\s+/g, ' ')
+    .replace(/^Pe\.?\s+/i, 'Pe. ')
+    .replace(/\s*,\s*/g, ', ')
+    .replace(/,\s*([A-Za-z]{2,5})\s*$/, (_, order) => `, ${order.toUpperCase()}`)
+    .trim();
 
 async function main() {
   const parishes = (await crawlParishes()).sort((a, b) => a.name.localeCompare(b.name, 'pt-BR'));

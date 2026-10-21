@@ -16,7 +16,7 @@ export function useChurchActions(church) {
   return {
     call: (phone) => Linking.openURL(`tel:${phone.replace(/\D/g, '')}`),
     email: (address) => Linking.openURL(`mailto:${address}`),
-    openMap: () => Linking.openURL(`https://maps.google.com/?q=${encodeURIComponent(church.address)}`),
+    openMap: () => Linking.openURL(`https://maps.google.com/?q=${encodeURIComponent(`${church.address}, ${church.city}, ${church.state}`)}`),
     remindVisit: () => remind({
       title: 'Lembrete de Visita',
       body: `Não se esqueça da sua visita à ${church.name}!`,

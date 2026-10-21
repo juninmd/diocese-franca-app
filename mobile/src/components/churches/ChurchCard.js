@@ -15,7 +15,7 @@ export function ChurchCard({ church, isFavorite, onPress, onToggleFavorite, onSh
         <View style={styles.body}>
           <View style={styles.top}>
             <Text variant="heading" numberOfLines={3}>{church.name}</Text>
-            <Text variant="caption" numberOfLines={2}>{church.address}</Text>
+            <Text variant="caption" numberOfLines={2}>{church.city}/{church.state} · {church.address}</Text>
           </View>
           <View style={styles.pills}>
             {distance ? <Pill tone="sand" label={distance} /> : null}

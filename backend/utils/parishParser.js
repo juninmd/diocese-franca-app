@@ -2,28 +2,42 @@ const { htmlToText } = require('./htmlText');
 const { parseMassLines } = require('./massParser');
 
 const SITE = 'https://www.diocesefranca.org.br';
-const PHONE = /\(?\d{2}\)?\s?9?\d{4}-\d{4}/g;
+const PHONE = /\(?\d{2}\)?\s?9?\d{4}[-\s]?\d{4}/g;
 const EMAIL = /[\w.+-]+@[\w-]+(?:\.[\w-]+)+/g;
 const STOP_MASSES = /^(capela|comunidade|descri[çc][ãa]o|lar |compartilhar|santu[aá]rio|igreja)/i;
 
-const field = (text, label) => {
-  const match = text.match(new RegExp(`^[ \\t]*${label}[ \\t]*:[ \\t]*(.*)$`, 'mi'));
-  return match ? match[1].trim() : '';
+// Valor(es) de "Rótulo : valor" (a linha pode repetir, ex.: dois "Vigário paroquial").
+const field = (text, label) =>
+  [...text.matchAll(new RegExp(`^[ \\t]*${label}[ \\t]*:[ \\t]*(.*)$`, 'gmi'))].map((m) => m[1].trim()).filter(Boolean).join(', ');
+
+// O endereço pode quebrar linha ("Rua\nPayaguas, 826") até o próximo rótulo.
+const addressField = (text) =>
+  ((text.match(/Endereço\s*:([\s\S]*?)\n\s*Cidade\/UF/i) || [])[1] || '').replace(/\s+/g, ' ').trim();
+
+const formatPhone = (raw) => {
+  const digits = raw.replace(/\D/g, '');
+  return `(${digits.slice(0, 2)}) ${digits.slice(2, -4)}-${digits.slice(-4)}`;
 };
 
 const lines = (text) => text.split('\n').map((l) => l.trim()).filter(Boolean);
 
 // "Pe. A, Pe. B" / "Diácono X, Diácono Y" -> lista (a vírgula de "..., SJS" é preservada)
 const splitPeople = (value) =>
-  value.split(/,\s*(?=Pe\.?\s|Padre|Frei|Fr\.|Di[aá]cono|Mons|C[ôo]nego)/i).map((n) => n.trim()).filter(Boolean);
+  value.split(/;\s*|,\s*(?=Pe\.?\s|Padre|Frei|Fr\.|Di[aá]cono|Mons|C[ôo]nego)/i).map((n) => n.trim()).filter(Boolean);
 
+const ZIP = /(\d{2})\s?\.?\s?(\d{3})\s?-?\s?(\d{3})/;
 const formatZip = (text) => {
-  const m = text.match(/(\d{2})\.?(\d{3})-?(\d{3})/);
+  const m = text.match(ZIP);
   return m ? `${m[1]}${m[2]}-${m[3]}` : null;
 };
 
 const cleanAddress = (raw) =>
-  raw.replace(/\.?\s*Cx\.? Postal\s*\d+,?/i, '').replace(/,?\s*(CEP:?\s*)?\d{2}\.?\d{3}-?\d{3}/i, '').replace(/[\s,]+$/, '').replace(/,\s*(?=[^,]*$)/, ' - ');
+  raw
+    .replace(/[.,\s-]*(Caixa Postal|Cx\.? Postal|C\. ?P\.)\s*\d+[.,]?/i, '')
+    .replace(new RegExp(`[.,\\s-]*(CEP[:\\s-]*)?${ZIP.source}`, 'i'), '')
+    .replace(/^(\w+)\s*\.\s+/, '$1 ')
+    .replace(/[\s,.-]+$/, '')
+    .replace(/,\s*(?=[^,]*$)/, ' - ');
 
 const toIsoDate = (br) => {
   const m = br.match(/(\d{2})\/(\d{2})\/(\d{4})/);
@@ -53,7 +67,7 @@ function parseParish(html, sourceId) {
   const body = cut > 0 ? text.slice(0, cut) : text;
 
   const { name, city: titleCity, state: titleState } = parseTitle(htmlToText(title).trim());
-  const [cityName, uf] = field(body, 'Cidade/UF').split(/\s*-\s*/);
+  const [cityName, uf] = field(body, 'Cidade/UF').split(/\s*[-/]\s*(?=[A-Z]{2}$)/);
   const contact = body.slice(body.indexOf('Cidade/UF'), body.search(/^\s*Dados\s*$/m) > 0 ? body.search(/^\s*Dados\s*$/m) : undefined);
   const office = body.match(/Expediente da secretaria\s*:?([\s\S]*?)(?=\bMissas?[^:\n]{0,20}:)/i);
   const massBlock = body.match(/\bMissas?[^:\n]{0,20}:([\s\S]*)/i);
@@ -69,11 +83,11 @@ function parseParish(html, sourceId) {
   return {
     sourceId,
     name,
-    city: (cityName || titleCity).trim(),
+    city: (cityName || titleCity).replace(/\s*\/\s*[A-Z]{2}$/, '').trim(),
     state: (uf || titleState).trim(),
-    address: cleanAddress(field(body, 'Endereço')),
-    zipCode: formatZip(field(body, 'Endereço')),
-    phone: (contact.match(PHONE) || [])[0] || null,
+    address: cleanAddress(addressField(body)),
+    zipCode: formatZip(addressField(body)),
+    phone: (contact.match(PHONE) || [])[0] ? formatPhone(contact.match(PHONE)[0]) : null,
     email: (contact.match(EMAIL) || [])[0] || null,
     foundedAt: toIsoDate(field(body, 'Data Criação')),
     officeHours: office ? lines(office[1]) : [],
