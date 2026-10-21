@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, Animated, AppState } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { api } from '../services/api';
+import { colors } from '../theme';
 
 export function NetworkStatus() {
   const [isOffline, setIsOffline] = useState(false);
@@ -91,7 +92,7 @@ const styles = StyleSheet.create({
     top: 0,
     left: 0,
     right: 0,
-    backgroundColor: '#e74c3c',
+    backgroundColor: colors.danger,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
@@ -107,7 +108,7 @@ const styles = StyleSheet.create({
     marginLeft: 8,
   },
   banner: {
-    backgroundColor: '#f39c12',
+    backgroundColor: '#7A5A16',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',

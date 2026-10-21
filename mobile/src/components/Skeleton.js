@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { View, StyleSheet, Animated } from 'react-native';
+import { colors } from '../theme';
 
 export function Skeleton({ width, height, borderRadius = 8, style }) {
   const shimmerAnim = useRef(new Animated.Value(0)).current;
@@ -35,7 +36,7 @@ export function Skeleton({ width, height, borderRadius = 8, style }) {
           width: width || '100%',
           height: height || 20,
           borderRadius,
-          backgroundColor: '#e0e0e0',
+          backgroundColor: colors.sand,
           opacity,
         },
         style,
@@ -121,7 +122,7 @@ export function ListSkeleton({ count = 5, type = 'church' }) {
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: '#fff',
+    backgroundColor: colors.surface,
     borderRadius: 16,
     padding: 16,
     marginBottom: 12,
@@ -143,10 +144,10 @@ const styles = StyleSheet.create({
     marginTop: 14,
     paddingTop: 14,
     borderTopWidth: 1,
-    borderTopColor: '#f0f4f8',
+    borderTopColor: colors.line,
   },
   massCard: {
-    backgroundColor: '#fff',
+    backgroundColor: colors.surface,
     borderRadius: 12,
     padding: 14,
     marginBottom: 8,
@@ -158,7 +159,7 @@ const styles = StyleSheet.create({
     marginLeft: 14,
   },
   newsCard: {
-    backgroundColor: '#fff',
+    backgroundColor: colors.surface,
     borderRadius: 12,
     width: 240,
     elevation: 3,
