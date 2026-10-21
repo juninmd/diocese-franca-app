@@ -7,8 +7,8 @@ import { colors, fonts } from '../../theme';
 const initialsOf = (name) =>
   name.split(' ').filter((w) => w && !w.endsWith('.')).slice(0, 2).map((w) => w[0].toUpperCase()).join('');
 
-// Pároco da igreja com contatos de e-mail e telefone.
-export function ClergyCard({ priest, onEmail, onCall }) {
+// Pároco da igreja com contatos de e-mail e telefone e, abaixo, o restante da equipe.
+export function ClergyCard({ priest, team = [], onEmail, onCall }) {
   return (
     <View style={styles.section}>
       <Text variant="title" accessibilityRole="header" style={styles.heading}>Pároco</Text>
@@ -22,6 +22,9 @@ export function ClergyCard({ priest, onEmail, onCall }) {
           {priest.bio ? <Text variant="caption" style={{ marginTop: 6 }}>{priest.bio}</Text> : null}
         </View>
       </View>
+      {team.map((member) => (
+        <Text key={member.id} variant="caption">{member.title}: <Text variant="label" style={{ fontSize: 14 }}>{member.name}</Text></Text>
+      ))}
       <View style={styles.contacts}>
         {priest.email ? <Button label="Email" icon="mail-outline" onPress={() => onEmail(priest.email)} style={styles.contact} /> : null}
         {priest.phone ? <Button label="Ligar" icon="call-outline" tone="outline" onPress={() => onCall(priest.phone)} style={styles.contact} /> : null}

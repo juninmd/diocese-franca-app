@@ -51,7 +51,9 @@ router.get('/:id', validateId('id'), (req, res) => {
   }
 
   const churchMasses = masses.filter(m => m.churchId === church.id);
-  const churchPriest = priests.find(p => p.churchId === church.id);
+  // Equipe da paróquia (sem o bispo, que tem tela própria); o pároco vem primeiro.
+  const clergy = priests.filter(p => p.churchId === church.id && p.title !== 'Bispo Diocesano');
+  const churchPriest = clergy.find(p => p.title === 'Pároco') || clergy[0];
 
   res.json({
     success: true,
@@ -59,6 +61,7 @@ router.get('/:id', validateId('id'), (req, res) => {
       ...church,
       masses: churchMasses,
       priest: churchPriest,
+      clergy,
       nextMass: findNextMass(churchMasses)
     }
   });

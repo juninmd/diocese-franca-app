@@ -22,6 +22,19 @@ API REST para consulta de informações da Diocese de Franca, incluindo igrejas,
 - `GET /api/masses/by-day/:day` - Lista missas por dia da semana
   - Dias aceitos: domingo, segunda-feira, terça-feira, quarta-feira, quinta-feira, sexta-feira, sábado
 
+## Dados oficiais (sync)
+
+`churches.json`, `priests.json` e `masses.json` são gerados a partir das páginas das paróquias em
+diocesefranca.org.br:
+
+```bash
+node scripts/syncDiocese.js   # requer rede; reescreve os três JSONs e data/cityCoords.json
+```
+
+- `utils/parishParser.js` / `utils/massParser.js`: extraem paróquia, clero e horários semanais
+  (horários irregulares viram `massNotes`).
+- `data/depara.json`: ajustes manuais por id, mesclados por `utils/applyDepara.js` (via `utils/catalog.js`).
+
 ## Instalação
 
 ```bash

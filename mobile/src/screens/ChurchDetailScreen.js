@@ -8,6 +8,7 @@ import { NextMassCard } from '../components/churches/NextMassCard';
 import { ActionTiles } from '../components/churches/ActionTiles';
 import { MassSchedule } from '../components/churches/MassSchedule';
 import { ClergyCard } from '../components/churches/ClergyCard';
+import { ChurchNotes } from '../components/churches/ChurchNotes';
 import { useChurchDetail } from '../components/churches/useChurchDetail';
 import { useChurchActions } from '../components/churches/useChurchActions';
 import { colors } from '../theme';
@@ -46,7 +47,15 @@ export default function ChurchDetailScreen({ route, navigation }) {
           onVisit={actions.remindVisit}
         />
         {church.masses?.length > 0 ? <MassSchedule masses={church.masses} nextMass={church.nextMass} /> : null}
-        {church.priest ? <ClergyCard priest={church.priest} onEmail={actions.email} onCall={actions.call} /> : null}
+        <ChurchNotes church={church} />
+        {church.priest ? (
+          <ClergyCard
+            priest={church.priest}
+            team={(church.clergy || []).filter((p) => p.id !== church.priest.id)}
+            onEmail={actions.email}
+            onCall={actions.call}
+          />
+        ) : null}
       </>
     );
   }
