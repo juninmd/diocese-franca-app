@@ -1,6 +1,24 @@
 [
   {
     "id": 1,
+    "title": "Frei Welton Cardoso Cavallini toma posse como pároco da Paróquia Nossa Senhora das Graças",
+    "category": "Frei Welton",
+    "description": "Celebração foi presidida por Dom Paulo Roberto Beloto, no sábado (17), em Franca",
+    "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6095&id_orgao=1",
+    "image": "https://diocesefranca.org.br/images/20261019202902_1000388427.png",
+    "date": "19 de outubro"
+  },
+  {
+    "id": 2,
+    "title": "Pastoral do Batismo reúne agentes da Diocese de Franca para refletir sobre compromisso e missão",
+    "category": "Pastoral do Batismo",
+    "description": "Encontro realizado na Paróquia São Benedito contou com a presença de Dom Paulo e formação conduzida por José Roberto.",
+    "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6096&id_orgao=1",
+    "image": "https://diocesefranca.org.br/images/20261019204838_1000388461.png",
+    "date": "19 de outubro"
+  },
+  {
+    "id": 3,
     "title": "Caminhada em Defesa da Vida e da Família chega à terceira edição na Diocese de Franca",
     "category": "Caminhada",
     "description": "Promovida pela Pastoral Familiar, mobilização percorreu o trajeto entre o Santuário Santo Antônio e a Catedral, com momentos de oração e reflexão...",
@@ -9,7 +27,7 @@
     "date": "15 de outubro"
   },
   {
-    "id": 2,
+    "id": 4,
     "title": "Frei Agostinho Morosini toma posse como pároco da Paróquia Nossa Senhora Aparecida, em Franca",
     "category": "Frei Agostinho Morosini",
     "description": "Celebração aconteceu no dia 10 de outubro, durante a novena em honra à padroeira, e marcou o início de uma nova etapa na comunidade da Capelinha.",
@@ -18,30 +36,12 @@
     "date": "10 de out"
   },
   {
-    "id": 3,
-    "title": "Carmelo Santa Teresa promove jantar beneficente para arrecadar recursos para sua manutenção",
-    "category": "Carmelo Santa Teresa",
-    "description": "Evento será realizado no dia 14 de novembro, no Salão Paroquial Santa Luzia, em Franca. Os convites custam R$ 60, e crianças de até 10 anos não pagam.",
-    "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6091&id_orgao=1",
-    "image": "https://diocesefranca.org.br/images/20261015214033_1000384949.png",
-    "date": "14 de nov"
-  },
-  {
-    "id": 4,
+    "id": 5,
     "title": "Formação reúne 78 salmistas de três foranias da Diocese de Franca",
     "category": "Salmistas",
     "description": "Encontro na Paróquia São Vicente de Paulo abordou o Guia Litúrgico-Pastoral, leitura de partituras e técnicas vocais para o canto litúrgico.",
     "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6090&id_orgao=1",
     "image": "https://diocesefranca.org.br/images/20261015212615_1000384917.png",
     "date": "15 de outubro"
-  },
-  {
-    "id": 5,
-    "title": "Encontro da Mãe Peregrina de Schoenstatt celebra 10 anos do Santuário Paroquial",
-    "category": "Encontro da Mãe Peregrina",
-    "description": "Atividade reuniu fiéis na Paróquia Menino Jesus de Praga e Santa Efigênia e contou com a presença da Imagem Auxiliar Diocesana da Mãe Rainha",
-    "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6083&id_orgao=1",
-    "image": "https://diocesefranca.org.br/images/20261005214341_1000377419.png",
-    "date": "5 de outubro"
   }
 ]
