@@ -1,66 +1,41 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Linking, RefreshControl, FlatList, Image, ActivityIndicator } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import * as Notifications from 'expo-notifications';
+import { View, ScrollView, RefreshControl, Linking, StyleSheet } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { getChurches, getPriests, getMasses, getNews, getNearbyChurches } from '../services/api';
 import { LocationService } from '../services/LocationService';
+import { scheduleReminder } from '../services/ReminderService';
 import { useToast } from '../context/ToastContext';
 import { NetworkStatus } from '../components/NetworkStatus';
-import { NewsCardSkeleton } from '../components/Skeleton';
-import { formatNextMass, formatDistance } from '../utils/massTime';
+import { HomeHeader } from '../components/home/HomeHeader';
+import { NearestChurchCard } from '../components/home/NearestChurchCard';
+import { StatsRow } from '../components/home/StatsRow';
+import { NewsCarousel } from '../components/home/NewsCarousel';
+import { QuickActions } from '../components/home/QuickActions';
+import { ContactCard } from '../components/home/ContactCard';
+import { buildQuickActions, callDiocese, emailDiocese } from '../components/home/quickActionItems';
+import { colors } from '../theme';
 
 export default function HomeScreen({ navigation }) {
+  const insets = useSafeAreaInsets();
+  const toast = useToast();
   const [stats, setStats] = useState({ churches: 0, priests: 0, masses: 0 });
-  const [refreshing, setRefreshing] = useState(false);
-  const [loading, setLoading] = useState(true);
   const [news, setNews] = useState([]);
   const [loadingNews, setLoadingNews] = useState(true);
-  const [nearestChurch, setNearestChurch] = useState(null);
-  const [nearestLoading, setNearestLoading] = useState(false);
-  const [nearestError, setNearestError] = useState(null);
-  const toast = useToast();
+  const [refreshing, setRefreshing] = useState(false);
+  const [nearest, setNearest] = useState({ church: null, loading: false, error: null });
 
   useEffect(() => {
     loadStats();
     fetchNews();
-    setupDailyNotification();
   }, []);
 
-  const findNearestChurch = async () => {
-    setNearestLoading(true);
-    setNearestError(null);
-    const { granted, coords } = await LocationService.getCurrentPosition();
-    if (!granted || !coords) {
-      setNearestError('Puxa, permita o acesso à localização para descobrir a igreja mais próxima de você.');
-      setNearestLoading(false);
-      return;
-    }
+  const loadStats = async () => {
     try {
-      const data = await getNearbyChurches(coords.latitude, coords.longitude);
-      setNearestChurch(data && data.success ? data.nearest : null);
-    } catch (err) {
-      setNearestError('Puxa, não conseguimos encontrar a igreja mais próxima agora. Tente novamente.');
-    } finally {
-      setNearestLoading(false);
-    }
-  };
-
-  const setupDailyNotification = async () => {
-    const { status } = await Notifications.requestPermissionsAsync();
-    if (status === 'granted') {
-      // Cancel previous scheduled notifications to avoid duplicates if mounted multiple times
-      await Notifications.cancelAllScheduledNotificationsAsync();
-      await Notifications.scheduleNotificationAsync({
-        content: {
-          title: '📖 Liturgia Diária',
-          body: 'Não se esqueça da leitura do Evangelho de hoje!',
-        },
-        trigger: {
-          hour: 8,
-          minute: 0,
-          repeats: true,
-        },
-      });
+      const [churches, priests, masses] = await Promise.all([getChurches(), getPriests(), getMasses()]);
+      const count = (list) => list.length;
+      setStats({ churches: count(churches), priests: count(priests), masses: count(masses) });
+    } catch (error) {
+      console.error('Error loading stats:', error);
     }
   };
 
@@ -68,35 +43,26 @@ export default function HomeScreen({ navigation }) {
     try {
       setLoadingNews(true);
       const data = await getNews();
-      if (data && data.success && data.data) {
-        setNews(data.data);
-      } else {
-        setNews([]);
-      }
+      setNews(data && data.success && data.data ? data.data : []);
     } catch (err) {
-      console.error("Failed to load news", err);
+      console.error('Failed to load news', err);
     } finally {
       setLoadingNews(false);
     }
   };
 
-  const loadStats = async () => {
+  const findNearestChurch = async () => {
+    setNearest({ church: null, loading: true, error: null });
+    const { granted, coords } = await LocationService.getCurrentPosition();
+    if (!granted || !coords) {
+      setNearest({ church: null, loading: false, error: 'Puxa, permita o acesso à localização para descobrir a igreja mais próxima de você.' });
+      return;
+    }
     try {
-      setLoading(true);
-      const [churches, priests, masses] = await Promise.all([
-        getChurches(),
-        getPriests(),
-        getMasses(),
-      ]);
-      setStats({
-        churches: churches.length,
-        priests: priests.length,
-        masses: masses.length,
-      });
-    } catch (error) {
-      console.error('Error loading stats:', error);
-    } finally {
-      setLoading(false);
+      const data = await getNearbyChurches(coords.latitude, coords.longitude);
+      setNearest({ church: data && data.success ? data.nearest : null, loading: false, error: null });
+    } catch (err) {
+      setNearest({ church: null, loading: false, error: 'Puxa, não conseguimos encontrar a igreja mais próxima agora. Tente novamente.' });
     }
   };
 
@@ -107,861 +73,46 @@ export default function HomeScreen({ navigation }) {
     toast.success('Dados atualizados!');
   };
 
-  const handleCall = (phone) => {
-    Linking.openURL(`tel:${phone.replace(/\D/g, '')}`);
+  const openNews = (item) => {
+    Linking.openURL(item.link);
+    toast.info('Abrindo a notícia...');
   };
 
-  const handleEmail = (email) => {
-    Linking.openURL(`mailto:${email}`);
+  const remindNews = async (item) => {
+    const ok = await scheduleReminder({ title: 'Lembrete de Leitura 📖', body: item.title, seconds: 10, data: { url: item.link } });
+    if (ok) toast.success('Lembrete configurado para daqui a 10 segundos!');
+    else toast.error('Permissão de notificação negada.');
   };
+
+  const go = (tab) => () => navigation.navigate(tab);
+  const openChurch = () => navigation.navigate('Churches', { screen: 'ChurchDetail', params: { churchId: nearest.church.id } });
 
   return (
     <View style={styles.container}>
       <NetworkStatus />
       <ScrollView
         showsVerticalScrollIndicator={false}
-        refreshControl={
-          <RefreshControl
-            refreshing={refreshing}
-            onRefresh={onRefresh}
-            colors={['#2c3e50']}
-            tintColor="#2c3e50"
-          />
-        }
+        contentContainerStyle={[styles.content, { paddingTop: insets.top + 24 }]}
+        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} colors={[colors.primary]} tintColor={colors.primary} />}
       >
-        <View style={styles.header}>
-          <View style={styles.logoContainer}>
-            <Ionicons name="church" size={60} color="#fff" />
-          </View>
-          <Text style={styles.title}> Diocese de Franca</Text>
-          <Text style={styles.subtitle}>Aplicativo Oficial</Text>
-          <Text style={styles.version}>v1.0.0</Text>
-        </View>
-
-        <View style={styles.welcomeCard}>
-          <Text style={styles.welcomeTitle}>Bem-vindo!</Text>
-          <Text style={styles.welcomeText}>
-            Conheça as paróquias, padres e horários de missa da Diocese de Franca.
-          </Text>
-          <TouchableOpacity activeOpacity={0.8} style={styles.refreshButton} onPress={onRefresh} >
-            <Ionicons name="refresh" size={18} color="#2c3e50" />
-            <Text style={styles.refreshText}>Atualizar dados</Text>
-          </TouchableOpacity>
-        </View>
-
-        <View style={styles.nearestCard}>
-          <View style={styles.nearestHeader}>
-            <Ionicons name="navigate" size={20} color="#3498db" />
-            <Text style={styles.nearestTitle}>Igreja mais próxima</Text>
-          </View>
-
-          {nearestLoading ? (
-            <View style={styles.nearestLoadingRow}>
-              <ActivityIndicator size="small" color="#2c3e50" />
-              <Text style={styles.nearestLoadingText}>Localizando você...</Text>
-            </View>
-          ) : nearestChurch ? (
-            <TouchableOpacity activeOpacity={0.8}
-              style={styles.nearestResult}
-              onPress={() => navigation.navigate('Churches', { screen: 'ChurchDetail', params: { churchId: nearestChurch.id } })}
-
-            >
-              <View style={styles.nearestResultText}>
-                <Text style={styles.nearestChurchName} numberOfLines={1}>{nearestChurch.name}</Text>
-                <Text style={styles.nearestDistance}>{formatDistance(nearestChurch.distanceKm)} de você</Text>
-                {nearestChurch.nextMass && (
-                  <Text style={styles.nearestNextMass}>Próxima missa: {formatNextMass(nearestChurch.nextMass)}</Text>
-                )}
-              </View>
-              <Ionicons name="chevron-forward" size={22} color="#bdc3c7" />
-            </TouchableOpacity>
-          ) : (
-            <View>
-              {nearestError && <Text style={styles.nearestErrorText}>{nearestError}</Text>}
-              <TouchableOpacity activeOpacity={0.8} style={styles.nearestButton} onPress={findNearestChurch} >
-                <Ionicons name="locate" size={16} color="#fff" />
-                <Text style={styles.nearestButtonText}>
-                  {nearestError ? 'Tentar novamente' : 'Encontrar a igreja mais próxima'}
-                </Text>
-              </TouchableOpacity>
-            </View>
-          )}
-        </View>
-
-        <View style={styles.statsContainer}>
-          <TouchableOpacity activeOpacity={0.8} style={styles.statItem} onPress={() => navigation.navigate('Churches')} >
-            <View style={[styles.statIcon, { backgroundColor: '#e8f4f8' }]}>
-              <Ionicons name="business" size={24} color="#2c3e50" />
-            </View>
-            <Text style={styles.statNumber}>{stats.churches}</Text>
-            <Text style={styles.statLabel}>Paróquias</Text>
-          </TouchableOpacity>
-          <View style={styles.statDivider} />
-          <TouchableOpacity activeOpacity={0.8} style={styles.statItem} onPress={() => navigation.navigate('Priests')} >
-            <View style={[styles.statIcon, { backgroundColor: '#fef5e7' }]}>
-              <Ionicons name="person" size={24} color="#d35400" />
-            </View>
-            <Text style={styles.statNumber}>{stats.priests}</Text>
-            <Text style={styles.statLabel}>Padres</Text>
-          </TouchableOpacity>
-          <View style={styles.statDivider} />
-          <TouchableOpacity activeOpacity={0.8} style={styles.statItem} onPress={() => navigation.navigate('Masses')} >
-            <View style={[styles.statIcon, { backgroundColor: '#e8f8f5' }]}>
-              <Ionicons name="calendar" size={24} color="#27ae60" />
-            </View>
-            <Text style={styles.statNumber}>{stats.masses}</Text>
-            <Text style={styles.statLabel}>Missas/sem</Text>
-          </TouchableOpacity>
-        </View>
-
-        <View style={styles.newsContainer}>
-          <Text style={styles.sectionTitle}>Notícias da Diocese</Text>
-          {loadingNews ? (
-             <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.newsList}>
-               <NewsCardSkeleton />
-               <NewsCardSkeleton />
-               <NewsCardSkeleton />
-             </ScrollView>
-          ) : news.length > 0 ? (
-            <FlatList
-              horizontal
-              data={news}
-              keyExtractor={(item) => item.id.toString()}
-              showsHorizontalScrollIndicator={false}
-              contentContainerStyle={styles.newsList}
-              renderItem={({ item }) => (
-                <TouchableOpacity activeOpacity={0.8}
-                  style={styles.newsCard}
-                  onPress={() => {
-                    Linking.openURL(item.link);
-                    toast.info('Abrindo a notícia...', { duration: 2000 });
-                  }}
-
-                >
-                  <Image source={{ uri: item.image }} style={styles.newsImage} />
-                  <View style={styles.newsContent}>
-                    <Text style={styles.newsTitle} numberOfLines={2}>{item.title}</Text>
-                    {item.description ? (
-                      <Text style={styles.newsDescription} numberOfLines={3}>{item.description}</Text>
-                    ) : null}
-                    <TouchableOpacity activeOpacity={0.8}
-                      style={styles.readLaterButton}
-                      onPress={async () => {
-                        const { status } = await Notifications.requestPermissionsAsync();
-                        if (status === 'granted') {
-                          await Notifications.scheduleNotificationAsync({
-                            content: {
-                              title: 'Lembrete de Leitura 📖',
-                              body: item.title,
-                              data: { url: item.link },
-                            },
-                            trigger: { seconds: 10 },
-                          });
-                          showToast('Lembrete configurado para daqui a 10 segundos!', 'success');
-                        } else {
-                          showToast('Permissão de notificação negada.', 'error');
-                        }
-                      }}
-                    >
-                      <Ionicons name="alarm-outline" size={16} color="#3498db" />
-                      <Text style={styles.readLaterText}>Lembrar de Ler (10s)</Text>
-                    </TouchableOpacity>
-                  </View>
-                </TouchableOpacity>
-              )}
-            />
-          ) : (
-            <View style={styles.emptyNewsContainer}>
-              <Ionicons name="newspaper-outline" size={36} color="#bdc3c7" />
-              <Text style={styles.emptyNewsText}>Puxa, não conseguimos encontrar notícias no momento.</Text>
-              <TouchableOpacity activeOpacity={0.8} style={styles.refreshButtonSmall} onPress={fetchNews} >
-                <Ionicons name="refresh" size={16} color="#fff" />
-                <Text style={styles.refreshButtonSmallText}>Tentar Novamente</Text>
-              </TouchableOpacity>
-            </View>
-          )}
-        </View>
-
-        <View style={styles.menuContainer}>
-          <Text style={styles.sectionTitle}>Navegue</Text>
-
-          <TouchableOpacity activeOpacity={0.8}
-            style={styles.menuCard}
-            onPress={() => navigation.navigate('Churches')}
-
-          >
-            <View style={[styles.menuIconContainer, { backgroundColor: '#e8f4f8' }]}>
-              <Ionicons name="church-outline" size={32} color="#2c3e50" />
-            </View>
-            <View style={styles.menuContent}>
-              <Text style={styles.menuTitle}>Igrejas</Text>
-              <Text style={styles.menuDescription}>Veja todas as paróquias e suas informações</Text>
-            </View>
-            <View style={styles.menuArrow}>
-              <Ionicons name="chevron-forward" size={24} color="#bdc3c7" />
-            </View>
-          </TouchableOpacity>
-
-          <TouchableOpacity activeOpacity={0.8}
-            style={styles.menuCard}
-            onPress={() => navigation.navigate('Priests')}
-
-          >
-            <View style={[styles.menuIconContainer, { backgroundColor: '#fef5e7' }]}>
-              <Ionicons name="person-outline" size={32} color="#d35400" />
-            </View>
-            <View style={styles.menuContent}>
-              <Text style={styles.menuTitle}>Padres</Text>
-              <Text style={styles.menuDescription}>Conheça nossos sacerdotes</Text>
-            </View>
-            <View style={styles.menuArrow}>
-              <Ionicons name="chevron-forward" size={24} color="#bdc3c7" />
-            </View>
-          </TouchableOpacity>
-
-          <TouchableOpacity activeOpacity={0.8}
-            style={styles.menuCard}
-            onPress={() => navigation.navigate('Masses')}
-
-          >
-            <View style={[styles.menuIconContainer, { backgroundColor: '#e8f8f5' }]}>
-              <Ionicons name="time-outline" size={32} color="#27ae60" />
-            </View>
-            <View style={styles.menuContent}>
-              <Text style={styles.menuTitle}>Horários de Missa</Text>
-              <Text style={styles.menuDescription}>Consulte os horários por dia da semana</Text>
-            </View>
-            <View style={styles.menuArrow}>
-              <Ionicons name="chevron-forward" size={24} color="#bdc3c7" />
-            </View>
-          </TouchableOpacity>
-        </View>
-
-        <View style={styles.quickAccess}>
-          <Text style={styles.sectionTitle}>Acesso Rápido</Text>
-          <View style={styles.quickGrid}>
-            <TouchableOpacity activeOpacity={0.8}
-              style={styles.quickItem}
-
-              onPress={() => navigation.navigate('Masses', { day: 'Domingo' })}
-            >
-              <Ionicons name="sunny" size={28} color="#f39c12" />
-              <Text style={styles.quickText}>Missa{'\n'}Domingo</Text>
-            </TouchableOpacity>
-            <TouchableOpacity activeOpacity={0.8}
-              style={styles.quickItem}
-
-              onPress={async () => {
-                const { status } = await Notifications.requestPermissionsAsync();
-                if (status === 'granted') {
-                  await Notifications.scheduleNotificationAsync({
-                    content: {
-                      title: 'Hora do Ângelus 🙏',
-                      body: 'O Anjo do Senhor anunciou a Maria...',
-                    },
-                    trigger: { seconds: 5 },
-                  });
-                  showToast('Lembrete do Ângelus configurado para daqui a 5 segundos.', 'info');
-                } else {
-                  showToast('Permissão para notificações negada.', 'error');
-                }
-              }}
-            >
-              <Ionicons name="time" size={28} color="#8e44ad" />
-              <Text style={styles.quickText}>Lembrete{'\n'}Ângelus</Text>
-            </TouchableOpacity>
-            <TouchableOpacity activeOpacity={0.8}
-              style={styles.quickItem}
-
-              onPress={async () => {
-                const { status } = await Notifications.requestPermissionsAsync();
-                if (status === 'granted') {
-                  await Notifications.scheduleNotificationAsync({
-                    content: {
-                      title: 'Teste de Lembrete',
-                      body: 'A paz do Senhor esteja com você!',
-                    },
-                    trigger: { seconds: 5 },
-                  });
-                  toast.success('Notificação agendada para daqui a 5 segundos!');
-                } else {
-                  toast.error('Permissão de notificação negada.');
-                }
-              }}
-            >
-              <Ionicons name="notifications" size={28} color="#e74c3c" />
-              <Text style={styles.quickText}>Lembrete{'\n'}Teste (5s)</Text>
-            </TouchableOpacity>
-            <TouchableOpacity activeOpacity={0.8}
-              style={styles.quickItem}
-
-              onPress={() => {
-                toast.success('Ligando para a Diocese...');
-                handleCall('1637111400');
-              }}
-            >
-              <Ionicons name="call" size={28} color="#27ae60" />
-              <Text style={styles.quickText}>Ligar{'\n'}Diocese</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity activeOpacity={0.8}
-              style={styles.quickItem}
-
-              onPress={() => handleEmail('contato@diocesefranca.org.br')}
-            >
-              <Ionicons name="mail" size={28} color="#9b59b6" />
-              <Text style={styles.quickText}>Enviar{'\n'}Email</Text>
-            </TouchableOpacity>
-            <TouchableOpacity activeOpacity={0.8}
-              style={styles.quickItem}
-              onPress={async () => {
-                const { status } = await Notifications.requestPermissionsAsync();
-                if (status === 'granted') {
-                  await Notifications.scheduleNotificationAsync({
-                    content: {
-                      title: 'Lembrete de Oração 🙏',
-                      body: 'Este é um lembrete de teste configurado para 5 segundos.',
-                    },
-                    trigger: { seconds: 5 },
-                  });
-                  toast.success('Lembrete agendado para daqui a 5 segundos!');
-                } else {
-                  toast.error('Permissão para notificações negada.');
-                }
-              }}
-            >
-              <Ionicons name="notifications" size={28} color="#e67e22" />
-              <Text style={styles.quickText}>Lembrete{'\n'}Teste 5s</Text>
-            </TouchableOpacity>
-            <TouchableOpacity activeOpacity={0.8}
-              style={styles.quickItem}
-              onPress={async () => {
-                const { status } = await Notifications.requestPermissionsAsync();
-                if (status === 'granted') {
-                  await Notifications.scheduleNotificationAsync({
-                    content: {
-                      title: 'Lembrete Bíblia 📖',
-                      body: 'Não se esqueça de ler o evangelho de hoje!',
-                    },
-                    trigger: { seconds: 5 },
-                  });
-                  toast.success('Lembrete bíblico configurado para 5s!');
-                } else {
-                  toast.error('Permissão para notificações negada.');
-                }
-              }}
-            >
-              <Ionicons name="book" size={28} color="#8e44ad" />
-              <Text style={styles.quickText}>Lembrete{'\n'}Bíblia</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-
-        <View style={styles.contactCard}>
-          <Text style={styles.contactTitle}>Contato da Diocese</Text>
-          <View style={styles.contactRow}>
-            <TouchableOpacity activeOpacity={0.8} style={styles.contactItem} onPress={() => handleCall('1637111400')} >
-              <View style={styles.contactIconWrapper}>
-                <Ionicons name="call-outline" size={20} color="#3498db" />
-              </View>
-              <View>
-                <Text style={styles.contactLabel}>Telefone</Text>
-                <Text style={styles.contactText}>(16) 3711-1400</Text>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity activeOpacity={0.8} style={styles.contactItem} onPress={() => handleEmail('contato@diocesefranca.org.br')} >
-              <View style={styles.contactIconWrapper}>
-                <Ionicons name="mail-outline" size={20} color="#3498db" />
-              </View>
-              <View>
-                <Text style={styles.contactLabel}>Email</Text>
-                <Text style={styles.contactText}>contato@diocesefranca.org.br</Text>
-              </View>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.dioceseInfo}>
-            <Ionicons name="location-outline" size={16} color="#7f8c8d" />
-            <Text style={styles.dioceseInfoText}>Praça Nossa Senhora da Conceição, 85 - Centro</Text>
-          </View>
-          <View style={styles.dioceseInfo}>
-            <Ionicons name="planet-outline" size={16} color="#7f8c8d" />
-            <Text style={styles.dioceseInfoText}>Franca - SP, 14400-670</Text>
-          </View>
-        </View>
-
-        <View style={styles.footer}>
-          <Text style={styles.footerText}>Bem-vindo, Fiel!</Text>
-          <Text style={styles.footerSubtext}>Paróquia em Cristo</Text>
-          <View style={styles.footerBadges}>
-            <View style={styles.footerBadge}>
-              <Ionicons name="heart" size={12} color="#e74c3c" />
-              <Text style={styles.footerBadgeText}>Feito com amor</Text>
-            </View>
-          </View>
-        </View>
+        <HomeHeader onRefresh={onRefresh} />
+        <NearestChurchCard church={nearest.church} loading={nearest.loading} error={nearest.error} onFind={findNearestChurch} onOpen={openChurch} />
+        <StatsRow
+          items={[
+            { label: 'Paróquias', value: stats.churches, onPress: go('Churches') },
+            { label: 'Padres', value: stats.priests, onPress: go('Priests') },
+            { label: 'Missas/sem', value: stats.masses, onPress: go('Masses') },
+          ]}
+        />
+        <NewsCarousel news={news} loading={loadingNews} onOpen={openNews} onRemind={remindNews} onRetry={fetchNews} />
+        <QuickActions items={buildQuickActions({ navigation, toast })} />
+        <ContactCard onCall={callDiocese} onEmail={emailDiocese} />
       </ScrollView>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#f8f9fa',
-  },
-  header: {
-    backgroundColor: '#2c3e50',
-    paddingTop: 50,
-    paddingBottom: 30,
-    alignItems: 'center',
-    borderBottomLeftRadius: 30,
-    borderBottomRightRadius: 30,
-  },
-  logoContainer: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
-    backgroundColor: 'rgba(255,255,255,0.15)',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 15,
-  },
-  title: {
-    fontSize: 26,
-    fontWeight: 'bold',
-    color: '#fff',
-    textAlign: 'center',
-  },
-  subtitle: {
-    fontSize: 14,
-    color: '#bdc3c7',
-    marginTop: 5,
-  },
-  version: {
-    fontSize: 11,
-    color: '#7f8c8d',
-    marginTop: 8,
-    backgroundColor: 'rgba(255,255,255,0.1)',
-    paddingHorizontal: 10,
-    paddingVertical: 4,
-    borderRadius: 12,
-  },
-  welcomeCard: {
-    backgroundColor: '#fff',
-    marginHorizontal: 16,
-    marginTop: -20,
-    padding: 20,
-    borderRadius: 16,
-    elevation: 4,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-  },
-  welcomeTitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#2c3e50',
-    marginBottom: 8,
-  },
-  welcomeText: {
-    fontSize: 14,
-    color: '#7f8c8d',
-    lineHeight: 22,
-  },
-  refreshButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginTop: 16,
-    alignSelf: 'flex-start',
-    paddingHorizontal: 14,
-    paddingVertical: 8,
-    backgroundColor: '#f0f4f8',
-    borderRadius: 8,
-    gap: 6,
-  },
-  refreshText: {
-    fontSize: 13,
-    color: '#2c3e50',
-    fontWeight: '600',
-  },
-  nearestCard: {
-    backgroundColor: '#fff',
-    marginHorizontal: 16,
-    marginTop: 16,
-    padding: 20,
-    borderRadius: 16,
-    elevation: 4,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-  },
-  nearestHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-    marginBottom: 12,
-  },
-  nearestTitle: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#2c3e50',
-  },
-  nearestLoadingRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 10,
-  },
-  nearestLoadingText: {
-    fontSize: 14,
-    color: '#7f8c8d',
-  },
-  nearestResult: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#f0f4f8',
-    borderRadius: 12,
-    padding: 14,
-  },
-  nearestResultText: {
-    flex: 1,
-    marginRight: 8,
-  },
-  nearestChurchName: {
-    fontSize: 15,
-    fontWeight: 'bold',
-    color: '#2c3e50',
-  },
-  nearestDistance: {
-    fontSize: 13,
-    color: '#3498db',
-    fontWeight: '600',
-    marginTop: 2,
-  },
-  nearestNextMass: {
-    fontSize: 13,
-    color: '#27ae60',
-    marginTop: 4,
-  },
-  nearestErrorText: {
-    fontSize: 13,
-    color: '#e74c3c',
-    marginBottom: 10,
-  },
-  nearestButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#2c3e50',
-    paddingVertical: 12,
-    borderRadius: 10,
-    gap: 8,
-  },
-  nearestButtonText: {
-    color: '#fff',
-    fontSize: 14,
-    fontWeight: '600',
-  },
-  statsContainer: {
-    flexDirection: 'row',
-    backgroundColor: '#fff',
-    marginHorizontal: 16,
-    marginTop: 16,
-    padding: 20,
-    borderRadius: 16,
-    elevation: 4,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-  },
-  statItem: {
-    flex: 1,
-    alignItems: 'center',
-  },
-  statIcon: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 8,
-  },
-  statNumber: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    color: '#2c3e50',
-  },
-  statLabel: {
-    fontSize: 12,
-    color: '#7f8c8d',
-    marginTop: 4,
-  },
-  statDivider: {
-    width: 1,
-    backgroundColor: '#ecf0f1',
-    marginVertical: 5,
-  },
-  menuContainer: {
-    padding: 16,
-  },
-  sectionTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#2c3e50',
-    marginBottom: 16,
-  },
-  menuCard: {
-    backgroundColor: '#fff',
-    borderRadius: 16,
-    padding: 16,
-    marginBottom: 12,
-    flexDirection: 'row',
-    alignItems: 'center',
-    elevation: 3,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.08,
-    shadowRadius: 8,
-  },
-  menuIconContainer: {
-    width: 60,
-    height: 60,
-    borderRadius: 15,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  menuContent: {
-    flex: 1,
-    marginLeft: 16,
-  },
-  menuTitle: {
-    fontSize: 17,
-    fontWeight: 'bold',
-    color: '#2c3e50',
-  },
-  menuDescription: {
-    fontSize: 13,
-    color: '#95a5a6',
-    marginTop: 4,
-  },
-  menuArrow: {
-    paddingLeft: 8,
-  },
-  newsContainer: {
-    marginTop: 20,
-  },
-  newsList: {
-    paddingHorizontal: 16,
-    gap: 16,
-  },
-  newsCard: {
-    backgroundColor: '#fff',
-    borderRadius: 20,
-    width: 320,
-    elevation: 6,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.2,
-    shadowRadius: 10,
-    overflow: 'hidden',
-    marginRight: 20,
-    paddingBottom: 12,
-  },
-  newsImage: {
-    width: '100%',
-    height: 140,
-    backgroundColor: '#ecf0f1',
-    resizeMode: 'cover',
-  },
-  newsContent: {
-    padding: 20,
-  },
-  newsTitle: {
-    fontSize: 14,
-    fontWeight: 'bold',
-    color: '#2c3e50',
-    lineHeight: 20,
-  },
-  newsDescription: {
-    fontSize: 12,
-    color: '#7f8c8d',
-    marginTop: 4,
-    lineHeight: 18,
-  },
-  readLaterButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginTop: 12,
-    gap: 4,
-    paddingVertical: 6,
-    paddingHorizontal: 10,
-    backgroundColor: '#e8f4f8',
-    borderRadius: 8,
-    alignSelf: 'flex-start',
-  },
-  readLaterText: {
-    fontSize: 12,
-    color: '#3498db',
-    fontWeight: '600',
-  },
-  loadingText: {
-    paddingHorizontal: 16,
-    color: '#7f8c8d',
-  },
-  emptyNewsContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: 32,
-    backgroundColor: '#fdfdfd',
-    marginHorizontal: 16,
-    borderRadius: 16,
-    elevation: 3,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.15,
-    shadowRadius: 6,
-    borderWidth: 1,
-    borderColor: '#ecf0f1',
-  },
-  emptyNewsText: {
-    marginTop: 12,
-    color: '#7f8c8d',
-    fontSize: 15,
-    textAlign: 'center',
-    marginBottom: 16,
-    paddingHorizontal: 20,
-    lineHeight: 22,
-  },
-  refreshButtonSmall: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#2c3e50',
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-    borderRadius: 8,
-    gap: 6,
-  },
-  refreshButtonSmallText: {
-    color: '#fff',
-    fontSize: 13,
-    fontWeight: '600',
-  },
-  quickAccess: {
-    paddingHorizontal: 16,
-    marginBottom: 8,
-  },
-  quickGrid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 12,
-  },
-  quickItem: {
-    width: '47%',
-    backgroundColor: '#fff',
-    borderRadius: 16,
-    padding: 16,
-    alignItems: 'center',
-    elevation: 2,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.08,
-    shadowRadius: 4,
-  },
-  quickText: {
-    fontSize: 13,
-    color: '#2c3e50',
-    fontWeight: '600',
-    textAlign: 'center',
-    marginTop: 8,
-  },
-  contactCard: {
-    backgroundColor: '#fff',
-    marginHorizontal: 16,
-    marginBottom: 16,
-    padding: 20,
-    borderRadius: 16,
-    elevation: 4,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-  },
-  contactTitle: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#2c3e50',
-    marginBottom: 16,
-  },
-  contactRow: {
-    gap: 12,
-    marginBottom: 12,
-  },
-  contactItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingVertical: 8,
-    gap: 12,
-  },
-  contactIconWrapper: {
-    width: 40,
-    height: 40,
-    borderRadius: 10,
-    backgroundColor: '#f0f4f8',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  contactLabel: {
-    fontSize: 11,
-    color: '#7f8c8d',
-  },
-  contactText: {
-    fontSize: 14,
-    color: '#3498db',
-    fontWeight: '500',
-  },
-  dioceseInfo: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginTop: 8,
-    gap: 8,
-  },
-  dioceseInfoText: {
-    fontSize: 13,
-    color: '#7f8c8d',
-  },
-  footer: {
-    alignItems: 'center',
-    paddingVertical: 24,
-    paddingBottom: 40,
-  },
-  footerText: {
-    fontSize: 14,
-    color: '#95a5a6',
-    fontWeight: '600',
-  },
-  footerSubtext: {
-    fontSize: 12,
-    color: '#bdc3c7',
-    marginTop: 4,
-  },
-  footerBadges: {
-    flexDirection: 'row',
-    marginTop: 16,
-    gap: 12,
-  },
-  footerBadge: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#fff',
-    paddingHorizontal: 12,
-    paddingVertical: 6,
-    borderRadius: 16,
-    gap: 4,
-  },
-  footerBadgeText: {
-    fontSize: 11,
-    color: '#7f8c8d',
-  },
+  container: { flex: 1, backgroundColor: colors.bg },
+  content: { paddingHorizontal: 20, paddingBottom: 120, gap: 24 },
 });

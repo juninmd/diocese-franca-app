@@ -1,15 +1,17 @@
 import React, { createContext, useContext, useState, useCallback } from 'react';
-import { View, Text, StyleSheet, Animated, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Animated, TouchableOpacity } from 'react-native';
+import { RawText as Text } from '../components/ui/Text';
 import { Ionicons } from '@expo/vector-icons';
+import { colors } from '../theme';
 
 const ToastContext = createContext(null);
 
 const TOAST_DURATION = 3000;
 const TOAST_TYPES = {
-  success: { icon: 'checkmark-circle', color: '#27ae60', bg: '#e8f8f5' },
-  error: { icon: 'alert-circle', color: '#e74c3c', bg: '#fdf2f2' },
-  info: { icon: 'information-circle', color: '#3498db', bg: '#ebf5fb' },
-  warning: { icon: 'warning', color: '#f39c12', bg: '#fef9e7' },
+  success: { icon: 'checkmark-circle', color: colors.greenInk, bg: colors.greenTint },
+  error: { icon: 'alert-circle', color: colors.danger, bg: '#F9E3E1' },
+  info: { icon: 'information-circle', color: colors.primary, bg: colors.tint },
+  warning: { icon: 'warning', color: '#7A5A16', bg: '#F6EBCF' },
 };
 
 let toastHandler = null;
@@ -124,7 +126,7 @@ const styles = StyleSheet.create({
   },
   toast: {
     width: '100%',
-    borderRadius: 12,
+    borderRadius: 18,
     marginBottom: 10,
     elevation: 6,
     shadowColor: '#000',

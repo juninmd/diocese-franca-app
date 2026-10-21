@@ -1,117 +1,70 @@
-import React, { useEffect, useState, useCallback } from 'react';
-import { View, Text, StyleSheet, FlatList, ActivityIndicator, TouchableOpacity, RefreshControl, SectionList } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import * as Notifications from 'expo-notifications';
+import React, { useEffect, useState, useCallback, useMemo } from 'react';
+import { View, ScrollView, RefreshControl, StyleSheet } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { getMasses } from '../services/api';
+import { scheduleReminder } from '../services/ReminderService';
 import { useToast } from '../context/ToastContext';
 import { NetworkStatus } from '../components/NetworkStatus';
 import { ListSkeleton } from '../components/Skeleton';
+import { Text, EmptyState } from '../components/ui';
+import { DayStrip } from '../components/masses/DayStrip';
+import { MassRow } from '../components/masses/MassRow';
+import { TypeFilter } from '../components/masses/TypeFilter';
+import { DAY_NAMES, weekDays, dayTitle, groupByDay, findNextMassId } from '../components/masses/massUtils';
+import { colors, space } from '../theme';
 
-const DAYS_OF_WEEK = [
-  { key: 'all', label: 'Todos', short: 'All' },
-  { key: 'Domingo', label: 'Domingo', short: 'Dom' },
-  { key: 'Segunda-feira', label: 'Segunda', short: 'Seg' },
-  { key: 'Terça-feira', label: 'Terça', short: 'Ter' },
-  { key: 'Quarta-feira', label: 'Quarta', short: 'Qua' },
-  { key: 'Quinta-feira', label: 'Quinta', short: 'Qui' },
-  { key: 'Sexta-feira', label: 'Sexta', short: 'Sex' },
-  { key: 'Sábado', label: 'Sábado', short: 'Sáb' },
-];
+const ERROR_MSG = 'Puxa, não conseguimos carregar os horários das missas agora. Verifique sua conexão e tente novamente!';
+const EMPTY_MSG = 'Puxa, não encontramos missas para esses filtros. Vamos tentar limpar os filtros e buscar novamente?';
 
-export default function MassesScreen() {
+export default function MassesScreen({ navigation, route }) {
+  const insets = useSafeAreaInsets();
+  const toast = useToast();
+  const today = DAY_NAMES[new Date().getDay()];
   const [masses, setMasses] = useState([]);
-  const [filteredMasses, setFilteredMasses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [error, setError] = useState(null);
-  const [selectedDay, setSelectedDay] = useState('all');
+  const [selectedDay, setSelectedDay] = useState(route?.params?.day || today);
   const [massType, setMassType] = useState('all');
-  const toast = useToast();
+  const [reminders, setReminders] = useState({});
 
-  useEffect(() => {
-    loadMasses();
-  }, []);
-
-  useEffect(() => {
-    filterMasses();
-  }, [selectedDay, massType, masses]);
-
-  const loadMasses = async () => {
+  const loadMasses = useCallback(async () => {
     try {
-      setLoading(true);
-      const data = await getMasses();
-      setMasses(data);
+      setMasses(await getMasses());
       setError(null);
     } catch (err) {
-      setError('Puxa, não conseguimos carregar os horários das missas agora. Verifique sua conexão e tente novamente!');
+      setError(ERROR_MSG);
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
+
+  useEffect(() => { loadMasses(); }, [loadMasses]);
+  useEffect(() => { if (route?.params?.day) setSelectedDay(route.params.day); }, [route?.params?.day]);
 
   const onRefresh = useCallback(async () => {
     setRefreshing(true);
     await loadMasses();
     setRefreshing(false);
     toast.success('Horários atualizados!');
-  }, []);
+  }, [loadMasses, toast]);
 
-  const scheduleMassReminder = async (item) => {
+  const remind = async (item) => {
     try {
-      const { status } = await Notifications.requestPermissionsAsync();
-      if (status !== 'granted') {
-        toast.error('Permissão para notificações negada.');
-        return;
-      }
-      await Notifications.scheduleNotificationAsync({
-        content: {
-          title: 'Lembrete de Missa',
-          body: `Missa às ${item.time} na paróquia ${item.church?.name || 'selecionada'}.`,
-          sound: true,
-        },
-        trigger: { seconds: 5 },
+      const ok = await scheduleReminder({
+        title: 'Lembrete de Missa',
+        body: `Missa às ${item.time}${item.church ? ' na ' + item.church.name : ''}`,
+        seconds: 5,
+        data: { massId: item.id },
       });
-      toast.success('Lembrete agendado para daqui a 5 segundos!');
+      if (!ok) return toast.error('Permissão de notificação negada.');
+      setReminders((r) => ({ ...r, [item.id]: true }));
+      toast.success('Lembrete configurado para daqui a 5 segundos!');
     } catch (err) {
       console.error(err);
       toast.error('Não foi possível agendar o lembrete.');
     }
   };
-
-  const filterMasses = () => {
-    let filtered = masses;
-
-    if (selectedDay !== 'all') {
-      filtered = filtered.filter((mass) => mass.dayOfWeek === selectedDay);
-    }
-
-    if (massType !== 'all') {
-      filtered = filtered.filter((mass) => mass.type === massType);
-    }
-
-    const grouped = groupByDay(filtered);
-    setFilteredMasses(grouped);
-  };
-
-  const groupByDay = (massesList) => {
-    const dayOrder = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
-    const grouped = massesList.reduce((acc, mass) => {
-      if (!acc[mass.dayOfWeek]) {
-        acc[mass.dayOfWeek] = [];
-      }
-      acc[mass.dayOfWeek].push(mass);
-      return acc;
-    }, {});
-
-    return dayOrder
-      .filter(day => grouped[day])
-      .map(day => ({
-        day,
-        data: grouped[day].sort((a, b) => a.time.localeCompare(b.time)),
-      }));
-  };
-
-  const uniqueTypes = [...new Set(masses.map((m) => m.type))];
 
   const clearFilters = () => {
     setSelectedDay('all');
@@ -119,460 +72,70 @@ export default function MassesScreen() {
     toast.success('Filtros limpos! Veja todos os horários.');
   };
 
-  const hasActiveFilters = selectedDay !== 'all' || massType !== 'all';
+  const sections = useMemo(() => groupByDay(masses.filter((m) =>
+    (selectedDay === 'all' || m.dayOfWeek === selectedDay) && (massType === 'all' || m.type === massType))), [masses, selectedDay, massType]);
+  const types = useMemo(() => [...new Set(masses.map((m) => m.type))], [masses]);
+  const nextId = useMemo(() => findNextMassId(masses), [masses]);
+  const hasFilters = selectedDay !== 'all' || massType !== 'all';
+  const openChurch = (churchId) => navigation.navigate('Churches', { screen: 'ChurchDetail', params: { churchId } });
 
-  const renderMassItem = ({ item }) => (
-    <View style={styles.massCard}>
-      <View style={styles.massTimeContainer}>
-        <Text style={styles.massTime}>{item.time}</Text>
-      </View>
-      <View style={styles.massInfo}>
-        <View style={styles.typeBadge}>
-          <Ionicons name={item.type === 'Missa Dominical' ? 'sunny' : 'moon'} size={14} color={item.type === 'Missa Dominical' ? '#f39c12' : '#3498db'} />
-          <Text style={[styles.massType, { color: item.type === 'Missa Dominical' ? '#f39c12' : '#3498db' }]}>{item.type}</Text>
+  const renderBody = () => {
+    if (loading && !refreshing) return <ListSkeleton count={5} type="mass" />;
+    if (error && masses.length === 0) {
+      return <EmptyState icon="alert-circle-outline" message={error} actionLabel="Tentar Novamente" onAction={() => { setLoading(true); loadMasses(); }} />;
+    }
+    if (sections.length === 0) {
+      return (
+        <View style={styles.list}>
+          <Text variant="heading">Puxa, não encontramos missas.</Text>
+          <EmptyState icon="calendar-outline" message={EMPTY_MSG} actionLabel={hasFilters ? 'Limpar filtros' : undefined} onAction={clearFilters} />
         </View>
-        {item.church && (
-          <>
-            <View style={styles.churchRow}>
-              <Ionicons name="church-outline" size={14} color="#2c3e50" />
-              <Text style={styles.churchName}>{item.church.name}</Text>
-            </View>
-            {item.church.address && (
-              <Text style={styles.churchAddress} numberOfLines={1}>{item.church.address}</Text>
-            )}
-          </>
-        )}
-      </View>
-      <TouchableOpacity activeOpacity={0.8}
-        style={styles.notificationButton}
-        activeOpacity={0.8}
-        onPress={async () => {
-          const { status } = await Notifications.requestPermissionsAsync();
-          if (status === 'granted') {
-            await Notifications.scheduleNotificationAsync({
-              content: {
-                title: 'Lembrete de Missa',
-                body: `Missa às ${item.time}${item.church ? ' na ' + item.church.name : ''}`,
-              },
-              trigger: { seconds: 5 },
-            });
-            toast.success('Lembrete configurado para daqui a 5 segundos!');
-          } else {
-            toast.error('Permissão de notificação negada.');
-          }
-        }}
-      >
-        <Ionicons name="notifications-outline" size={24} color="#3498db" />
-      </TouchableOpacity>
-    </View>
-  );
-
-  const renderSectionHeader = ({ section }) => {
-    const count = section.data.length;
-    return (
-      <View style={styles.daySection}>
-        <View style={styles.dayHeader}>
-          <View style={styles.dayHeaderLeft}>
-            <Ionicons name="calendar" size={18} color="#2c3e50" />
-            <Text style={styles.dayTitle}>{section.day}</Text>
-          </View>
-          <View style={styles.dayBadge}>
-            <Text style={styles.dayBadgeText}>{count} {count === 1 ? 'missa' : 'missas'}</Text>
-          </View>
+      );
+    }
+    return sections.map(({ day, data }) => (
+      <View key={day} style={styles.list}>
+        <View style={styles.sectionHead}>
+          <Text variant="title">{dayTitle(day)}</Text>
+          <Text variant="caption">{data.length} {data.length === 1 ? 'missa' : 'missas'}</Text>
         </View>
-        {section.data.map((item, index) => renderMassItem({ item, index }))}
+        {data.map((item) => (
+          <MassRow key={item.id} item={item} isNext={item.id === nextId} reminderSet={!!reminders[item.id]} onOpenChurch={openChurch} onRemind={remind} />
+        ))}
       </View>
-    );
+    ));
   };
 
-  const renderFilters = () => (
-    <View style={styles.filtersContainer}>
-      <View style={styles.filtersHeader}>
-        <Text style={styles.filterLabel}>Dia da semana</Text>
-        {hasActiveFilters && (
-          <TouchableOpacity activeOpacity={0.8} onPress={clearFilters} style={styles.clearButton} >
-            <Ionicons name="close" size={14} color="#e74c3c" />
-            <Text style={styles.clearText}>Limpar filtros</Text>
-          </TouchableOpacity>
-        )}
-      </View>
-      <FlatList
-        horizontal
-        data={DAYS_OF_WEEK}
-        renderItem={({ item }) => (
-          <TouchableOpacity activeOpacity={0.8}
-            key={item.key}
-
-            style={[
-              styles.dayFilterButton,
-              selectedDay === item.key && styles.dayFilterButtonActive,
-            ]}
-            onPress={() => setSelectedDay(item.key)}
-          >
-            <Text
-              style={[
-                styles.dayFilterText,
-                selectedDay === item.key && styles.dayFilterTextActive,
-              ]}
-            >
-              {item.short}
-            </Text>
-          </TouchableOpacity>
-        )}
-        keyExtractor={(item) => item.key}
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={styles.dayFiltersList}
-      />
-
-      {uniqueTypes.length > 1 && (
-        <>
-          <Text style={[styles.filterLabel, { marginTop: 12 }]}>Tipo de missa</Text>
-          <FlatList
-            horizontal
-            data={[{ key: 'all', label: 'Todos' }, ...uniqueTypes.map(t => ({ key: t, label: t }))]}
-            renderItem={({ item }) => (
-              <TouchableOpacity activeOpacity={0.8}
-                key={item.key}
-
-                style={[styles.typeFilterButton, massType === item.key && styles.typeFilterButtonActive]}
-                onPress={() => setMassType(item.key)}
-              >
-                <Ionicons
-                  name={item.key === 'all' ? 'apps' : item.key === 'Missa Dominical' ? 'sunny' : 'moon'}
-                  size={14}
-                  color={massType === item.key ? '#fff' : '#7f8c8d'}
-                />
-                <Text style={[styles.typeFilterText, massType === item.key && styles.typeFilterTextActive]}>
-                  {item.label}
-                </Text>
-              </TouchableOpacity>
-            )}
-            keyExtractor={(item) => item.key}
-            showsHorizontalScrollIndicator={false}
-            contentContainerStyle={styles.dayFiltersList}
-          />
-        </>
-      )}
-    </View>
-  );
-
-  if (loading && !refreshing) {
-    return (
-      <View style={styles.container}>
-        {renderFilters()}
-        <ListSkeleton count={5} type="mass" />
-      </View>
-    );
-  }
-
-  if (error && masses.length === 0) {
-    return (
-      <View style={styles.container}>
-        <NetworkStatus />
-        <View style={styles.centerContainer}>
-          <Ionicons name="alert-circle-outline" size={64} color="#e74c3c" />
-          <Text style={styles.errorText}>{error}</Text>
-          <TouchableOpacity activeOpacity={0.8} style={styles.retryButton} onPress={loadMasses} >
-            <Ionicons name="refresh" size={18} color="#fff" />
-            <Text style={styles.retryButtonText}>Tentar Novamente</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-    );
-  }
-
-  const totalMasses = filteredMasses.reduce((acc, day) => acc + day.data.length, 0);
-
   return (
-    <View style={styles.container}>
+    <ScrollView
+      style={styles.screen}
+      contentContainerStyle={[styles.content, { paddingTop: insets.top + space.xxl }]}
+      showsVerticalScrollIndicator={false}
+      refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} colors={[colors.primary]} tintColor={colors.primary} />}
+    >
       <NetworkStatus />
-      {renderFilters()}
-
-      <View style={styles.statsBar}>
-        <Ionicons name="information-circle-outline" size={16} color="#7f8c8d" />
-        <Text style={styles.statsText}>
-          {totalMasses} {totalMasses === 1 ? 'missa encontrada' : 'missas encontradas'}
-          {hasActiveFilters && ' (filtrado)'}
+      <View style={styles.titleBox}>
+        <Text variant="display">Horários de missa</Text>
+        <Text variant="body" style={{ color: colors.muted }}>
+          {new Date().toLocaleDateString('pt-BR', { month: 'long', year: 'numeric' })} · toda a diocese
         </Text>
       </View>
-
-      <SectionList
-        sections={filteredMasses}
-        renderItem={renderMassItem}
-        renderSectionHeader={renderSectionHeader}
-        keyExtractor={(item) => item.id.toString()}
-        contentContainerStyle={styles.listContainer}
-        showsVerticalScrollIndicator={false}
-        stickySectionHeadersEnabled={false}
-        SectionSeparatorComponent={() => <View style={{ height: 8 }} />}
-        ListEmptyComponent={
-          <View style={styles.emptyContainer}>
-            <Ionicons name="calendar-outline" size={64} color="#bdc3c7" />
-            <Text style={styles.emptyTitle}>Puxa, não encontramos missas.</Text>
-            <Text style={styles.emptyText}>
-              Puxa, não encontramos missas para esses filtros. Vamos tentar limpar os filtros e buscar novamente?
-            </Text>
-            {hasActiveFilters && (
-              <TouchableOpacity activeOpacity={0.8} style={styles.emptyButton} onPress={clearFilters} >
-                <Text style={styles.emptyButtonText}>Limpar filtros</Text>
-              </TouchableOpacity>
-            )}
-          </View>
-        }
-        refreshControl={
-          <RefreshControl
-            refreshing={refreshing}
-            onRefresh={onRefresh}
-            colors={['#2c3e50']}
-            tintColor="#2c3e50"
-          />
-        }
+      <DayStrip days={weekDays()} selected={selectedDay} onSelect={setSelectedDay} />
+      <TypeFilter
+        types={types}
+        allDays={selectedDay === 'all'}
+        onToggleAllDays={() => setSelectedDay(selectedDay === 'all' ? today : 'all')}
+        selectedType={massType}
+        onSelectType={setMassType}
       />
-    </View>
+      {renderBody()}
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#f8f9fa',
-  },
-  centerContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 20,
-  },
-  filtersContainer: {
-    backgroundColor: '#fff',
-    paddingHorizontal: 16,
-    paddingTop: 16,
-    paddingBottom: 12,
-    borderBottomWidth: 1,
-    borderBottomColor: '#f0f4f8',
-  },
-  filtersHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 8,
-  },
-  filterLabel: {
-    fontSize: 12,
-    fontWeight: '600',
-    color: '#7f8c8d',
-    marginBottom: 8,
-    textTransform: 'uppercase',
-    letterSpacing: 0.5,
-  },
-  clearButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 4,
-  },
-  clearText: {
-    fontSize: 12,
-    color: '#e74c3c',
-    fontWeight: '600',
-  },
-  dayFiltersList: {
-    paddingRight: 16,
-  },
-  dayFilterButton: {
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    marginRight: 8,
-    borderRadius: 20,
-    backgroundColor: '#f0f4f8',
-  },
-  dayFilterButtonActive: {
-    backgroundColor: '#2c3e50',
-  },
-  dayFilterText: {
-    fontSize: 13,
-    fontWeight: '600',
-    color: '#7f8c8d',
-  },
-  dayFilterTextActive: {
-    color: '#fff',
-  },
-  typeFilterButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    marginRight: 8,
-    borderRadius: 16,
-    backgroundColor: '#f0f4f8',
-    gap: 6,
-  },
-  typeFilterButtonActive: {
-    backgroundColor: '#27ae60',
-  },
-  typeFilterText: {
-    fontSize: 12,
-    color: '#7f8c8d',
-  },
-  typeFilterTextActive: {
-    color: '#fff',
-    fontWeight: '600',
-  },
-  statsBar: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: 16,
-    paddingVertical: 10,
-    backgroundColor: '#f8f9fa',
-  },
-  statsText: {
-    fontSize: 12,
-    color: '#7f8c8d',
-    marginLeft: 6,
-  },
-  listContainer: {
-    padding: 16,
-    paddingTop: 8,
-  },
-  daySection: {
-    backgroundColor: '#fff',
-    borderRadius: 16,
-    overflow: 'hidden',
-  },
-  dayHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: 16,
-    paddingVertical: 14,
-    backgroundColor: '#f8f9fa',
-    borderBottomWidth: 1,
-    borderBottomColor: '#ecf0f1',
-  },
-  dayHeaderLeft: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  dayTitle: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#2c3e50',
-    marginLeft: 10,
-  },
-  dayBadge: {
-    backgroundColor: '#e8f4f8',
-    paddingHorizontal: 10,
-    paddingVertical: 4,
-    borderRadius: 12,
-  },
-  dayBadgeText: {
-    fontSize: 11,
-    fontWeight: '600',
-    color: '#2c3e50',
-  },
-  massCard: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: 18,
-    paddingVertical: 18,
-    borderBottomWidth: 1,
-    borderBottomColor: '#f0f4f8',
-    elevation: 2,
-    backgroundColor: '#fff',
-  },
-  massTimeContainer: {
-    backgroundColor: '#2c3e50',
-    paddingHorizontal: 14,
-    paddingVertical: 10,
-    borderRadius: 10,
-    marginRight: 14,
-  },
-  massTime: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#fff',
-  },
-  massInfo: {
-    flex: 1,
-  },
-  notificationButton: {
-    padding: 10,
-    marginLeft: 10,
-  },
-  typeBadge: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 4,
-    gap: 4,
-  },
-  massType: {
-    fontSize: 13,
-    fontWeight: '600',
-  },
-  churchRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 2,
-  },
-  churchName: {
-    fontSize: 14,
-    fontWeight: '600',
-    color: '#2c3e50',
-    marginLeft: 6,
-  },
-  churchAddress: {
-    fontSize: 12,
-    color: '#95a5a6',
-    marginLeft: 20,
-  },
-  emptyContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingVertical: 60,
-  },
-  emptyTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#2c3e50',
-    marginTop: 16,
-  },
-  emptyText: {
-    fontSize: 14,
-    color: '#7f8c8d',
-    marginTop: 8,
-    textAlign: 'center',
-  },
-  emptyButton: {
-    marginTop: 20,
-    backgroundColor: '#2c3e50',
-    paddingHorizontal: 24,
-    paddingVertical: 12,
-    borderRadius: 10,
-  },
-  emptyButtonText: {
-    color: '#fff',
-    fontSize: 14,
-    fontWeight: 'bold',
-  },
-  errorText: {
-    fontSize: 16,
-    color: '#e74c3c',
-    textAlign: 'center',
-    marginTop: 16,
-    marginBottom: 20,
-  },
-  retryButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#2c3e50',
-    paddingHorizontal: 24,
-    paddingVertical: 12,
-    borderRadius: 10,
-    gap: 8,
-  },
-  retryButtonText: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
+  screen: { flex: 1, backgroundColor: colors.bg },
+  content: { paddingHorizontal: space.xl, paddingBottom: 110, gap: 18 },
+  titleBox: { gap: space.xs },
+  list: { gap: 10 },
+  sectionHead: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'baseline' },
 });

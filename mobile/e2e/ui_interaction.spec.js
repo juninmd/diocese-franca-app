@@ -25,7 +25,8 @@ test('ui interaction uses toast and triggers local notification schedule', async
   // The fact that we navigated without error is good.
 });
 
-test('priest detail local notification scheduling works', async ({ page }) => {
+test('priest detail local notification scheduling works', async ({ page, context }) => {
+  await context.grantPermissions(['notifications']);
   await page.goto('http://localhost:3001/');
   await expect(page.getByText(/Diocese de Franca/i).first()).toBeVisible({ timeout: 10000 });
 
@@ -33,14 +34,16 @@ test('priest detail local notification scheduling works', async ({ page }) => {
   await page.waitForTimeout(2000);
 
   // Click on a priest to enter detail screen
-  // Wait for at least one priest card to be visible. Usually they contain text like 'Padre'
-  await expect(page.getByText('Padre').first()).toBeVisible({ timeout: 10000 });
-  await page.getByText('Padre').first().click({ force: true });
+  // Wait for at least one priest card to be visible (names start with 'Pe.')
+  await expect(page.getByText(/Pe\. /).first()).toBeVisible({ timeout: 10000 });
+  await page.getByText(/Pe\. /).first().click({ force: true });
   await page.waitForTimeout(2000);
 
   // Look for Confession Reminder button
   const lembreteButton = page.getByText(/Configurar alerta/i).first();
   if (await lembreteButton.isVisible()) {
+      // A tab bar flutuante pode cobrir o item: rola até ele antes de clicar.
+      await lembreteButton.evaluate((el) => el.scrollIntoView({ block: 'center' }));
       await lembreteButton.click({ force: true });
       await page.waitForTimeout(1000);
       await expect(page.getByText(/Lembrete configurado para daqui a 5 segundos!/i).first()).toBeVisible();

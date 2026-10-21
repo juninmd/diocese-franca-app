@@ -1,0 +1,17 @@
+{
+  "_meta": {
+    "description": "De-para: ajustes manuais por id (id = id da página no site da Diocese) que complementam/corrigem os JSONs gerados por scripts/syncDiocese.js. Campos aqui sobrescrevem o registro base; campos ausentes mantêm o valor base. Imagens com placeholder (via.placeholder.com) são descartadas (image = null).",
+    "source": "https://www.diocesefranca.org.br",
+    "collectedAt": "2026-10-21",
+    "notes": [
+      "Imagens são hospedadas no site oficial da Diocese; confirmar permissão de uso/hotlink antes de publicar.",
+      "A foto da Catedral usa o banner de 750px do site em vez da miniatura de 160px da página da paróquia."
+    ]
+  },
+  "churches": {
+    "2080": {
+      "image": "https://www.diocesefranca.org.br/images/20210403030607_catedral-franca-1.jpg"
+    }
+  },
+  "priests": {}
+}

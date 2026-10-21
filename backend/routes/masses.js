@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const masses = require('../data/masses.json');
-const churches = require('../data/churches.json');
+const { masses, churches } = require('../utils/catalog');
 const { validateId, validateDay } = require('../middleware/validation');
 
 router.get('/', (req, res) => {

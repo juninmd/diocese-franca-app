@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Animated, AppState } from 'react-native';
+import { View, StyleSheet, Animated, AppState } from 'react-native';
+import { RawText as Text } from './ui/Text';
 import { Ionicons } from '@expo/vector-icons';
 import { api } from '../services/api';
+import { colors } from '../theme';
 
 export function NetworkStatus() {
   const [isOffline, setIsOffline] = useState(false);
@@ -21,11 +23,10 @@ export function NetworkStatus() {
 
   const checkConnection = async () => {
     try {
-      await api.get('/', { timeout: 3000 });
-      if (isOffline) {
-        setIsOffline(false);
-        hideIndicator();
-      }
+      await api.get('/', { timeout: 8000 });
+      // A closure do intervalo guarda o estado antigo: sempre esconde o aviso ao reconectar.
+      setIsOffline(false);
+      hideIndicator();
     } catch (error) {
       setIsOffline(true);
       displayIndicator();
@@ -91,7 +92,7 @@ const styles = StyleSheet.create({
     top: 0,
     left: 0,
     right: 0,
-    backgroundColor: '#e74c3c',
+    backgroundColor: colors.danger,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
@@ -107,7 +108,7 @@ const styles = StyleSheet.create({
     marginLeft: 8,
   },
   banner: {
-    backgroundColor: '#f39c12',
+    backgroundColor: '#7A5A16',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',

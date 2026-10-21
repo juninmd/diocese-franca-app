@@ -5,7 +5,7 @@ import axios from 'axios';
 // For production, use your deployed backend URL
 const API_BASE_URL = 'http://localhost:3000';
 
-const api = axios.create({
+export const api = axios.create({
   baseURL: API_BASE_URL,
   timeout: 10000,
   headers: {
@@ -13,15 +13,18 @@ const api = axios.create({
   },
 });
 
+// O backend responde { success, count, data }; as telas esperam o payload direto.
+const unwrap = (response) => response.data.data;
+
 // Churches
 export const getChurches = async () => {
   const response = await api.get('/api/churches');
-  return response.data;
+  return unwrap(response);
 };
 
 export const getChurchById = async (id) => {
   const response = await api.get(`/api/churches/${id}`);
-  return response.data;
+  return unwrap(response);
 };
 
 export const getNearbyChurches = async (latitude, longitude) => {
@@ -34,28 +37,28 @@ export const getNearbyChurches = async (latitude, longitude) => {
 // Priests
 export const getPriests = async () => {
   const response = await api.get('/api/priests');
-  return response.data;
+  return unwrap(response);
 };
 
 export const getPriestById = async (id) => {
   const response = await api.get(`/api/priests/${id}`);
-  return response.data;
+  return unwrap(response);
 };
 
 // Masses
 export const getMasses = async () => {
   const response = await api.get('/api/masses');
-  return response.data;
+  return unwrap(response);
 };
 
 export const getMassesByChurch = async (churchId) => {
   const response = await api.get(`/api/masses/by-church/${churchId}`);
-  return response.data;
+  return unwrap(response);
 };
 
 export const getMassesByDay = async (day) => {
   const response = await api.get(`/api/masses/by-day/${day}`);
-  return response.data;
+  return unwrap(response);
 };
 
 // News
