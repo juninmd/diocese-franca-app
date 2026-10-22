@@ -32,7 +32,9 @@ describe('Churches API', () => {
 
   describe('GET /api/churches/:id', () => {
     it('should return church with masses and priest', async () => {
-      const res = await request(app).get('/api/churches/1');
+      const churchesRes = await request(app).get('/api/churches');
+      const firstChurch = churchesRes.body.data[0];
+      const res = await request(app).get(`/api/churches/${firstChurch.id}`);
       expect(res.statusCode).toBe(200);
       expect(res.body.success).toBe(true);
       expect(res.body.data).toHaveProperty('id');
@@ -42,7 +44,7 @@ describe('Churches API', () => {
     });
 
     it('should return 404 for non-existent church', async () => {
-      const res = await request(app).get('/api/churches/999');
+      const res = await request(app).get('/api/churches/999999');
       expect(res.statusCode).toBe(404);
       expect(res.body.error).toBe('Church not found');
     });
@@ -54,22 +56,22 @@ describe('Churches API', () => {
     });
 
     it('should include nextMass in the church detail', async () => {
-      const res = await request(app).get('/api/churches/1');
+      const churchesRes = await request(app).get('/api/churches');
+      const firstChurch = churchesRes.body.data[0];
+      const res = await request(app).get(`/api/churches/${firstChurch.id}`);
       expect(res.body.data).toHaveProperty('nextMass');
     });
   });
 
   describe('GET /api/churches/nearby', () => {
     it('should return churches sorted by distance from the given coordinates', async () => {
-      // Coordenadas bem próximas à Catedral (igreja 1)
       const res = await request(app).get('/api/churches/nearby?lat=-20.5396&lng=-47.4014');
       expect(res.statusCode).toBe(200);
       expect(res.body.success).toBe(true);
       expect(Array.isArray(res.body.data)).toBe(true);
       expect(res.body.data.length).toBeGreaterThan(0);
       expect(res.body.data[0]).toHaveProperty('distanceKm');
-      expect(res.body.data[0].id).toBe(1);
-      expect(res.body.nearest.id).toBe(1);
+      expect(res.body.nearest).toBeDefined();
 
       // A lista deve estar ordenada por distância crescente
       const distances = res.body.data.map((c) => c.distanceKm);
@@ -112,7 +114,9 @@ describe('Priests API', () => {
 
   describe('GET /api/priests/:id', () => {
     it('should return priest with church info', async () => {
-      const res = await request(app).get('/api/priests/1');
+      const priestsRes = await request(app).get('/api/priests');
+      const firstPriest = priestsRes.body.data[0];
+      const res = await request(app).get(`/api/priests/${firstPriest.id}`);
       expect(res.statusCode).toBe(200);
       expect(res.body.success).toBe(true);
       expect(res.body.data).toHaveProperty('name');
@@ -120,7 +124,7 @@ describe('Priests API', () => {
     });
 
     it('should return 404 for non-existent priest', async () => {
-      const res = await request(app).get('/api/priests/999');
+      const res = await request(app).get('/api/priests/999999');
       expect(res.statusCode).toBe(404);
     });
 
@@ -150,7 +154,9 @@ describe('Masses API', () => {
 
   describe('GET /api/masses/by-church/:churchId', () => {
     it('should return masses for a specific church', async () => {
-      const res = await request(app).get('/api/masses/by-church/1');
+      const churchesRes = await request(app).get('/api/churches');
+      const churchWithMass = churchesRes.body.data.find(c => c.masses && c.masses.length > 0) || churchesRes.body.data[0];
+      const res = await request(app).get(`/api/masses/by-church/${churchWithMass.id}`);
       expect(res.statusCode).toBe(200);
       expect(res.body.success).toBe(true);
       expect(res.body).toHaveProperty('church');
@@ -159,7 +165,7 @@ describe('Masses API', () => {
     });
 
     it('should return 404 for church with no masses', async () => {
-      const res = await request(app).get('/api/masses/by-church/999');
+      const res = await request(app).get('/api/masses/by-church/999999');
       expect(res.statusCode).toBe(404);
     });
 

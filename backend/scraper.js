@@ -2,9 +2,12 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 const fs = require('fs');
 const path = require('path');
-
-const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 const { decode } = require('html-entities');
+const { parseParish, SITE } = require('./utils/parishParser');
+const { htmlToText } = require('./utils/htmlText');
+
+const DATA_DIR = path.join(__dirname, 'data');
+const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 const USER_AGENTS = [
     'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36',
@@ -22,6 +25,11 @@ const decodeHtmlEntities = (text) => {
     return decode(text);
 };
 
+const getRandomUserAgent = () => USER_AGENTS[Math.floor(Math.random() * USER_AGENTS.length)];
+
+/**
+ * Scrapes news articles from the homepage of https://diocesefranca.org.br/
+ */
 const scrapeNews = async () => {
   let data = null;
   const maxRetries = 3;
@@ -29,10 +37,9 @@ const scrapeNews = async () => {
 
   while (attempt < maxRetries) {
       try {
-          const randomUserAgent = USER_AGENTS[Math.floor(Math.random() * USER_AGENTS.length)];
           const response = await axios.get('https://diocesefranca.org.br/', {
               headers: {
-                  'User-Agent': randomUserAgent,
+                  'User-Agent': getRandomUserAgent(),
                   'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8',
                   'Accept-Language': 'pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7',
                   'Referer': 'https://www.google.com/'
@@ -40,27 +47,33 @@ const scrapeNews = async () => {
               timeout: 25000
           });
           data = response.data;
-          break; // success, exit the loop
+          break; // success
       } catch (err) {
           attempt++;
           const status = err.response ? err.response.status : 'No response status';
           console.error(`Attempt ${attempt} failed to fetch diocesefranca.org.br: ${err.message} (Status: ${status})`);
           if (attempt >= maxRetries) {
-              throw err;
+              break;
           }
           await wait(2000 * Math.pow(2, attempt));
       }
+  }
+
+  if (!data) {
+      console.warn('Scrape news failed to retrieve HTML, preserving existing news.json fallback if available.');
+      const outputPath = path.join(DATA_DIR, 'news.json');
+      if (!fs.existsSync(outputPath)) {
+          fs.writeFileSync(outputPath, JSON.stringify([], null, 2));
+      }
+      return [];
   }
 
   try {
     const $ = cheerio.load(data);
     const news = [];
 
-    // The layout has list items (li) containing the news.
-    // Inside, there is <div class="scale_image_container"> and <div class="post_text">.
     let newsElements = $('.section_post_left');
 
-    // Add fallback for empty section_post_left
     if (newsElements.length === 0) {
         console.log('Fallback: .section_post_left is empty, using .noticia_item instead');
         newsElements = $('.noticia_item');
@@ -73,61 +86,44 @@ const scrapeNews = async () => {
             let title = titleElement.length > 0 ? titleElement.text().trim() : '';
 
             if (!title || title === '') {
-                // Fallback to the h2 text itself if a tag is empty or missing
                 console.log('Fallback: h2.post_title a tag missing or empty, using h2 text instead');
                 titleElement = $(el).find('h1.title, h2.post_title, .title');
                 title = titleElement.length > 0 ? titleElement.text().trim() : 'Sem título disponível';
             }
-            if (link === '#') {
-                console.log(`Fallback: Missing href attribute for title "${title.substring(0, 30)}"`);
-            }
 
-            // Decode HTML entities and sanitize title
             title = decodeHtmlEntities(title);
             title = title.replace(/["']/g, '').trim();
 
-            // Extract category if available
             const categoryElement = $(el).find('.buttons_container a.banner_button').first();
             const category = categoryElement.length > 0 ? categoryElement.text().trim() : 'Geral';
 
-            // Find the image in the context
             const imgTag = $(el).find('.scale_image_container img.scale_image');
             let image = imgTag.length > 0 ? (imgTag.attr('src') ? imgTag.attr('src').trim() : imgTag.attr('data-src') ? imgTag.attr('data-src').trim() : '') : '';
 
             const descriptionElement = $(el).find('.post_text p').first();
             let descriptionText = descriptionElement.length > 0 && descriptionElement.text().trim() !== '' ? descriptionElement.text().trim() : $(el).text().trim();
 
-            // Decode HTML entities
             descriptionText = decodeHtmlEntities(descriptionText);
-            // Clean up extra whitespaces and newlines
             descriptionText = descriptionText.replace(/\s+/g, ' ').trim();
-            // Clean up trailing commas, ellipses, and other non-alphanumeric chars at the end, without cutting words in half
             descriptionText = descriptionText.length > 150 ? descriptionText.substring(0, 150).replace(/\s+\S*$/, '') + '...' : descriptionText;
             descriptionText = descriptionText.replace(/[,;\-]+$/g, '').trim();
 
             const description = descriptionText ? descriptionText.trim() : 'Sem descrição disponível';
 
-            // Attempt to find a date if available, typically in small or span tags inside post_title or similar
             let dateElement = $(el).find('.event_date, .date, .post_date').first();
             let dateText = dateElement.length > 0 ? dateElement.text().trim() : '';
 
-            // Extract from h2 text directly if event_date is empty but h2 text contains a date pattern
             if (!dateText || dateText === '') {
                 const titleTextForDate = titleElement.length > 0 ? titleElement.text().trim() : '';
                 const h2DateMatch = titleTextForDate.match(/\d{1,2}\s*de\s*[a-zA-ZçÇ]+/i);
                 if (h2DateMatch) {
                     dateText = h2DateMatch[0];
-                    console.log('  -> Found date via h2 text fallback:', dateText);
                 }
             }
 
             if (!dateText || dateText === '') {
                 try {
-                    console.log('Fallback: date extraction using regex on title/description/image for: ', title.substring(0, 30) + '...');
-                    // Try parsing the date from the description or title using expanded regex
-                    // Matches "12 de Agosto", "12 de agosto de 2024", "12/08/2024", "12/08", "Agosto de 2024"
                     const fullText = (description + ' ' + title).replace(/\s+/g, ' ');
-                    // Improved regexes to handle extra spaces and more formats
                     const dateMatch = fullText.match(/(?:[A-Za-z]+-feira,\s*)?(\d{1,2}(,\s*\d{1,2})*\s*(e|ou)\s*)?\d{1,2}\s*de\s*[a-zA-ZçÇ]+\s*(de\s*\d{4})?/i);
                     const shortDateMatch = fullText.match(/\d{1,2}\s*\/\s*\d{1,2}(\s*\/\s*\d{2,4})?/);
                     const monthYearMatch = fullText.match(/[a-zA-ZçÇ]+\s+(de\s+)?\d{4}/i);
@@ -136,21 +132,15 @@ const scrapeNews = async () => {
 
                     if (fallbackDateMatch) {
                         dateText = fallbackDateMatch[0];
-                        console.log('  -> Found date via regex (fallback d/m/y):', dateText);
                     } else if (abbrevMonthMatch) {
                         dateText = abbrevMonthMatch[0];
-                        console.log('  -> Found date via regex (mês abreviado):', dateText);
                     } else if (dateMatch) {
                         dateText = dateMatch[0];
-                        console.log('  -> Found date via regex (extenso):', dateText);
                     } else if (shortDateMatch) {
                         dateText = shortDateMatch[0];
-                        console.log('  -> Found date via regex (curto):', dateText);
                     } else if (monthYearMatch) {
                         dateText = monthYearMatch[0];
-                        console.log('  -> Found date via regex (mês/ano):', dateText);
                     } else if (image) {
-                        // Extract date from image URL (e.g. 20260812223051 -> 12 de agosto)
                         const imageDateMatch = image.match(/images\/\d{4}(\d{2})(\d{2})\d+/);
                         if (imageDateMatch) {
                             const monthStr = imageDateMatch[1];
@@ -158,34 +148,23 @@ const scrapeNews = async () => {
                             const months = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
                             const month = months[parseInt(monthStr, 10) - 1];
                             dateText = `${parseInt(dayStr, 10)} de ${month}`;
-                            console.log('  -> Found date via image URL fallback:', dateText);
                         }
                     }
 
-                    // Final fallback for date
                     if (!dateText) {
                         const today = new Date();
                         const day = String(today.getDate()).padStart(2, '0');
                         const months = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
                         const month = months[today.getMonth()];
                         dateText = `${day} de ${month}`;
-                        console.log('  -> Found date via final fallback (current date):', dateText);
                     }
                 } catch (dateErr) {
-                    console.error('Error during date extraction fallback:', dateErr.message);
                     dateText = '';
                 }
             }
             let date = dateText ? dateText : 'Sem informação de data';
-            if (date === 'Sem informação de data') {
-                const now = new Date();
-                const months = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
-                date = `${now.getDate()} de ${months[now.getMonth()]}`;
-                console.log('  -> Found date via current date fallback:', date);
-            }
 
             if (title && link) {
-                // Make link absolute using URL object
                 let fullLink = link;
                 if (link !== '#') {
                     try {
@@ -203,11 +182,9 @@ const scrapeNews = async () => {
                         fullImage = image.startsWith('http') ? image : image.startsWith('//') ? 'https:' + image : `https://diocesefranca.org.br/${image}`;
                     }
                 } else {
-                    // Fallback placeholder image
                     fullImage = 'https://via.placeholder.com/400x200.png?text=Not%C3%ADcia+da+Diocese';
                 }
 
-                // Check for duplicates
                 const isDuplicate = news.some(n => n.link === fullLink);
                 if (!isDuplicate) {
                     news.push({ id: news.length + 1, title, category, description, link: fullLink, image: fullImage, date });
@@ -218,31 +195,161 @@ const scrapeNews = async () => {
         }
     });
 
-    const outputPath = path.join(__dirname, 'data', 'news.json');
+    const outputPath = path.join(DATA_DIR, 'news.json');
     fs.writeFileSync(outputPath, JSON.stringify(news, null, 2));
     console.log(`Scraped ${news.length} news items. Output saved to ${outputPath}`);
+    return news;
 
   } catch (error) {
     console.error('Error scraping news:', error.message);
-    console.error('Error: fallbacks acionados devidos à falha crítica no scraper.');
-    if (error.response) {
-      console.error('Response status:', error.response.status);
-    }
-    // Provide a graceful fallback to an empty array so that the frontend doesn't crash on undefined
-    const outputPath = path.join(__dirname, 'data', 'news.json');
+    const outputPath = path.join(DATA_DIR, 'news.json');
     if (!fs.existsSync(outputPath)) {
         fs.writeFileSync(outputPath, JSON.stringify([], null, 2));
-        console.log(`Fallback: Created empty news.json at ${outputPath}`);
-    } else {
-        console.log(`Fallback: news.json already exists at ${outputPath}, leaving it intact. Logging error fallback behavior for debugging.`);
     }
+    return [];
   }
 };
 
+/**
+ * Helper to fetch parish pages from https://diocesefranca.org.br/ with retries
+ */
+async function fetchPage(id) {
+  const pageUrl = `${SITE}/?menu=noticia_detalhe&id=${id}&id_orgao=1`;
+  for (let attempt = 1; attempt <= 3; attempt += 1) {
+    try {
+      const res = await axios.get(pageUrl, {
+        timeout: 25000,
+        headers: {
+          'User-Agent': getRandomUserAgent(),
+          'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+          'Accept-Language': 'pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7',
+          'Referer': 'https://diocesefranca.org.br/'
+        }
+      });
+      return res.data;
+    } catch (error) {
+      await wait(1000 * attempt);
+    }
+  }
+  return '';
+}
+
+/**
+ * Scrapes diocese catalog data (parishes, priests, mass schedules) from https://diocesefranca.org.br/
+ */
+const scrapeCatalog = async () => {
+  console.log('Starting diocese catalog scraping (parishes, priests, masses)...');
+  const FIRST_ID = 2030;
+  const LAST_ID = 2400;
+  const BISHOP_PAGE_ID = 1865;
+  const SEAT_ID = 2080;
+  const CITY_FILE = path.join(DATA_DIR, 'cityCoords.json');
+
+  const normalizeName = (name) =>
+    name
+      .replace(/\s+/g, ' ')
+      .replace(/^Pe\.?\s+/i, 'Pe. ')
+      .replace(/\s*,\s*/g, ', ')
+      .replace(/,\s*([A-Za-z]{2,5})\s*$/, (_, order) => `, ${order.toUpperCase()}`)
+      .trim();
+
+  // Crawl parish pages
+  const ids = Array.from({ length: LAST_ID - FIRST_ID }, (_, i) => FIRST_ID + i);
+  const parishes = [];
+  for (let i = 0; i < ids.length; i += 6) {
+    const pages = await Promise.all(ids.slice(i, i + 6).map(async (id) => [id, await fetchPage(id)]));
+    pages.forEach(([id, html]) => {
+      const parish = html && parseParish(html, id);
+      if (parish) parishes.push(parish);
+    });
+  }
+
+  parishes.sort((a, b) => a.name.localeCompare(b.name, 'pt-BR'));
+
+  // Load city coordinates cache
+  const cityCache = fs.existsSync(CITY_FILE) ? JSON.parse(fs.readFileSync(CITY_FILE, 'utf8')) : {};
+
+  const churches = parishes.map(({ sourceId, clergy, masses, ...p }) => {
+    const [latitude, longitude] = cityCache[`${p.city}|${p.state}`] || [null, null];
+    return { id: sourceId, ...p, latitude, longitude, coordinatesVerified: false, coordinatesPrecision: 'city' };
+  });
+
+  const massList = [];
+  parishes.forEach((p) => p.masses.forEach((m) => massList.push({
+    id: massList.length + 1,
+    churchId: p.sourceId,
+    dayOfWeek: m.dayOfWeek,
+    time: m.time,
+    type: m.dayOfWeek === 'Domingo' ? 'Missa Dominical' : 'Missa Semanal',
+  })));
+
+  // Parse bishop page
+  const priests = [];
+  const bishopHtml = await fetchPage(BISHOP_PAGE_ID);
+  if (bishopHtml) {
+    const text = htmlToText(bishopHtml);
+    const name = (text.match(/Bispo atual\s*-\s*(Dom [^\n]+)/) || [])[1];
+    if (name) {
+      const born = (text.match(/Nascido em ([^-\n]+)- (\d{2}\/\d{2}\/\d{4})/) || []).slice(1);
+      const seat = (text.match(/Nomeado Bispo de Franca[^\n]*\n\s*Posse:\s*(\d{2}\/\d{2}\/\d{4})/) || [])[1];
+      const phone = (text.match(/Fone:\s*(\(\d{2}\)\s?\d{4}-\d{4})/) || [])[1];
+      const bio = [`${(text.match(/(\d)º Bispo Diocesano/) || [])[1] || ''}º Bispo Diocesano de Franca`.replace(/^º /, ''),
+        born.length ? `nascido em ${born[0].trim()} (${born[1]})` : '', seat ? `com posse em ${seat}` : '']
+        .filter(Boolean).join(', ') + '.';
+      priests.push({ id: 1, name: name.trim(), title: 'Bispo Diocesano', churchId: SEAT_ID, email: null, phone: phone || null, bio, image: null });
+    }
+  }
+
+  const seen = new Set(priests.map((p) => p.name));
+  parishes.forEach((p) => p.clergy.forEach((c) => {
+    const name = normalizeName(c.name);
+    if (seen.has(name)) return;
+    seen.add(name);
+    priests.push({
+      id: priests.length + 1,
+      name,
+      title: c.title,
+      churchId: p.sourceId,
+      email: p.email,
+      phone: p.phone,
+      bio: `${c.title} da ${p.name} (${p.city}/${p.state}).`,
+      image: null,
+    });
+  }));
+
+  if (churches.length > 0) {
+    fs.writeFileSync(path.join(DATA_DIR, 'churches.json'), JSON.stringify(churches, null, 2) + '\n');
+    fs.writeFileSync(path.join(DATA_DIR, 'masses.json'), JSON.stringify(massList, null, 2) + '\n');
+    fs.writeFileSync(path.join(DATA_DIR, 'priests.json'), JSON.stringify(priests, null, 2) + '\n');
+    console.log(`Scraped Catalog: ${churches.length} parishes, ${priests.length} priests/deacons, ${massList.length} mass schedules.`);
+  } else {
+    console.warn('Scrape catalog returned 0 churches (network offline or block). Keeping existing files.');
+  }
+
+  return { churches, priests, masses: massList };
+};
+
+/**
+ * Runs both news and catalog scraping
+ */
+const scrapeAll = async () => {
+  console.log('--- Starting Full Scrape for Diocese de Franca (News, Parishes, Priests, Masses) ---');
+  const news = await scrapeNews();
+  const catalog = await scrapeCatalog();
+  console.log('--- Full Scrape Completed Successfully ---');
+  return { news, ...catalog };
+};
+
 if (require.main === module) {
-  scrapeNews().then(() => {
+  scrapeAll().then(() => {
     console.log('Scraper finished execution.');
+  }).catch((err) => {
+    console.error('Fatal error during scraping:', err.message);
   });
 }
 
-module.exports = scrapeNews;
+module.exports = {
+  scrapeNews,
+  scrapeCatalog,
+  scrapeAll
+};
