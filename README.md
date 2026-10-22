@@ -1,19 +1,26 @@
 # Diocese de Franca - App
 
+![Diocese de Franca Banner](mobile/screenshots/home_full.png?v=32)
+
 Aplicativo completo para a Diocese de Franca com backend API REST e app React Native.
 
-> **Status: 100% Funcional e em Produção** - Tests: 31/31 passing
+> **Status: 100% Funcional e em Produção** - Backend Tests: 51/51 passing | E2E Playwright Tests: 14/14 passing
 
 ## Funcionalidades
 
-### Backend API
+### Backend API & Scraper Autônomo
 - REST API com Express.js 5.x
 - Compressão gzip e headers de segurança (Helmet)
 - Health check endpoint para monitoramento
 - Middleware de validação e tratamento de erros
-- Respostas padronizadas com sucesso/erro
-- **Igrejas próximas** (`/api/churches/nearby`): ordena as paróquias pela distância (fórmula de Haversine) até uma coordenada e calcula a próxima missa de cada uma
-- **31 testes automatizados** cobrindo todos os endpoints, além de utilitários de geolocalização e cálculo da próxima missa
+- Respostas padronizadas com wrapper `{ success, count, data }`
+- **Scraper Aprimorado (`backend/scraper.js`)**: Raspagem completa e autônoma de https://diocesefranca.org.br/ trazendo:
+  - **Notícias**: Destaques, títulos, fotos, links e parsing avançado de datas em formato extenso/relativo.
+  - **Paróquias**: 40 paróquias com endereços, contatos, expediente e links de imagem.
+  - **Padres e Clero**: 88 sacerdotes (incluindo o Bispo Diocesano e diáconos) vinculados a cada comunidade.
+  - **Horários de Missa**: 231 horários semanais estruturados por dia e horário.
+- **Igrejas próximas** (`/api/churches/nearby`): ordena as paróquias pela distância (fórmula de Haversine) até uma coordenada e calcula a próxima missa de cada uma.
+- **51 testes automatizados (Jest)** cobrindo todos os endpoints, rotas de notícias, catálogo, geolocalização e cálculo da próxima missa.
 
 ### Mobile App
 - Interface moderna com design profissional
@@ -29,112 +36,76 @@ Aplicativo completo para a Diocese de Franca com backend API REST e app React Na
 ## Novidades Implementadas
 
 ### Mobile
-- Deploy web 100% funcional no Netlify com Metro bundler suportando `react-native-web` e devidamente validado na configuração.
+- Deploy web 100% funcional no Netlify com Metro bundler suportando `react-native-web`.
 - Lembrete diário às 08:00 configurado na Home usando `expo-notifications`.
-- Adição de Notificações Locais (`expo-notifications`) para as interações de agendamento: "Lembrete Confissão" em Detalhes do Padre, notificações em horários de missas (`MassesScreen.js`), e em Detalhes da Igreja ("Agendar Visita") configurados para alertar.
-- empty/error states de toda a aplicação (Home, Listas, Detalhes) foram padronizados de forma mais empática, sempre iniciando com "Puxa,..."
-- Garantida consistência de `activeOpacity={0.8}` para um feedback visual padronizado de clique nos botões e listas interativas.
-- As interações imediatas do usuário na interface (favoritar, ler notícias, etc) continuam utilizando o `Toast` (`useToast`) ou navegação para prover feedback imediato além de escalonar a notificação.
-- Notificações locais automáticas de boas-vindas na inicialização do app (`App.js`) e lembrete diário às 08:00 permanecem utilizando `expo-notifications`.
-- **Lembrete de Confissão e Missas**: Uso do `expo-notifications` para solicitar permissão e de fato engatilhar agendamentos locais (`scheduleNotificationAsync`) ao clicar nos ícones de notificação na tela de `PriestDetailScreen.js` e `MassesScreen.js`.
-- Empty states mais empáticos para erros de rede, utilizando textos encorajadores nas telas de busca e listagem (`ChurchesScreen.js`, `MassesScreen.js`).
-- Aprimoramentos de UI/UX: Refinamento na listagem de Padres e Igrejas (`ChurchesScreen.js`, `PriestsScreen.js`) melhorando a legibilidade e atualizando os empty states para uma linguagem mais acolhedora e empática (ex: "Puxa, não conseguimos carregar as igrejas agora. Tente novamente!"). O uso do tom empático "Puxa..." foi padronizado em todas as telas, incluindo "Puxa, não encontramos paróquias com este nome." nos empty states de busca. Foi adicionado `activeOpacity={0.8}` para todos os botões e áreas touchable para prover um consistente feedback tátil aos usuários.
-- Aprimoramentos no Scraper de Notícias: extração direta de data através do texto do título caso a tag explícita esteja vazia, reforçando as garantias e estabilidade da captura de dados autônoma.
-- Skeletons Loaders (Animação Shimmer) em diversas áreas como Notícias e Listas
-- Melhorias na UI/UX dos empty states, como no `MassesScreen.js`
-- Correção de duplicação de variáveis na renderização do banner offline
-- Pull-to-refresh com feedback visual
-- Favoritos salvos localmente (persistem)
-- Toast notifications animadas (success/error/info)
-- Indicador de conexão em tempo real
-- Filtro "Todos" vs "Favoritos" em Igrejas e Padres
-- Botão de limpar filtros
-- Seção de acesso rápido na home
-- Badges de estatísticas clicáveis
-- Testes E2E atualizados com Playwright, incluindo cenários específicos para empty states e screenshots regeradas com sucesso.
-- Scraper (`backend/scraper.js`) aprimorado com blocos de `try...catch` robustos na lógica de extração de data, prevenindo falhas silenciosas na varredura.
-- **Igrejas próximas ("Perto de mim")**: novo filtro em `ChurchesScreen.js` que usa `expo-location` (`LocationService.js`) para pedir a localização do usuário e listar as paróquias ordenadas por distância, com badge de distância e a próxima missa de cada uma. Estados vazios acolhedores para permissão negada/timeout, com botão de tentar novamente.
-- **Card "Igreja mais próxima" na Home**: botão que localiza o usuário e destaca a paróquia mais próxima com distância e horário da próxima missa, navegando direto para os detalhes dela.
-- **Próxima missa na tela de detalhes**: banner em `ChurchDetailScreen.js` mostrando a próxima missa (dia, horário e "em quanto tempo"), calculada a partir dos horários cadastrados.
-- **Notificações Locais (Lembrete Diário/Missa/Testes)**: Implementação de lembretes diários (8h da manhã) com `expo-notifications` para incentivo à oração, assim como lembretes para a Hora do Ângelus (12h e 18h), configurados globalmente em `App.js` na inicialização, e novos botões de acesso rápido ("Lembrete Teste 5s", "Lembrete Bíblia" e "Lembrete Ângelus") na Home. Além disso, a opção "Agendar Visita" nas paróquias e o ícone de sino na tela de horários de missas (`MassesScreen.js`) disparam uma notificação local contextual. As interfaces de usuário também receberam ajustes nas áreas de toque (`padding`) para garantir maior acessibilidade e ergonomia.
+- Adição de Notificações Locais (`expo-notifications`) para as interações de agendamento: "Lembrete Confissão" em Detalhes do Padre, notificações em horários de missas (`MassesScreen.js`), e em Detalhes da Igreja ("Agendar Visita").
+- empty/error states de toda a aplicação (Home, Listas, Detalhes) padronizados com tom acolhedor e empático ("Puxa,...").
+- Consistência de `activeOpacity={0.8}` para feedback tátil em botões e listas interativas.
+- **Lembrete de Confissão e Missas**: Uso do `expo-notifications` para solicitar permissão e engatilhar agendamentos locais (`scheduleNotificationAsync`).
+- **Igrejas próximas ("Perto de mim")**: filtro em `ChurchesScreen.js` que usa `expo-location` (`LocationService.js`) para solicitar a localização do usuário e ordenar as paróquias por distância com o badge da próxima missa.
+- **Card "Igreja mais próxima" na Home**: destaca a paróquia mais próxima com horário da próxima missa.
+- **Próxima missa na tela de detalhes**: banner em `ChurchDetailScreen.js` mostrando a próxima missa calculada.
+- **14 Testes E2E (Playwright)** validando fluxos na versão Web, lembretes, estados vazios e capturando screenshots atualizadas.
 
-### Deploy (Web)
-- **Netlify**: O projeto já encontra-se pré-configurado para ser compilado e entregue como Progressive Web App (PWA) / Single Page Application usando `npx expo export -p web` na pasta `mobile/`. A configuração para Netlify está estabelecida na raiz em `netlify.toml`, que mapeia corretamente o redirecionamento `/*` para `/index.html` (resolvendo roteamento client-side) e define a pasta de publicação como `mobile/dist`. Todas as dependências necessárias para Web (`react-native-web`, `react-dom`, `@expo/metro-runtime`) estão mantidas de forma compatível.
-
-### Backend
-- Scraper autônomo aprimorado (`backend/scraper.js`) para capturar data, imagens (`data-src`) e descrição (`.event_date` e `.post_text p`) garantindo fallbacks robustos inclusive com regex aprimorada para reconhecer dias da semana (e.g. "quarta-feira") junto de múltiplas datas com preposições como "e" ou "ou" ("2, 3 e 4 de outubro", "12 ou 13 de agosto") e datas curtas, gerando logs de debug das etapas para facilitar manutenção. Além de fallback para imagens ausentes e melhor tratamento e limpeza de strings (espaçamentos extras na descrição, usando word-boundary para evitar cortes de palavras no meio ao limitar em 150 caracteres). O script agora corre via invocação inline exportando o modulo e finalizando limpo. Usa a classe `.section_post_left` para maior confiabilidade (com fallback adicional para a classe `.noticia_item` e também extraindo diretamente o texto de `.title`, `h1.title` ou `h2.post_title` caso a tag `a` não esteja presente, além do uso da data atual caso os regex de data falhem) e bloca a execução individual em `try/catch` com timeout de 20s. Foi adicionado também um **mecanismo de tentativas (retry loop)** para a requisição de rede inicial, tentando até 3 vezes caso o site da Diocese apresente falhas intermitentes, retornando um array vazio de fallback apenas se o site original continuar inacessível para evitar crashs na API.
+### Backend & Scraper
+- **Scraper Unificado e Aprimorado (`backend/scraper.js`)**: Raspagem de notícias, paróquias, clero e horários de missa em https://diocesefranca.org.br/.
+- Tratamento robusto contra falhas de rede com retries exponenciais, User-Agents aleatórios e fallbacks gracioso para JSONs preservando a integridade dos dados.
+- Decodificação completa de HTML Entities com a biblioteca `html-entities` e limpeza de formatação.
 - Endpoint de health check `/api/health`
-- Compressão gzip automática
-- Helmet.js para headers de segurança
-- Middleware de validação de ID e dia
-- Logs de requisição com timestamp
-- Tratamento centralizado de erros 404/500
-- Respostas com wrapper `{ success, count, data }`
-- **Igrejas próximas e próxima missa**: `backend/utils/geo.js` (distância por Haversine) e `backend/utils/nextMass.js` (próxima ocorrência de missa a partir de agora) alimentam o endpoint `GET /api/churches/nearby` e o campo `nextMass` em `GET /api/churches/:id`
+- Testes automatizados atualizados dinamicamente para validar IDs ativos no banco de dados.
 
 ## Tecnologias
 
 ### Backend
 - Node.js + Express.js 5.x
+- Axios + Cheerio + HTML-Entities
 - CORS, Compression, Helmet
-- Jest (31 testes)
+- Jest (51 testes)
 
 ### Mobile
 - React Native (Expo SDK 54)
 - React Navigation 7
 - AsyncStorage (favoritos persistentes)
 - @expo/vector-icons (Ionicons)
-- Axios
-- expo-location (geolocalização para "igrejas próximas")
+- Playwright E2E (14 testes)
 
 ## Estrutura do Projeto
 
 ```
 diocese-franca-app/
 ├── backend/
-│   ├── data/                    # Dados JSON
+│   ├── data/                    # Dados JSON (Notícias, Igrejas, Padres, Missas)
+│   │   ├── news.json
 │   │   ├── churches.json
 │   │   ├── priests.json
 │   │   └── masses.json
 │   ├── routes/                 # Rotas da API
 │   │   ├── churches.js
 │   │   ├── priests.js
-│   │   └── masses.js
+│   │   ├── masses.js
+│   │   └── news.js
 │   ├── middleware/             # Middleware Express
 │   │   └── validation.js
-│   ├── utils/                   # Funções auxiliares
-│   │   ├── geo.js               # Distância entre coordenadas (Haversine)
-│   │   └── nextMass.js          # Próxima ocorrência de missa a partir de agora
-│   ├── tests/                  # Testes automatizados
-│   │   ├── api.test.js
-│   │   ├── geo.test.js
-│   │   └── nextMass.test.js
-│   ├── index.js                # Entry point
+│   ├── utils/                   # Funções auxiliares e parsers
+│   │   ├── geo.js
+│   │   ├── nextMass.js
+│   │   ├── parishParser.js
+│   │   └── massParser.js
+│   ├── tests/                  # Testes automatizados Jest
+│   ├── scraper.js              # Scraper completo da Diocese
+│   ├── index.js                # Entry point API
 │   └── package.json
 │
 └── mobile/
+    ├── e2e/                    # Testes End-to-End com Playwright
+    ├── screenshots/            # Screenshots geradas pelos testes E2E
     ├── src/
-    │   ├── components/          # Componentes reutilizáveis
-    │   │   ├── NetworkStatus.js
-    │   │   └── Skeleton.js
-    │   ├── context/            # Contextos React
-    │   │   ├── DataCacheContext.js
-    │   │   └── ToastContext.js
-    │   ├── navigation/         # Navegação
-    │   │   └── index.js
-    │   ├── screens/            # Telas do app
-    │   │   ├── HomeScreen.js
-    │   │   ├── ChurchesScreen.js
-    │   │   ├── ChurchDetailScreen.js
-    │   │   ├── PriestsScreen.js
-    │   │   ├── PriestDetailScreen.js
-    │   │   └── MassesScreen.js
-    │   ├── services/           # Serviços
-    │   │   ├── api.js
-    │   │   ├── FavoritesService.js
-    │   │   └── LocationService.js  # Permissão e leitura de localização (expo-location)
-    │   └── utils/              # Funções auxiliares de UI
-    │       └── massTime.js     # Formata "próxima missa" e distância em texto
+    │   ├── components/
+    │   ├── context/
+    │   ├── navigation/
+    │   ├── screens/
+    │   ├── services/
+    │   └── utils/
     ├── App.js
     └── package.json
 ```
@@ -146,6 +117,9 @@ diocese-franca-app/
 ```bash
 cd backend
 pnpm install
+# Executar scraper para atualizar dados:
+node scraper.js
+# Iniciar o servidor:
 pnpm start
 # Servidor: http://localhost:3000
 ```
@@ -161,13 +135,13 @@ pnpm start
 ### Executar Testes
 
 ```bash
+# Testes do Backend (51 testes)
 cd backend
 pnpm test
-# Resultado: 31 testes passando
 
+# Testes E2E Mobile com Playwright (14 testes)
 cd ../mobile
 npx playwright test
-# Testes E2E (Web) validando Home, Igrejas, Missas e Igrejas Próximas
 ```
 
 ## Endpoints da API
@@ -178,136 +152,58 @@ npx playwright test
 | GET | `/api/health` | Health check |
 | GET | `/api/churches` | Lista todas as igrejas |
 | GET | `/api/churches/:id` | Detalhes de uma igreja (inclui a próxima missa) |
-| GET | `/api/churches/nearby?lat=&lng=` | Igrejas ordenadas por distância até uma coordenada, com a próxima missa de cada uma |
+| GET | `/api/churches/nearby?lat=&lng=` | Igrejas ordenadas por distância até uma coordenada |
 | GET | `/api/priests` | Lista todos os padres |
 | GET | `/api/priests/:id` | Detalhes de um padre |
-| GET | `/api/masses` | Lista todos os horários |
+| GET | `/api/masses` | Lista todos os horários de missas |
 | GET | `/api/masses/by-church/:id` | Missas por igreja |
-| GET | `/api/masses/by-day/:dia` | Missas por dia |
-| GET | `/api/news` | Notícias da Diocese (scraped) |
+| GET | `/api/masses/by-day/:dia` | Missas por dia da semana |
+| GET | `/api/news` | Notícias atualizadas da Diocese |
 
-## Funcionalidades do App Detalhadas
+## Dados Atualizados
 
-### Tela Início
-- Dashboard com estatísticas (paróquias, padres, missas)
-- **NOVO:** Sessão "Notícias da Diocese" que exibe os destaques raspados diretamente do portal da Diocese com imagens e links. Agora com o novo "Lembrete de Leitura (10s)", usando notificações locais para lembrar de ler a notícia mais tarde.
-- Cards clicáveis para navegação rápida
-- Seção de acesso rápido (Missa domingo, **Lembretes diários (incluindo Ângelus) e Lembretes de Confissão/Missa com notificações locais**, ligar, email)
-- Pull-to-refresh para atualizar dados
-- Informações de contato da diocese
-
-### Igrejas
-- Lista com busca em tempo real
-- Filtro: Todos / Favoritos / **Perto de mim** (usa a localização do dispositivo para ordenar por distância e mostrar a próxima missa de cada igreja)
-- Avatar com ícone da igreja
-- Botões de ação: favoritar, compartilhar
-- Pull-to-refresh
-- Skeleton loader durante carregamento
-
-### Detalhes da Igreja
-- Banner com a próxima missa (dia, horário e "em quanto tempo")
-- Informações completas (endereço, telefone, descrição)
-- Pároco responsável com contato
-- Lista de horários de missa
-- Botão para abrir no mapa
-
-### Padres
-- Lista com busca por nome/título
-- Filtro: Todos / Favoritos
-- Avatar com iniciais do nome
-- Badge com título (Pároco, Bispo)
-- Pull-to-refresh
-
-### Detalhes do Padre
-- Perfil com biografia
-- Contato (email, telefone)
-- Paróquia com navegação
-
-### Horários de Missa
-- Filtros por dia da semana
-- Filtros por tipo (Dominical/Semanal)
-- Botão limpar filtros
-- Lista organizada por dia
-- Badge com contador de missas
-- Pull-to-refresh
-
-## Dados
-
-| Entidade | Quantidade |
-|----------|------------|
-| Paróquias | 4 |
-| Padres | 5 |
-| Missas/semana | 22 |
-
-> **Sobre a origem dos dados:** paróquias, padres e horários de missa (`backend/data/*.json`) são dados de exemplo criados manualmente para o desenvolvimento do app — este ambiente de desenvolvimento não teve acesso à internet para validá-los ou raspá-los diretamente do site oficial da Diocese de Franca (apenas o scraper de notícias, que já roda em produção, alcança o site real). Antes de publicar, homologue paróquias/padres/missas com a Diocese e substitua os dados de exemplo pelos reais; o campo `coordinatesVerified: false` em cada igreja sinaliza que as coordenadas geográficas também são aproximadas, pendentes de geocodificação real.
-
-## Testes
-
-O backend possui **31 testes automatizados** cobrindo:
-
-- Validação de ID inválido (400)
-- Busca de igreja/padre inexistente (404)
-- Listagem com wrapper de sucesso
-- Verificação de campos obrigatórios
-- Filtro por dia da semana
-- Case insensitive para dias
-- Arrays vazios para dias sem missa
-- Cálculo de distância entre coordenadas (Haversine) e ordenação de `GET /api/churches/nearby`
-- Cálculo da próxima missa (mesmo dia, dias seguintes e virada de semana)
-- Validação de coordenadas ausentes/fora do intervalo válido
-
-## Pré-requisitos
-
-- Node.js 18+
-- pnpm (gerenciador de pacotes)
-
-```bash
-npm install -g pnpm
-```
+| Entidade | Quantidade Raspada |
+|----------|--------------------|
+| Paróquias | 40 |
+| Padres / Clero | 88 |
+| Horários de Missa | 231 |
+| Notícias em Destaque | 5+ |
 
 ## Screenshots
 
-O app possui interface moderna com:
-- Cores consistentes (#2c3e50 como primária)
-- Cards com elevation e sombras suaves
-- Ícones Ionicons em todas as ações
-- Feedback visual em todas as interações
-- Estados de loading com skeleton
-- Toasts animados para feedback
-
 ### Screenshots (Web Output E2E Test)
 **Home Screen**
-![Home Screen](mobile/screenshots/home_full.png?v=31)
+![Home Screen](mobile/screenshots/home_full.png?v=32)
 
 **News Section**
-![News Section](mobile/screenshots/news_section.png?v=31)
+![News Section](mobile/screenshots/news_section.png?v=32)
 
 **Igrejas Screen**
-![Igrejas Screen](mobile/screenshots/churches_full.png?v=31)
+![Igrejas Screen](mobile/screenshots/churches_full.png?v=32)
 
 **Padres Screen**
-![Padres Screen](mobile/screenshots/priests_full.png?v=31)
+![Padres Screen](mobile/screenshots/priests_full.png?v=32)
 
 **Missas Screen**
-![Missas Screen](mobile/screenshots/masses_full.png?v=31)
+![Missas Screen](mobile/screenshots/masses_full.png?v=32)
 
 **Missas (Empty State)**
-![Missas (Empty State)](mobile/screenshots/masses_empty.png?v=31)
+![Missas (Empty State)](mobile/screenshots/masses_empty.png?v=32)
 
 **Lembrete de Missa**
-![Lembrete de Missa](mobile/screenshots/masses_lembrete.png?v=31)
+![Lembrete de Missa](mobile/screenshots/masses_lembrete.png?v=32)
 
 **Igrejas (Empty State)**
-![Igrejas (Empty State)](mobile/screenshots/churches_empty.png?v=31)
+![Igrejas (Empty State)](mobile/screenshots/churches_empty.png?v=32)
 
 **Padres (Empty State)**
-![Padres (Empty State)](mobile/screenshots/priests_empty.png?v=31)
+![Padres (Empty State)](mobile/screenshots/priests_empty.png?v=32)
 
 **Igreja Próxima**
-![Igreja Próxima](mobile/screenshots/churches_nearby.png?v=31)
+![Igreja Próxima](mobile/screenshots/churches_nearby.png?v=32)
 
 **Igreja Próxima (Permissão Negada)**
-![Igreja Próxima Permissão Negada](mobile/screenshots/churches_nearby_denied.png?v=31)
+![Igreja Próxima Permissão Negada](mobile/screenshots/churches_nearby_denied.png?v=32)
 
 ## Licença
 
