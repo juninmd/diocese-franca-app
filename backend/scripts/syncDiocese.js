@@ -83,9 +83,11 @@ async function parseBishop() {
 // "Pe Fulano , sjs" -> "Pe. Fulano, SJS"
 const normalizeName = (name) =>
   name
+    .trim()
     .replace(/\s+/g, ' ')
-    .replace(/^Pe\.?\s+/i, 'Pe. ')
+    .replace(/^(?:Pe\b\.?\s*\.?\s*)+/i, 'Pe. ')
     .replace(/\s*,\s*/g, ', ')
+    .replace(/\s*-\s*Reitor$/i, '')
     .replace(/,\s*([A-Za-z]{2,5})\s*$/, (_, order) => `, ${order.toUpperCase()}`)
     .trim();
 
