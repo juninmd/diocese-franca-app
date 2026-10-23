@@ -22,8 +22,13 @@ const formatPhone = (raw) => {
 const lines = (text) => text.split('\n').map((l) => l.trim()).filter(Boolean);
 
 // "Pe. A, Pe. B" / "Diácono X, Diácono Y" -> lista (a vírgula de "..., SJS" é preservada)
-const splitPeople = (value) =>
-  value.split(/;\s*|,\s*(?=Pe\.?\s|Padre|Frei|Fr\.|Di[aá]cono|Mons|C[ôo]nego)/i).map((n) => n.trim()).filter(Boolean);
+const splitPeople = (value) => {
+  if (!value) return [];
+  return value
+    .split(/\s*(?:[;|]|\s+e\s+|\s+e\/ou\s+|\/\s*|,\s*(?=(?:Pe\.?|Padre|Frei|Fr\.|Di[aá]cono|Mons|C[ôo]nego)\b))\s*/i)
+    .map((n) => n.trim())
+    .filter(Boolean);
+};
 
 const ZIP = /(\d{2})\s?\.?\s?(\d{3})\s?-?\s?(\d{3})/;
 const formatZip = (text) => {

@@ -5,6 +5,7 @@ const path = require('path');
 const { decode } = require('html-entities');
 const { parseParish, SITE } = require('./utils/parishParser');
 const { htmlToText } = require('./utils/htmlText');
+const { applyDepara } = require('./utils/applyDepara');
 
 const DATA_DIR = path.join(__dirname, 'data');
 const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
@@ -247,9 +248,11 @@ const scrapeCatalog = async () => {
 
   const normalizeName = (name) =>
     name
+      .trim()
       .replace(/\s+/g, ' ')
-      .replace(/^Pe\.?\s+/i, 'Pe. ')
+      .replace(/^(?:Pe\b\.?\s*\.?\s*)+/i, 'Pe. ')
       .replace(/\s*,\s*/g, ', ')
+      .replace(/\s*-\s*Reitor$/i, '')
       .replace(/,\s*([A-Za-z]{2,5})\s*$/, (_, order) => `, ${order.toUpperCase()}`)
       .trim();
 
@@ -317,11 +320,17 @@ const scrapeCatalog = async () => {
     });
   }));
 
+  const deparaFile = path.join(DATA_DIR, 'depara.json');
+  const depara = fs.existsSync(deparaFile) ? JSON.parse(fs.readFileSync(deparaFile, 'utf8')) : { churches: {}, priests: {} };
+
+  const churchesWithDepara = applyDepara(churches, depara.churches || {});
+  const priestsWithDepara = applyDepara(priests, depara.priests || {});
+
   if (churches.length > 0) {
-    fs.writeFileSync(path.join(DATA_DIR, 'churches.json'), JSON.stringify(churches, null, 2) + '\n');
+    fs.writeFileSync(path.join(DATA_DIR, 'churches.json'), JSON.stringify(churchesWithDepara, null, 2) + '\n');
     fs.writeFileSync(path.join(DATA_DIR, 'masses.json'), JSON.stringify(massList, null, 2) + '\n');
-    fs.writeFileSync(path.join(DATA_DIR, 'priests.json'), JSON.stringify(priests, null, 2) + '\n');
-    console.log(`Scraped Catalog: ${churches.length} parishes, ${priests.length} priests/deacons, ${massList.length} mass schedules.`);
+    fs.writeFileSync(path.join(DATA_DIR, 'priests.json'), JSON.stringify(priestsWithDepara, null, 2) + '\n');
+    console.log(`Scraped Catalog: ${churchesWithDepara.length} parishes, ${priestsWithDepara.length} priests/deacons, ${massList.length} mass schedules.`);
   } else {
     console.warn('Scrape catalog returned 0 churches (network offline or block). Keeping existing files.');
   }

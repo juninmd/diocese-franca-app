@@ -1,10 +1,10 @@
 # Diocese de Franca - App
 
-![Diocese de Franca Banner](mobile/screenshots/home_full.png?v=32)
+![Diocese de Franca Banner](mobile/screenshots/home_full.png?v=33)
 
 Aplicativo completo para a Diocese de Franca com backend API REST e app React Native.
 
-> **Status: 100% Funcional e em Produção** - Backend Tests: 51/51 passing | E2E Playwright Tests: 14/14 passing
+> **Status: 100% Funcional e em Produção** - Backend Tests: 53/53 passing | E2E Playwright Tests: 15/15 passing
 
 ## Funcionalidades
 
@@ -17,10 +17,10 @@ Aplicativo completo para a Diocese de Franca com backend API REST e app React Na
 - **Scraper Aprimorado (`backend/scraper.js`)**: Raspagem completa e autônoma de https://diocesefranca.org.br/ trazendo:
   - **Notícias**: Destaques, títulos, fotos, links e parsing avançado de datas em formato extenso/relativo.
   - **Paróquias**: 40 paróquias com endereços, contatos, expediente e links de imagem.
-  - **Padres e Clero**: 88 sacerdotes (incluindo o Bispo Diocesano e diáconos) vinculados a cada comunidade.
+  - **Padres e Clero**: 93 sacerdotes (incluindo o Bispo Diocesano e diáconos) vinculados a cada comunidade.
   - **Horários de Missa**: 231 horários semanais estruturados por dia e horário.
 - **Igrejas próximas** (`/api/churches/nearby`): ordena as paróquias pela distância (fórmula de Haversine) até uma coordenada e calcula a próxima missa de cada uma.
-- **51 testes automatizados (Jest)** cobrindo todos os endpoints, rotas de notícias, catálogo, geolocalização e cálculo da próxima missa.
+- **53 testes automatizados (Jest)** cobrindo todos os endpoints, rotas de notícias, catálogo, geolocalização, cálculo da próxima missa, separação de diáconos/clero e normalização de nomes.
 
 ### Mobile App
 - Interface moderna com design profissional
@@ -45,7 +45,7 @@ Aplicativo completo para a Diocese de Franca com backend API REST e app React Na
 - **Igrejas próximas ("Perto de mim")**: filtro em `ChurchesScreen.js` que usa `expo-location` (`LocationService.js`) para solicitar a localização do usuário e ordenar as paróquias por distância com o badge da próxima missa.
 - **Card "Igreja mais próxima" na Home**: destaca a paróquia mais próxima com horário da próxima missa.
 - **Próxima missa na tela de detalhes**: banner em `ChurchDetailScreen.js` mostrando a próxima missa calculada.
-- **14 Testes E2E (Playwright)** validando fluxos na versão Web, lembretes, estados vazios e capturando screenshots atualizadas.
+- **15 Testes E2E (Playwright)** validando fluxos na versão Web, lembretes, validação de dados raspados, estados vazios e capturando screenshots atualizadas.
 
 ### Backend & Scraper
 - **Scraper Unificado e Aprimorado (`backend/scraper.js`)**: Raspagem de notícias, paróquias, clero e horários de missa em https://diocesefranca.org.br/.
@@ -60,14 +60,14 @@ Aplicativo completo para a Diocese de Franca com backend API REST e app React Na
 - Node.js + Express.js 5.x
 - Axios + Cheerio + HTML-Entities
 - CORS, Compression, Helmet
-- Jest (51 testes)
+- Jest (53 testes)
 
 ### Mobile
 - React Native (Expo SDK 54)
 - React Navigation 7
 - AsyncStorage (favoritos persistentes)
 - @expo/vector-icons (Ionicons)
-- Playwright E2E (14 testes)
+- Playwright E2E (15 testes)
 
 ## Estrutura do Projeto
 
@@ -135,11 +135,11 @@ pnpm start
 ### Executar Testes
 
 ```bash
-# Testes do Backend (51 testes)
+# Testes do Backend (53 testes)
 cd backend
 pnpm test
 
-# Testes E2E Mobile com Playwright (14 testes)
+# Testes E2E Mobile com Playwright (15 testes)
 cd ../mobile
 npx playwright test
 ```
@@ -165,7 +165,7 @@ npx playwright test
 | Entidade | Quantidade Raspada |
 |----------|--------------------|
 | Paróquias | 40 |
-| Padres / Clero | 88 |
+| Padres / Clero | 93 |
 | Horários de Missa | 231 |
 | Notícias em Destaque | 5+ |
 
@@ -173,37 +173,37 @@ npx playwright test
 
 ### Screenshots (Web Output E2E Test)
 **Home Screen**
-![Home Screen](mobile/screenshots/home_full.png?v=32)
+![Home Screen](mobile/screenshots/home_full.png?v=33)
 
 **News Section**
-![News Section](mobile/screenshots/news_section.png?v=32)
+![News Section](mobile/screenshots/news_section.png?v=33)
 
 **Igrejas Screen**
-![Igrejas Screen](mobile/screenshots/churches_full.png?v=32)
+![Igrejas Screen](mobile/screenshots/churches_full.png?v=33)
 
 **Padres Screen**
-![Padres Screen](mobile/screenshots/priests_full.png?v=32)
+![Padres Screen](mobile/screenshots/priests_full.png?v=33)
 
 **Missas Screen**
-![Missas Screen](mobile/screenshots/masses_full.png?v=32)
+![Missas Screen](mobile/screenshots/masses_full.png?v=33)
 
 **Missas (Empty State)**
-![Missas (Empty State)](mobile/screenshots/masses_empty.png?v=32)
+![Missas (Empty State)](mobile/screenshots/masses_empty.png?v=33)
 
 **Lembrete de Missa**
-![Lembrete de Missa](mobile/screenshots/masses_lembrete.png?v=32)
+![Lembrete de Missa](mobile/screenshots/masses_lembrete.png?v=33)
 
 **Igrejas (Empty State)**
-![Igrejas (Empty State)](mobile/screenshots/churches_empty.png?v=32)
+![Igrejas (Empty State)](mobile/screenshots/churches_empty.png?v=33)
 
 **Padres (Empty State)**
-![Padres (Empty State)](mobile/screenshots/priests_empty.png?v=32)
+![Padres (Empty State)](mobile/screenshots/priests_empty.png?v=33)
 
 **Igreja Próxima**
-![Igreja Próxima](mobile/screenshots/churches_nearby.png?v=32)
+![Igreja Próxima](mobile/screenshots/churches_nearby.png?v=33)
 
 **Igreja Próxima (Permissão Negada)**
-![Igreja Próxima Permissão Negada](mobile/screenshots/churches_nearby_denied.png?v=32)
+![Igreja Próxima Permissão Negada](mobile/screenshots/churches_nearby_denied.png?v=33)
 
 ## Licença
 
