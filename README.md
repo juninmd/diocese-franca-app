@@ -110,6 +110,24 @@ diocese-franca-app/
     └── package.json
 ```
 
+## Requisitos
+
+- Node.js 20+ (validado com Node 24) e [pnpm](https://pnpm.io/) (cada pacote tem `pnpm-lock.yaml`)
+- Para os testes E2E: navegador Chromium do Playwright (`npx playwright install chromium`)
+- Para o deploy manual: conta Netlify (`deploy.sh` usa `npx netlify deploy`)
+
+## Configuração
+
+| Onde | Variável | Uso |
+|------|----------|-----|
+| `backend/.env.example` | `PORT` | Porta da API (padrão `3000`) |
+| `backend/.env.example` | `NODE_ENV` | Ambiente de execução |
+| `mobile/.env.example` | `API_BASE_URL` | Documentada no exemplo, mas **ainda não é lida pelo código** |
+
+O backend lê `PORT` direto de `process.env` (não carrega arquivo `.env` sozinho; exporte a variável no shell).
+No mobile, a URL da API está fixa em `mobile/src/services/api.js` (`http://localhost:3000`); para emulador Android ou
+dispositivo físico, edite a constante `API_BASE_URL` nesse arquivo.
+
 ## Instalação e Execução
 
 ### Backend
@@ -117,11 +135,9 @@ diocese-franca-app/
 ```bash
 cd backend
 pnpm install
-# Executar scraper para atualizar dados:
-node scraper.js
-# Iniciar o servidor:
-pnpm start
-# Servidor: http://localhost:3000
+pnpm start            # API em http://localhost:3000 (também: pnpm dev)
+node scraper.js       # raspa diocesefranca.org.br e atualiza backend/data/*.json (precisa de rede)
+node scripts/syncDiocese.js   # sincroniza igrejas/padres/missas com as páginas das paróquias (precisa de rede)
 ```
 
 ### Mobile
@@ -129,20 +145,42 @@ pnpm start
 ```bash
 cd mobile
 pnpm install
-pnpm start
+pnpm start            # Expo (também: pnpm android | pnpm ios | pnpm web)
 ```
 
-### Executar Testes
+## Testes
 
 ```bash
-# Testes do Backend (53 testes)
+# Backend: 53 testes Jest em 7 suítes
 cd backend
 pnpm test
 
-# Testes E2E Mobile com Playwright (15 testes)
+# Mobile: 15 testes E2E Playwright contra o bundle web exportado
 cd ../mobile
-npx playwright test
+pnpm install
+npx expo export -p web      # gera mobile/dist
+npx playwright test         # sobe `npx serve dist -p 3001` automaticamente
 ```
+
+Os E2E esperam a API em `http://localhost:3000` (ou exibem os estados vazios) e regravam os prints em `mobile/screenshots/`.
+
+## Lint
+
+Não há linter configurado no repositório (nenhum script `lint` em `backend/` ou `mobile/`).
+
+## Build e deploy
+
+- **Web (Netlify):** `netlify.toml` roda `cd mobile && pnpm install && npx expo export -p web` e publica `mobile/dist`, com redirect `/*` para `/index.html`.
+- **Manual:** `./deploy.sh` faz o mesmo build e executa `npx netlify deploy --prod --dir=dist`.
+- **Backend:** não há Dockerfile nem pipeline de deploy no repositório; rode `pnpm start` no ambiente de destino.
+
+## Gates de CI
+
+| Workflow | Gatilho | O que checa |
+|----------|---------|-------------|
+| `validate.yml` | PR e push em `main`/`master` | Chama o reusable `juninmd/base-actions/.github/workflows/reusable-validate.yml` (validação de código definida no repositório `base-actions`) |
+| `security.yml` | push em `main`/`master` | Chama o reusable `reusable-security-scan.yml` (Gitleaks) |
+| `release-drafter.yml` | push em `main`/`master` e PR | Atualiza o rascunho de release (não bloqueia) |
 
 ## Endpoints da API
 
