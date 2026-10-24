@@ -27,4 +27,25 @@ describe('parseMassLines', () => {
   it('remove duplicados e ordena por dia e horário', () => {
     expect(slots(['Sábado: 19h', 'Domingo: 19h e 7h', 'Sábado: 19h'])).toEqual(['Dom 07:00', 'Dom 19:00', 'Sáb 19:00']);
   });
+
+  it('aceita ";" mantendo os dias e horários como "19 h" ou "07hs"', () => {
+    expect(slots(['Segunda e terça: 06h30; 11h30 e 19 h'])).toEqual(['Seg 06:30', 'Seg 11:30', 'Seg 19:00', 'Ter 06:30', 'Ter 11:30', 'Ter 19:00']);
+    expect(slots(['Sábado: 07hs e 19hs', 'Domingo: 07h,10h e 19h'])).toEqual(['Dom 07:00', 'Dom 10:00', 'Dom 19:00', 'Sáb 07:00', 'Sáb 19:00']);
+  });
+
+  it('separa dias colados na mesma linha sem cruzar horários', () => {
+    expect(slots(['Terça às 19h30 Domingo às 07h30'])).toEqual(['Dom 07:30', 'Ter 19:30']);
+    expect(slots(['Quinta-feira às 19h30 e Domingo às 10h'])).toEqual(['Dom 10:00', 'Qui 19:30']);
+  });
+
+  it('une dias separados por "/" e dias/horários em linhas distintas', () => {
+    expect(slots(['Terça / Quarta e Sexta-feira: 19h30'])).toEqual(['Ter 19:30', 'Qua 19:30', 'Sex 19:30']);
+    expect(slots(['Terça-feira', '19h', 'Sábado: 18h'])).toEqual(['Ter 19:00', 'Sáb 18:00']);
+  });
+
+  it('não inventa horário inválido e junta horários órfãos à nota anterior', () => {
+    const { masses, notes } = parseMassLines(['Sábado: 25h', 'Quinta: Celebração da palavra: 06h30; 11h30 e 19h']);
+    expect(masses).toEqual([]);
+    expect(notes).toEqual(['Sábado: 25h', 'Quinta: Celebração da palavra: 06h30; 11h30 e 19h']);
+  });
 });

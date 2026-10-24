@@ -68,8 +68,8 @@
     "massNotes": [
       "1ª Sexta-feira mês às 06h30: Missa Votiva ao Sagrado Coração de Jesus"
     ],
-    "latitude": null,
-    "longitude": null,
+    "latitude": -20.25071,
+    "longitude": -47.4808786,
     "coordinatesVerified": false,
     "coordinatesPrecision": "city"
   },
@@ -121,6 +121,29 @@
     "coordinatesPrecision": "city"
   },
   {
+    "id": 2047,
+    "name": "Paróquia Nossa Senhora da Guia",
+    "city": "Franca",
+    "state": "SP",
+    "address": "Avenida João Batista Paula Silva, 471 - Recanto Elimar II",
+    "zipCode": "14403-300",
+    "phone": "(16) 99104-6520",
+    "email": "nsguia@diocesefranca.org.br",
+    "foundedAt": "2016-03-05",
+    "officeHours": [
+      "Terça a Sexta-feira: 08h - 14h",
+      "Sábado: 08h às 12h"
+    ],
+    "description": "Localizada no Recanto Elimar, em Franca, a Paróquia Nossa Senhora da Guia foi instalada canonicamente no dia 05 de março de 2016, tendo como primeiro pároco o padre Carlos David Urbinati.",
+    "image": "https://www.diocesefranca.org.br/images/20210412210022_igreja%20nossa%20senhora%20da%20guia.jpg",
+    "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2047&id_orgao=1",
+    "massNotes": [],
+    "latitude": -20.5381768,
+    "longitude": -47.4009795,
+    "coordinatesVerified": false,
+    "coordinatesPrecision": "city"
+  },
+  {
     "id": 2049,
     "name": "Paróquia Nossa Senhora das Graças",
     "city": "Franca",
@@ -138,12 +161,7 @@
     "image": "https://www.diocesefranca.org.br/images/20210413011346_IMG_0466A2-79C9CF-25437D-88E7B1-0BED5C-59667B.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2049&id_orgao=1",
     "massNotes": [
-      "11h30 e 19h",
-      "Quinta-feira: Celebração da palavra: 06h30",
-      "11h30 e 19h",
-      "Sábado: 06h30 e 19 h",
-      "08h30",
-      "11h e 19 h",
+      "Quinta-feira: Celebração da palavra: 06h30; 11h30 e 19h",
       "1ª sexta-feira do mês: 15h",
       "Dias 22 de cada mês, 15h (exceto quinta-feira, sabádo e domingo)"
     ],
@@ -174,8 +192,8 @@
     "image": "https://www.diocesefranca.org.br/images/20210413011738_2.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2050&id_orgao=1",
     "massNotes": [],
-    "latitude": null,
-    "longitude": null,
+    "latitude": -20.3366604,
+    "longitude": -47.7797924,
     "coordinatesVerified": false,
     "coordinatesPrecision": "city"
   },
@@ -245,8 +263,7 @@
     "email": "nsrosamistica.franca@gmail.com",
     "foundedAt": "2021-02-02",
     "officeHours": [
-      "Terça a Sexta-feira:",
-      "12h às 18h",
+      "Terça a Sexta-feira: 12h às 18h",
       "Sábado: 8h30 às 11h",
       "Horário das"
     ],
@@ -543,11 +560,9 @@
     "image": "https://www.diocesefranca.org.br/images/20210413014308_15.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2062&id_orgao=1",
     "massNotes": [
-      "Matriz",
-      "Santa Teresinha",
+      "Matriz Santa Teresinha",
       "Missas Devocionais (na Matriz)",
-      "Toda 1° sexta-feira do mês:",
-      "Missa do Sagrado Coração de Jesus às 07h e às 18h."
+      "Toda 1° sexta-feira do mês: Missa do Sagrado Coração de Jesus às 07h e às 18h."
     ],
     "latitude": -20.5381768,
     "longitude": -47.4009795,
@@ -594,8 +609,8 @@
     "image": "https://www.diocesefranca.org.br/images/20210413031400_download.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2065&id_orgao=1",
     "massNotes": [],
-    "latitude": null,
-    "longitude": null,
+    "latitude": -20.0811589,
+    "longitude": -47.4210736,
     "coordinatesVerified": false,
     "coordinatesPrecision": "city"
   },
@@ -710,8 +725,8 @@
     "image": "https://www.diocesefranca.org.br/images/20210608141128_Sao%20Joao%20Batista%20Ituverava.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2257&id_orgao=1",
     "massNotes": [],
-    "latitude": null,
-    "longitude": null,
+    "latitude": -20.3366604,
+    "longitude": -47.7797924,
     "coordinatesVerified": false,
     "coordinatesPrecision": "city"
   },
@@ -735,7 +750,6 @@
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2071&id_orgao=1",
     "massNotes": [
       "Matriz",
-      "Terça",
       "3ª Sexta-feira do mês, missa da Mãe Rainha",
       "3ª Quarta-feira do mês, missa votiva de São José",
       "1ª Sexta-feira do mês missa Sagrado Coração de Jesus"
@@ -768,8 +782,8 @@
       "Todas terças-feiras, missa na Comunidade",
       "Capela Nossa Senhora de Fátima, Vila Marta às 19h30"
     ],
-    "latitude": null,
-    "longitude": null,
+    "latitude": -20.5934194,
+    "longitude": -47.6416942,
     "coordinatesVerified": false,
     "coordinatesPrecision": "city"
   },
@@ -817,10 +831,7 @@
     "description": null,
     "image": "https://www.diocesefranca.org.br/images/20210413020750_27.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2074&id_orgao=1",
-    "massNotes": [
-      "Sábado: 07hs e 19hs",
-      "Domingo: 07h,10h,17h e 19h"
-    ],
+    "massNotes": [],
     "latitude": -20.5381768,
     "longitude": -47.4009795,
     "coordinatesVerified": false,
@@ -905,10 +916,7 @@
     "description": "A Paróquia São Sebastião foi instalada, canonicamente, no dia 10 de Agosto de 2011, sendo desmembrada da Paróquia Nossa Senhora da Abadia - Cristais Paulista/SP, tendo Pe. Josenildo Almeida da Silva como primeiro pároco. Territorialmente, faz divisa com a Paróquia São João…",
     "image": "https://www.diocesefranca.org.br/images/20210413021045_30.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2077&id_orgao=1",
-    "massNotes": [
-      "Atendimento do Padre:",
-      "Quinta-feira das 13h30 às 16h"
-    ],
+    "massNotes": [],
     "latitude": -20.3104773,
     "longitude": -47.5915669,
     "coordinatesVerified": false,
@@ -982,7 +990,6 @@
     "image": "https://www.diocesefranca.org.br/images/20210413015357_17.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2064&id_orgao=1",
     "massNotes": [
-      "Terça-feira",
       "15h: Terço das Mulheres",
       "20: Terço dos Homens",
       "Venda dos Pães de Santo Antônio",
@@ -990,9 +997,7 @@
       "07h: Santa Missa",
       "07h40: Início da Adoração",
       "18h50: Benção do Santíssimo Sacramento",
-      "19h: Santa Missa",
-      "Itens relacionados",
-      "Paróquia Santo Antônio será elevada a “Santuário Diocesano”"
+      "19h: Santa Missa"
     ],
     "latitude": -20.5381768,
     "longitude": -47.4009795,
@@ -1014,7 +1019,7 @@
       "Sábado 08h às 11h"
     ],
     "description": null,
-    "image": "https://www.diocesefranca.org.br/images/20210403030607_catedral-franca-1.jpg",
+    "image": "https://www.diocesefranca.org.br/images/20210413021455_33.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2080&id_orgao=1",
     "massNotes": [],
     "latitude": -20.5381768,

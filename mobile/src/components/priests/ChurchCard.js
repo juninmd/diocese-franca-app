@@ -4,10 +4,10 @@ import { Ionicons } from '@expo/vector-icons';
 import { Text } from '../ui';
 import { colors, radius } from '../../theme';
 
-// Paróquia do padre; o toque abre o mapa.
+// Paróquia do padre; o toque abre a página da paróquia.
 export function ChurchCard({ church, onPress }) {
   return (
-    <TouchableOpacity activeOpacity={0.8} accessibilityRole="button" style={styles.card} onPress={onPress}>
+    <TouchableOpacity activeOpacity={0.8} accessibilityRole="button" accessibilityLabel={`Abrir ${church.name}`} style={styles.card} onPress={onPress}>
       <View style={styles.icon}>
         <Ionicons name="business-outline" size={26} color={colors.surface} />
       </View>
@@ -16,7 +16,7 @@ export function ChurchCard({ church, onPress }) {
         {church.address && <Text variant="caption" numberOfLines={2}>{church.address}</Text>}
         {church.city && <Text variant="caption">{church.city} - {church.state}</Text>}
       </View>
-      <Ionicons name="navigate-outline" size={22} color={colors.gold} />
+      <Ionicons name="chevron-forward" size={22} color={colors.gold} />
     </TouchableOpacity>
   );
 }

@@ -4,7 +4,7 @@ const { parseMassLines } = require('./massParser');
 const SITE = 'https://www.diocesefranca.org.br';
 const PHONE = /\(?\d{2}\)?\s?9?\d{4}[-\s]?\d{4}/g;
 const EMAIL = /[\w.+-]+@[\w-]+(?:\.[\w-]+)+/g;
-const STOP_MASSES = /^(capela|comunidade|descri[çc][ãa]o|lar |compartilhar|santu[aá]rio|igreja)/i;
+const STOP_MASSES = /^(capela|comunidade|descri[çc][ãa]o|lar |compartilhar|santu[aá]rio|igreja|itens relacionados|atendimento)/i;
 
 // Valor(es) de "Rótulo : valor" (a linha pode repetir, ex.: dois "Vigário paroquial").
 const field = (text, label) =>
@@ -65,7 +65,7 @@ function parseTitle(title) {
 
 function parseParish(html, sourceId) {
   const title = (html.match(/<h2[^>]*>([^<]*)<\/h2>\s*<div class="text_post_block"/) || [])[1];
-  const start = html.indexOf('Local e Contato');
+  const start = html.search(/local\s+e\s+contato/i);
   if (!title || start === -1) return null;
   const text = htmlToText(html.slice(start));
   const cut = text.indexOf('Compartilhar');
@@ -81,7 +81,7 @@ function parseParish(html, sourceId) {
     if (STOP_MASSES.test(line)) break;
     massLines.push(line);
   }
-  const descLine = lines((body.match(/Descri[çc][ãa]o\s*\n([\s\S]*)/) || [])[1] || '')[0] || '';
+  const descLine = lines((body.match(/Descri[çc][ãa]o\s*\n([\s\S]*)/i) || [])[1] || '')[0] || '';
   const description = descLine.length > 60 && !/^(expediente|missa|segunda|capela)/i.test(descLine) ? shorten(descLine) : null;
   const image = html.match(/<img src="(images\/[^"]+)"[^>]*class="scale_image2"/);
 

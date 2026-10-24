@@ -4,7 +4,7 @@
 
 Aplicativo completo para a Diocese de Franca com backend API REST e app React Native.
 
-> **Status: 100% Funcional e em Produção** - Backend Tests: 53/53 passing | E2E Playwright Tests: 15/15 passing
+> **Status: 100% Funcional e em Produção** - Backend Tests: 90/90 passing | E2E Playwright Tests: 16/16 passing
 
 ## Funcionalidades
 
@@ -15,12 +15,14 @@ Aplicativo completo para a Diocese de Franca com backend API REST e app React Na
 - Middleware de validação e tratamento de erros
 - Respostas padronizadas com wrapper `{ success, count, data }`
 - **Scraper Aprimorado (`backend/scraper.js`)**: Raspagem completa e autônoma de https://diocesefranca.org.br/ trazendo:
-  - **Notícias**: Destaques, títulos, fotos, links e parsing avançado de datas extraídas diretamente dos artigos e seletores de data.
-  - **Paróquias**: 40 paróquias com endereços, contatos, expediente e links de imagem.
+  - **Notícias**: títulos, categorias, fotos, links e data de publicação (extraída do carimbo no nome da imagem, sem inventar "hoje").
+  - **Paróquias**: 41 paróquias com endereços, contatos, expediente e links de imagem (inclui páginas coladas do Word, com quebras dentro dos rótulos).
   - **Padres e Clero**: Sacerdotes e diáconos (incluindo Bispo Diocesano, Administradores Paroquiais, Reitores e Diáconos Permanentes) vinculados a cada comunidade.
-  - **Horários de Missa**: 231 horários semanais estruturados por dia e horário.
+  - **Horários de Missa**: 251 horários semanais estruturados por dia e horário ("06h30; 11h30 e 19 h", dias colados na mesma linha e listas "a/e" são interpretados; o que é irregular vira nota).
 - **Igrejas próximas** (`/api/churches/nearby`): ordena as paróquias pela distância (fórmula de Haversine) até uma coordenada e calcula a próxima missa de cada uma.
-- **53 testes automatizados (Jest)** cobrindo todos os endpoints, rotas de notícias, catálogo, geolocalização, cálculo da próxima missa, separação de diáconos/clero e normalização de nomes.
+- **Cache no backend**: leitura dos JSONs com invalidação por `mtime` (o scraper atualiza a API sem reinício), `Cache-Control` + `ETag`/304 e índices por id.
+- **Scraper seguro**: escrita atômica e recusa de sobrescrever dados com resultado vazio ou muito menor (site fora do ar / layout alterado); ids de padres estáveis entre execuções.
+- **90 testes automatizados (Jest)** cobrindo endpoints, cache HTTP, parsers (notícias, paróquias, missas), construção do catálogo, integridade dos JSONs, geolocalização, próxima missa (fuso de Brasília) e normalização de nomes.
 
 ### Mobile App
 - Interface moderna com design profissional
@@ -45,11 +47,12 @@ Aplicativo completo para a Diocese de Franca com backend API REST e app React Na
 - **Igrejas próximas ("Perto de mim")**: filtro em `ChurchesScreen.js` que usa `expo-location` (`LocationService.js`) para solicitar a localização do usuário e ordenar as paróquias por distância com o badge da próxima missa.
 - **Card "Igreja mais próxima" na Home**: destaca a paróquia mais próxima com horário da próxima missa.
 - **Próxima missa na tela de detalhes**: banner em `ChurchDetailScreen.js` mostrando a próxima missa calculada.
-- **15 Testes E2E (Playwright)** validando fluxos na versão Web, lembretes, validação de dados raspados, estados vazios e capturando screenshots atualizadas.
+- **Cache offline (stale-while-revalidate)**: `src/services/cache.js` + `src/hooks/useResource.js` mostram na hora o que já foi baixado (memória + AsyncStorage), revalidam em segundo plano e, sem rede, mantêm a cópia salva com aviso acolhedor (`NetworkStatus`, sem polling). A próxima missa é recalculada no aparelho.
+- **16 Testes E2E (Playwright)** validando fluxos na versão Web, lembretes, validação de dados raspados, estados vazios e capturando screenshots atualizadas.
 
 ### Backend & Scraper
 - **Scraper Unificado e Aprimorado (`backend/scraper.js`)**: Raspagem de notícias, paróquias, clero e horários de missa em https://diocesefranca.org.br/.
-- Tratamento robusto contra falhas de rede com retries exponenciais, User-Agents aleatórios e fallbacks gracioso para JSONs preservando a integridade dos dados.
+- Tratamento robusto contra falhas de rede com retries exponenciais e preservação dos JSONs atuais quando a raspagem falha.
 - Decodificação completa de HTML Entities com a biblioteca `html-entities` e limpeza de formatação.
 - Endpoint de health check `/api/health`
 - Testes automatizados atualizados dinamicamente para validar IDs ativos no banco de dados.
@@ -60,14 +63,14 @@ Aplicativo completo para a Diocese de Franca com backend API REST e app React Na
 - Node.js + Express.js 5.x
 - Axios + Cheerio + HTML-Entities
 - CORS, Compression, Helmet
-- Jest (53 testes)
+- Jest (90 testes)
 
 ### Mobile
 - React Native (Expo SDK 54)
 - React Navigation 7
 - AsyncStorage (favoritos persistentes)
 - @expo/vector-icons (Ionicons)
-- Playwright E2E (15 testes)
+- Playwright E2E (16 testes)
 
 ## Estrutura do Projeto
 
@@ -85,12 +88,17 @@ diocese-franca-app/
 │   │   ├── masses.js
 │   │   └── news.js
 │   ├── middleware/             # Middleware Express
-│   │   └── validation.js
+│   │   ├── cache.js
+│   └── validation.js
 │   ├── utils/                   # Funções auxiliares e parsers
 │   │   ├── geo.js
 │   │   ├── nextMass.js
+│   │   ├── newsParser.js
 │   │   ├── parishParser.js
-│   │   └── massParser.js
+│   │   ├── massParser.js
+│   │   ├── catalogBuilder.js
+│   │   ├── fileStore.js
+│   │   └── http.js
 │   ├── tests/                  # Testes automatizados Jest
 │   ├── scraper.js              # Scraper completo da Diocese
 │   ├── index.js                # Entry point API
@@ -102,6 +110,7 @@ diocese-franca-app/
     ├── src/
     │   ├── components/
     │   ├── context/
+    │   ├── hooks/
     │   ├── navigation/
     │   ├── screens/
     │   ├── services/
@@ -151,11 +160,11 @@ pnpm start            # Expo (também: pnpm android | pnpm ios | pnpm web)
 ## Testes
 
 ```bash
-# Backend: 53 testes Jest em 7 suítes
+# Backend: 90 testes Jest em 11 suítes
 cd backend
 pnpm test
 
-# Mobile: 15 testes E2E Playwright contra o bundle web exportado
+# Mobile: 16 testes E2E Playwright contra o bundle web exportado
 cd ../mobile
 pnpm install
 npx expo export -p web      # gera mobile/dist

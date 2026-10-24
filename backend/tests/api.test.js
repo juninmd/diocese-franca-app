@@ -3,12 +3,15 @@ const express = require('express');
 const churchesRouter = require('../routes/churches');
 const priestsRouter = require('../routes/priests');
 const massesRouter = require('../routes/masses');
+const newsRouter = require('../routes/news');
+const { cacheControl } = require('../middleware/cache');
 
 const app = express();
 app.use(express.json());
-app.use('/api/churches', churchesRouter);
+app.use('/api/churches', cacheControl(), churchesRouter);
 app.use('/api/priests', priestsRouter);
 app.use('/api/masses', massesRouter);
+app.use('/api/news', newsRouter);
 
 describe('Churches API', () => {
   describe('GET /api/churches', () => {
@@ -202,5 +205,35 @@ describe('Masses API', () => {
       expect(res.statusCode).toBe(400);
       expect(res.body.error).toBe('Invalid Day');
     });
+  });
+});
+
+describe('Cache HTTP e news', () => {
+  it('envia Cache-Control e ETag e responde 304 para If-None-Match', async () => {
+    const first = await request(app).get('/api/churches');
+    expect(first.headers['cache-control']).toMatch(/max-age=300/);
+    expect(first.headers.etag).toBeTruthy();
+    const second = await request(app).get('/api/churches').set('If-None-Match', first.headers.etag);
+    expect(second.statusCode).toBe(304);
+  });
+
+  it('GET /api/news devolve notícias com data de atualização', async () => {
+    const res = await request(app).get('/api/news');
+    expect(res.statusCode).toBe(200);
+    expect(res.body.success).toBe(true);
+    expect(res.body.count).toBe(res.body.data.length);
+    expect(res.body).toHaveProperty('updatedAt');
+  });
+
+  it('lista de padres traz a paróquia resumida', async () => {
+    const res = await request(app).get('/api/priests');
+    const withChurch = res.body.data.filter((p) => p.church);
+    expect(withChurch.length).toBe(res.body.data.length);
+    expect(withChurch[0].church).toEqual(expect.objectContaining({ id: expect.any(Number), name: expect.any(String), city: expect.any(String) }));
+  });
+
+  it('rejeita ids não numéricos (inclusive "12abc")', async () => {
+    expect((await request(app).get('/api/churches/12abc')).statusCode).toBe(400);
+    expect((await request(app).get('/api/priests/abc')).statusCode).toBe(400);
   });
 });

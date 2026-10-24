@@ -16,24 +16,46 @@ API REST para consulta de informações da Diocese de Franca, incluindo igrejas,
 - `GET /api/priests` - Lista todos os padres
 - `GET /api/priests/:id` - Obtém detalhes de um padre específico (inclui igreja)
 
+### Notícias (News)
+- `GET /api/news` - Notícias da home do site da Diocese (`id`, `title`, `category`, `description`, `link`, `image`, `date`, `publishedAt`) e `updatedAt` (quando o scraper gravou o arquivo)
+
+### Saúde
+- `GET /api/health` - Status, uptime e contagem/data de atualização dos dados (nunca em cache)
+
 ### Missas (Masses)
 - `GET /api/masses` - Lista todas as missas (inclui informação da igreja)
 - `GET /api/masses/by-church/:churchId` - Lista missas por igreja
 - `GET /api/masses/by-day/:day` - Lista missas por dia da semana
   - Dias aceitos: domingo, segunda-feira, terça-feira, quarta-feira, quinta-feira, sexta-feira, sábado
 
-## Dados oficiais (sync)
+## Dados oficiais (scraper)
 
-`churches.json`, `priests.json` e `masses.json` são gerados a partir das páginas das paróquias em
-diocesefranca.org.br:
+`news.json`, `churches.json`, `priests.json` e `masses.json` são gerados a partir de diocesefranca.org.br:
 
 ```bash
-node scripts/syncDiocese.js   # requer rede; reescreve os três JSONs e data/cityCoords.json
+node scraper.js               # notícias + catálogo (requer rede)
+node scripts/syncDiocese.js   # só o catálogo (paróquias, clero, missas e data/cityCoords.json)
 ```
 
+- `utils/newsParser.js`: notícias da home. A data vem do carimbo `AAAAMMDDHHMMSS_` no nome da imagem
+  (a home não exibe data); sem carimbo válido o item fica sem data em vez de usar "hoje".
 - `utils/parishParser.js` / `utils/massParser.js`: extraem paróquia, clero e horários semanais
-  (horários irregulares viram `massNotes`).
+  (horários irregulares viram `massNotes`). O HTML das paróquias às vezes é colado do Word (quebras de
+  linha dentro de rótulos, "LOCAL E CONTATO" em maiúsculas): `utils/htmlText.js` trata quebras do código-fonte
+  como espaço e só `<br>`/blocos quebram linha.
+- `utils/catalogBuilder.js`: monta churches/priests/masses. Um padre em várias paróquias é um único
+  registro (`churchIds`); ids de padres são preservados entre execuções (o app guarda favoritos por id).
+- `utils/http.js`: GET com retries/backoff. `utils/fileStore.js`: escrita atômica e `writeIfSane` — o scraper
+  **não** sobrescreve um JSON com lista vazia ou que encolheu mais de 40% (site fora do ar / layout alterado).
 - `data/depara.json`: ajustes manuais por id, mesclados por `utils/applyDepara.js` (via `utils/catalog.js`).
+
+## Cache
+
+- Os JSONs são lidos com cache em memória invalidado pelo `mtime` (`fileStore.readCached`, checagem a cada 2 s):
+  rodar o scraper com a API no ar atualiza as respostas sem reiniciar. Índices por id (`getCatalog`) evitam `find`/`filter` por requisição.
+- `GET /api/{churches,priests,masses}`: `Cache-Control: public, max-age=300, stale-while-revalidate=3600`;
+  `/api/news`: `max-age=120`. O Express envia `ETag`; clientes revalidam com `If-None-Match` e recebem `304`.
+- `nextMass` usa o fuso `America/Sao_Paulo` (o servidor pode estar em UTC).
 
 ## Instalação
 

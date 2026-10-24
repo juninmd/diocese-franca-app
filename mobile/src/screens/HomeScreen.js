@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { View, ScrollView, RefreshControl, Linking, StyleSheet } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { getChurches, getPriests, getMasses, getNews, getNearbyChurches } from '../services/api';
+import { getNearbyChurches } from '../services/api';
+import { useChurches, usePriests, useMasses, useNews } from '../hooks/useData';
 import { LocationService } from '../services/LocationService';
 import { scheduleReminder } from '../services/ReminderService';
 import { useToast } from '../context/ToastContext';
-import { NetworkStatus } from '../components/NetworkStatus';
 import { HomeHeader } from '../components/home/HomeHeader';
 import { NearestChurchCard } from '../components/home/NearestChurchCard';
 import { StatsRow } from '../components/home/StatsRow';
@@ -18,38 +18,13 @@ import { colors } from '../theme';
 export default function HomeScreen({ navigation }) {
   const insets = useSafeAreaInsets();
   const toast = useToast();
-  const [stats, setStats] = useState({ churches: 0, priests: 0, masses: 0 });
-  const [news, setNews] = useState([]);
-  const [loadingNews, setLoadingNews] = useState(true);
+  const churches = useChurches();
+  const priests = usePriests();
+  const masses = useMasses();
+  const news = useNews();
   const [refreshing, setRefreshing] = useState(false);
   const [nearest, setNearest] = useState({ church: null, loading: false, error: null });
-
-  useEffect(() => {
-    loadStats();
-    fetchNews();
-  }, []);
-
-  const loadStats = async () => {
-    try {
-      const [churches, priests, masses] = await Promise.all([getChurches(), getPriests(), getMasses()]);
-      const count = (list) => list.length;
-      setStats({ churches: count(churches), priests: count(priests), masses: count(masses) });
-    } catch (error) {
-      console.error('Error loading stats:', error);
-    }
-  };
-
-  const fetchNews = async () => {
-    try {
-      setLoadingNews(true);
-      const data = await getNews();
-      setNews(data && data.success && data.data ? data.data : []);
-    } catch (err) {
-      console.error('Failed to load news', err);
-    } finally {
-      setLoadingNews(false);
-    }
-  };
+  const count = (resource) => (resource.data ? resource.data.length : 0);
 
   const findNearestChurch = async () => {
     setNearest({ church: null, loading: true, error: null });
@@ -68,9 +43,10 @@ export default function HomeScreen({ navigation }) {
 
   const onRefresh = async () => {
     setRefreshing(true);
-    await Promise.all([loadStats(), fetchNews()]);
+    const results = await Promise.all([churches, priests, masses, news].map((r) => r.reload()));
     setRefreshing(false);
-    toast.success('Dados atualizados!');
+    if (results.every((r) => r && !r.stale)) toast.success('Dados atualizados!');
+    else toast.warning('Sem conexão: mostrando os dados salvos.');
   };
 
   const openNews = (item) => {
@@ -89,7 +65,6 @@ export default function HomeScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <NetworkStatus />
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={[styles.content, { paddingTop: insets.top + 24 }]}
@@ -99,12 +74,12 @@ export default function HomeScreen({ navigation }) {
         <NearestChurchCard church={nearest.church} loading={nearest.loading} error={nearest.error} onFind={findNearestChurch} onOpen={openChurch} />
         <StatsRow
           items={[
-            { label: 'Paróquias', value: stats.churches, onPress: go('Churches') },
-            { label: 'Padres', value: stats.priests, onPress: go('Priests') },
-            { label: 'Missas/sem', value: stats.masses, onPress: go('Masses') },
+            { label: 'Paróquias', value: count(churches), onPress: go('Churches') },
+            { label: 'Padres', value: count(priests), onPress: go('Priests') },
+            { label: 'Missas/semana', value: count(masses), onPress: go('Masses') },
           ]}
         />
-        <NewsCarousel news={news} loading={loadingNews} onOpen={openNews} onRemind={remindNews} onRetry={fetchNews} />
+        <NewsCarousel news={news.data || []} loading={news.loading} onOpen={openNews} onRemind={remindNews} error={!!news.error} onRetry={() => news.reload()} />
         <QuickActions items={buildQuickActions({ navigation, toast })} />
         <ContactCard onCall={callDiocese} onEmail={emailDiocese} />
       </ScrollView>

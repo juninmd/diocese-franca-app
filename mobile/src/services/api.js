@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { setOnline } from './connection';
 
 // Update this URL to your backend API URL
 // For development, you can use: http://localhost:3000
@@ -12,6 +13,19 @@ export const api = axios.create({
     'Content-Type': 'application/json',
   },
 });
+
+// Conectividade inferida das respostas: sem resposta (rede/timeout) = offline; qualquer resposta HTTP = online.
+api.interceptors.response.use(
+  (response) => {
+    setOnline(true);
+    return response;
+  },
+  (error) => {
+    if (!error.response) setOnline(false);
+    else setOnline(true);
+    return Promise.reject(error);
+  },
+);
 
 // O backend responde { success, count, data }; as telas esperam o payload direto.
 const unwrap = (response) => response.data.data;
@@ -64,7 +78,9 @@ export const getMassesByDay = async (day) => {
 // News
 export const getNews = async () => {
   const response = await api.get('/api/news');
-  return response.data;
+  return unwrap(response) || [];
 };
+
+export const pingApi = () => api.get('/api/health', { timeout: 5000 });
 
 export default api;
