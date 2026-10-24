@@ -1,10 +1,9 @@
 import React, { useEffect, useState, useCallback, useMemo } from 'react';
 import { View, ScrollView, RefreshControl, StyleSheet } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { getMasses } from '../services/api';
+import { useMasses } from '../hooks/useData';
 import { scheduleReminder } from '../services/ReminderService';
 import { useToast } from '../context/ToastContext';
-import { NetworkStatus } from '../components/NetworkStatus';
 import { ListSkeleton } from '../components/Skeleton';
 import { Text, EmptyState } from '../components/ui';
 import { DayStrip } from '../components/masses/DayStrip';
@@ -13,6 +12,7 @@ import { TypeFilter } from '../components/masses/TypeFilter';
 import { DAY_NAMES, weekDays, dayTitle, groupByDay, findNextMassId } from '../components/masses/massUtils';
 import { colors, space } from '../theme';
 
+const EMPTY = [];
 const ERROR_MSG = 'Puxa, não conseguimos carregar os horários das missas agora. Verifique sua conexão e tente novamente!';
 const EMPTY_MSG = 'Puxa, não encontramos missas para esses filtros. Vamos tentar limpar os filtros e buscar novamente?';
 
@@ -20,34 +20,23 @@ export default function MassesScreen({ navigation, route }) {
   const insets = useSafeAreaInsets();
   const toast = useToast();
   const today = DAY_NAMES[new Date().getDay()];
-  const [masses, setMasses] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const resource = useMasses();
+  const masses = resource.data || EMPTY;
   const [refreshing, setRefreshing] = useState(false);
-  const [error, setError] = useState(null);
   const [selectedDay, setSelectedDay] = useState(route?.params?.day || today);
   const [massType, setMassType] = useState('all');
   const [reminders, setReminders] = useState({});
+  const error = resource.error && masses.length === 0 ? ERROR_MSG : null;
 
-  const loadMasses = useCallback(async () => {
-    try {
-      setMasses(await getMasses());
-      setError(null);
-    } catch (err) {
-      setError(ERROR_MSG);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
-
-  useEffect(() => { loadMasses(); }, [loadMasses]);
   useEffect(() => { if (route?.params?.day) setSelectedDay(route.params.day); }, [route?.params?.day]);
 
   const onRefresh = useCallback(async () => {
     setRefreshing(true);
-    await loadMasses();
+    const result = await resource.reload();
     setRefreshing(false);
-    toast.success('Horários atualizados!');
-  }, [loadMasses, toast]);
+    if (result && !result.stale) toast.success('Horários atualizados!');
+    else toast.warning('Sem conexão: mostrando os horários salvos.');
+  }, [resource.reload, toast]);
 
   const remind = async (item) => {
     try {
@@ -80,9 +69,9 @@ export default function MassesScreen({ navigation, route }) {
   const openChurch = (churchId) => navigation.navigate('Churches', { screen: 'ChurchDetail', params: { churchId } });
 
   const renderBody = () => {
-    if (loading && !refreshing) return <ListSkeleton count={5} type="mass" />;
-    if (error && masses.length === 0) {
-      return <EmptyState icon="alert-circle-outline" message={error} actionLabel="Tentar Novamente" onAction={() => { setLoading(true); loadMasses(); }} />;
+    if (resource.loading && !refreshing) return <ListSkeleton count={5} type="mass" />;
+    if (error) {
+      return <EmptyState icon="alert-circle-outline" message={error} actionLabel="Tentar Novamente" onAction={() => resource.reload()} />;
     }
     if (sections.length === 0) {
       return (
@@ -112,7 +101,6 @@ export default function MassesScreen({ navigation, route }) {
       showsVerticalScrollIndicator={false}
       refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} colors={[colors.primary]} tintColor={colors.primary} />}
     >
-      <NetworkStatus />
       <View style={styles.titleBox}>
         <Text variant="display">Horários de missa</Text>
         <Text variant="body" style={{ color: colors.muted }}>

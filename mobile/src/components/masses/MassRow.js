@@ -12,9 +12,11 @@ export function MassRow({ item, isNext, reminderSet, onOpenChurch, onRemind }) {
         activeOpacity={0.8}
         style={styles.main}
         disabled={!item.church}
+        accessibilityRole="button"
+        accessibilityLabel={`Missa às ${item.time}${church ? `, ${church}` : ''}${isNext ? ', próxima' : ''}`}
         onPress={() => onOpenChurch(item.church.id)}
       >
-        <Text style={[styles.time, isNext && { color: colors.primary }]}>{item.time}</Text>
+        <Text numberOfLines={1} style={[styles.time, isNext && { color: colors.primary }]}>{item.time}</Text>
         <View style={styles.info}>
           {church ? <Text variant="label" style={styles.church}>{church}</Text> : null}
           <Text variant="caption">{item.type}{isNext ? ' · próxima' : ''}</Text>
@@ -33,8 +35,8 @@ export function MassRow({ item, isNext, reminderSet, onOpenChurch, onRemind }) {
 const styles = StyleSheet.create({
   row: { flexDirection: 'row', alignItems: 'center', gap: 14, paddingVertical: 14, paddingLeft: 16, paddingRight: 8, borderRadius: 22, backgroundColor: colors.surface, borderWidth: 1, borderColor: colors.line },
   rowNext: { backgroundColor: '#FBEFEE', borderColor: '#E4BFC2' },
-  main: { flex: 1, minWidth: 0, flexDirection: 'row', alignItems: 'center', gap: 16 },
-  time: { width: 70, fontFamily: fonts.serif, fontSize: 27, fontWeight: '600', letterSpacing: -0.3, color: colors.ink },
+  main: { flex: 1, minWidth: 0, flexDirection: 'row', alignItems: 'center', gap: 12 },
+  time: { width: 84, flexShrink: 0, fontFamily: fonts.serif, fontSize: 26, fontWeight: '600', letterSpacing: -0.3, color: colors.ink, fontVariant: ['tabular-nums'] },
   info: { flex: 1, minWidth: 0, gap: 3 },
   church: { fontSize: 16, lineHeight: 20 },
 });

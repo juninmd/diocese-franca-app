@@ -1,31 +1,16 @@
 const express = require('express');
 const router = express.Router();
-const path = require('path');
-const fs = require('fs');
+const { readCached, updatedAt } = require('../utils/fileStore');
 
+// Notícias vêm de data/news.json (scraper). Cache com cabeçalho mais curto: mudam com mais frequência.
 router.get('/', (req, res) => {
-  try {
-    const newsPath = path.join(__dirname, '../data/news.json');
-    if (!fs.existsSync(newsPath)) {
-      return res.json({
-        success: true,
-        count: 0,
-        data: []
-      });
-    }
-
-    const newsData = JSON.parse(fs.readFileSync(newsPath, 'utf8'));
-    res.json({
-      success: true,
-      count: newsData.length,
-      data: newsData
-    });
-  } catch (error) {
-    res.status(500).json({
-      error: 'Failed to read news data',
-      message: error.message
-    });
-  }
+  const data = readCached('news.json', []);
+  res.json({
+    success: true,
+    count: data.length,
+    updatedAt: updatedAt('news.json'),
+    data
+  });
 });
 
 module.exports = router;

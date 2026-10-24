@@ -10,11 +10,11 @@ import { openCall } from './priestUtils';
 export function PriestCard({ priest, isFavorite, onOpen, onFavorite, onShare }) {
   return (
     <View style={styles.card}>
-      <TouchableOpacity activeOpacity={0.8} style={styles.main} onPress={onOpen}>
+      <TouchableOpacity activeOpacity={0.8} accessibilityRole="button" accessibilityLabel={`${priest.name}, ${priest.title}`} style={styles.main} onPress={onOpen}>
         <PriestAvatar name={priest.name} image={priest.image} />
         <View style={styles.info}>
-          <Text variant="label" style={styles.name} numberOfLines={2}>{priest.name}</Text>
-          <Text variant="caption" numberOfLines={2}>{priest.title}</Text>
+          <Text variant="label" style={styles.name} numberOfLines={3}>{priest.name}</Text>
+          <Text variant="caption" numberOfLines={2}>{priest.title}{priest.church && priest.church.city ? ` · ${priest.church.city}` : ''}</Text>
         </View>
       </TouchableOpacity>
       <PriestActions name={priest.name} isFavorite={isFavorite} onFavorite={onFavorite} onShare={onShare} />

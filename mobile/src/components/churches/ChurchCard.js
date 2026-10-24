@@ -10,12 +10,13 @@ export function ChurchCard({ church, isFavorite, onPress, onToggleFavorite, onSh
   const distance = formatDistance(church.distanceKm);
   return (
     <View style={styles.wrap}>
-      <TouchableOpacity activeOpacity={0.8} onPress={onPress} style={styles.card}>
+      <TouchableOpacity activeOpacity={0.8} accessibilityRole="button" accessibilityLabel={`${church.name}, ${church.city}`} onPress={onPress} style={styles.card}>
         <ChurchPhoto uri={church.image} style={styles.thumb} />
         <View style={styles.body}>
           <View style={styles.top}>
+            <Text variant="overline" numberOfLines={1} style={styles.city}>{church.city}/{church.state}</Text>
             <Text variant="heading" numberOfLines={3}>{church.name}</Text>
-            <Text variant="caption" numberOfLines={2}>{church.city}/{church.state} · {church.address}</Text>
+            <Text variant="caption" numberOfLines={2}>{church.address}</Text>
           </View>
           <View style={styles.pills}>
             {distance ? <Pill tone="sand" label={distance} /> : null}
@@ -42,6 +43,7 @@ const styles = StyleSheet.create({
   thumb: { width: 84, minHeight: 108, borderRadius: radius.md },
   body: { flex: 1, minWidth: 0, justifyContent: 'space-between', gap: 8 },
   top: { gap: 4, paddingRight: 52 },
+  city: { color: colors.primary },
   pills: { flexDirection: 'row', flexWrap: 'wrap', gap: 6 },
   actions: { position: 'absolute', top: 6, right: 6, gap: 4 },
 });

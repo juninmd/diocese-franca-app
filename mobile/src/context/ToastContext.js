@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useCallback } from 'react';
+import React, { createContext, useContext, useState, useCallback, useMemo } from 'react';
 import { View, StyleSheet, Animated, TouchableOpacity } from 'react-native';
 import { RawText as Text } from '../components/ui/Text';
 import { Ionicons } from '@expo/vector-icons';
@@ -20,7 +20,7 @@ export function ToastProvider({ children }) {
   const [toasts, setToasts] = useState([]);
 
   const showToast = useCallback((message, type = 'info', duration = TOAST_DURATION) => {
-    const id = Date.now();
+    const id = Date.now() + Math.random();
     const toast = { id, message, type };
 
     setToasts(prev => [...prev, toast]);
@@ -41,10 +41,12 @@ export function ToastProvider({ children }) {
   const info = useCallback((message) => showToast(message, 'info'), [showToast]);
   const warning = useCallback((message) => showToast(message, 'warning'), [showToast]);
 
-  toastHandler = { showToast, hideToast, success, error, info, warning };
+  // Valor estável: telas/hooks que listam `toast` como dependência não recriam callbacks a cada render.
+  const value = useMemo(() => ({ showToast, hideToast, success, error, info, warning }), [showToast, hideToast, success, error, info, warning]);
+  toastHandler = value;
 
   return (
-    <ToastContext.Provider value={{ showToast, hideToast, success, error, info, warning }}>
+    <ToastContext.Provider value={value}>
       {children}
       <View style={styles.container} pointerEvents="box-none">
         {toasts.map((toast) => (

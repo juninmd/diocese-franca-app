@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import { View, StyleSheet, FlatList, RefreshControl, Share } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { getPriests } from '../services/api';
+import { usePriests } from '../hooks/useData';
 import { FavoritesService } from '../services/FavoritesService';
 import { useToast } from '../context/ToastContext';
 import { ListSkeleton } from '../components/Skeleton';
@@ -12,12 +12,14 @@ import { PriestsFilters } from '../components/priests/PriestsFilters';
 import { PriestsEmpty } from '../components/priests/PriestsEmpty';
 import { colors, space } from '../theme';
 
+const EMPTY = [];
+
 const matches = (p, q) =>
-  p.name.toLowerCase().includes(q) || p.title.toLowerCase().includes(q) || (p.email && p.email.toLowerCase().includes(q));
+  [p.name, p.title, p.email, p.church && p.church.city].some((field) => field && field.toLowerCase().includes(q));
 
 export default function PriestsScreen({ navigation }) {
-  const [priests, setPriests] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const resource = usePriests();
+  const priests = resource.data || EMPTY;
   const [refreshing, setRefreshing] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [favorites, setFavorites] = useState([]);
@@ -26,21 +28,8 @@ export default function PriestsScreen({ navigation }) {
   const insets = useSafeAreaInsets();
 
   useEffect(() => {
-    loadPriests();
     loadFavorites();
   }, []);
-
-  const loadPriests = async () => {
-    try {
-      setLoading(true);
-      setPriests(await getPriests());
-    } catch (err) {
-      // Lista vazia: PriestsEmpty exibe a mensagem empática de falha de carregamento.
-      setPriests([]);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const loadFavorites = async () => {
     const favs = await FavoritesService.getFavoritePriests();
@@ -49,10 +38,10 @@ export default function PriestsScreen({ navigation }) {
 
   const onRefresh = async () => {
     setRefreshing(true);
-    await loadPriests();
-    await loadFavorites();
+    const [result] = await Promise.all([resource.reload(), loadFavorites()]);
     setRefreshing(false);
-    toast.success('Dados atualizados!');
+    if (result && !result.stale) toast.success('Dados atualizados!');
+    else toast.warning('Sem conexão: mostrando os dados salvos.');
   };
 
   const toggleFavorite = async (priest) => {
@@ -100,7 +89,7 @@ export default function PriestsScreen({ navigation }) {
         <Text variant="body" style={{ color: colors.muted }}>Bispo e párocos da Diocese de Franca</Text>
       </View>
       <PriestsFilters
-        loading={loading && !refreshing}
+        loading={resource.loading && !refreshing}
         query={searchQuery}
         onQuery={setSearchQuery}
         showFavorites={showFavorites}
@@ -113,7 +102,7 @@ export default function PriestsScreen({ navigation }) {
 
   return (
     <View style={[styles.container, { paddingTop: insets.top + space.lg }]}>
-      {loading && !refreshing ? (
+      {resource.loading && !refreshing ? (
         <View style={styles.pad}>{header}<ListSkeleton count={5} type="priest" /></View>
       ) : (
         <FlatList
@@ -130,7 +119,13 @@ export default function PriestsScreen({ navigation }) {
             </View>
           }
           ListEmptyComponent={bishop ? null : (
-            <PriestsEmpty showFavorites={showFavorites} hasQuery={!!searchQuery} onShowAll={() => setShowFavorites(false)} />
+            <PriestsEmpty
+              showFavorites={showFavorites}
+              hasQuery={!!searchQuery}
+              failed={!!resource.error && priests.length === 0}
+              onShowAll={() => setShowFavorites(false)}
+              onRetry={() => resource.reload()}
+            />
           )}
           refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} colors={[colors.primary]} tintColor={colors.primary} />}
         />

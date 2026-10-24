@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, ScrollView, ActivityIndicator, StyleSheet } from 'react-native';
+import { View, ScrollView, StyleSheet } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Text, EmptyState } from '../components/ui';
+import { EmptyState } from '../components/ui';
+import { DetailSkeleton } from '../components/Skeleton';
 import { DetailHero } from '../components/churches/DetailHero';
 import { ChurchIntro } from '../components/churches/ChurchIntro';
 import { NextMassCard } from '../components/churches/NextMassCard';
@@ -20,12 +21,7 @@ export default function ChurchDetailScreen({ route, navigation }) {
 
   let body;
   if (loading) {
-    body = (
-      <View style={styles.center}>
-        <ActivityIndicator size="large" color={colors.primary} />
-        <Text variant="caption">Carregando...</Text>
-      </View>
-    );
+    body = <DetailSkeleton />;
   } else if (error || !church) {
     body = (
       <EmptyState
@@ -77,5 +73,4 @@ export default function ChurchDetailScreen({ route, navigation }) {
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: colors.bg },
   sheet: { marginTop: -34, minHeight: 400, borderTopLeftRadius: 32, borderTopRightRadius: 32, backgroundColor: colors.bg, paddingTop: 24, paddingHorizontal: 20, gap: 20 },
-  center: { alignItems: 'center', gap: 12, padding: 24 },
 });

@@ -1,47 +1,52 @@
 [
   {
-    "id": 1,
+    "id": 6095,
     "title": "Frei Welton Cardoso Cavallini toma posse como pároco da Paróquia Nossa Senhora das Graças",
     "category": "Frei Welton",
     "description": "Celebração foi presidida por Dom Paulo Roberto Beloto, no sábado (17), em Franca",
     "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6095&id_orgao=1",
     "image": "https://diocesefranca.org.br/images/20261019202902_1000388427.png",
-    "date": "19 de outubro"
+    "date": "19 de outubro",
+    "publishedAt": "2026-10-19T20:29:02-03:00"
   },
   {
-    "id": 2,
+    "id": 6096,
     "title": "Pastoral do Batismo reúne agentes da Diocese de Franca para refletir sobre compromisso e missão",
     "category": "Pastoral do Batismo",
     "description": "Encontro realizado na Paróquia São Benedito contou com a presença de Dom Paulo e formação conduzida por José Roberto.",
     "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6096&id_orgao=1",
     "image": "https://diocesefranca.org.br/images/20261019204838_1000388461.png",
-    "date": "19 de outubro"
+    "date": "19 de outubro",
+    "publishedAt": "2026-10-19T20:48:38-03:00"
   },
   {
-    "id": 3,
+    "id": 6092,
     "title": "Caminhada em Defesa da Vida e da Família chega à terceira edição na Diocese de Franca",
     "category": "Caminhada",
-    "description": "Promovida pela Pastoral Familiar, mobilização percorreu o trajeto entre o Santuário Santo Antônio e a Catedral, com momentos de oração e reflexão...",
+    "description": "Promovida pela Pastoral Familiar, mobilização percorreu o trajeto entre o Santuário Santo Antônio e a Catedral, com momentos de oração e reflexão sobre a…",
     "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6092&id_orgao=1",
     "image": "https://diocesefranca.org.br/images/20261015221924_1000385033.png",
-    "date": "15 de outubro"
+    "date": "15 de outubro",
+    "publishedAt": "2026-10-15T22:19:24-03:00"
   },
   {
-    "id": 4,
+    "id": 6089,
     "title": "Frei Agostinho Morosini toma posse como pároco da Paróquia Nossa Senhora Aparecida, em Franca",
     "category": "Frei Agostinho Morosini",
     "description": "Celebração aconteceu no dia 10 de outubro, durante a novena em honra à padroeira, e marcou o início de uma nova etapa na comunidade da Capelinha.",
     "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6089&id_orgao=1",
     "image": "https://diocesefranca.org.br/images/20261015211307_1000384887.png",
-    "date": "10 de out"
+    "date": "15 de outubro",
+    "publishedAt": "2026-10-15T21:13:07-03:00"
   },
   {
-    "id": 5,
+    "id": 6090,
     "title": "Formação reúne 78 salmistas de três foranias da Diocese de Franca",
     "category": "Salmistas",
     "description": "Encontro na Paróquia São Vicente de Paulo abordou o Guia Litúrgico-Pastoral, leitura de partituras e técnicas vocais para o canto litúrgico.",
     "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6090&id_orgao=1",
     "image": "https://diocesefranca.org.br/images/20261015212615_1000384917.png",
-    "date": "15 de outubro"
+    "date": "15 de outubro",
+    "publishedAt": "2026-10-15T21:26:15-03:00"
   }
 ]

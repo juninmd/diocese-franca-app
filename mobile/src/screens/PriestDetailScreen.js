@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, ScrollView, ActivityIndicator, Linking } from 'react-native';
-import { getPriestById } from '../services/api';
+import React from 'react';
+import { View, StyleSheet, ScrollView } from 'react-native';
+import { usePriest } from '../hooks/useData';
 import { scheduleReminder } from '../services/ReminderService';
 import { useToast } from '../context/ToastContext';
 import { Text, EmptyState } from '../components/ui';
+import { DetailSkeleton } from '../components/Skeleton';
 import { DetailTopBar } from '../components/priests/DetailTopBar';
 import { DetailHero } from '../components/priests/DetailHero';
 import { ContactRow, Panel } from '../components/priests/ContactRow';
@@ -13,32 +14,16 @@ import { colors } from '../theme';
 
 export default function PriestDetailScreen({ route, navigation }) {
   const { priestId } = route.params;
-  const [priest, setPriest] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const resource = usePriest(priestId);
+  const priest = resource.data;
+  const error = resource.error && !priest
+    ? 'Puxa, não conseguimos carregar os detalhes do padre agora. Tente novamente!'
+    : null;
   const toast = useToast();
 
-  useEffect(() => {
-    loadPriestDetail();
-  }, [priestId]);
-
-  const loadPriestDetail = async () => {
-    try {
-      setLoading(true);
-      setPriest(await getPriestById(priestId));
-      setError(null);
-    } catch (err) {
-      setError('Puxa, não conseguimos carregar os detalhes do padre agora. Tente novamente!');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleMap = (church) => {
-    if (church && church.address) {
-      const query = encodeURIComponent(`${church.name}, ${church.address}, ${church.city}`);
-      Linking.openURL(`https://maps.google.com/?q=${query}`);
-    }
+  // Abre a página da paróquia no app (lá estão "Como chegar", horários e equipe).
+  const openChurch = (church) => {
+    if (church) navigation.navigate('Churches', { screen: 'ChurchDetail', params: { churchId: church.id } });
   };
 
   const handleConfessionReminder = async () => {
@@ -57,14 +42,11 @@ export default function PriestDetailScreen({ route, navigation }) {
 
   const topBar = <DetailTopBar onBack={() => navigation.goBack()} />;
 
-  if (loading) {
+  if (resource.loading) {
     return (
       <View style={styles.container}>
         {topBar}
-        <View style={styles.center}>
-          <ActivityIndicator size="large" color={colors.primary} />
-          <Text variant="caption">Carregando...</Text>
-        </View>
+        <View style={styles.pad}><DetailSkeleton /></View>
       </View>
     );
   }
@@ -78,7 +60,7 @@ export default function PriestDetailScreen({ route, navigation }) {
             icon="alert-circle-outline"
             message={error || 'Puxa, não encontramos o padre'}
             actionLabel="Tentar Novamente"
-            onAction={loadPriestDetail}
+            onAction={() => resource.reload()}
           />
         </View>
       </View>
@@ -123,7 +105,7 @@ export default function PriestDetailScreen({ route, navigation }) {
         {priest.church && (
           <View style={styles.section}>
             <Text variant="title">Paróquia</Text>
-            <ChurchCard church={priest.church} onPress={() => handleMap(priest.church)} />
+            <ChurchCard church={priest.church} onPress={() => openChurch(priest.church)} />
           </View>
         )}
       </ScrollView>
@@ -133,6 +115,7 @@ export default function PriestDetailScreen({ route, navigation }) {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: colors.bg },
+  pad: { paddingHorizontal: 20 },
   center: { flex: 1, justifyContent: 'center', alignItems: 'center', gap: 12, padding: 20 },
   content: { paddingHorizontal: 20, paddingBottom: 110, gap: 24 },
   section: { gap: 12 },

@@ -1,34 +1,26 @@
-import { useEffect, useState } from 'react';
-import { getChurchById } from '../../services/api';
+import { useEffect, useMemo, useState } from 'react';
+import { useChurch } from '../../hooks/useData';
 import { FavoritesService } from '../../services/FavoritesService';
 import { useToast } from '../../context/ToastContext';
+import { computeNextMass } from '../../utils/massTime';
 
-// Carrega a igreja (com missas, pároco e próxima missa) e o estado de favorito.
+// Carrega a igreja (com missas e pároco) e o estado de favorito. A próxima missa é recalculada
+// no aparelho a partir das missas, para não depender da hora em que o dado foi guardado em cache.
 export function useChurchDetail(churchId) {
-  const [church, setChurch] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const resource = useChurch(churchId);
+  const data = resource.data;
+  const church = useMemo(() => (data ? { ...data, nextMass: computeNextMass(data.masses) } : null), [data]);
   const [isFavorite, setIsFavorite] = useState(false);
   const toast = useToast();
 
-  const load = async () => {
-    try {
-      setLoading(true);
-      setChurch(await getChurchById(churchId));
-      setError(null);
-    } catch (err) {
-      setError('Puxa, não conseguimos carregar os detalhes da igreja agora. Tente novamente!');
-    } finally {
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
-    load();
-    FavoritesService.getFavoriteChurches().then((favs) => setIsFavorite(favs.some((f) => f.id === churchId)));
+    let active = true;
+    FavoritesService.getFavoriteChurches().then((favs) => active && setIsFavorite(favs.some((f) => f.id === churchId)));
+    return () => { active = false; };
   }, [churchId]);
 
   const toggleFavorite = async () => {
+    if (!church) return;
     if (isFavorite) {
       await FavoritesService.removeFavoriteChurch(church.id);
       toast.info(`${church.name} removido dos favoritos`);
@@ -39,5 +31,9 @@ export function useChurchDetail(churchId) {
     setIsFavorite(!isFavorite);
   };
 
-  return { church, loading, error, isFavorite, reload: load, toggleFavorite };
+  const error = resource.error && !church
+    ? 'Puxa, não conseguimos carregar os detalhes da igreja agora. Tente novamente!'
+    : null;
+
+  return { church, loading: resource.loading, error, stale: resource.stale, isFavorite, reload: () => resource.reload(), toggleFavorite };
 }

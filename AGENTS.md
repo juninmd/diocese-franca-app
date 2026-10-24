@@ -8,10 +8,10 @@ App da Diocese de Franca: API REST (`backend/`) + app Expo/React Native com buil
 
 ## Comandos (a partir da raiz)
 - API: `cd backend && pnpm install && pnpm start` (porta `PORT`, padrao 3000)
-- Testes backend: `cd backend && pnpm test` (53 testes, 7 suites)
-- Scraper: `cd backend && node scraper.js` e `node scripts/syncDiocese.js` (precisam de rede e reescrevem `backend/data/*.json`). O scraper extrai notícias com seleção aprimorada de datas e suporte expandido a funções clericais (Administrador Paroquial, Reitor, Diácono Permanente).
+- Testes backend: `cd backend && pnpm test` (90 testes, 11 suites; inclui integridade dos JSONs em `data/`)
+- Scraper: `cd backend && node scraper.js` e `node scripts/syncDiocese.js` (precisam de rede e reescrevem `backend/data/*.json`). O scraper extrai notícias (data = carimbo `AAAAMMDDHHMMSS_` do nome da imagem) e funções clericais (Administrador Paroquial, Reitor, Diácono Permanente). Ele nunca sobrescreve um JSON com resultado vazio/muito menor (`utils/fileStore.writeIfSane`) e preserva ids de padres (favoritos do app dependem deles).
 - Mobile: `cd mobile && pnpm install && pnpm start`
-- E2E: `cd mobile && npx expo export -p web && npx playwright test` (serve `dist` na 3001; regrava `mobile/screenshots/`)
+- E2E: `cd mobile && npx expo export -p web && npx playwright test` (precisa da API em :3000 com dados reais; inclui `offline_cache.spec.js`) (serve `dist` na 3001; regrava `mobile/screenshots/`)
 - Lint: nao existe linter configurado.
 
 ## Gates de CI
@@ -25,6 +25,9 @@ App da Diocese de Franca: API REST (`backend/`) + app Expo/React Native com buil
 - Estados vazios/erro com tom acolhedor ("Puxa, ..."); `activeOpacity={0.8}` em toques de listas e detalhes.
 - Locators do Playwright com regex (`getByText(/Diocese de Franca/i)`): React Native Web quebra texto multilinha.
 - Tokens de design em `mobile/src/theme/index.js`.
+- Dados remotos no app: use `useResource`/hooks de `mobile/src/hooks/useData.js` (cache stale-while-revalidate em `services/cache.js`); não chame `api.js` direto em telas. Próxima missa é calculada no aparelho (`utils/massTime.computeNextMass`); no backend, `utils/nextMass` usa o fuso America/Sao_Paulo.
+- Backend: rotas leem o catálogo via `utils/catalog.getCatalog()` (cache por `mtime`); respostas de dados levam `Cache-Control` (`middleware/cache.js`).
+- Parsers: HTML do site às vezes é colado do Word; `htmlText` trata quebra de linha do código-fonte como espaço. Ao mexer em `massParser`/`parishParser`, valide contra páginas reais (ids 2030–2399) além dos fixtures.
 
 ## Nao fazer
 - Nao commitar `.env`; use `.env.example` e so nomes de variaveis.

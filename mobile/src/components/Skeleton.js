@@ -99,23 +99,29 @@ export function NewsCardSkeleton() {
   );
 }
 
-export function ListSkeleton({ count = 5, type = 'church' }) {
-  const renderItem = () => {
-    switch (type) {
-      case 'priest':
-        return <PriestCardSkeleton key={Math.random()} />;
-      case 'mass':
-        return <MassCardSkeleton key={Math.random()} />;
-      case 'news':
-        return <NewsCardSkeleton key={Math.random()} />;
-      default:
-        return <ChurchCardSkeleton key={Math.random()} />;
-    }
-  };
-
+export function DetailSkeleton() {
   return (
-    <View style={styles.list}>
-      {[...Array(count)].map((_, i) => renderItem())}
+    <View style={styles.detail} accessibilityLabel="Carregando" accessibilityRole="progressbar">
+      <Skeleton width="80%" height={30} />
+      <Skeleton width="60%" height={16} />
+      <Skeleton width="45%" height={16} />
+      <Skeleton height={96} borderRadius={22} style={{ marginTop: 8 }} />
+      <View style={styles.tiles}>
+        <Skeleton height={72} borderRadius={22} style={{ flex: 1 }} />
+        <Skeleton height={72} borderRadius={22} style={{ flex: 1 }} />
+        <Skeleton height={72} borderRadius={22} style={{ flex: 1 }} />
+      </View>
+    </View>
+  );
+}
+
+const ITEMS = { priest: PriestCardSkeleton, mass: MassCardSkeleton, news: NewsCardSkeleton, church: ChurchCardSkeleton };
+
+export function ListSkeleton({ count = 5, type = 'church' }) {
+  const Item = ITEMS[type] || ChurchCardSkeleton;
+  return (
+    <View style={styles.list} accessibilityLabel="Carregando" accessibilityRole="progressbar">
+      {Array.from({ length: count }, (_, i) => <Item key={i} />)}
     </View>
   );
 }
@@ -123,14 +129,11 @@ export function ListSkeleton({ count = 5, type = 'church' }) {
 const styles = StyleSheet.create({
   card: {
     backgroundColor: colors.surface,
-    borderRadius: 16,
+    borderRadius: 24,
+    borderWidth: 1,
+    borderColor: colors.line,
     padding: 16,
     marginBottom: 12,
-    elevation: 3,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.08,
-    shadowRadius: 8,
   },
   header: {
     flexDirection: 'row',
@@ -148,7 +151,9 @@ const styles = StyleSheet.create({
   },
   massCard: {
     backgroundColor: colors.surface,
-    borderRadius: 12,
+    borderRadius: 22,
+    borderWidth: 1,
+    borderColor: colors.line,
     padding: 14,
     marginBottom: 8,
     flexDirection: 'row',
@@ -160,13 +165,10 @@ const styles = StyleSheet.create({
   },
   newsCard: {
     backgroundColor: colors.surface,
-    borderRadius: 12,
-    width: 240,
-    elevation: 3,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 6,
+    borderRadius: 22,
+    borderWidth: 1,
+    borderColor: colors.line,
+    width: 270,
     overflow: 'hidden',
     marginRight: 16,
   },
@@ -174,6 +176,8 @@ const styles = StyleSheet.create({
     padding: 12,
   },
   list: {
-    padding: 16,
+    paddingVertical: 4,
   },
+  detail: { gap: 12 },
+  tiles: { flexDirection: 'row', gap: 10 },
 });

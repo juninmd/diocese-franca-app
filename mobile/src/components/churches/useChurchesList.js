@@ -1,19 +1,21 @@
 import { useEffect, useState, useMemo, useCallback } from 'react';
 import { Share } from 'react-native';
-import { getChurches, getNearbyChurches } from '../../services/api';
+import { getNearbyChurches } from '../../services/api';
+import { useChurches } from '../../hooks/useData';
 import { LocationService } from '../../services/LocationService';
 import { FavoritesService } from '../../services/FavoritesService';
 import { useToast } from '../../context/ToastContext';
 
+const EMPTY = [];
+
 const matches = (church, query) =>
-  [church.name, church.address, church.city].some((field) => field.toLowerCase().includes(query));
+  [church.name, church.address, church.city].some((field) => (field || '').toLowerCase().includes(query));
 
 // Estado e ações da lista de igrejas: busca, filtros (todas/favoritas/perto), favoritos e compartilhamento.
 export function useChurchesList() {
-  const [churches, setChurches] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const resource = useChurches();
+  const churches = resource.data || EMPTY;
   const [refreshing, setRefreshing] = useState(false);
-  const [error, setError] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [favorites, setFavorites] = useState([]);
   const [filterMode, setFilterMode] = useState('all'); // 'all' | 'favorites' | 'nearby'
@@ -21,18 +23,9 @@ export function useChurchesList() {
   const [nearbyLoading, setNearbyLoading] = useState(false);
   const [nearbyError, setNearbyError] = useState(null);
   const toast = useToast();
-
-  const loadChurches = async () => {
-    try {
-      setLoading(true);
-      setChurches(await getChurches());
-      setError(null);
-    } catch (err) {
-      setError('Puxa, não conseguimos carregar as igrejas agora. Verifique sua conexão e tente novamente!');
-    } finally {
-      setLoading(false);
-    }
-  };
+  const error = resource.error && churches.length === 0
+    ? 'Puxa, não conseguimos carregar as igrejas agora. Verifique sua conexão e tente novamente!'
+    : null;
 
   const loadFavorites = async () => {
     const favs = await FavoritesService.getFavoriteChurches();
@@ -40,7 +33,6 @@ export function useChurchesList() {
   };
 
   useEffect(() => {
-    loadChurches();
     loadFavorites();
   }, []);
 
@@ -51,7 +43,7 @@ export function useChurchesList() {
         ? churches.filter((c) => favorites.includes(c.id))
         : churches;
     const query = searchQuery.trim().toLowerCase();
-    return query === '' ? baseList : baseList.filter((c) => matches(c, searchQuery.toLowerCase()));
+    return query === '' ? baseList : baseList.filter((c) => matches(c, query));
   }, [searchQuery, churches, filterMode, favorites, nearbyChurches]);
 
   const loadNearbyChurches = async () => {
@@ -82,11 +74,11 @@ export function useChurchesList() {
 
   const onRefresh = useCallback(async () => {
     setRefreshing(true);
-    await loadChurches();
-    await loadFavorites();
+    const [result] = await Promise.all([resource.reload(), loadFavorites()]);
     setRefreshing(false);
-    toast.success('Dados atualizados!');
-  }, []);
+    if (result && !result.stale) toast.success('Dados atualizados!');
+    else toast.warning('Sem conexão: mostrando os dados salvos.');
+  }, [resource.reload, toast]);
 
   const toggleFavorite = async (church) => {
     if (favorites.includes(church.id)) {
@@ -112,7 +104,7 @@ export function useChurchesList() {
   };
 
   return {
-    churches, filteredChurches, favorites, loading, refreshing, error,
+    churches, filteredChurches, favorites, loading: resource.loading, refreshing, error, stale: resource.stale,
     searchQuery, setSearchQuery, filterMode, selectFilterMode,
     nearbyChurches, nearbyLoading, nearbyError, loadNearbyChurches,
     onRefresh, toggleFavorite, shareChurch,

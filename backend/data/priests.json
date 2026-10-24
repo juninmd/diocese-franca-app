@@ -7,13 +7,19 @@
     "email": null,
     "phone": "(16) 3701-0222",
     "bio": "4º Bispo Diocesano de Franca, nascido em Adamantina/SP (09/04/1957), com posse em 15/12/2013.",
-    "image": null
+    "image": null,
+    "churchIds": [
+      2080
+    ]
   },
   {
     "id": 2,
     "name": "Pe. João Francisco Maria da Cruz Eugênio, SJS",
     "title": "Pároco",
     "churchId": 2042,
+    "churchIds": [
+      2042
+    ],
     "email": "paroquiansarestinga@hotmail.com",
     "phone": "(16) 3143-1133",
     "bio": "Pároco da Paróquia Nossa Senhora Aparecida (Restinga/SP).",
@@ -24,6 +30,9 @@
     "name": "Pe. Paulo Rafael Maria da Cruz Ribeiro, SJS",
     "title": "Vigário Paroquial",
     "churchId": 2042,
+    "churchIds": [
+      2042
+    ],
     "email": "paroquiansarestinga@hotmail.com",
     "phone": "(16) 3143-1133",
     "bio": "Vigário Paroquial da Paróquia Nossa Senhora Aparecida (Restinga/SP).",
@@ -34,6 +43,9 @@
     "name": "Pe. Osvaldo de Souza Filho",
     "title": "Pároco",
     "churchId": 2043,
+    "churchIds": [
+      2043
+    ],
     "email": null,
     "phone": "(16) 97405-1369",
     "bio": "Pároco da Paróquia Nossa Senhora Aparecida (Itirapuã/SP).",
@@ -44,6 +56,9 @@
     "name": "Diácono Carlos Alberto de Souza",
     "title": "Diácono",
     "churchId": 2043,
+    "churchIds": [
+      2043
+    ],
     "email": null,
     "phone": "(16) 97405-1369",
     "bio": "Diácono da Paróquia Nossa Senhora Aparecida (Itirapuã/SP).",
@@ -54,6 +69,9 @@
     "name": "Pe. Darry Everson de Campos",
     "title": "Pároco",
     "churchId": 2044,
+    "churchIds": [
+      2044
+    ],
     "email": "nsaparecidapedregulho@hotmail.com",
     "phone": "(16) 99101-2006",
     "bio": "Pároco da Paróquia Nossa Senhora Aparecida (Pedregulho/SP).",
@@ -64,6 +82,9 @@
     "name": "Pe. Diogo Augusto de Melo Avelar",
     "title": "Vigário Paroquial",
     "churchId": 2044,
+    "churchIds": [
+      2044
+    ],
     "email": "nsaparecidapedregulho@hotmail.com",
     "phone": "(16) 99101-2006",
     "bio": "Vigário Paroquial da Paróquia Nossa Senhora Aparecida (Pedregulho/SP).",
@@ -74,6 +95,9 @@
     "name": "Diácono Luiz Antônio Marques",
     "title": "Diácono",
     "churchId": 2044,
+    "churchIds": [
+      2044
+    ],
     "email": "nsaparecidapedregulho@hotmail.com",
     "phone": "(16) 99101-2006",
     "bio": "Diácono da Paróquia Nossa Senhora Aparecida (Pedregulho/SP).",
@@ -84,6 +108,9 @@
     "name": "Frei Agostinho Morosini, OAR",
     "title": "Pároco",
     "churchId": 2045,
+    "churchIds": [
+      2045
+    ],
     "email": "dfcapelinha@hotmail.com",
     "phone": "(16) 3707-2222",
     "bio": "Pároco da Paróquia Nossa Senhora Aparecida - Capelinha (Franca/SP).",
@@ -94,6 +121,9 @@
     "name": "Diácono José Ronaldo Carrijo",
     "title": "Diácono",
     "churchId": 2045,
+    "churchIds": [
+      2045
+    ],
     "email": "dfcapelinha@hotmail.com",
     "phone": "(16) 3707-2222",
     "bio": "Diácono da Paróquia Nossa Senhora Aparecida - Capelinha (Franca/SP).",
@@ -104,6 +134,9 @@
     "name": "Pe. Wallace Nunes Aguiar Honório",
     "title": "Pároco",
     "churchId": 2046,
+    "churchIds": [
+      2046
+    ],
     "email": "paroquiaabadia@hotmail.com",
     "phone": "(16) 3133-1127",
     "bio": "Pároco da Paróquia Nossa Senhora da D'Abadia (Cristais Paulista/SP).",
@@ -114,6 +147,9 @@
     "name": "Frei Edmilson Vidal, OAR",
     "title": "Pároco",
     "churchId": 2049,
+    "churchIds": [
+      2049
+    ],
     "email": "pnsgracasfranca2711@gmail.com",
     "phone": "(16) 3724-2623",
     "bio": "Pároco da Paróquia Nossa Senhora das Graças (Franca/SP).",
@@ -124,6 +160,9 @@
     "name": "Frei Antonio Benedito Stefani, OAR",
     "title": "Vigário Paroquial",
     "churchId": 2049,
+    "churchIds": [
+      2049
+    ],
     "email": "pnsgracasfranca2711@gmail.com",
     "phone": "(16) 3724-2623",
     "bio": "Vigário Paroquial da Paróquia Nossa Senhora das Graças (Franca/SP).",
@@ -134,6 +173,9 @@
     "name": "Frei Ademir João Garcia, OAR",
     "title": "Vigário Paroquial",
     "churchId": 2049,
+    "churchIds": [
+      2049
+    ],
     "email": "pnsgracasfranca2711@gmail.com",
     "phone": "(16) 3724-2623",
     "bio": "Vigário Paroquial da Paróquia Nossa Senhora das Graças (Franca/SP).",
@@ -144,6 +186,9 @@
     "name": "Pe. Marco Antônio Bognotti",
     "title": "Pároco",
     "churchId": 2050,
+    "churchIds": [
+      2050
+    ],
     "email": "paroquiansdcarmo@gmail.com",
     "phone": "(16) 3839-2788",
     "bio": "Pároco da Paróquia Nossa Senhora do Carmo (Ituverava/SP).",
@@ -154,6 +199,9 @@
     "name": "Pe. André Luis Rodrigues",
     "title": "Vigário Paroquial",
     "churchId": 2050,
+    "churchIds": [
+      2050
+    ],
     "email": "paroquiansdcarmo@gmail.com",
     "phone": "(16) 3839-2788",
     "bio": "Vigário Paroquial da Paróquia Nossa Senhora do Carmo (Ituverava/SP).",
@@ -164,6 +212,9 @@
     "name": "Diácono João Batista Pereira",
     "title": "Diácono",
     "churchId": 2050,
+    "churchIds": [
+      2050
+    ],
     "email": "paroquiansdcarmo@gmail.com",
     "phone": "(16) 3839-2788",
     "bio": "Diácono da Paróquia Nossa Senhora do Carmo (Ituverava/SP).",
@@ -174,6 +225,9 @@
     "name": "Pe. Mauro Henrique da Silva",
     "title": "Pároco",
     "churchId": 2041,
+    "churchIds": [
+      2041
+    ],
     "email": "nspatrocinio@yahoo.com.br",
     "phone": "(16) 3145-1723",
     "bio": "Pároco da Paróquia Nossa Senhora do Patrocínio (Patrocínio Paulista/SP).",
@@ -184,6 +238,9 @@
     "name": "Diácono Antônio Flávio de Castro",
     "title": "Diácono",
     "churchId": 2041,
+    "churchIds": [
+      2041
+    ],
     "email": "nspatrocinio@yahoo.com.br",
     "phone": "(16) 3145-1723",
     "bio": "Diácono da Paróquia Nossa Senhora do Patrocínio (Patrocínio Paulista/SP).",
@@ -194,6 +251,9 @@
     "name": "Diácono Fábio Costa",
     "title": "Diácono",
     "churchId": 2041,
+    "churchIds": [
+      2041
+    ],
     "email": "nspatrocinio@yahoo.com.br",
     "phone": "(16) 3145-1723",
     "bio": "Diácono da Paróquia Nossa Senhora do Patrocínio (Patrocínio Paulista/SP).",
@@ -204,6 +264,9 @@
     "name": "Diácono Alexandre Donizete Ferreira",
     "title": "Diácono",
     "churchId": 2041,
+    "churchIds": [
+      2041
+    ],
     "email": "nspatrocinio@yahoo.com.br",
     "phone": "(16) 3145-1723",
     "bio": "Diácono da Paróquia Nossa Senhora do Patrocínio (Patrocínio Paulista/SP).",
@@ -214,6 +277,10 @@
     "name": "Pe. Fabiano Rosa de Oliveira",
     "title": "Pároco",
     "churchId": 2051,
+    "churchIds": [
+      2051,
+      2077
+    ],
     "email": "paroquianspatrocinio@gmail.com",
     "phone": "(16) 3751-1006",
     "bio": "Pároco da Paróquia Nossa Senhora do Patrocínio (Buritizal/SP).",
@@ -224,6 +291,9 @@
     "name": "Pe. Adriano da Silva Ramos",
     "title": "Pároco",
     "churchId": 2230,
+    "churchIds": [
+      2230
+    ],
     "email": "nsrosamistica.franca@gmail.com",
     "phone": "(16) 3722-0333",
     "bio": "Pároco da Paróquia Nossa Senhora Rosa Mística (Franca/SP).",
@@ -234,6 +304,9 @@
     "name": "Diácono Geraldo Bernardes de Castro",
     "title": "Diácono",
     "churchId": 2230,
+    "churchIds": [
+      2230
+    ],
     "email": "nsrosamistica.franca@gmail.com",
     "phone": "(16) 3722-0333",
     "bio": "Diácono da Paróquia Nossa Senhora Rosa Mística (Franca/SP).",
@@ -244,6 +317,9 @@
     "name": "Pe. Ovídio José Alves de Andrade",
     "title": "Pároco",
     "churchId": 2053,
+    "churchIds": [
+      2053
+    ],
     "email": "sagradocoracaodejesusfranca@hotmail.com",
     "phone": "(16) 3703-3938",
     "bio": "Pároco da Paróquia Sagrado Coração de Jesus (Franca/SP).",
@@ -254,6 +330,9 @@
     "name": "Pe. Marcos Valentin Nerone",
     "title": "Vigário Paroquial",
     "churchId": 2053,
+    "churchIds": [
+      2053
+    ],
     "email": "sagradocoracaodejesusfranca@hotmail.com",
     "phone": "(16) 3703-3938",
     "bio": "Vigário Paroquial da Paróquia Sagrado Coração de Jesus (Franca/SP).",
@@ -264,6 +343,9 @@
     "name": "Diácono Everton Pereira",
     "title": "Diácono",
     "churchId": 2053,
+    "churchIds": [
+      2053
+    ],
     "email": "sagradocoracaodejesusfranca@hotmail.com",
     "phone": "(16) 3703-3938",
     "bio": "Diácono da Paróquia Sagrado Coração de Jesus (Franca/SP).",
@@ -274,6 +356,9 @@
     "name": "Diácono Maurílio Antônio da Silva",
     "title": "Diácono",
     "churchId": 2053,
+    "churchIds": [
+      2053
+    ],
     "email": "sagradocoracaodejesusfranca@hotmail.com",
     "phone": "(16) 3703-3938",
     "bio": "Diácono da Paróquia Sagrado Coração de Jesus (Franca/SP).",
@@ -284,6 +369,9 @@
     "name": "Pe. Diego Carlos Gonçalves",
     "title": "Pároco",
     "churchId": 2066,
+    "churchIds": [
+      2066
+    ],
     "email": "santana@diocesefranca.org.br",
     "phone": "(16) 3701-8533",
     "bio": "Pároco da Paróquia Sant’Ana (Franca/SP).",
@@ -294,6 +382,9 @@
     "name": "Pe. Luiz Carlos de Souza",
     "title": "Vigário Paroquial",
     "churchId": 2066,
+    "churchIds": [
+      2066
+    ],
     "email": "santana@diocesefranca.org.br",
     "phone": "(16) 3701-8533",
     "bio": "Vigário Paroquial da Paróquia Sant’Ana (Franca/SP).",
@@ -304,6 +395,9 @@
     "name": "Frei Francisco Sevolani Botacin",
     "title": "Pároco",
     "churchId": 2054,
+    "churchIds": [
+      2054
+    ],
     "email": null,
     "phone": null,
     "bio": "Pároco da Paróquia Santa Cruz (Ribeirão Corrente/SP).",
@@ -314,6 +408,9 @@
     "name": "Pe. Célio Adriano Cintra",
     "title": "Pároco",
     "churchId": 2055,
+    "churchIds": [
+      2055
+    ],
     "email": "psedwiges@diocesefranca.org.br",
     "phone": "(16) 3432-0161",
     "bio": "Pároco da Paróquia Santa Edwiges (Franca/SP).",
@@ -324,6 +421,9 @@
     "name": "Pe. Vilmar Volpato",
     "title": "Pároco",
     "churchId": 2056,
+    "churchIds": [
+      2056
+    ],
     "email": "santagianna121@gmail.com",
     "phone": "(16) 3703-5767",
     "bio": "Pároco da Paróquia Santa Gianna (Franca/SP).",
@@ -334,6 +434,9 @@
     "name": "Pe. Bruno Gonzales Silveira",
     "title": "Vigário Paroquial",
     "churchId": 2056,
+    "churchIds": [
+      2056
+    ],
     "email": "santagianna121@gmail.com",
     "phone": "(16) 3703-5767",
     "bio": "Vigário Paroquial da Paróquia Santa Gianna (Franca/SP).",
@@ -344,6 +447,9 @@
     "name": "Diácono Romualdo Domingos Silva Marques",
     "title": "Diácono",
     "churchId": 2056,
+    "churchIds": [
+      2056
+    ],
     "email": "santagianna121@gmail.com",
     "phone": "(16) 3703-5767",
     "bio": "Diácono da Paróquia Santa Gianna (Franca/SP).",
@@ -354,19 +460,12 @@
     "name": "Pe. Everaldo Donizete Campanaro",
     "title": "Pároco",
     "churchId": 2057,
+    "churchIds": [
+      2057
+    ],
     "email": "santaluzia@diocesefranca.org.br",
     "phone": "(16) 3721-0036",
     "bio": "Pároco da Paróquia Santa Luzia (Franca/SP).",
-    "image": null
-  },
-  {
-    "id": 37,
-    "name": "Pe. dro Galdino de Oliveira",
-    "title": "Pároco",
-    "churchId": 2058,
-    "email": "paroquiasantamonicafranca@gmail.com",
-    "phone": "(16) 3703-1451",
-    "bio": "Pároco da Paróquia Santa Mônica (Franca/SP).",
     "image": null
   },
   {
@@ -374,6 +473,9 @@
     "name": "Pe. Adilson Aparecido Fortunato",
     "title": "Pároco",
     "churchId": 2059,
+    "churchIds": [
+      2059
+    ],
     "email": "santarita@diocesefranca.org.br",
     "phone": "(16) 3702-0877",
     "bio": "Pároco da Paróquia Santa Rita de Cássia (Franca/SP).",
@@ -384,6 +486,9 @@
     "name": "Pe. Antonio Carlos Barbosa",
     "title": "Vigário Paroquial",
     "churchId": 2059,
+    "churchIds": [
+      2059
+    ],
     "email": "santarita@diocesefranca.org.br",
     "phone": "(16) 3702-0877",
     "bio": "Vigário Paroquial da Paróquia Santa Rita de Cássia (Franca/SP).",
@@ -394,6 +499,9 @@
     "name": "Diácono Leomar Rodrigues Caetano",
     "title": "Diácono",
     "churchId": 2059,
+    "churchIds": [
+      2059
+    ],
     "email": "santarita@diocesefranca.org.br",
     "phone": "(16) 3702-0877",
     "bio": "Diácono da Paróquia Santa Rita de Cássia (Franca/SP).",
@@ -404,6 +512,9 @@
     "name": "Pe. Luciano Resende Caixeta, SJS",
     "title": "Pároco",
     "churchId": 2060,
+    "churchIds": [
+      2060
+    ],
     "email": "dfigarapava@hotmail.com",
     "phone": "(16) 3172-1607",
     "bio": "Pároco da Paróquia Santa Rita de Cássia (Igarapava/SP).",
@@ -414,6 +525,9 @@
     "name": "Pe. Gabriel Soares de Souza, SJS",
     "title": "Vigário Paroquial",
     "churchId": 2060,
+    "churchIds": [
+      2060
+    ],
     "email": "dfigarapava@hotmail.com",
     "phone": "(16) 3172-1607",
     "bio": "Vigário Paroquial da Paróquia Santa Rita de Cássia (Igarapava/SP).",
@@ -424,6 +538,9 @@
     "name": "Pe. Tiago Gonçalo de Oliveira, SJS",
     "title": "Vigário Paroquial",
     "churchId": 2060,
+    "churchIds": [
+      2060
+    ],
     "email": "dfigarapava@hotmail.com",
     "phone": "(16) 3172-1607",
     "bio": "Vigário Paroquial da Paróquia Santa Rita de Cássia (Igarapava/SP).",
@@ -434,6 +551,9 @@
     "name": "Pe. Danilo Juscelino da Silva",
     "title": "Pároco",
     "churchId": 2061,
+    "churchIds": [
+      2061
+    ],
     "email": "paroquia@paroquiasantaritasales.org.br",
     "phone": "(16) 3852-1021",
     "bio": "Pároco da Paróquia Santa Rita de Cássia (Sales Oliveira/SP).",
@@ -444,6 +564,9 @@
     "name": "Pe. Francisco Milanésio",
     "title": "Vigário Paroquial",
     "churchId": 2061,
+    "churchIds": [
+      2061
+    ],
     "email": "paroquia@paroquiasantaritasales.org.br",
     "phone": "(16) 3852-1021",
     "bio": "Vigário Paroquial da Paróquia Santa Rita de Cássia (Sales Oliveira/SP).",
@@ -454,6 +577,9 @@
     "name": "Diácono Moacir Cezar",
     "title": "Diácono",
     "churchId": 2061,
+    "churchIds": [
+      2061
+    ],
     "email": "paroquia@paroquiasantaritasales.org.br",
     "phone": "(16) 3852-1021",
     "bio": "Diácono da Paróquia Santa Rita de Cássia (Sales Oliveira/SP).",
@@ -464,6 +590,9 @@
     "name": "Pe. Antônio de Pádua Dias",
     "title": "Pároco",
     "churchId": 2062,
+    "churchIds": [
+      2062
+    ],
     "email": "paroquiasantateresinhafranca@gmail.com",
     "phone": "(16) 3703-1309",
     "bio": "Pároco da Paróquia Santa Teresinha (Franca/SP).",
@@ -474,6 +603,9 @@
     "name": "Diácono Rubens Andrade Dias",
     "title": "Diácono",
     "churchId": 2062,
+    "churchIds": [
+      2062
+    ],
     "email": "paroquiasantateresinhafranca@gmail.com",
     "phone": "(16) 3703-1309",
     "bio": "Diácono da Paróquia Santa Teresinha (Franca/SP).",
@@ -484,6 +616,9 @@
     "name": "Pe. Rodrigo Anael de Paulo",
     "title": "Pároco",
     "churchId": 2063,
+    "churchIds": [
+      2063
+    ],
     "email": "psaaramina@hotmail.com",
     "phone": "(16) 3752-1902",
     "bio": "Pároco da Paróquia Santo Antônio (Aramina/SP).",
@@ -494,6 +629,9 @@
     "name": "Pe. Alessandro Marcos de Souza",
     "title": "Pároco",
     "churchId": 2065,
+    "churchIds": [
+      2065
+    ],
     "email": "santoantoniorifaina@gmail.com",
     "phone": "(16) 3135-1217",
     "bio": "Pároco da Paróquia Santo Antônio (Rifaina/SP).",
@@ -504,6 +642,9 @@
     "name": "Pe. Idair Perina",
     "title": "Pároco",
     "churchId": 2067,
+    "churchIds": [
+      2067
+    ],
     "email": "sbenedito@diocesefranca.org.br",
     "phone": "(16) 3701-5605",
     "bio": "Pároco da Paróquia São Benedito (Franca/SP).",
@@ -514,6 +655,9 @@
     "name": "Pe. Antonio José Salomão Vicente",
     "title": "Vigário Paroquial",
     "churchId": 2067,
+    "churchIds": [
+      2067
+    ],
     "email": "sbenedito@diocesefranca.org.br",
     "phone": "(16) 3701-5605",
     "bio": "Vigário Paroquial da Paróquia São Benedito (Franca/SP).",
@@ -524,6 +668,9 @@
     "name": "Diácono Wilson Ramos",
     "title": "Diácono",
     "churchId": 2067,
+    "churchIds": [
+      2067
+    ],
     "email": "sbenedito@diocesefranca.org.br",
     "phone": "(16) 3701-5605",
     "bio": "Diácono da Paróquia São Benedito (Franca/SP).",
@@ -534,6 +681,9 @@
     "name": "Pe. Geraldo José Urbinatti",
     "title": "Pároco",
     "churchId": 2068,
+    "churchIds": [
+      2068
+    ],
     "email": "paroquiasaocrispim@diocesefranca.org.br",
     "phone": "(16) 3703-8330",
     "bio": "Pároco da Paróquia São Crispim (Franca/SP).",
@@ -544,6 +694,9 @@
     "name": "Pe. Jaysson França Alves",
     "title": "Vigário Paroquial",
     "churchId": 2068,
+    "churchIds": [
+      2068
+    ],
     "email": "paroquiasaocrispim@diocesefranca.org.br",
     "phone": "(16) 3703-8330",
     "bio": "Vigário Paroquial da Paróquia São Crispim (Franca/SP).",
@@ -554,6 +707,9 @@
     "name": "Diácono José Luíz Afonso Neto",
     "title": "Diácono",
     "churchId": 2068,
+    "churchIds": [
+      2068
+    ],
     "email": "paroquiasaocrispim@diocesefranca.org.br",
     "phone": "(16) 3703-8330",
     "bio": "Diácono da Paróquia São Crispim (Franca/SP).",
@@ -564,6 +720,9 @@
     "name": "Pe. Cássio Dias Borges",
     "title": "Pároco",
     "churchId": 2069,
+    "churchIds": [
+      2069
+    ],
     "email": "secretaria@prsaofrancisco.com.br",
     "phone": null,
     "bio": "Pároco da Paróquia São Francisco de Assis (Franca/SP).",
@@ -574,6 +733,9 @@
     "name": "Pe. Alessandro Orlovski",
     "title": "Pároco",
     "churchId": 2070,
+    "churchIds": [
+      2070
+    ],
     "email": "igrejasaojoao@hotmail.com",
     "phone": "(16) 3701-8468",
     "bio": "Pároco da Paróquia São João Batista (Franca/SP).",
@@ -584,6 +746,9 @@
     "name": "Pe. Welington Eustáquio",
     "title": "Vigário Paroquial",
     "churchId": 2070,
+    "churchIds": [
+      2070
+    ],
     "email": "igrejasaojoao@hotmail.com",
     "phone": "(16) 3701-8468",
     "bio": "Vigário Paroquial da Paróquia São João Batista (Franca/SP).",
@@ -594,6 +759,9 @@
     "name": "Pe. Adailson Ferreira de Oliveira",
     "title": "Pároco",
     "churchId": 2257,
+    "churchIds": [
+      2257
+    ],
     "email": "paroquiasjbituverava@hotmail.com",
     "phone": "(16) 99998-4101",
     "bio": "Pároco da Paróquia São João Batista (Ituverava/SP).",
@@ -604,6 +772,9 @@
     "name": "Pe. Antônio Marcos de Oliveira",
     "title": "Pároco",
     "churchId": 2071,
+    "churchIds": [
+      2071
+    ],
     "email": "psjoaquim@outlook.com",
     "phone": "(16) 3818-2394",
     "bio": "Pároco da Paróquia São Joaquim (São Joaquim da Barra/SP).",
@@ -614,6 +785,9 @@
     "name": "Pe. Adriano Henrique da Silva",
     "title": "Vigário Paroquial",
     "churchId": 2071,
+    "churchIds": [
+      2071
+    ],
     "email": "psjoaquim@outlook.com",
     "phone": "(16) 3818-2394",
     "bio": "Vigário Paroquial da Paróquia São Joaquim (São Joaquim da Barra/SP).",
@@ -624,6 +798,9 @@
     "name": "Pe. Rafael Canavez de Oliveira",
     "title": "Vigário Paroquial",
     "churchId": 2071,
+    "churchIds": [
+      2071
+    ],
     "email": "psjoaquim@outlook.com",
     "phone": "(16) 3818-2394",
     "bio": "Vigário Paroquial da Paróquia São Joaquim (São Joaquim da Barra/SP).",
@@ -634,6 +811,9 @@
     "name": "Diácono Manoel Francisco do Nascimento",
     "title": "Diácono",
     "churchId": 2071,
+    "churchIds": [
+      2071
+    ],
     "email": "psjoaquim@outlook.com",
     "phone": "(16) 3818-2394",
     "bio": "Diácono da Paróquia São Joaquim (São Joaquim da Barra/SP).",
@@ -644,6 +824,9 @@
     "name": "Diácono Marco Antônio dos Santos",
     "title": "Diácono",
     "churchId": 2071,
+    "churchIds": [
+      2071
+    ],
     "email": "psjoaquim@outlook.com",
     "phone": "(16) 3818-2394",
     "bio": "Diácono da Paróquia São Joaquim (São Joaquim da Barra/SP).",
@@ -654,6 +837,9 @@
     "name": "Diácono Sebastião Pazeto Sobrinho",
     "title": "Diácono",
     "churchId": 2071,
+    "churchIds": [
+      2071
+    ],
     "email": "psjoaquim@outlook.com",
     "phone": "(16) 3818-2394",
     "bio": "Diácono da Paróquia São Joaquim (São Joaquim da Barra/SP).",
@@ -664,6 +850,9 @@
     "name": "Pe. Luan Marques Domingues",
     "title": "Pároco",
     "churchId": 2072,
+    "churchIds": [
+      2072
+    ],
     "email": "paroquia@psaojose.org.br",
     "phone": "(16) 3142-1311",
     "bio": "Pároco da Paróquia São José (São José da Bela Vista/SP).",
@@ -674,6 +863,9 @@
     "name": "Pe. Carlos Henrique da Silva Souza",
     "title": "Pároco",
     "churchId": 2073,
+    "churchIds": [
+      2073
+    ],
     "email": "pqsjorlandia@gmail.com",
     "phone": "(16) 3826-1315",
     "bio": "Pároco da Paróquia São José (Orlândia/SP).",
@@ -684,6 +876,9 @@
     "name": "Pe. Marcio Barbosa Rigolin",
     "title": "Vigário Paroquial",
     "churchId": 2073,
+    "churchIds": [
+      2073
+    ],
     "email": "pqsjorlandia@gmail.com",
     "phone": "(16) 3826-1315",
     "bio": "Vigário Paroquial da Paróquia São José (Orlândia/SP).",
@@ -694,6 +889,9 @@
     "name": "Diácono Valter Ferreira de Sousa",
     "title": "Diácono",
     "churchId": 2073,
+    "churchIds": [
+      2073
+    ],
     "email": "pqsjorlandia@gmail.com",
     "phone": "(16) 3826-1315",
     "bio": "Diácono da Paróquia São José (Orlândia/SP).",
@@ -704,6 +902,9 @@
     "name": "Diácono Francisco Gonçalves da Silva",
     "title": "Diácono",
     "churchId": 2073,
+    "churchIds": [
+      2073
+    ],
     "email": "pqsjorlandia@gmail.com",
     "phone": "(16) 3826-1315",
     "bio": "Diácono da Paróquia São José (Orlândia/SP).",
@@ -714,6 +915,9 @@
     "name": "Frei Israel Costa Cardoso, OFM",
     "title": "Pároco",
     "churchId": 2074,
+    "churchIds": [
+      2074
+    ],
     "email": "saojudas@diocesefranca.org.br",
     "phone": "(16) 3720-3057",
     "bio": "Pároco da Paróquia São Judas (Franca/SP).",
@@ -724,19 +928,12 @@
     "name": "Frei Joaquim Camilo, OFM",
     "title": "Vigário",
     "churchId": 2074,
+    "churchIds": [
+      2074
+    ],
     "email": "saojudas@diocesefranca.org.br",
     "phone": "(16) 3720-3057",
     "bio": "Vigário da Paróquia São Judas (Franca/SP).",
-    "image": null
-  },
-  {
-    "id": 74,
-    "name": "Frei Fernando Aparecido dos Santos OFM",
-    "title": "Cooperador",
-    "churchId": 2074,
-    "email": "saojudas@diocesefranca.org.br",
-    "phone": "(16) 3720-3057",
-    "bio": "Cooperador da Paróquia São Judas (Franca/SP).",
     "image": null
   },
   {
@@ -744,6 +941,9 @@
     "name": "Frei Fábio Rogério Sanches, OFM",
     "title": "Cooperador",
     "churchId": 2074,
+    "churchIds": [
+      2074
+    ],
     "email": "saojudas@diocesefranca.org.br",
     "phone": "(16) 3720-3057",
     "bio": "Cooperador da Paróquia São Judas (Franca/SP).",
@@ -754,6 +954,9 @@
     "name": "Pe. Omar Rachad Ghinaim",
     "title": "Pároco",
     "churchId": 2075,
+    "churchIds": [
+      2075
+    ],
     "email": "saopedro@diocesefranca.org.br",
     "phone": "(16) 3702-6685",
     "bio": "Pároco da Paróquia São Pedro (Franca/SP).",
@@ -764,6 +967,9 @@
     "name": "Diácono Gabriel Barbosa Melo",
     "title": "Diácono",
     "churchId": 2075,
+    "churchIds": [
+      2075
+    ],
     "email": "saopedro@diocesefranca.org.br",
     "phone": "(16) 3702-6685",
     "bio": "Diácono da Paróquia São Pedro (Franca/SP).",
@@ -774,6 +980,9 @@
     "name": "Pe. Valdomiro José de Souza",
     "title": "Pároco",
     "churchId": 2076,
+    "churchIds": [
+      2076
+    ],
     "email": "pssebastiaofranca@hotmail.com",
     "phone": "(16) 99154-8258",
     "bio": "Pároco da Paróquia São Sebastião (Franca/SP).",
@@ -784,6 +993,9 @@
     "name": "Pe. José Ricardo Batista Cintra",
     "title": "Vigário Paroquial",
     "churchId": 2076,
+    "churchIds": [
+      2076
+    ],
     "email": "pssebastiaofranca@hotmail.com",
     "phone": "(16) 99154-8258",
     "bio": "Vigário Paroquial da Paróquia São Sebastião (Franca/SP).",
@@ -794,6 +1006,9 @@
     "name": "Diácono Amauri Junqueira",
     "title": "Diácono",
     "churchId": 2076,
+    "churchIds": [
+      2076
+    ],
     "email": "pssebastiaofranca@hotmail.com",
     "phone": "(16) 99154-8258",
     "bio": "Diácono da Paróquia São Sebastião (Franca/SP).",
@@ -804,6 +1019,9 @@
     "name": "Pe. Edson Francisco dos Santos",
     "title": "Pároco",
     "churchId": 2078,
+    "churchIds": [
+      2078
+    ],
     "email": "dfparoquiaguara@gmail.com",
     "phone": "(16) 3831-1730",
     "bio": "Pároco da Paróquia São Sebastião e Santo Antônio (Guará/SP).",
@@ -814,6 +1032,9 @@
     "name": "Pe. Cecílio dos Santos",
     "title": "Vigário Paroquial",
     "churchId": 2078,
+    "churchIds": [
+      2078
+    ],
     "email": "dfparoquiaguara@gmail.com",
     "phone": "(16) 3831-1730",
     "bio": "Vigário Paroquial da Paróquia São Sebastião e Santo Antônio (Guará/SP).",
@@ -824,6 +1045,9 @@
     "name": "Diácono Antonio Chaud",
     "title": "Diácono",
     "churchId": 2078,
+    "churchIds": [
+      2078
+    ],
     "email": "dfparoquiaguara@gmail.com",
     "phone": "(16) 3831-1730",
     "bio": "Diácono da Paróquia São Sebastião e Santo Antônio (Guará/SP).",
@@ -834,6 +1058,9 @@
     "name": "Pe. Juliano Gonçalves Delgado",
     "title": "Pároco",
     "churchId": 2079,
+    "churchIds": [
+      2079
+    ],
     "email": "psvpaulo@diocesefranca.org.br",
     "phone": "(16) 3704-8465",
     "bio": "Pároco da Paróquia São Vicente de Paulo (Franca/SP).",
@@ -844,6 +1071,9 @@
     "name": "Pe. Aparecido Raimundo de Sousa Meireles",
     "title": "Vigário Paroquial",
     "churchId": 2079,
+    "churchIds": [
+      2079
+    ],
     "email": "psvpaulo@diocesefranca.org.br",
     "phone": "(16) 3704-8465",
     "bio": "Vigário Paroquial da Paróquia São Vicente de Paulo (Franca/SP).",
@@ -854,6 +1084,9 @@
     "name": "Diácono Carlos José Lucindo",
     "title": "Diácono",
     "churchId": 2079,
+    "churchIds": [
+      2079
+    ],
     "email": "psvpaulo@diocesefranca.org.br",
     "phone": "(16) 3704-8465",
     "bio": "Diácono da Paróquia São Vicente de Paulo (Franca/SP).",
@@ -864,6 +1097,9 @@
     "name": "Diácono Cláudio José Soares Araújo",
     "title": "Diácono",
     "churchId": 2079,
+    "churchIds": [
+      2079
+    ],
     "email": "psvpaulo@diocesefranca.org.br",
     "phone": "(16) 3704-8465",
     "bio": "Diácono da Paróquia São Vicente de Paulo (Franca/SP).",
@@ -874,6 +1110,9 @@
     "name": "Diácono Júlio César Naves",
     "title": "Diácono",
     "churchId": 2079,
+    "churchIds": [
+      2079
+    ],
     "email": "psvpaulo@diocesefranca.org.br",
     "phone": "(16) 3704-8465",
     "bio": "Diácono da Paróquia São Vicente de Paulo (Franca/SP).",
@@ -884,6 +1123,9 @@
     "name": "Pe. Raphael Romão",
     "title": "Pároco",
     "churchId": 2064,
+    "churchIds": [
+      2064
+    ],
     "email": "psantoniofranca@gmail.com",
     "phone": "(16) 99129-8923",
     "bio": "Pároco da Santuário Diocesano Santo Antônio (Franca/SP).",
@@ -894,6 +1136,9 @@
     "name": "Pe. Fernando Antônio Costa",
     "title": "Vigário Paroquial",
     "churchId": 2064,
+    "churchIds": [
+      2064
+    ],
     "email": "psantoniofranca@gmail.com",
     "phone": "(16) 99129-8923",
     "bio": "Vigário Paroquial da Santuário Diocesano Santo Antônio (Franca/SP).",
@@ -904,6 +1149,9 @@
     "name": "Pe. Rogério Ruffo",
     "title": "Pároco",
     "churchId": 2080,
+    "churchIds": [
+      2080
+    ],
     "email": "catedral@diocesefranca.org.br",
     "phone": "(16) 3721-4085",
     "bio": "Pároco da Sé Catedral Nossa Senhora da Conceição (Franca/SP).",
@@ -914,6 +1162,9 @@
     "name": "Pe. Luiz Ricardo Tertuliano",
     "title": "Vigário Paroquial",
     "churchId": 2080,
+    "churchIds": [
+      2080
+    ],
     "email": "catedral@diocesefranca.org.br",
     "phone": "(16) 3721-4085",
     "bio": "Vigário Paroquial da Sé Catedral Nossa Senhora da Conceição (Franca/SP).",
@@ -924,9 +1175,64 @@
     "name": "Diácono João César Martini",
     "title": "Diácono",
     "churchId": 2080,
+    "churchIds": [
+      2080
+    ],
     "email": "catedral@diocesefranca.org.br",
     "phone": "(16) 3721-4085",
     "bio": "Diácono da Sé Catedral Nossa Senhora da Conceição (Franca/SP).",
+    "image": null
+  },
+  {
+    "id": 94,
+    "name": "Pe. Josenildo Almeida da Silva",
+    "title": "Pároco",
+    "churchId": 2047,
+    "churchIds": [
+      2047
+    ],
+    "email": "nsguia@diocesefranca.org.br",
+    "phone": "(16) 99104-6520",
+    "bio": "Pároco da Paróquia Nossa Senhora da Guia (Franca/SP).",
+    "image": null
+  },
+  {
+    "id": 95,
+    "name": "Frei Alef Henrique Pavini, OFM",
+    "title": "Administrador Paroquial",
+    "churchId": 2052,
+    "churchIds": [
+      2052
+    ],
+    "email": "psfamilia2020@gmail.com",
+    "phone": "(16) 3724-9316",
+    "bio": "Administrador Paroquial da Paróquia Sagrada Família (Franca/SP).",
+    "image": null
+  },
+  {
+    "id": 96,
+    "name": "Pe. Pedro Galdino de Oliveira",
+    "title": "Pároco",
+    "churchId": 2058,
+    "churchIds": [
+      2058
+    ],
+    "email": "paroquiasantamonicafranca@gmail.com",
+    "phone": "(16) 3703-1451",
+    "bio": "Pároco da Paróquia Santa Mônica (Franca/SP).",
+    "image": null
+  },
+  {
+    "id": 97,
+    "name": "Frei Fernando Aparecido dos Santos, OFM",
+    "title": "Cooperador",
+    "churchId": 2074,
+    "churchIds": [
+      2074
+    ],
+    "email": "saojudas@diocesefranca.org.br",
+    "phone": "(16) 3720-3057",
+    "bio": "Cooperador da Paróquia São Judas (Franca/SP).",
     "image": null
   }
 ]

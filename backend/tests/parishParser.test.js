@@ -82,3 +82,28 @@ describe('parseParish - variações do site', () => {
     expect(p.address).toBe('Praça Hélvio - 193');
   });
 });
+
+describe('parseParish - HTML colado do Word (quebras de linha dentro de rótulos)', () => {
+  const html = fs.readFileSync(path.join(__dirname, 'fixtures', 'parish_word.html'), 'utf8');
+  const parish = parseParish(html, 2047);
+
+  it('reconhece "LOCAL E CONTATO" em maiúsculas e rótulos quebrados em duas linhas', () => {
+    expect(parish).toMatchObject({
+      name: 'Paróquia Nossa Senhora da Guia',
+      city: 'Franca',
+      state: 'SP',
+      address: 'Avenida João Batista Paula Silva, 471 - Recanto Elimar II',
+      zipCode: '14403-300',
+      phone: '(16) 99104-6520',
+      email: 'nsguia@diocesefranca.org.br',
+      foundedAt: '2016-03-05',
+    });
+    expect(parish.clergy).toEqual([{ name: 'Pe. Josenildo Almeida da Silva', title: 'Pároco' }]);
+  });
+
+  it('lê missas e descrição (cabeçalho "DESCRIÇÃO") e para na comunidade', () => {
+    expect(parish.masses.map((m) => `${m.dayOfWeek} ${m.time}`)).toEqual(['Domingo 08:30', 'Domingo 18:00', 'Terça-feira 19:30', 'Sábado 19:00']);
+    expect(parish.description).toMatch(/^Localizada no Recanto Elimar, em Franca/);
+  });
+});
+

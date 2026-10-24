@@ -3,7 +3,17 @@ import { View } from 'react-native';
 import { Text, EmptyState } from '../ui';
 
 // Estado vazio empático: favoritos vazios, busca sem resultado ou falha de carregamento.
-export function PriestsEmpty({ showFavorites, hasQuery, onShowAll }) {
+export function PriestsEmpty({ showFavorites, hasQuery, failed, onShowAll, onRetry }) {
+  if (failed) {
+    return (
+      <EmptyState
+        icon="alert-circle-outline"
+        message="Puxa, não conseguimos carregar os padres agora. Verifique sua conexão e tente novamente!"
+        actionLabel="Tentar Novamente"
+        onAction={onRetry}
+      />
+    );
+  }
   const message = showFavorites
     ? 'Puxa, você ainda não possui padres favoritos.'
     : 'Puxa, não encontramos padres com este termo.';

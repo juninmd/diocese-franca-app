@@ -14,7 +14,7 @@ describe('findNextMass', () => {
 
   it('picks a mass later today when one is still upcoming', () => {
     // Quarta-feira (Wednesday), 2024-01-03, 10:00 -> a missa das 19:00 ainda não aconteceu
-    const now = new Date(2024, 0, 3, 10, 0);
+    const now = new Date('2024-01-03T10:00:00-03:00');
     const next = findNextMass(masses, now);
     expect(next.dayOfWeek).toBe('Quarta-feira');
     expect(next.time).toBe('19:00');
@@ -23,18 +23,18 @@ describe('findNextMass', () => {
 
   it('skips to the next day when today\'s mass already happened', () => {
     // Quarta-feira, 2024-01-03, 20:00 -> a missa das 19:00 já passou, próxima é sexta
-    const now = new Date(2024, 0, 3, 20, 0);
+    const now = new Date('2024-01-03T20:00:00-03:00');
     const next = findNextMass(masses, now);
     expect(next.dayOfWeek).toBe('Sexta-feira');
-    expect(next.startsAt).toContain('2024-01-05');
+    expect(next.startsAt).toBe('2024-01-05T22:00:00.000Z'); // sexta 19:00 em Brasília
   });
 
   it('wraps around to next week when every mass this week has passed', () => {
     // Sexta-feira, 2024-01-05, 23:00 -> tudo já passou nesta semana, volta para o domingo
-    const now = new Date(2024, 0, 5, 23, 0);
+    const now = new Date('2024-01-05T23:00:00-03:00');
     const next = findNextMass(masses, now);
     expect(next.dayOfWeek).toBe('Domingo');
-    expect(next.startsAt).toContain('2024-01-07');
+    expect(next.startsAt).toBe('2024-01-07T12:00:00.000Z'); // domingo 09:00 em Brasília
   });
 
   it('ignores masses with an invalid day or time', () => {
@@ -43,5 +43,19 @@ describe('findNextMass', () => {
       { id: 10, churchId: 1, dayOfWeek: 'Domingo', time: 'não-informado' },
     ];
     expect(findNextMass(invalid)).toBeNull();
+  });
+
+  it('lê o relógio no fuso da diocese, não no do servidor (UTC)', () => {
+    // 01:00 UTC de quinta = quarta 22:00 em Brasília: a missa de quarta 19:00 já passou
+    const next = findNextMass(masses, new Date('2024-01-04T01:00:00Z'));
+    expect(next.dayOfWeek).toBe('Sexta-feira');
+    // 21:30 UTC de quarta = 18:30 em Brasília: faltam 30 min para a missa das 19:00
+    const soon = findNextMass(masses, new Date('2024-01-03T21:30:00Z'));
+    expect(soon.dayOfWeek).toBe('Quarta-feira');
+    expect(soon.startsInMinutes).toBe(30);
+  });
+
+  it('missa no minuto atual começa em 0 min', () => {
+    expect(findNextMass(masses, new Date('2024-01-03T19:00:30-03:00')).startsInMinutes).toBe(0);
   });
 });

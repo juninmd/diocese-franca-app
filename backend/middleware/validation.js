@@ -1,7 +1,7 @@
 const validateId = (paramName) => {
   return (req, res, next) => {
     const id = req.params[paramName];
-    if (!id || isNaN(parseInt(id))) {
+    if (!/^\d+$/.test(id || '')) {
       return res.status(400).json({
         error: 'Invalid ID',
         message: `O parâmetro ${paramName} deve ser um número válido`,

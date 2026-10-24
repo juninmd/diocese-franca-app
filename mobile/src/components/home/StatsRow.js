@@ -8,7 +8,7 @@ export function StatsRow({ items }) {
   return (
     <View style={styles.row}>
       {items.map((s) => (
-        <TouchableOpacity key={s.label} activeOpacity={0.8} style={styles.item} onPress={s.onPress}>
+        <TouchableOpacity key={s.label} activeOpacity={0.8} accessibilityRole="button" accessibilityLabel={`${s.value} ${s.label}`} style={styles.item} onPress={s.onPress}>
           <Text style={styles.number}>{s.value}</Text>
           <Text variant="caption">{s.label}</Text>
         </TouchableOpacity>

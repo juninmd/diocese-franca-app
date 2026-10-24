@@ -1,4 +1,5 @@
 import React from 'react';
+import { View } from 'react-native';
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -10,6 +11,7 @@ import PriestsScreen from '../screens/PriestsScreen';
 import PriestDetailScreen from '../screens/PriestDetailScreen';
 import MassesScreen from '../screens/MassesScreen';
 import { FloatingTabBar } from '../components/FloatingTabBar';
+import { NetworkStatus } from '../components/NetworkStatus';
 import { colors } from '../theme';
 
 const Stack = createStackNavigator();
@@ -53,8 +55,11 @@ function TabNavigator() {
 
 export default function Navigation() {
   return (
-    <NavigationContainer theme={navTheme}>
-      <TabNavigator />
-    </NavigationContainer>
+    <View style={{ flex: 1, backgroundColor: colors.bg }}>
+      <NetworkStatus />
+      <NavigationContainer theme={navTheme}>
+        <TabNavigator />
+      </NavigationContainer>
+    </View>
   );
 }
