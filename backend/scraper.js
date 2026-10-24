@@ -111,7 +111,7 @@ const scrapeNews = async () => {
 
             const description = descriptionText ? descriptionText.trim() : 'Sem descrição disponível';
 
-            let dateElement = $(el).find('.event_date, .date, .post_date').first();
+            let dateElement = $(el).find('.event_date, .date, .post_date, .post_info_date, .post_header_meta').first();
             let dateText = dateElement.length > 0 ? dateElement.text().trim() : '';
 
             if (!dateText || dateText === '') {
@@ -162,6 +162,11 @@ const scrapeNews = async () => {
                 } catch (dateErr) {
                     dateText = '';
                 }
+            }
+
+            // Normaliza espaços em branco na data
+            if (dateText) {
+                dateText = dateText.replace(/\s+/g, ' ').trim();
             }
             let date = dateText ? dateText : 'Sem informação de data';
 

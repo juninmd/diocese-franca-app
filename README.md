@@ -1,6 +1,6 @@
 # Diocese de Franca - App
 
-![Diocese de Franca Banner](mobile/screenshots/home_full.png?v=33)
+![Diocese de Franca Banner](mobile/screenshots/home_full.png?v=34)
 
 Aplicativo completo para a Diocese de Franca com backend API REST e app React Native.
 
@@ -15,9 +15,9 @@ Aplicativo completo para a Diocese de Franca com backend API REST e app React Na
 - Middleware de validação e tratamento de erros
 - Respostas padronizadas com wrapper `{ success, count, data }`
 - **Scraper Aprimorado (`backend/scraper.js`)**: Raspagem completa e autônoma de https://diocesefranca.org.br/ trazendo:
-  - **Notícias**: Destaques, títulos, fotos, links e parsing avançado de datas em formato extenso/relativo.
+  - **Notícias**: Destaques, títulos, fotos, links e parsing avançado de datas extraídas diretamente dos artigos e seletores de data.
   - **Paróquias**: 40 paróquias com endereços, contatos, expediente e links de imagem.
-  - **Padres e Clero**: 93 sacerdotes (incluindo o Bispo Diocesano e diáconos) vinculados a cada comunidade.
+  - **Padres e Clero**: Sacerdotes e diáconos (incluindo Bispo Diocesano, Administradores Paroquiais, Reitores e Diáconos Permanentes) vinculados a cada comunidade.
   - **Horários de Missa**: 231 horários semanais estruturados por dia e horário.
 - **Igrejas próximas** (`/api/churches/nearby`): ordena as paróquias pela distância (fórmula de Haversine) até uma coordenada e calcula a próxima missa de cada uma.
 - **53 testes automatizados (Jest)** cobrindo todos os endpoints, rotas de notícias, catálogo, geolocalização, cálculo da próxima missa, separação de diáconos/clero e normalização de nomes.
@@ -211,37 +211,37 @@ Não há linter configurado no repositório (nenhum script `lint` em `backend/` 
 
 ### Screenshots (Web Output E2E Test)
 **Home Screen**
-![Home Screen](mobile/screenshots/home_full.png?v=33)
+![Home Screen](mobile/screenshots/home_full.png?v=34)
 
 **News Section**
-![News Section](mobile/screenshots/news_section.png?v=33)
+![News Section](mobile/screenshots/news_section.png?v=34)
 
 **Igrejas Screen**
-![Igrejas Screen](mobile/screenshots/churches_full.png?v=33)
+![Igrejas Screen](mobile/screenshots/churches_full.png?v=34)
 
 **Padres Screen**
-![Padres Screen](mobile/screenshots/priests_full.png?v=33)
+![Padres Screen](mobile/screenshots/priests_full.png?v=34)
 
 **Missas Screen**
-![Missas Screen](mobile/screenshots/masses_full.png?v=33)
+![Missas Screen](mobile/screenshots/masses_full.png?v=34)
 
 **Missas (Empty State)**
-![Missas (Empty State)](mobile/screenshots/masses_empty.png?v=33)
+![Missas (Empty State)](mobile/screenshots/masses_empty.png?v=34)
 
 **Lembrete de Missa**
-![Lembrete de Missa](mobile/screenshots/masses_lembrete.png?v=33)
+![Lembrete de Missa](mobile/screenshots/masses_lembrete.png?v=34)
 
 **Igrejas (Empty State)**
-![Igrejas (Empty State)](mobile/screenshots/churches_empty.png?v=33)
+![Igrejas (Empty State)](mobile/screenshots/churches_empty.png?v=34)
 
 **Padres (Empty State)**
-![Padres (Empty State)](mobile/screenshots/priests_empty.png?v=33)
+![Padres (Empty State)](mobile/screenshots/priests_empty.png?v=34)
 
 **Igreja Próxima**
-![Igreja Próxima](mobile/screenshots/churches_nearby.png?v=33)
+![Igreja Próxima](mobile/screenshots/churches_nearby.png?v=34)
 
 **Igreja Próxima (Permissão Negada)**
-![Igreja Próxima Permissão Negada](mobile/screenshots/churches_nearby_denied.png?v=33)
+![Igreja Próxima Permissão Negada](mobile/screenshots/churches_nearby_denied.png?v=34)
 
 ## Licença
 

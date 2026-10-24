@@ -9,7 +9,7 @@ App da Diocese de Franca: API REST (`backend/`) + app Expo/React Native com buil
 ## Comandos (a partir da raiz)
 - API: `cd backend && pnpm install && pnpm start` (porta `PORT`, padrao 3000)
 - Testes backend: `cd backend && pnpm test` (53 testes, 7 suites)
-- Scraper: `cd backend && node scraper.js` e `node scripts/syncDiocese.js` (precisam de rede e reescrevem `backend/data/*.json`)
+- Scraper: `cd backend && node scraper.js` e `node scripts/syncDiocese.js` (precisam de rede e reescrevem `backend/data/*.json`). O scraper extrai notícias com seleção aprimorada de datas e suporte expandido a funções clericais (Administrador Paroquial, Reitor, Diácono Permanente).
 - Mobile: `cd mobile && pnpm install && pnpm start`
 - E2E: `cd mobile && npx expo export -p web && npx playwright test` (serve `dist` na 3001; regrava `mobile/screenshots/`)
 - Lint: nao existe linter configurado.

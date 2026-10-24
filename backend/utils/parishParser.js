@@ -101,8 +101,12 @@ function parseParish(html, sourceId) {
     website: `${SITE}/?menu=noticia_detalhe&id=${sourceId}&id_orgao=1`,
     clergy: [
       ...splitPeople(field(body, 'Pároco')).map((n) => ({ name: n, title: 'Pároco' })),
+      ...splitPeople(field(body, 'Administrador Paroquial')).map((n) => ({ name: n, title: 'Administrador Paroquial' })),
+      ...splitPeople(field(body, 'Reitor')).map((n) => ({ name: n, title: 'Reitor' })),
       ...splitPeople(field(body, 'Vigário paroquial')).map((n) => ({ name: n, title: 'Vigário Paroquial' })),
       ...splitPeople(field(body, 'Vigário')).map((n) => ({ name: n, title: 'Vigário' })),
+      ...splitPeople(field(body, 'Diácono permanente')).map((n) => ({ name: n, title: 'Diácono Permanente' })),
+      ...splitPeople(field(body, 'Diácono')).map((n) => ({ name: n, title: 'Diácono' })),
       ...splitPeople(field(body, 'Cooperador')).map((n) => ({ name: n, title: /di[aá]cono/i.test(n) ? 'Diácono' : 'Cooperador' })),
     ],
     ...(() => {
