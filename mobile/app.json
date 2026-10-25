@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "mobile",
-    "slug": "mobile",
+    "name": "Diocese de Franca",
+    "slug": "diocese-franca",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -14,11 +14,15 @@
     },
     "ios": {
       "supportsTablet": true,
+      "bundleIdentifier": "br.org.diocesefranca.app",
+      "buildNumber": "1",
       "infoPlist": {
         "NSLocationWhenInUseUsageDescription": "Usamos sua localização para mostrar as igrejas mais próximas de você e os horários de missa mais próximos."
       }
     },
     "android": {
+      "package": "br.org.diocesefranca.app",
+      "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
@@ -35,6 +39,13 @@
         "expo-location",
         {
           "locationWhenInUsePermission": "Usamos sua localização para mostrar as igrejas mais próximas de você e os horários de missa mais próximos."
+        }
+      ],
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/icon.png",
+          "color": "#7A1E2C"
         }
       ]
     ]
