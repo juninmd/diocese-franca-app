@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const compression = require('compression');
 const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
 const churchesRouter = require('./routes/churches');
 const priestsRouter = require('./routes/priests');
 const massesRouter = require('./routes/masses');
@@ -13,14 +14,34 @@ const { readCached, updatedAt } = require('./utils/fileStore');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+if (process.env.TRUST_PROXY) {
+  const trustProxy = process.env.TRUST_PROXY;
+  if (trustProxy === 'true') app.set('trust proxy', true);
+  else if (trustProxy === 'false') app.set('trust proxy', false);
+  else if (!isNaN(Number(trustProxy))) app.set('trust proxy', Number(trustProxy));
+  else app.set('trust proxy', trustProxy);
+}
+
 app.use(helmet());
 app.use(compression());
 app.use(cors());
-app.use(express.json());
+
+const limiter = rateLimit({
+  windowMs: 60 * 1000,
+  max: 120,
+  standardHeaders: true,
+  legacyHeaders: false
+});
+app.use(limiter);
 
 app.use((req, res, next) => {
-  req.requestTime = new Date().toISOString();
-  console.log(`[${req.requestTime}] ${req.method} ${req.url}`);
+  const start = Date.now();
+  req.requestTime = new Date(start).toISOString();
+  res.on('finish', () => {
+    const duration = Date.now() - start;
+    const path = req.originalUrl ? req.originalUrl.split('?')[0] : req.path;
+    console.log(`[${req.requestTime}] ${req.method} ${path} ${res.statusCode} ${duration}ms`);
+  });
   next();
 });
 
@@ -46,6 +67,10 @@ app.get('/api/health', noStore, (req, res) => {
       news: '/api/news'
     }
   });
+});
+
+app.get('/api/test-error', (req, res, next) => {
+  next(new Error('Erro de teste interno detalhado'));
 });
 
 // Os dados só mudam quando o scraper roda: clientes e proxies podem reutilizar (ETag + max-age).
@@ -93,9 +118,9 @@ app.use((err, req, res, next) => {
   console.error(`[ERROR] ${new Date().toISOString()}:`, err.stack);
   res.status(500).json({
     error: 'Internal Server Error',
-    message: process.env.NODE_ENV === 'production'
-      ? 'Ocorreu um erro interno no servidor'
-      : err.message,
+    message: process.env.NODE_ENV === 'development'
+      ? err.message
+      : 'Ocorreu um erro interno no servidor',
     timestamp: new Date().toISOString()
   });
 });

@@ -1,17 +1,5 @@
 const request = require('supertest');
-const express = require('express');
-const churchesRouter = require('../routes/churches');
-const priestsRouter = require('../routes/priests');
-const massesRouter = require('../routes/masses');
-const newsRouter = require('../routes/news');
-const { cacheControl } = require('../middleware/cache');
-
-const app = express();
-app.use(express.json());
-app.use('/api/churches', cacheControl(), churchesRouter);
-app.use('/api/priests', priestsRouter);
-app.use('/api/masses', massesRouter);
-app.use('/api/news', newsRouter);
+const app = require('../index');
 
 describe('Churches API', () => {
   describe('GET /api/churches', () => {
@@ -235,5 +223,63 @@ describe('Cache HTTP e news', () => {
   it('rejeita ids não numéricos (inclusive "12abc")', async () => {
     expect((await request(app).get('/api/churches/12abc')).statusCode).toBe(400);
     expect((await request(app).get('/api/priests/abc')).statusCode).toBe(400);
+  });
+});
+
+describe('SecOps e LGPD (Logging & Privacy)', () => {
+  it('GET /api/churches/nearby?lat=-20.5&lng=-47.4 não registra -20.5 nem -47.4 no log e inclui método, path, status e duração em ms', async () => {
+    const consoleSpy = jest.spyOn(console, 'log').mockImplementation(() => {});
+    await request(app).get('/api/churches/nearby?lat=-20.5&lng=-47.4');
+    expect(consoleSpy).toHaveBeenCalled();
+    const logCalls = consoleSpy.mock.calls.map(call => call.join(' '));
+    const nearbyLog = logCalls.find(msg => msg.includes('/api/churches/nearby'));
+    expect(nearbyLog).toBeDefined();
+    expect(nearbyLog).not.toContain('-20.5');
+    expect(nearbyLog).not.toContain('-47.4');
+    expect(nearbyLog).toMatch(/GET \/api\/churches\/nearby 200 \d+ms/);
+    consoleSpy.mockRestore();
+  });
+});
+
+describe('Error Handler', () => {
+  const originalEnv = process.env.NODE_ENV;
+
+  afterEach(() => {
+    process.env.NODE_ENV = originalEnv;
+  });
+
+  it('responde com mensagem genérica quando NODE_ENV não é "development"', async () => {
+    delete process.env.NODE_ENV;
+    const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+    const res = await request(app).get('/api/test-error');
+    expect(res.statusCode).toBe(500);
+    expect(res.body.message).toBe('Ocorreu um erro interno no servidor');
+    expect(res.body.message).not.toContain('Erro de teste interno detalhado');
+    consoleErrorSpy.mockRestore();
+  });
+
+  it('responde com a mensagem de erro quando NODE_ENV === "development"', async () => {
+    process.env.NODE_ENV = 'development';
+    const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+    const res = await request(app).get('/api/test-error');
+    expect(res.statusCode).toBe(500);
+    expect(res.body.message).toBe('Erro de teste interno detalhado');
+    consoleErrorSpy.mockRestore();
+  });
+});
+
+describe('Rate Limiter', () => {
+  it('responde 429 com Retry-After na 121ª requisição do mesmo IP em um minuto', async () => {
+    let rateLimitedRes;
+    for (let i = 0; i < 121; i++) {
+      const res = await request(app).get('/api/health');
+      if (res.statusCode === 429) {
+        rateLimitedRes = res;
+        break;
+      }
+    }
+    expect(rateLimitedRes).toBeDefined();
+    expect(rateLimitedRes.statusCode).toBe(429);
+    expect(rateLimitedRes.headers['retry-after']).toBeDefined();
   });
 });
