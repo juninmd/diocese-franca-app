@@ -1,4 +1,4 @@
-import { Linking } from 'react-native';
+import { openExternalUrl } from '../../utils/openExternalUrl';
 import { scheduleReminder } from '../../services/ReminderService';
 import { useToast } from '../../context/ToastContext';
 import { formatNextMass } from '../../utils/massTime';
@@ -14,9 +14,9 @@ export function useChurchActions(church) {
   };
 
   return {
-    call: (phone) => Linking.openURL(`tel:${phone.replace(/\D/g, '')}`),
-    email: (address) => Linking.openURL(`mailto:${address}`),
-    openMap: () => Linking.openURL(`https://maps.google.com/?q=${encodeURIComponent(`${church.address}, ${church.city}, ${church.state}`)}`),
+    call: (phone) => openExternalUrl(`tel:${phone.replace(/\D/g, '')}`, toast),
+    email: (address) => openExternalUrl(`mailto:${address}`, toast),
+    openMap: () => openExternalUrl(`https://maps.google.com/?q=${encodeURIComponent(`${church.address}, ${church.city}, ${church.state}`)}`, toast),
     remindVisit: () => remind({
       title: 'Lembrete de Visita',
       body: `Não se esqueça da sua visita à ${church.name}!`,

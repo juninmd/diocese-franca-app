@@ -1,12 +1,16 @@
 import React from 'react';
-import { View, Linking, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, TouchableOpacity, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Text } from '../ui';
 import { colors } from '../../theme';
 import { SocialMediaButtons } from './SocialMediaButtons';
+import { openExternalUrl } from '../../utils/openExternalUrl';
+import { useToast } from '../../context/ToastContext';
 
 // Título serifado, endereço, telefone e descrição ("Sobre") da igreja.
 export function ChurchIntro({ church }) {
+  const toast = useToast();
+
   return (
     <View style={styles.box}>
       <Text variant="title" accessibilityRole="header" style={styles.title}>{church.name}</Text>
@@ -17,7 +21,7 @@ export function ChurchIntro({ church }) {
       {church.email ? <InfoLine icon="mail-outline">{church.email}</InfoLine> : null}
       {church.foundedAt ? <InfoLine icon="calendar-outline">Fundada em {formatDate(church.foundedAt)}</InfoLine> : null}
       {church.website ? (
-        <TouchableOpacity activeOpacity={0.8} style={styles.link} onPress={() => Linking.openURL(church.website)}>
+        <TouchableOpacity activeOpacity={0.8} style={styles.link} onPress={() => openExternalUrl(church.website, toast)}>
           <Ionicons name="globe-outline" size={18} color={colors.primary} />
           <Text variant="label" style={{ color: colors.primary }}>Página oficial da paróquia</Text>
         </TouchableOpacity>

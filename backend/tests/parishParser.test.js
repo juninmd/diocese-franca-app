@@ -43,11 +43,14 @@ describe('parseParish', () => {
 });
 
 describe('socialMedia e chapels parsers', () => {
-  it('parseSocialMedia extrai links de redes sociais', () => {
+  it('parseSocialMedia extrai links de redes sociais e recusa esquemas/hosts maliciosos ou enganosos', () => {
     const mockHtml = `<div class="text_post_block">
       <a href="https://www.facebook.com/paroquiamock">Facebook</a>
       <a href="https://www.instagram.com/paroquiamock">Instagram</a>
       <a href="https://www.youtube.com/channel/UC123456">YouTube</a>
+      <a href="javascript:alert(1)">Facebook</a>
+      <a href="https://evil.example.com/phishing">Facebook</a>
+      <a href="intent://bad#Intent;end">Instagram</a>
     </div>`;
     expect(parseSocialMedia(mockHtml)).toEqual({
       facebook: 'https://www.facebook.com/paroquiamock',
@@ -129,4 +132,3 @@ describe('parseParish - HTML colado do Word (quebras de linha dentro de rótulos
     expect(parish.description).toMatch(/^Localizada no Recanto Elimar, em Franca/);
   });
 });
-

@@ -1,10 +1,14 @@
 import React from 'react';
-import { View, TouchableOpacity, Linking, StyleSheet } from 'react-native';
+import { View, TouchableOpacity, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Text } from '../ui';
 import { colors } from '../../theme';
+import { openExternalUrl } from '../../utils/openExternalUrl';
+import { useToast } from '../../context/ToastContext';
 
 export function SocialMediaButtons({ socialMedia }) {
+  const toast = useToast();
+
   if (!socialMedia || (!socialMedia.facebook && !socialMedia.instagram && !socialMedia.youtube)) {
     return null;
   }
@@ -24,7 +28,7 @@ export function SocialMediaButtons({ socialMedia }) {
             key={item.key}
             activeOpacity={0.8}
             style={styles.button}
-            onPress={() => Linking.openURL(item.url)}
+            onPress={() => openExternalUrl(item.url, toast)}
             accessibilityLabel={`Abrir ${item.label}`}
           >
             <Ionicons name={item.icon} size={20} color={item.color} />
