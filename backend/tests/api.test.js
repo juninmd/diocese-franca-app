@@ -81,6 +81,16 @@ describe('Churches API', () => {
       expect(res.statusCode).toBe(400);
       expect(res.body.error).toBe('Invalid Coordinates');
     });
+
+    it('should return 400 for lat with garbage on the right or repeated param', async () => {
+      const garbageRes = await request(app).get('/api/churches/nearby?lat=-20.5abc&lng=-47.4xyz');
+      expect(garbageRes.statusCode).toBe(400);
+      expect(garbageRes.body.error).toBe('Invalid Coordinates');
+
+      const arrayRes = await request(app).get('/api/churches/nearby?lat=1&lat=2&lng=-47.4014');
+      expect(arrayRes.statusCode).toBe(400);
+      expect(arrayRes.body.error).toBe('Invalid Coordinates');
+    });
   });
 });
 
@@ -192,6 +202,40 @@ describe('Masses API', () => {
       const res = await request(app).get('/api/masses/by-day/invalid-day');
       expect(res.statusCode).toBe(400);
       expect(res.body.error).toBe('Invalid Day');
+    });
+
+    it('should accept unaccented days, short forms, and case variations', async () => {
+      for (const day of ['terca-feira', 'Sabado', 'domingo', 'quarta']) {
+        const res = await request(app).get(`/api/masses/by-day/${day}`);
+        expect(res.statusCode).toBe(200);
+        expect(res.body.success).toBe(true);
+        expect(Array.isArray(res.body.data)).toBe(true);
+      }
+    });
+
+    it('should return 400 for feriado', async () => {
+      const res = await request(app).get('/api/masses/by-day/feriado');
+      expect(res.statusCode).toBe(400);
+      expect(res.body.error).toBe('Invalid Day');
+      expect(res.body.validDays).toEqual([
+        'domingo', 'segunda-feira', 'terça-feira', 'quarta-feira',
+        'quinta-feira', 'sexta-feira', 'sábado'
+      ]);
+    });
+
+    it('should handle catalog containing a mass without dayOfWeek gracefully', async () => {
+      const { getCatalog } = require('../utils/catalog');
+      const catalog = getCatalog();
+      const originalMasses = catalog.masses;
+
+      try {
+        catalog.masses = [...originalMasses, { id: 999999, churchId: 1, time: '10:00' }];
+        const res = await request(app).get('/api/masses/by-day/domingo');
+        expect(res.statusCode).toBe(200);
+        expect(res.body.success).toBe(true);
+      } finally {
+        catalog.masses = originalMasses;
+      }
     });
   });
 });

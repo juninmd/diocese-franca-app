@@ -37,13 +37,13 @@ router.get('/by-church/:churchId', validateId('churchId'), (req, res) => {
 });
 
 router.get('/by-day/:day', validateDay, (req, res) => {
-  const day = req.params.day.toLowerCase();
+  const canonicalDay = req.canonicalDay || req.params.day.toLowerCase();
   const { masses, churchesById } = getCatalog();
   const data = masses
-    .filter((m) => m.dayOfWeek.toLowerCase() === day)
+    .filter((m) => (m.dayOfWeek || '').toLowerCase() === canonicalDay.toLowerCase())
     .map((mass) => withChurch(mass, churchesById));
 
-  res.json({ success: true, day, count: data.length, data });
+  res.json({ success: true, day: canonicalDay, count: data.length, data });
 });
 
 module.exports = router;
