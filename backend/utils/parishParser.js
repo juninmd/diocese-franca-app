@@ -1,27 +1,28 @@
 const cheerio = require('cheerio');
 const { htmlToText } = require('./htmlText');
 const { parseMassLines } = require('./massParser');
-
-const SITE = 'https://www.diocesefranca.org.br';
+const { toHttpsUrl, SITE } = require('./safeUrl');
 
 function parseSocialMedia(html) {
   const $ = cheerio.load(html);
   const social = {};
   $('.text_post_block a').each((_, el) => {
-    const text = $(el).text().trim();
     const href = $(el).attr('href');
     if (!href) return;
-    const lhref = href.toLowerCase();
-    const ltext = text.toLowerCase();
 
-    if ((lhref.includes('facebook.com') || ltext.includes('facebook')) && !lhref.includes('diocesedefranca') && !lhref.includes('sharethis')) {
-      social.facebook = href;
+    const fb = toHttpsUrl(href, { hosts: ['facebook.com'] });
+    if (fb && !fb.includes('sharethis')) {
+      social.facebook = fb;
     }
-    if ((lhref.includes('instagram.com') || ltext.includes('instagram')) && !lhref.includes('diocesedefranca')) {
-      social.instagram = href;
+
+    const ig = toHttpsUrl(href, { hosts: ['instagram.com'] });
+    if (ig) {
+      social.instagram = ig;
     }
-    if ((lhref.includes('youtube.com') || ltext.includes('youtube')) && !lhref.includes('diocesedefranca') && !lhref.includes('ucdr7rudq6tx82gc0vv6eqrw')) {
-      social.youtube = href;
+
+    const yt = toHttpsUrl(href, { hosts: ['youtube.com', 'youtu.be'] });
+    if (yt && !yt.includes('ucdr7rudq6tx82gc0vv6eqrw')) {
+      social.youtube = yt;
     }
   });
   return Object.keys(social).length ? social : null;
@@ -147,8 +148,8 @@ function parseParish(html, sourceId) {
     foundedAt: toIsoDate(field(body, 'Data Criação')),
     officeHours: office ? lines(office[1]) : [],
     description,
-    image: image ? encodeURI(`${SITE}/${image[1]}`) : null,
-    website: `${SITE}/?menu=noticia_detalhe&id=${sourceId}&id_orgao=1`,
+    image: image ? toHttpsUrl(`${SITE}/${image[1]}`) : null,
+    website: toHttpsUrl(`${SITE}/?menu=noticia_detalhe&id=${sourceId}&id_orgao=1`),
     clergy: [
       ...splitPeople(field(body, 'Pároco')).map((n) => ({ name: n, title: 'Pároco' })),
       ...splitPeople(field(body, 'Administrador Paroquial')).map((n) => ({ name: n, title: 'Administrador Paroquial' })),

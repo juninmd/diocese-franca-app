@@ -1,4 +1,5 @@
 const cheerio = require('cheerio');
+const { toHttpsUrl } = require('./safeUrl');
 
 const ORIGIN = 'https://diocesefranca.org.br';
 const MONTHS = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
@@ -8,18 +9,14 @@ const MAX_DESCRIPTION = 160;
 
 const clean = (text) => (text || '').replace(/\s+/g, ' ').trim();
 
-const absolute = (href) => {
-  if (!href || href === '#') return null;
+const sourceIdOf = (link) => {
+  if (!link) return null;
   try {
-    return new URL(href, `${ORIGIN}/`).href;
-  } catch (error) {
+    const id = new URL(link).searchParams.get('id');
+    return id && /^\d+$/.test(id) ? Number(id) : null;
+  } catch (e) {
     return null;
   }
-};
-
-const sourceIdOf = (link) => {
-  const id = link && new URL(link).searchParams.get('id');
-  return id && /^\d+$/.test(id) ? Number(id) : null;
 };
 
 // "2026-10-19T20:29:02-03:00" a partir do nome da imagem (null se a data for impossível).
@@ -62,14 +59,15 @@ function parseNews(html, now = new Date()) {
   items.each((index, el) => {
     const $el = $(el);
     const anchor = $el.find('h2.post_title a, .post_title a').first();
-    const link = absolute(anchor.attr('href') || $el.find('a[href*="noticia_detalhe"]').first().attr('href'));
+    const rawHref = anchor.attr('href') || $el.find('a[href*="noticia_detalhe"]').first().attr('href');
+    const link = toHttpsUrl(rawHref, { site: ORIGIN });
     const sourceId = sourceIdOf(link);
     const title = clean(anchor.text() || $el.find('h1, h2, .title').first().text());
     if (!link || !sourceId || !title || seen.has(sourceId)) return;
     seen.add(sourceId);
 
     const imageSrc = clean($el.find('img.scale_image').first().attr('src') || $el.find('img.scale_image').first().attr('data-src'));
-    const image = imageSrc ? absolute(encodeURI(decodeURI(imageSrc))) : null;
+    const image = imageSrc ? toHttpsUrl(encodeURI(decodeURI(imageSrc)), { site: ORIGIN }) : null;
     const publishedAt = publishedAtFromImage(imageSrc);
     const paragraph = $el.find('.post_text p').toArray().map((p) => clean($(p).text())).find(Boolean) || '';
 
