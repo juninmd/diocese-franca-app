@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, ScrollView, RefreshControl, Linking, StyleSheet } from 'react-native';
+import { View, ScrollView, RefreshControl, StyleSheet } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { getNearbyChurches } from '../services/api';
 import { useChurches, usePriests, useMasses, useNews } from '../hooks/useData';
@@ -13,6 +13,7 @@ import { NewsCarousel } from '../components/home/NewsCarousel';
 import { QuickActions } from '../components/home/QuickActions';
 import { ContactCard } from '../components/home/ContactCard';
 import { buildQuickActions, callDiocese, emailDiocese } from '../components/home/quickActionItems';
+import { openExternalUrl } from '../utils/openExternalUrl';
 import { colors } from '../theme';
 
 export default function HomeScreen({ navigation }) {
@@ -49,9 +50,11 @@ export default function HomeScreen({ navigation }) {
     else toast.warning('Sem conexão: mostrando os dados salvos.');
   };
 
-  const openNews = (item) => {
-    Linking.openURL(item.link);
-    toast.info('Abrindo a notícia...');
+  const openNews = async (item) => {
+    const opened = await openExternalUrl(item.link, toast);
+    if (opened) {
+      toast.info('Abrindo a notícia...');
+    }
   };
 
   const remindNews = async (item) => {
@@ -81,7 +84,7 @@ export default function HomeScreen({ navigation }) {
         />
         <NewsCarousel news={news.data || []} loading={news.loading} onOpen={openNews} onRemind={remindNews} error={!!news.error} onRetry={() => news.reload()} />
         <QuickActions items={buildQuickActions({ navigation, toast })} />
-        <ContactCard onCall={callDiocese} onEmail={emailDiocese} />
+        <ContactCard onCall={() => callDiocese(toast)} onEmail={() => emailDiocese(toast)} />
       </ScrollView>
     </View>
   );

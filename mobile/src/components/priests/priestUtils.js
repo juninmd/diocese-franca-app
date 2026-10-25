@@ -1,4 +1,4 @@
-import { Linking } from 'react-native';
+import { openExternalUrl } from '../../utils/openExternalUrl';
 
 // Iniciais para o avatar, ignorando tratamentos ("Pe.", "Padre").
 export const initials = (name = '') =>
@@ -14,6 +14,6 @@ export const initials = (name = '') =>
 // Imagens de placeholder.com não são fotos reais: usa-se as iniciais.
 export const realImageUri = (url) => (url && !/placeholder\.com/i.test(url) ? url : null);
 
-export const openCall = (phone) => Linking.openURL(`tel:${phone.replace(/\D/g, '')}`);
+export const openCall = (phone, toast) => openExternalUrl(`tel:${phone.replace(/\D/g, '')}`, toast);
 
-export const openEmail = (email) => Linking.openURL(`mailto:${email}`);
+export const openEmail = (email, toast) => openExternalUrl(`mailto:${email}`, toast);

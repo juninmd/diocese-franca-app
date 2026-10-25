@@ -1,11 +1,11 @@
-import { Linking } from 'react-native';
+import { openExternalUrl } from '../../utils/openExternalUrl';
 import { scheduleReminder } from '../../services/ReminderService';
 
 const DIOCESE_PHONE = '1637111400';
 const DIOCESE_EMAIL = 'contato@diocesefranca.org.br';
 
-export const callDiocese = () => Linking.openURL(`tel:${DIOCESE_PHONE}`);
-export const emailDiocese = () => Linking.openURL(`mailto:${DIOCESE_EMAIL}`);
+export const callDiocese = (toast) => openExternalUrl(`tel:${DIOCESE_PHONE}`, toast);
+export const emailDiocese = (toast) => openExternalUrl(`mailto:${DIOCESE_EMAIL}`, toast);
 
 // Lembrete de 5s com toast de sucesso/erro (sempre verifica permissão antes).
 const reminderAction = (toast, { title, body, success, kind = 'success' }) => async () => {
@@ -39,9 +39,9 @@ export function buildQuickActions({ navigation, toast }) {
     {
       icon: 'call',
       label: 'Ligar\nDiocese',
-      onPress: () => { toast.success('Ligando para a Diocese...'); callDiocese(); },
+      onPress: () => { toast.success('Ligando para a Diocese...'); callDiocese(toast); },
     },
-    { icon: 'mail', label: 'Enviar\nEmail', onPress: emailDiocese },
+    { icon: 'mail', label: 'Enviar\nEmail', onPress: () => emailDiocese(toast) },
     {
       icon: 'alarm',
       label: 'Lembrete\nTeste 5s',

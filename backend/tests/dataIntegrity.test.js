@@ -89,4 +89,21 @@ describe('integridade dos dados', () => {
       if (n.image) expect(n.image).toMatch(/^https:\/\//);
     });
   });
+
+  it('nenhum link em data/*.json tem esquema fora de https (ou tel/mailto quando aplicável)', () => {
+    const isUrlKey = (key) => ['link', 'website', 'image', 'facebook', 'instagram', 'youtube'].includes(key);
+    const checkObj = (obj) => {
+      if (!obj) return;
+      if (typeof obj === 'object') {
+        Object.entries(obj).forEach(([key, val]) => {
+          if (isUrlKey(key) && typeof val === 'string') {
+            expect(val).toMatch(/^(https|tel|mailto):/i);
+          } else {
+            checkObj(val);
+          }
+        });
+      }
+    };
+    [churches, priests, masses, news].forEach(checkObj);
+  });
 });
