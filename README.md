@@ -179,6 +179,12 @@ Não há linter configurado no repositório (nenhum script `lint` em `backend/` 
 
 ## Build e deploy
 
+- **Configuração de Identificadores Nativos (EAS/Stores):** O arquivo `mobile/app.json` define os identificadores reais da aplicação para builds nativos (iOS/Android):
+  - **Nome da Aplicação:** `Diocese de Franca`
+  - **Slug:** `diocese-franca`
+  - **Identificador de Pacote (iOS & Android):** `br.org.diocesefranca.app`
+  - **Plugins de Notificação:** `expo-notifications` configurado com ícone `./assets/icon.png` e cor de destaque `#7A1E2C` (vinho litúrgico).
+  - **Tema:** Mantido em `userInterfaceStyle: "light"` enquanto não há suporte completo a tema escuro.
 - **Web (Netlify):** `netlify.toml` roda `cd mobile && pnpm install && npx expo export -p web` e publica `mobile/dist`, com redirect `/*` para `/index.html`.
 - **Manual:** `./deploy.sh` faz o mesmo build e executa `npx netlify deploy --prod --dir=dist`.
 - **Backend:** não há Dockerfile nem pipeline de deploy no repositório; rode `pnpm start` no ambiente de destino.
