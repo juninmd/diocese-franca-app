@@ -26,6 +26,16 @@ describe('integridade dos dados', () => {
       if (c.phone) expect(c.phone).toMatch(/^\(\d{2}\) \d{4,5}-\d{4}$/);
       if (c.email) expect(c.email).toMatch(/^[^@\s]+@[^@\s]+\.[^@\s]+$/);
       if (c.foundedAt) expect(c.foundedAt).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+      if (c.socialMedia) {
+        expect(typeof c.socialMedia).toBe('object');
+        if (c.socialMedia.facebook) expect(c.socialMedia.facebook).toMatch(/^https?:\/\//);
+        if (c.socialMedia.instagram) expect(c.socialMedia.instagram).toMatch(/^https?:\/\//);
+        if (c.socialMedia.youtube) expect(c.socialMedia.youtube).toMatch(/^https?:\/\//);
+      }
+      if (c.chapels) {
+        expect(Array.isArray(c.chapels)).toBe(true);
+        c.chapels.forEach((chapel) => expect(chapel.name).toBeTruthy());
+      }
     });
   });
 

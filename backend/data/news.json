@@ -1,5 +1,25 @@
 [
   {
+    "id": 6098,
+    "title": "Formação de salmistas aprofunda dimensões espiritual, musical e litúrgica na Forania Madre Rita",
+    "category": "Salmistas",
+    "description": "Encontro realizado em Aramina aprofundou aspectos espirituais, musicais e litúrgicos do canto na celebração eucarística.",
+    "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6098&id_orgao=1",
+    "image": "https://diocesefranca.org.br/images/20261024161147_1000394335.png",
+    "date": "24 de outubro",
+    "publishedAt": "2026-10-24T16:11:47-03:00"
+  },
+  {
+    "id": 6099,
+    "title": "Candidatos ao Diaconato Permanente recebem o Ministério de Leitor na Diocese de Franca",
+    "category": "Diaconato Permanente",
+    "description": "Celebração presidida por Dom Paulo Roberto Beloto, na Paróquia São Benedito, marcou mais uma etapa da formação da Escola Diaconal Santo Efrém.",
+    "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6099&id_orgao=1",
+    "image": "https://diocesefranca.org.br/images/20261024164906_1000394426.png",
+    "date": "24 de outubro",
+    "publishedAt": "2026-10-24T16:49:06-03:00"
+  },
+  {
     "id": 6095,
     "title": "Frei Welton Cardoso Cavallini toma posse como pároco da Paróquia Nossa Senhora das Graças",
     "category": "Frei Welton",
@@ -28,25 +48,5 @@
     "image": "https://diocesefranca.org.br/images/20261015221924_1000385033.png",
     "date": "15 de outubro",
     "publishedAt": "2026-10-15T22:19:24-03:00"
-  },
-  {
-    "id": 6089,
-    "title": "Frei Agostinho Morosini toma posse como pároco da Paróquia Nossa Senhora Aparecida, em Franca",
-    "category": "Frei Agostinho Morosini",
-    "description": "Celebração aconteceu no dia 10 de outubro, durante a novena em honra à padroeira, e marcou o início de uma nova etapa na comunidade da Capelinha.",
-    "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6089&id_orgao=1",
-    "image": "https://diocesefranca.org.br/images/20261015211307_1000384887.png",
-    "date": "15 de outubro",
-    "publishedAt": "2026-10-15T21:13:07-03:00"
-  },
-  {
-    "id": 6090,
-    "title": "Formação reúne 78 salmistas de três foranias da Diocese de Franca",
-    "category": "Salmistas",
-    "description": "Encontro na Paróquia São Vicente de Paulo abordou o Guia Litúrgico-Pastoral, leitura de partituras e técnicas vocais para o canto litúrgico.",
-    "link": "https://diocesefranca.org.br/?menu=noticia_detalhe&id=6090&id_orgao=1",
-    "image": "https://diocesefranca.org.br/images/20261015212615_1000384917.png",
-    "date": "15 de outubro",
-    "publishedAt": "2026-10-15T21:26:15-03:00"
   }
 ]

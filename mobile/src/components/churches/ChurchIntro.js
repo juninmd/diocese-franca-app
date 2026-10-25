@@ -3,6 +3,7 @@ import { View, Linking, TouchableOpacity, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Text } from '../ui';
 import { colors } from '../../theme';
+import { SocialMediaButtons } from './SocialMediaButtons';
 
 // Título serifado, endereço, telefone e descrição ("Sobre") da igreja.
 export function ChurchIntro({ church }) {
@@ -27,6 +28,7 @@ export function ChurchIntro({ church }) {
           <Text variant="body" style={{ color: colors.muted }}>{church.description}</Text>
         </View>
       ) : null}
+      <SocialMediaButtons socialMedia={church.socialMedia} />
     </View>
   );
 }

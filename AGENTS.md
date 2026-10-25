@@ -8,8 +8,8 @@ App da Diocese de Franca: API REST (`backend/`) + app Expo/React Native com buil
 
 ## Comandos (a partir da raiz)
 - API: `cd backend && pnpm install && pnpm start` (porta `PORT`, padrao 3000)
-- Testes backend: `cd backend && pnpm test` (90 testes, 11 suites; inclui integridade dos JSONs em `data/`)
-- Scraper: `cd backend && node scraper.js` e `node scripts/syncDiocese.js` (precisam de rede e reescrevem `backend/data/*.json`). O scraper extrai notícias (data = carimbo `AAAAMMDDHHMMSS_` do nome da imagem) e funções clericais (Administrador Paroquial, Reitor, Diácono Permanente). Ele nunca sobrescreve um JSON com resultado vazio/muito menor (`utils/fileStore.writeIfSane`) e preserva ids de padres (favoritos do app dependem deles).
+- Testes backend: `cd backend && pnpm test` (92 testes, 11 suites; inclui integridade dos JSONs em `data/`)
+- Scraper: `cd backend && node scraper.js` e `node scripts/syncDiocese.js` (precisam de rede e reescrevem `backend/data/*.json`). O scraper extrai notícias (data = carimbo `AAAAMMDDHHMMSS_` do nome da imagem), funções clericais, redes sociais (Facebook, Instagram, YouTube) e capelas/comunidades vinculadas. Ele nunca sobrescreve um JSON com resultado vazio/muito menor (`utils/fileStore.writeIfSane`) e preserva ids de padres (favoritos do app dependem deles).
 - Mobile: `cd mobile && pnpm install && pnpm start`
 - E2E: `cd mobile && npx expo export -p web && npx playwright test` (precisa da API em :3000 com dados reais; inclui `offline_cache.spec.js`) (serve `dist` na 3001; regrava `mobile/screenshots/`)
 - Lint: nao existe linter configurado.

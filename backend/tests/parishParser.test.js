@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const { parseParish, parseTitle, splitPeople } = require('../utils/parishParser');
+const { parseParish, parseTitle, parseSocialMedia, parseChapels, splitPeople } = require('../utils/parishParser');
 
 const html = fs.readFileSync(path.join(__dirname, 'fixtures', 'parish.html'), 'utf8');
 
@@ -39,6 +39,29 @@ describe('parseParish', () => {
 
   it('retorna null para páginas que não são de paróquia', () => {
     expect(parseParish('<h2>Notícia</h2>', 1)).toBeNull();
+  });
+});
+
+describe('socialMedia e chapels parsers', () => {
+  it('parseSocialMedia extrai links de redes sociais', () => {
+    const mockHtml = `<div class="text_post_block">
+      <a href="https://www.facebook.com/paroquiamock">Facebook</a>
+      <a href="https://www.instagram.com/paroquiamock">Instagram</a>
+      <a href="https://www.youtube.com/channel/UC123456">YouTube</a>
+    </div>`;
+    expect(parseSocialMedia(mockHtml)).toEqual({
+      facebook: 'https://www.facebook.com/paroquiamock',
+      instagram: 'https://www.instagram.com/paroquiamock',
+      youtube: 'https://www.youtube.com/channel/UC123456',
+    });
+  });
+
+  it('parseChapels extrai capelas e comunidades com endereço', () => {
+    const text = `Local e Contato\nDados\nCapela São Benedito\nRua A, 100\nCEP 14400-000\nCapela Nossa Senhora\nRua B, 200\nCompartilhar`;
+    expect(parseChapels(text, '')).toEqual([
+      { name: 'Capela São Benedito', address: 'Rua A, 100 - CEP 14400-000' },
+      { name: 'Capela Nossa Senhora', address: 'Rua B, 200' },
+    ]);
   });
 });
 

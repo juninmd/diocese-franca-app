@@ -10,6 +10,7 @@ import { ActionTiles } from '../components/churches/ActionTiles';
 import { MassSchedule } from '../components/churches/MassSchedule';
 import { ClergyCard } from '../components/churches/ClergyCard';
 import { ChurchNotes } from '../components/churches/ChurchNotes';
+import { ChapelsList } from '../components/churches/ChapelsList';
 import { useChurchDetail } from '../components/churches/useChurchDetail';
 import { useChurchActions } from '../components/churches/useChurchActions';
 import { colors } from '../theme';
@@ -44,6 +45,7 @@ export default function ChurchDetailScreen({ route, navigation }) {
         />
         {church.masses?.length > 0 ? <MassSchedule masses={church.masses} nextMass={church.nextMass} /> : null}
         <ChurchNotes church={church} />
+        {church.chapels?.length > 0 ? <ChapelsList chapels={church.chapels} /> : null}
         {church.priest ? (
           <ClergyCard
             priest={church.priest}
