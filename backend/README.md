@@ -28,6 +28,29 @@ API REST para consulta de informações da Diocese de Franca, incluindo igrejas,
 - `GET /api/masses/by-day/:day` - Lista missas por dia da semana
   - Dias aceitos: domingo, segunda-feira, terça-feira, quarta-feira, quinta-feira, sexta-feira, sábado
 
+## Variáveis de Ambiente
+
+O servidor pode ser configurado por meio das seguintes variáveis de ambiente (definidas via `.env` ou no ambiente do servidor):
+
+- `PORT`: Porta na qual o servidor HTTP irá escutar (padrão: `3000`).
+- `NODE_ENV`: Define o ambiente de execução (`development`, `production`, etc.).
+  - Quando estritamente igual a `development`, o manipulador de erros HTTP expõe a mensagem detalhada (`err.message`) nas respostas de erro 500.
+  - Para qualquer outro valor ou quando ausente, uma mensagem genérica de erro interno (`Ocorreu um erro interno no servidor`) é devolvida ao cliente para evitar vazamento de informações sensíveis.
+- `TRUST_PROXY`: Configura a diretiva `trust proxy` do Express caso o backend esteja operando atrás de um proxy reverso ou load balancer (ex.: `true`, `false`, `1`, `loopback`).
+
+## Segurança, Privacidade e LGPD (SecOps)
+
+### Política de Logs
+Por conformidade com a LGPD (Lei Geral de Proteção de Dados), coordenadas geográficas (`lat` e `lng`) enviadas pelo usuário em requisições como `GET /api/churches/nearby` são tratadas como dados pessoais e **nunca** são registradas nos logs do servidor.
+- Os logs de acesso gravam apenas o caminho da requisição (`req.path`), omitindo query parameters (`?lat=...&lng=...`).
+- As entradas de log são registradas ao finalizar a requisição (`res.on('finish')`) em linha única no formato:
+  `[TIMESTAMP] METODO CAMINHO STATUS DURAÇÃOms` (ex.: `[2026-03-31T12:00:00.000Z] GET /api/churches/nearby 200 12ms`).
+
+### Limitação de Taxa (Rate Limit)
+A API utiliza `express-rate-limit` para prevenir abuso e ataques de negação de serviço (DoS):
+- Limite máximo de **120 requisições por minuto por IP**.
+- Caso o limite seja excedido, o servidor responde com código HTTP `429 Too Many Requests` e inclui o cabeçalho `Retry-After` indicando o tempo de espera até o envio de novas requisições.
+
 ## Dados oficiais (scraper)
 
 `news.json`, `churches.json`, `priests.json` e `masses.json` são gerados a partir de diocesefranca.org.br:
@@ -166,3 +189,6 @@ curl "http://localhost:3000/api/churches/nearby?lat=-20.5396&lng=-47.4014"
 - Node.js
 - Express
 - CORS
+- Helmet
+- Compression
+- Express Rate Limit
