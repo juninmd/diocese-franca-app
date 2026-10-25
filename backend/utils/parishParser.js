@@ -1,7 +1,57 @@
+const cheerio = require('cheerio');
 const { htmlToText } = require('./htmlText');
 const { parseMassLines } = require('./massParser');
 
 const SITE = 'https://www.diocesefranca.org.br';
+
+function parseSocialMedia(html) {
+  const $ = cheerio.load(html);
+  const social = {};
+  $('.text_post_block a').each((_, el) => {
+    const text = $(el).text().trim();
+    const href = $(el).attr('href');
+    if (!href) return;
+    const lhref = href.toLowerCase();
+    const ltext = text.toLowerCase();
+
+    if ((lhref.includes('facebook.com') || ltext.includes('facebook')) && !lhref.includes('diocesedefranca') && !lhref.includes('sharethis')) {
+      social.facebook = href;
+    }
+    if ((lhref.includes('instagram.com') || ltext.includes('instagram')) && !lhref.includes('diocesedefranca')) {
+      social.instagram = href;
+    }
+    if ((lhref.includes('youtube.com') || ltext.includes('youtube')) && !lhref.includes('diocesedefranca') && !lhref.includes('ucdr7rudq6tx82gc0vv6eqrw')) {
+      social.youtube = href;
+    }
+  });
+  return Object.keys(social).length ? social : null;
+}
+
+function parseChapels(text, parishName) {
+  const cut = text.indexOf('Compartilhar');
+  const body = cut > 0 ? text.slice(0, cut) : text;
+  const cutItems = body.indexOf('Itens relacionados');
+  const mainText = cutItems > 0 ? body.slice(0, cutItems) : body;
+
+  const chapels = [];
+  const lines = mainText.split('\n').map((l) => l.trim()).filter(Boolean);
+
+  for (let i = 0; i < lines.length; i += 1) {
+    const line = lines[i];
+    if (/^(capela|comunidade)\b/i.test(line) && !/^(capela|comunidade)\s+são\s+josé\s+-\s+franca/i.test(line)) {
+      if (parishName && line.toLowerCase().includes(parishName.toLowerCase())) continue;
+      const name = line;
+      const addressParts = [];
+      let j = i + 1;
+      while (j < lines.length && !/^(capela|comunidade|dados|missas|expediente|itens|compartilhar|descrição)/i.test(lines[j]) && addressParts.length < 3) {
+        addressParts.push(lines[j]);
+        j += 1;
+      }
+      chapels.push({ name, address: addressParts.join(' - ') || null });
+    }
+  }
+  return chapels;
+}
 const PHONE = /\(?\d{2}\)?\s?9?\d{4}[-\s]?\d{4}/g;
 const EMAIL = /[\w.+-]+@[\w-]+(?:\.[\w-]+)+/g;
 const STOP_MASSES = /^(capela|comunidade|descri[çc][ãa]o|lar |compartilhar|santu[aá]rio|igreja|itens relacionados|atendimento)/i;
@@ -109,6 +159,8 @@ function parseParish(html, sourceId) {
       ...splitPeople(field(body, 'Diácono')).map((n) => ({ name: n, title: 'Diácono' })),
       ...splitPeople(field(body, 'Cooperador')).map((n) => ({ name: n, title: /di[aá]cono/i.test(n) ? 'Diácono' : 'Cooperador' })),
     ],
+    socialMedia: parseSocialMedia(html),
+    chapels: parseChapels(text, name),
     ...(() => {
       const { masses, notes } = parseMassLines(massLines);
       return { masses, massNotes: notes };
@@ -116,4 +168,4 @@ function parseParish(html, sourceId) {
   };
 }
 
-module.exports = { parseParish, parseTitle, splitPeople, SITE };
+module.exports = { parseParish, parseTitle, parseSocialMedia, parseChapels, splitPeople, SITE };

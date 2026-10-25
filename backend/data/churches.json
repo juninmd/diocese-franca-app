@@ -16,6 +16,21 @@
     "description": null,
     "image": "https://www.diocesefranca.org.br/images/20210412141717_igraja%20restinga.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2042&id_orgao=1",
+    "socialMedia": null,
+    "chapels": [
+      {
+        "name": "Capela Nossa Senhora Aparecida",
+        "address": "Assentamento Boa Sorte - Missa: 3º sábado do mês às 17h"
+      },
+      {
+        "name": "Capela Nossa Senhora De Fátima",
+        "address": "Bairro Belo Horizonte (Venda do Nardo)"
+      },
+      {
+        "name": "Capela Nossa Senhora Aparecida",
+        "address": "Fazenda Santa Maria"
+      }
+    ],
     "massNotes": [],
     "latitude": -20.6032343,
     "longitude": -47.4830912,
@@ -42,6 +57,33 @@
     "description": "A Paróquia de Nossa Senhora Aparecida (Itirapuã/SP), criada em 02 de fevereiro de 1968, foi instalada a 24 de março do mesmo ano pelo então Arcebispo de Ribeirão Preto Dom Frei Felício da Cunha Vasconcelos (OFM). Faz divisa com Patrocínio Paulista e com o Estado de Minas Gerias.",
     "image": "https://www.diocesefranca.org.br/images/20210412145450_igraja%20itirapua.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2043&id_orgao=1",
+    "socialMedia": null,
+    "chapels": [
+      {
+        "name": "Capela Senhor Bom Jesus",
+        "address": "Missa: 1° Domingo do mês 7h30"
+      },
+      {
+        "name": "Capela Santos Reis",
+        "address": "Missa: Quinta-feira às 19h"
+      },
+      {
+        "name": "Capela Nossa Senhora do Carmo",
+        "address": "Missa : 3° Domingo do mês às 10h30"
+      },
+      {
+        "name": "Capela São Sebastião",
+        "address": "Missa: 4° Domingo do mês 07h30 - Lar São Francisco (Asilo) - Missa: última Quarta-feira do mês 15h"
+      },
+      {
+        "name": "Capela Santa Mônica",
+        "address": "Missa: 1⁰ Domingo às 15h"
+      },
+      {
+        "name": "Capela Santa Rita de Cásiia",
+        "address": "Missa: 4⁰ Domingo às 15h"
+      }
+    ],
     "massNotes": [],
     "latitude": -20.6406814,
     "longitude": -47.2193817,
@@ -65,6 +107,48 @@
     "description": null,
     "image": "https://www.diocesefranca.org.br/images/20210412150313_igreja%20pedregulho.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2044&id_orgao=1",
+    "socialMedia": {
+      "facebook": "https://www.facebook.com/paroquianossasenhoraaparecidapedregulho",
+      "instagram": "https://www.instagram.com/aparecida12deoutubro?igsh=MXdsbDM5bDljOG5zcA%3D%3D"
+    },
+    "chapels": [
+      {
+        "name": "Capela Santa Luzia",
+        "address": "Praça Santa Luzia, nº: 10 - Missa: Quarta-feira: 19h - Domingo: 18h"
+      },
+      {
+        "name": "Capela São Sebastião",
+        "address": "Praça Frei Alexandre, S/N Bela Vista - Missa: Sábado 18h30"
+      },
+      {
+        "name": "Comunidade São José",
+        "address": "R: Geraldo Batista Gabriel; nº: 07, Nova Pedregulho - Missa: Domingo 9h30"
+      },
+      {
+        "name": "Capela São Francisco de Assis",
+        "address": "Rua Igarapava, S/N - Estreito - Missa: Domingo 10h - 1ª Quinta do Mês: 19h"
+      },
+      {
+        "name": "Capela Nossa Senhora das Graças",
+        "address": "Praça 25 de Março, S/N - Vila Primavera - Missa: Domingo 8h30"
+      },
+      {
+        "name": "Capela São Pedro",
+        "address": "Praça São Pedro, s/n - Igaçaba"
+      },
+      {
+        "name": "Capela São Benedito",
+        "address": "Praça São Benedito, s/n - Alto Porã"
+      },
+      {
+        "name": "Capela Sagrada Família - Alto Lageado",
+        "address": "Fazenda Alto Lageado - Missa: 2 ª Sexta-feira mês 19h"
+      },
+      {
+        "name": "Capela São Sebastião - Taquari",
+        "address": "Fazenda Taquari - Missa: 4ª Sexta-feira, 19h30"
+      }
+    ],
     "massNotes": [
       "1ª Sexta-feira mês às 06h30: Missa Votiva ao Sagrado Coração de Jesus"
     ],
@@ -90,6 +174,47 @@
     "description": null,
     "image": "https://www.diocesefranca.org.br/images/20210412151344_igraja%20franca.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2045&id_orgao=1",
+    "socialMedia": {
+      "facebook": "https://www.facebook.com/ParoquiaNSraAparecidaCapelinha/"
+    },
+    "chapels": [
+      {
+        "name": "Capela Nossa Senhora da Penha",
+        "address": "Rua Nassim Miguel, 2081 - Jardim Líbano, CEP 14.403-536"
+      },
+      {
+        "name": "Capela Senhora de Fátima",
+        "address": "Rua Ceará, 150 - Jardim Riviera, CEP 14.402-029"
+      },
+      {
+        "name": "Capela Santa Marta",
+        "address": "Rua Belém, 1601 - Jardim Brasilândia, CEP 14.402-272"
+      },
+      {
+        "name": "Capela São Francisco Xavier",
+        "address": "Rua Miguel Ozório Santos Filho, 2280 - Jardim São Luiz I, CEP 14.402-322"
+      },
+      {
+        "name": "Capela São José",
+        "address": "Rua Espírito Santo, 1780 - Vila Aparecida, CEP 14.401-226"
+      },
+      {
+        "name": "Capela São Mateus",
+        "address": "Rua Francisco Miglioranza, 2549 - Jardim Palestina, CEP 14.402-336"
+      },
+      {
+        "name": "Capela Nossa Senhora das Dores",
+        "address": "Rodovia Franca - Ibiraci, Km 12 (Casa Seca)"
+      },
+      {
+        "name": "Capela São Roque",
+        "address": "Rodovia Franca - Ibiraci, Km 23"
+      },
+      {
+        "name": "Capela Divino Pai Eterno",
+        "address": "Rodovia Franca - Ibiraci, KM 18 - Missa : Última Sexta- feira do mês, 19h30"
+      }
+    ],
     "massNotes": [],
     "latitude": -20.5381768,
     "longitude": -47.4009795,
@@ -112,6 +237,33 @@
     "description": null,
     "image": "https://www.diocesefranca.org.br/images/20210412152110_igraja%20cristais%20paulista.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2046&id_orgao=1",
+    "socialMedia": null,
+    "chapels": [
+      {
+        "name": "Capela Santa Rita",
+        "address": "Terça-feira: 19h - Sábado: 19h - Todo dia 22: 19h"
+      },
+      {
+        "name": "Capela Bom Jesus da Lapa - Fazenda Chave da Taquara",
+        "address": "Missa Padroeira 06 de agosto - 5⁰ Domingo do mês: 17h"
+      },
+      {
+        "name": "Capela Sagrada Família",
+        "address": "Condomínio Ouro Verde - Missa: 1° domingo do mês 10h30"
+      },
+      {
+        "name": "Capela São José",
+        "address": "Fazenda Borda da Mata - Missa: 2º Domingo do mês 10h30"
+      },
+      {
+        "name": "Capela Nossa Senhora Aparecida",
+        "address": "Fazenda Limeira - Missa: 4⁰ domingo do mês 10h30"
+      },
+      {
+        "name": "Capela Santa Marta",
+        "address": "Missa: 3⁰ domingo do mês 10h30"
+      }
+    ],
     "massNotes": [
       "1ª Sexta de cada mês: 19h"
     ],
@@ -137,6 +289,16 @@
     "description": "Localizada no Recanto Elimar, em Franca, a Paróquia Nossa Senhora da Guia foi instalada canonicamente no dia 05 de março de 2016, tendo como primeiro pároco o padre Carlos David Urbinati.",
     "image": "https://www.diocesefranca.org.br/images/20210412210022_igreja%20nossa%20senhora%20da%20guia.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2047&id_orgao=1",
+    "socialMedia": {
+      "facebook": "https://www.facebook.com/parnsguia/",
+      "instagram": "https://www.instagram.com/parnsguia/"
+    },
+    "chapels": [
+      {
+        "name": "Comunidade São Marcos",
+        "address": "Rua Ana Carolina Ferreira Arantes, nº 5595 - Bairro: Residencial Antonio Gonzales, CEP 14.403-833"
+      }
+    ],
     "massNotes": [],
     "latitude": -20.5381768,
     "longitude": -47.4009795,
@@ -160,6 +322,11 @@
     "description": null,
     "image": "https://www.diocesefranca.org.br/images/20210413011346_IMG_0466A2-79C9CF-25437D-88E7B1-0BED5C-59667B.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2049&id_orgao=1",
+    "socialMedia": {
+      "youtube": "https://www.youtube.com/channel/UCo1C2rz9hOLvCqc_NANBMaA",
+      "facebook": "https://www.facebook.com/paroquian.sra.dasgracas/?rf=373691619316668"
+    },
+    "chapels": [],
     "massNotes": [
       "Quinta-feira: Celebração da palavra: 06h30; 11h30 e 19h",
       "1ª sexta-feira do mês: 15h",
@@ -191,6 +358,33 @@
     "description": null,
     "image": "https://www.diocesefranca.org.br/images/20210413011738_2.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2050&id_orgao=1",
+    "socialMedia": null,
+    "chapels": [
+      {
+        "name": "Capela Nossa Senhora Aparecida",
+        "address": "CEP: 13.360-000 - Distrito de Capivari"
+      },
+      {
+        "name": "Capela São Benedito",
+        "address": "Praça Eugênio do Carmo, 01, CEP 14.505-000 - São Benedito da Cachoeirinha - Missa: Sábado às 19h"
+      },
+      {
+        "name": "Capela São Pedro e São Paulo",
+        "address": "Rua José Carrer, S/N - Jardim Guanabara, CEP: 14.500-000 - Missa: Quinta-feira às 19h e Domingo às 09h30"
+      },
+      {
+        "name": "Capela Nossa Senhora Aparecida",
+        "address": "Praça Sinhô Passos, 01 - Aparecida do Salto - Missa: Domingo às 10h"
+      },
+      {
+        "name": "Capela Nossa Senhora Aparecida",
+        "address": "Rua Sebastiana Monteiro Cassiano, CEP: 14.500-000"
+      },
+      {
+        "name": "Capela Nossa Senhora do Rosário",
+        "address": "Largo do Rosário - Missa: Quinta-feira às 19h"
+      }
+    ],
     "massNotes": [],
     "latitude": -20.3366604,
     "longitude": -47.7797924,
@@ -214,6 +408,29 @@
     "description": null,
     "image": "https://www.diocesefranca.org.br/images/20210412140607_atrocinio-paulista.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2041&id_orgao=1",
+    "socialMedia": null,
+    "chapels": [
+      {
+        "name": "Capela Santa Cruz",
+        "address": "Praça Santa Cruz, S/N - Santa Cruz, CEP: 14.415-000"
+      },
+      {
+        "name": "Capela São Sebastião",
+        "address": "Avenida Diamante, 1750 - Nova Sapucaí, CEP: 14.415-000"
+      },
+      {
+        "name": "Comunidade do Lambari",
+        "address": "Missa: 1° Domingo 15h (meses pares)"
+      },
+      {
+        "name": "Comunidade da Cachoeira",
+        "address": "Missa: 2° Domingo 15h (meses pares)"
+      },
+      {
+        "name": "Comunidade do Palmital",
+        "address": "Missa: 3° Domingo 15h (meses pares)"
+      }
+    ],
     "massNotes": [
       "1ª Sexta-feira: 6h45 e 20h",
       "2ª Terça-feira: missa no Lar São Vicente de Paulo15h"
@@ -243,6 +460,11 @@
     "description": "A Paróquia Nossa Senhora do Patrocínio foi instalada canonicamente no dia 28 de julho de 2011, sendo desmembrada da Paróquia Santo Antônio, tendo como primeiro pároco o Pe. Adriano Henrique da Silva. Recebeu como patrona Nossa Senhora do Patrocínio, por \"patrocinar graças e…",
     "image": "https://www.diocesefranca.org.br/images/20210413011947_3.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2051&id_orgao=1",
+    "socialMedia": {
+      "facebook": "https://www.facebook.com/pnossasenhoradopatrocinio/",
+      "instagram": "https://www.instagram.com/pascomburitizal/"
+    },
+    "chapels": [],
     "massNotes": [
       "1⁰ Sábado do mês às 09h",
       "Missas Votivas conforme avisos semanais."
@@ -270,6 +492,19 @@
     "description": null,
     "image": "https://www.diocesefranca.org.br/images/20210607170423_IMG_485BA8-574F46-D3972A-DE4F4F-9B3CF4-78F065.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2230&id_orgao=1",
+    "socialMedia": {
+      "facebook": "https://www.facebook.com/NSraRosaMisticaOficial/"
+    },
+    "chapels": [
+      {
+        "name": "Capela Santo Antonio de Santana Galvão (Frei Galvão)",
+        "address": "Rua Dilco Rosa Faria, 2740 Jardim Pulicano - CEP 14.406-753"
+      },
+      {
+        "name": "Capela Nossa Senhora Aparecida do Bom Jardim",
+        "address": "Rodovia Nelson Nogueira, Km 6 - Bom Jardim - Obs: À direita na estrada Dona Gani - Missa: Domingo: 10h"
+      }
+    ],
     "massNotes": [
       "Quata e quinta-feira : 19h30",
       "1ª sexta-feira do mês : 19h30",
@@ -297,6 +532,24 @@
     "description": null,
     "image": "https://www.diocesefranca.org.br/images/20210413012114_4.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2052&id_orgao=1",
+    "socialMedia": {
+      "facebook": "https://www.facebook.com/Par%C3%B3quia-Sagrada-Fam%C3%ADlia-Diocese-de-FrancaSP-409250849820932",
+      "instagram": "https://instagram.com/areapastoralsagradafamilia?igshid=3bxpzb11be2w"
+    },
+    "chapels": [
+      {
+        "name": "Capela Nossa Senhora de Guadalupe",
+        "address": "Rua João de Araujo Malheiros, 1060 - Vila São Sebastião. CEP: 14.406-681 - Missa: - Domingo: 08h30"
+      },
+      {
+        "name": "Capela Santa Clara",
+        "address": "Rua Anésio Basílio dos Santos, 2030 - Jardim Palmeiras. CEP: 14.406-707 - Missa: - Domingo: 10h"
+      },
+      {
+        "name": "Capela Santa Maria dos Anjos",
+        "address": "Av. Nossa Senhora de Lourdes, 880 - Residencial Santa Clara. CEP: 14. 406-559 - Missa: - Sábado: 19h"
+      }
+    ],
     "massNotes": [],
     "latitude": -20.5381768,
     "longitude": -47.4009795,
@@ -317,6 +570,31 @@
     "description": "Com o loteamento do Jardim Paulistano, nos anos 1980, na zona leste desta cidade, houve uma grande demanda de pessoas vindas de várias partes da cidade, incentivados pela facilidade em adquirir terreno em 36 meses a preço sem juros com 300 a 400 mt², além do Distrito Industrial…",
     "image": "https://www.diocesefranca.org.br/images/20210413012628_5.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2053&id_orgao=1",
+    "socialMedia": {
+      "facebook": "https://www.facebook.com/pscj4068/?rf=809619902493644"
+    },
+    "chapels": [
+      {
+        "name": "Capela São Lucas",
+        "address": "Rua Natal, 800 – Jardim Brasilândia. CEP 14.402-265"
+      },
+      {
+        "name": "Capela São Francisco de Assis",
+        "address": "Av. Ricardo Alexsander de Andrade, 330 – Jardim São Francisco. CEP 14.402-600"
+      },
+      {
+        "name": "Capela São Paulo",
+        "address": "Rua Gilberto de Aguilar,1381 – Jardim Paulistano I. CEP 14.402-410"
+      },
+      {
+        "name": "Capela Divino Espírito Santo",
+        "address": "Rua Antônio Marcos, 3101– Jardim Palma CEP 14.401-083"
+      },
+      {
+        "name": "Capela São Geraldo Magela (Rural) Paiolzinho",
+        "address": "Missa: Domingo às 17h - 1ª sexta-feira do mês 19h e Adoração ao Santíssimo"
+      }
+    ],
     "massNotes": [
       "1ª Sexta – feira do mês às 18h15 Adoração ao Santíssimo e 19h missa"
     ],
@@ -345,6 +623,23 @@
     "description": "No dia 30/12/1975, Dom Diógenes Silva Matthes, bispo diocesano, solicita a fundação de uma Comissão Missionária em Franca, mas somente em 10/04/1983 foi decidido a fundação da Casa Missionária em Franca, no Jardim Aeroporto I.",
     "image": "https://www.diocesefranca.org.br/images/20210413015700_19.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2066&id_orgao=1",
+    "socialMedia": {
+      "facebook": "https://pt-br.facebook.com/ParoquiaSantanaFranca/"
+    },
+    "chapels": [
+      {
+        "name": "Capela Nossa Senhora das Dores",
+        "address": "Rua Capitão Fernando Pereira Garcia, 1107. Jardim Aeroporto I. CEP 14.404-049"
+      },
+      {
+        "name": "Capela Santa Catarina de Sena",
+        "address": "Rua Dr Fernando Costa, 500. Parque Universitário. CEP: 14.404-623"
+      },
+      {
+        "name": "Capela São João Bosco",
+        "address": "Av. Euclides Vieira Coelho, 2800 - Jardim Alvorada. CEP 14.404-000"
+      }
+    ],
     "massNotes": [],
     "latitude": -20.5381768,
     "longitude": -47.4009795,
@@ -368,6 +663,13 @@
     "description": null,
     "image": "https://www.diocesefranca.org.br/images/20210413012523_6.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2054&id_orgao=1",
+    "socialMedia": null,
+    "chapels": [
+      {
+        "name": "Capela Nossa Senhora das Graças",
+        "address": "Bairro Caetitú"
+      }
+    ],
     "massNotes": [],
     "latitude": -20.458063,
     "longitude": -47.5911289,
@@ -391,6 +693,20 @@
     "description": null,
     "image": "https://www.diocesefranca.org.br/images/20210413013106_7.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2055&id_orgao=1",
+    "socialMedia": {
+      "youtube": "https://www.youtube.com/channel/UCyJBBnJLgXmJ9OofR7JHeIg/",
+      "facebook": "https://www.facebook.com/santaedwigesfranca/"
+    },
+    "chapels": [
+      {
+        "name": "Capela Santa Paulina",
+        "address": "Rua Nilton Rodrigues Coelho, s.n - Res. Santa Mônica"
+      },
+      {
+        "name": "Capela Jesus Misericordioso - Parque do Mirante",
+        "address": "Avenida da Graviola, 530. - Missa: Domingo: 8h"
+      }
+    ],
     "massNotes": [],
     "latitude": -20.5381768,
     "longitude": -47.4009795,
@@ -414,6 +730,29 @@
     "description": null,
     "image": "https://www.diocesefranca.org.br/images/20210604171137_Paroquia%20Santa%20Gianna.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2056&id_orgao=1",
+    "socialMedia": {
+      "youtube": "https://www.youtube.com/channel/UCaFDdOeAka4ZGI9cFIyoPyA/",
+      "facebook": "https://www.facebook.com/Psantagiannaoficial",
+      "instagram": "https://instagram.com/psantagiannaoficial"
+    },
+    "chapels": [
+      {
+        "name": "Capela Nossa Senhora Auxiliadora",
+        "address": "Av. Dr. Abrahão Brickmann, 2675 - Jd. Luiza I - CEP - 14.407-010 - Fones: (16)3703-5767 - (16) 99388-2359"
+      },
+      {
+        "name": "Capela Nossa Senhora Do Rosário",
+        "address": "Rua José Josué da Silva, 1199 - Jd. Vera Cruz I - CEP - 14.407-488"
+      },
+      {
+        "name": "Capela Nossa Senhora De Fátima",
+        "address": "Av. Pastor Joaquim Honório Tostes, 4500 - Jdm Paineiras - CEP - 14.407-756"
+      },
+      {
+        "name": "Capela Nossa Senhora Do Carmo",
+        "address": "Rua Professora Vanda Gonzaga, 1481, Recanto Capitão Heliodoro."
+      }
+    ],
     "massNotes": [],
     "latitude": -20.5381768,
     "longitude": -47.4009795,
@@ -438,6 +777,21 @@
     "description": null,
     "image": "https://www.diocesefranca.org.br/images/20210413013437_9.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2057&id_orgao=1",
+    "socialMedia": {
+      "youtube": "https://www.youtube.com/c/ParoquiaSantaLuziaFranca-sp/",
+      "facebook": "https://www.facebook.com/santaluziafranca",
+      "instagram": "https://www.instagram.com/santaluziafranca/"
+    },
+    "chapels": [
+      {
+        "name": "Capela Nossa Senhora Aparecida",
+        "address": "Rua Conceição de Souza Barbosa, 530 Jd. Zelinda"
+      },
+      {
+        "name": "Capela São Rafael",
+        "address": "Rua Caetano Dal Sasso, 151 Pq. Das Esmeraldas"
+      }
+    ],
     "massNotes": [
       "Todo dia 13 às 19:15 Missa de Santa Luzia",
       "Todo dia 22 às 19:15 Missa de Santa Rita"
@@ -465,6 +819,10 @@
     "description": null,
     "image": "https://www.diocesefranca.org.br/images/20210413013659_10.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2058&id_orgao=1",
+    "socialMedia": {
+      "facebook": "https://www.facebook.com/pages/Par%C3%B3quia-Santa-M%C3%B4nica/715621458486919"
+    },
+    "chapels": [],
     "massNotes": [
       "Primeira terça- feira do mês: Missa nas casas Domingo: 8h, 10h30, 19h"
     ],
@@ -490,6 +848,20 @@
     "description": null,
     "image": "https://www.diocesefranca.org.br/images/20210413013822_11.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2059&id_orgao=1",
+    "socialMedia": {
+      "facebook": "https://www.facebook.com/Par%C3%B3quia-Sagrada-Fam%C3%ADlia-Diocese-de-FrancaSP-409250849820932",
+      "instagram": "https://instagram.com/areapastoralsagradafamilia?igshid=3bxpzb11be2w"
+    },
+    "chapels": [
+      {
+        "name": "Capela Nossa Senhora de Lourdes",
+        "address": "Rua Dr. ChaficFacury, nº 3021, Primo Meneghetti, 14.403-680"
+      },
+      {
+        "name": "Capela São José Operário",
+        "address": "Rua Pedro Pucci, 3237 - Vila Scarabucci, 14403-649"
+      }
+    ],
     "massNotes": [
       "3ª Terça-feira do mês, às 15h, Missa da saúde",
       "Quinta-feira às 14h30, Missa com Adoração Nossa Senhora Perpétuo Socorro",
@@ -517,6 +889,69 @@
     "description": null,
     "image": "https://www.diocesefranca.org.br/images/20210413014049_13.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2060&id_orgao=1",
+    "socialMedia": null,
+    "chapels": [
+      {
+        "name": "Capela Nossa Senhora Aparecida",
+        "address": "Rua Vicente Moreira, 51 - CEP - 14 540-000"
+      },
+      {
+        "name": "Capela Santa Cruz",
+        "address": "Rua Manoel Pedro Pimentel, 1320 - Vila Gomes - CEP - 14 540-000 - Missa: Sábado às 17h"
+      },
+      {
+        "name": "Capela Santo Antonio",
+        "address": "Rua Custódio Garcia, 305 - Conj.Hab. Ricardo Bozola - 14.540-000 - Missa: Domingo 19h"
+      },
+      {
+        "name": "Capela São Geraldo",
+        "address": "Avenida Dois - Usina Junqueira - 14.540-000 - Missa: Domingo às 08h"
+      },
+      {
+        "name": "Comunidade Santo Ântonio de Santana Galvão",
+        "address": "Rua Dr. Antônio Ribeiro Soares, 465 - Conj. Hab. Evaristo Rodrigues Nunes - CEP - 14.540-000 - Missa: Domingo 19h"
+      },
+      {
+        "name": "Comunidade Santo Ezequiel Moreno",
+        "address": "Rua José Franciscon, 184 - Conj. Hab. Assad Salim - CEP - 14.540-000 - Missa: Sábado 19h"
+      },
+      {
+        "name": "Comunidade São Bento",
+        "address": "Rua Francisco Alves Pereira, s/nº - CEP - 14.540-000 - Missa: Domingo 9h30"
+      },
+      {
+        "name": "Comunidade Nossa Senhora Das Graças",
+        "address": "Rua Rosina Basile Bortoleto, s/nº - - Conj. Hab. Waldir Dib Mattar - CEP - 14.540-000 - Missa: Domingo 10h"
+      },
+      {
+        "name": "Comunidade Santos Reis",
+        "address": "Rua Juybá Rodrigues Sora, s/º - Conj. Hab.Alceu Molina - CEP - 14.540-000 - Missa: Sábado 19h"
+      },
+      {
+        "name": "Comunidade João Paulo II",
+        "address": "Avenida Mogiana, s/nº - CEP - 14.540-000"
+      },
+      {
+        "name": "Comunidade Irmã Dulce",
+        "address": "Avenida Campo de Aviação, s/nº - CEP - 14.540-000 - 2ª e 4ª-feira do mês 9h30 - Abrigo Dos Idosos"
+      },
+      {
+        "name": "Capela Nossa Senhora Da Abadia",
+        "address": "Rua Cel. Francisco Martins, 717 - Centro - CEP - 14540-000 - Missa: Terça à Sexta 7h"
+      },
+      {
+        "name": "Capela da Ressurreição",
+        "address": "Missa: Segunda 15h"
+      },
+      {
+        "name": "Capela Mãe Peregrina",
+        "address": "Rua Nicolau Nassif, 112 - Jardim Madrugada (creche), CEP: 14.540-000 - Missa: Domingo: 08h"
+      },
+      {
+        "name": "Capela São João Batista",
+        "address": "Missa: Domingo: 19h - Fazenda Aliança (zona rural) - Rodovia Anhanguera Km 441"
+      }
+    ],
     "massNotes": [],
     "latitude": -20.0411748,
     "longitude": -47.7476682,
@@ -539,6 +974,25 @@
     "description": null,
     "image": "https://www.diocesefranca.org.br/images/20210413014211_14.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2061&id_orgao=1",
+    "socialMedia": {
+      "youtube": "https://www.youtube.com/channel/UC30gCDm3dkEGKISj3Rgg-PQ",
+      "facebook": "https://www.facebook.com/paroquiasalesoliveira",
+      "instagram": "https://www.instagram.com/paroquiasalesoliveira/"
+    },
+    "chapels": [
+      {
+        "name": "Capela Nossa Senhora Aparecida",
+        "address": "Rua Dr. Paulo de Lima Correia, 709, CEP: 14.660-000"
+      },
+      {
+        "name": "Capela São José",
+        "address": "Rua José Vilela Nunes Sobrinho, s/n, CEP: 14.660-000 - Missa: Domingo às 08h"
+      },
+      {
+        "name": "Capela Santo Antônio",
+        "address": "Missa: Domingo às 08h"
+      }
+    ],
     "massNotes": [],
     "latitude": -20.769612,
     "longitude": -47.836873,
@@ -559,6 +1013,17 @@
     "description": null,
     "image": "https://www.diocesefranca.org.br/images/20210413014308_15.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2062&id_orgao=1",
+    "socialMedia": {
+      "youtube": "https://www.youtube.com/channel/UCc73kNNiU4fjpEdYCykMRjw",
+      "facebook": "https://www.facebook.com/profile.php?id=100093579530149&mibextid=ZbWKwL",
+      "instagram": "https://www.instagram.com/paroquiasantateresinhafrancasp/"
+    },
+    "chapels": [
+      {
+        "name": "Capela Santo Tomás de Aquino",
+        "address": "Av. Marginal Francisco José da Silva, 1250. Residencial São Tomáz, Franca. - Quinta-feira: 19h - Domingo: 10h"
+      }
+    ],
     "massNotes": [
       "Matriz Santa Teresinha",
       "Missas Devocionais (na Matriz)",
@@ -586,6 +1051,31 @@
     "description": null,
     "image": "https://www.diocesefranca.org.br/images/20210413014852_16.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2063&id_orgao=1",
+    "socialMedia": {
+      "facebook": "https://www.facebook.com/pascom.aramina"
+    },
+    "chapels": [
+      {
+        "name": "Capela Nossa Senhora Aparecida - Canindé",
+        "address": "Missa: Segunda, quarta e quinta-feira: 19h00"
+      },
+      {
+        "name": "Comunidade dos Três Reis",
+        "address": "Missa: Sexta-feira, 19h00"
+      },
+      {
+        "name": "Comunidade Nossa Senhora do Bom Conselho - Brejão",
+        "address": "Missa: 1ª e 3ª Quinta-feira, 19h00"
+      },
+      {
+        "name": "Comunidade Nossa Senhora Aparecida - Paraíso",
+        "address": "Missa: Última quarta feira do mês, 19h00"
+      },
+      {
+        "name": "Comunidade Nossa Senhora Aparecida - Aramina",
+        "address": "Missa : Sábado, 19h30 - Domingo, 19h00"
+      }
+    ],
     "massNotes": [],
     "latitude": -20.0876144,
     "longitude": -47.789201,
@@ -608,6 +1098,11 @@
     "description": null,
     "image": "https://www.diocesefranca.org.br/images/20210413031400_download.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2065&id_orgao=1",
+    "socialMedia": {
+      "facebook": "https://www.facebook.com/Santo-Ant%C3%B4nio-de-Rifaina-1382002201866783/",
+      "instagram": "https://www.instagram.com/matriz_rifaina/"
+    },
+    "chapels": [],
     "massNotes": [],
     "latitude": -20.0811589,
     "longitude": -47.4210736,
@@ -628,6 +1123,25 @@
     "description": null,
     "image": "https://www.diocesefranca.org.br/images/20210413015735_20.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2067&id_orgao=1",
+    "socialMedia": {
+      "youtube": "https://www.youtube.com/channel/UCABdVgcxha9_Kr-c44C64wA",
+      "facebook": "https://www.facebook.com/ParoquiaSaoBeneditoFranca/?ref=br_rs",
+      "instagram": "https://www.instagram.com/sao.benedito.franca/"
+    },
+    "chapels": [
+      {
+        "name": "Capela Nossa Senhora do Sagrado Coração",
+        "address": "Rua Abrão Jorge, 3469 - Jardim Guanabara - CEP: 14.405-397"
+      },
+      {
+        "name": "Capela São Paulo",
+        "address": "Rua Antônio Bernardes Pinto, 4620 - Vl, Chico Júlio - CEP: 14.405-233"
+      },
+      {
+        "name": "Capela São Padre Pio",
+        "address": "Rua: Francisco Naline, 3699 - Parque São Jorge"
+      }
+    ],
     "massNotes": [
       "Quinta às 15h, na Matriz : Missa e novena de Nª Srª do Perpétuo Socorro"
     ],
@@ -653,6 +1167,25 @@
     "description": "A Paróquia São Crispim foi instalada, canonicamente, no dia 24 de outubro de 1999, sendo desmembrada da Paróquia São Benedito, tendo Pe. Devair Araújo da Fonseca como primeiro pároco.",
     "image": "https://www.diocesefranca.org.br/images/20210413015844_21.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2068&id_orgao=1",
+    "socialMedia": {
+      "youtube": "https://www.youtube.com/user/Pascomcrispim",
+      "facebook": "https://www.facebook.com/paroquiasaocrispim/",
+      "instagram": "https://www.instagram.com/paroquiasaocrispim/"
+    },
+    "chapels": [
+      {
+        "name": "Capela N. Sra Mãe da Divina Providência",
+        "address": "Rua Wanderlei Riscolino da Silva, 1220 - Jardim Cambuí - CEP - 14.409-682"
+      },
+      {
+        "name": "Capela Santa Cruz",
+        "address": "Avenida Monteiro Lobato, 800 - Miramontes - CEP - 14.409-500"
+      },
+      {
+        "name": "Capela São Miguel",
+        "address": "Rua José Mafas, 991 - Parque do Horto"
+      }
+    ],
     "massNotes": [],
     "latitude": -20.5381768,
     "longitude": -47.4009795,
@@ -676,6 +1209,15 @@
     "description": null,
     "image": "https://www.diocesefranca.org.br/images/20210413020004_22.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2069&id_orgao=1",
+    "socialMedia": {
+      "facebook": "https://www.facebook.com/Par%C3%B2quia-S%C3%A3o-Francisco-de-AssisFranca-Sp-1501800000087961/"
+    },
+    "chapels": [
+      {
+        "name": "Capela Sagrado Coração de Jesus",
+        "address": "Rua Alípio Resende de Araújo, 2105, Jardim Aeroporto II"
+      }
+    ],
     "massNotes": [
       "1ª Sexta do mês 19h00"
     ],
@@ -701,6 +1243,19 @@
     "description": null,
     "image": "https://www.diocesefranca.org.br/images/20210413020052_23.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2070&id_orgao=1",
+    "socialMedia": {
+      "facebook": "https://www.facebook.com/Par%C3%B3quia-S%C3%A3o-Jo%C3%A3o-Batista-Franca-111084467198217/?ref=py_c"
+    },
+    "chapels": [
+      {
+        "name": "Capela Santa Dorothea",
+        "address": "Rua Urias Alves Taveira, nº 6571. Residencial Ana Dorothea"
+      },
+      {
+        "name": "Capela Nossa Senhora do Carmo",
+        "address": "2ª Quarta-feira do mês, às 19h30. - Av. São Vicente, 7316 – Residencial Zanetti (a missa é celebrada na casa de leigos)"
+      }
+    ],
     "massNotes": [],
     "latitude": -20.5381768,
     "longitude": -47.4009795,
@@ -724,6 +1279,20 @@
     "description": null,
     "image": "https://www.diocesefranca.org.br/images/20210608141128_Sao%20Joao%20Batista%20Ituverava.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2257&id_orgao=1",
+    "socialMedia": {
+      "facebook": "https://www.facebook.com/paroquiasaojoaobatistaituveravasp",
+      "instagram": "https://www.instagram.com/psao.joaobatista/"
+    },
+    "chapels": [
+      {
+        "name": "Capela Imaculada Conceição",
+        "address": "Avenida Perimetral, S/N. CEP: 14.500-000"
+      },
+      {
+        "name": "Capela Sagrado Coração de Jesus",
+        "address": "Rua: Nobuo Sakemi, S/N. CEP: 14.500-000"
+      }
+    ],
     "massNotes": [],
     "latitude": -20.3366604,
     "longitude": -47.7797924,
@@ -748,6 +1317,31 @@
     "description": null,
     "image": "https://www.diocesefranca.org.br/images/20210413020244_24.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2071&id_orgao=1",
+    "socialMedia": {
+      "youtube": "https://www.youtube.com/channel/UCAcQ2vrYFKI_uMdbHtPVvWw"
+    },
+    "chapels": [
+      {
+        "name": "Capela Santo Antônio",
+        "address": "Rua Clotilde Torres Penedo, 100 - Jardim Paraíso, CEP: 14.600-000"
+      },
+      {
+        "name": "Capela São Benedito",
+        "address": "Praça Mário Lano, s/n - Residencial Espigão, CEP: 14.600-000"
+      },
+      {
+        "name": "Capela São Pedro e São Paulo",
+        "address": "Rua José Chaves, S/N – Pedro Chediach, CEP: 14.600-000"
+      },
+      {
+        "name": "Capela Senhor Bom Jesus da Lapa",
+        "address": "Rua Sergipe, 2540 - Lapa Nova, CEP: 14.600-000"
+      },
+      {
+        "name": "Capela Santo Hilário - Rural",
+        "address": "Missa: 1⁰ Domingo do mês 10he30 - Obs: Todos os sábados missa nas Irmãs às 09h; 1ª sexta-feira do mês missa no Asilo às 15h e última sexta-feira do mês, missa na Santa Casa às 15h."
+      }
+    ],
     "massNotes": [
       "Matriz",
       "3ª Sexta-feira do mês, missa da Mãe Rainha",
@@ -776,6 +1370,15 @@
     "description": "Em fins do século XIX, o café começou a ser cultivado no Norte do Estado, atraindo grandes levas de famílias que, aos pouco, formavam pequenas comunidades. Nasceu assim, entre os Ribeirões Buritis e Lageado, o patrimônio de São José das Pitangueiras, onde foi construída uma…",
     "image": "https://www.diocesefranca.org.br/images/20210413025811_Par%C3%B3quia_S%C3%A3o_Jos%C3%A9,_S%C3%A3o_Jos%C3%A9_da_Bela_Vista_(SP),_Brazil.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2072&id_orgao=1",
+    "socialMedia": {
+      "facebook": "https://www.facebook.com/psaojose.org.br"
+    },
+    "chapels": [
+      {
+        "name": "Capela Santa Rita de Cássia",
+        "address": "Bairro do Buritizinho"
+      }
+    ],
     "massNotes": [
       "1ª Sexta-feira, Sagrado Coração de Jesus às 19h30",
       "Dia 22 de todo mês, Missa Santa Rita 19h",
@@ -805,6 +1408,45 @@
     "description": null,
     "image": "https://www.diocesefranca.org.br/images/20210413020559_26.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2073&id_orgao=1",
+    "socialMedia": null,
+    "chapels": [
+      {
+        "name": "Capela do Hospital Beneficiente Santo Antôni o",
+        "address": "Rua 3, S/N - Centro, CEP: 14.620-000 - Missa : 2ª Quinta-feira do mês às 18h"
+      },
+      {
+        "name": "Capela Mãe Rainha",
+        "address": "Rua 30, s/n - Jardim Teixeira, CEP: 14.620-000"
+      },
+      {
+        "name": "Capela Nossa Senhora Aparecida",
+        "address": "Rua 26, nº 1182 - Jardim Cidade Alta, CEP: 14.620-000 - Missa : Domingo 8h"
+      },
+      {
+        "name": "Capela Sagrada Família",
+        "address": "Rua 16, nº 701 - Centro, CEP: 14.620-000 - Missa: Quarta-feira às 07h"
+      },
+      {
+        "name": "Capela Santa Genoveva",
+        "address": "Praça Mário Furtado, S/N - Centro, CEP: 14.620-000 - Missa : Sexta-feira 19h"
+      },
+      {
+        "name": "Capela Santa Luzia",
+        "address": "Avenida 9, nº 40, CEP: 14.620-000 - Missa: Domingo 10h"
+      },
+      {
+        "name": "Capela São Francisco de Assis",
+        "address": "Rua 28 - Jardim Francisco, CEP: 14.620-000 - Missa : Domingo 8h30"
+      },
+      {
+        "name": "Capela São João Batista",
+        "address": "Rua 5, nº 1641 - Jardim Nova Orlândia, CEP: 14.620-000"
+      },
+      {
+        "name": "Capela do Cemitério",
+        "address": "Missa : 1ª Quinta-feira do mês às 18h"
+      }
+    ],
     "massNotes": [
       "1ª Sexta-feira do mês: 7h e Adoração ao Santíssimo durante todo o dia.",
       "Sábado: 17h30, 18h30, 20h (CNC)"
@@ -831,6 +1473,29 @@
     "description": null,
     "image": "https://www.diocesefranca.org.br/images/20210413020750_27.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2074&id_orgao=1",
+    "socialMedia": null,
+    "chapels": [
+      {
+        "name": "Capela Nossa Senhora da Guadalupe",
+        "address": "Vila São Sebaastião - Missa: Domingo às 08h30"
+      },
+      {
+        "name": "Capela Santa Clara",
+        "address": "Rua Anésio Basílio dos Santos, 2030 - Jardim Palmeiras - Missa: Domingo às 10h"
+      },
+      {
+        "name": "Capela Santa Maria dos Anjos",
+        "address": "Av. Nossa Senhora de Lourdes - Residencial Santa Clara - Missa: Sábado às 19h"
+      },
+      {
+        "name": "Capela Santo Antônio Santana Galvão",
+        "address": "Rua Dillco Rosa Faria, n. 274 - Jardim Pulicano - Missa: Sábado às 19h"
+      },
+      {
+        "name": "Capela Nossa Senhora Aparecida",
+        "address": "Bom Jardim - Missa: 1ª Terça-feira às 20h"
+      }
+    ],
     "massNotes": [],
     "latitude": -20.5381768,
     "longitude": -47.4009795,
@@ -863,6 +1528,21 @@
     "description": "A Paróquia São Pedro foi instalada canonicamente no dia 29 de junho de 2005, sendo desmembrada da Paróquia Santa Rita, tendo como primeiro pároco Padre Josenildo Almeida da Silva. Territorialmente faz divisa com a Paróquia Santana, Paróquia Santa Rita, Paróquia Nossa Senhora da…",
     "image": "https://www.diocesefranca.org.br/images/20210413020831_28.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2075&id_orgao=1",
+    "socialMedia": {
+      "youtube": "https://www.youtube.com/channel/UCNYlVt1bQfqzt-hQ5HfjwFQ",
+      "facebook": "https://pt-br.facebook.com/saopedrofranca/",
+      "instagram": "https://www.instagram.com/saopedrofranca/?hl=pt"
+    },
+    "chapels": [
+      {
+        "name": "Capela Santa Teresinha do Menino Jesus",
+        "address": "Rua. Dr. Agnelo Morato, 1210 – Prolongamento do Jardim Flórida CEP: 14.403-276"
+      },
+      {
+        "name": "Capela São João Paulo II",
+        "address": "Av. José Marcelo Leite, 2080 – Parque dos Lima"
+      }
+    ],
     "massNotes": [],
     "latitude": -20.5381768,
     "longitude": -47.4009795,
@@ -887,6 +1567,11 @@
     "description": null,
     "image": "https://www.diocesefranca.org.br/images/20251226175350_1000167251.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2076&id_orgao=1",
+    "socialMedia": {
+      "facebook": "https://www.facebook.com/pssebastiao",
+      "instagram": "https://instagram.com/paroquiasaosebastiaofranca"
+    },
+    "chapels": [],
     "massNotes": [
       "Última terça-feira do mês: Missa da catequese 1ª Eucaristia",
       "1ª Sexta-feira do mês: Missa em honra ao Sagrado Coração de Jesus às 19h",
@@ -916,6 +1601,11 @@
     "description": "A Paróquia São Sebastião foi instalada, canonicamente, no dia 10 de Agosto de 2011, sendo desmembrada da Paróquia Nossa Senhora da Abadia - Cristais Paulista/SP, tendo Pe. Josenildo Almeida da Silva como primeiro pároco. Territorialmente, faz divisa com a Paróquia São João…",
     "image": "https://www.diocesefranca.org.br/images/20210413021045_30.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2077&id_orgao=1",
+    "socialMedia": {
+      "facebook": "https://www.facebook.com/Par%C3%B3quia-S%C3%A3o-Sebasti%C3%A3o-Jeriquara-108016254237725/",
+      "instagram": "https://www.instagram.com/paroquiasaosebastiao20/"
+    },
+    "chapels": [],
     "massNotes": [],
     "latitude": -20.3104773,
     "longitude": -47.5915669,
@@ -939,6 +1629,24 @@
     "description": "Aos 19 dias do mês de Março do ano de 1924, Dom Aberto José Gonçalves, por graça de Deus e para melhor atender o bem espiritual do povo de Guará, cria a Paróquia, desmembrando-a da Paróquia de Ituverava.",
     "image": "https://www.diocesefranca.org.br/images/20240902141852_WhatsApp-Image-2024-08-29-at-17.41.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2078&id_orgao=1",
+    "socialMedia": {
+      "facebook": "https://www.facebook.com/dfparoquiaguara/",
+      "instagram": "https://www.instagram.com/paroquiaguara/"
+    },
+    "chapels": [
+      {
+        "name": "Capela Nossa Senhora Aparecida",
+        "address": "Rua Jordão Idelfonso Pereira Martins, s/n. Vila Pires. - Missa: Domingo, 08h"
+      },
+      {
+        "name": "Capela Senhor Bom Jesus da Lapa",
+        "address": "Praça José Pedro Figueiredo, s/n. Vila Vitória. - Missa: Domingo, 09h30"
+      },
+      {
+        "name": "Capela São Pedro",
+        "address": "Praça São Pedro, 190. Pioneiros, CEP: 14.580-000 - Missa : Sexta-feira, 19h - Centro Catequético Santa Rita"
+      }
+    ],
     "massNotes": [],
     "latitude": -20.4290496,
     "longitude": -47.8250067,
@@ -964,6 +1672,25 @@
     "description": "A Paróquia São Vicente de Paulo foi instalada canonicamente no dia do seu padroeiro, 27 de setembro de 1990, sendo desmembrada da Paróquia São Benedito. Teve como primeiro pároco Padre Luis Antonio Brentini, o segundo Padre Jacinto Ferreira Neto, terceiro Padre Idair Perina,…",
     "image": "https://www.diocesefranca.org.br/images/20210413021305_32.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2079&id_orgao=1",
+    "socialMedia": {
+      "youtube": "https://www.youtube.com/@paroquiasaovicentefranca",
+      "facebook": "https://www.facebook.com/paroquiasaovicentefranca",
+      "instagram": "https://www.instagram.com/paroquiasaovicentefranca/"
+    },
+    "chapels": [
+      {
+        "name": "Capela Santo Expedito",
+        "address": "Rua João Luiz Facirolli, 2411 - Jardim Pinheiros II, CEP: 14.407-365"
+      },
+      {
+        "name": "Capela Nossa Senhora de Lourdes",
+        "address": "Av. Wanderlei Mancini, 1830 – Parque Vicente Leporace I, CEP: 14.407-325"
+      },
+      {
+        "name": "Capela Santa Filomena",
+        "address": "Rua Antônio Rúbio Herreiro, 441 – Parque Vicente Leporace II, CEP: 14.407-047"
+      }
+    ],
     "massNotes": [
       "Sábado: (Salão Paroquial) Missa Cominidade Neocatecumenal: 18h"
     ],
@@ -989,6 +1716,10 @@
     "description": null,
     "image": "https://www.diocesefranca.org.br/images/20210413015357_17.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2064&id_orgao=1",
+    "socialMedia": {
+      "facebook": "https://www.facebook.com/santoantonio.franca"
+    },
+    "chapels": [],
     "massNotes": [
       "15h: Terço das Mulheres",
       "20: Terço dos Homens",
@@ -1021,6 +1752,21 @@
     "description": null,
     "image": "https://www.diocesefranca.org.br/images/20210413021455_33.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2080&id_orgao=1",
+    "socialMedia": {
+      "youtube": "https://www.youtube.com/channel/UC9LLGWGugJx961l3tsFzjAg",
+      "facebook": "https://www.facebook.com/catedralfrancaoficial/?rf=177501642390235",
+      "instagram": "https://www.instagram.com/catedral_franca/"
+    },
+    "chapels": [
+      {
+        "name": "Capela São Francisco de Assis",
+        "address": "Rua Frederico Ozanan, n°1111. Jardim Consolação - CEP 14.400-150 - Franca-SP"
+      },
+      {
+        "name": "Capela Nossa Senhora de Lourdes",
+        "address": "Rua Major Claudiano, n° 1488. Centro. - CEP 14.000-690 - Franca-SP"
+      }
+    ],
     "massNotes": [],
     "latitude": -20.5381768,
     "longitude": -47.4009795,
