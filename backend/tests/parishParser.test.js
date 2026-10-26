@@ -43,11 +43,12 @@ describe('parseParish', () => {
 });
 
 describe('socialMedia e chapels parsers', () => {
-  it('parseSocialMedia extrai links de redes sociais e recusa esquemas/hosts maliciosos ou enganosos', () => {
+  it('parseSocialMedia extrai links de redes sociais e whatsapp e recusa esquemas/hosts maliciosos ou enganosos', () => {
     const mockHtml = `<div class="text_post_block">
       <a href="https://www.facebook.com/paroquiamock">Facebook</a>
       <a href="https://www.instagram.com/paroquiamock">Instagram</a>
       <a href="https://www.youtube.com/channel/UC123456">YouTube</a>
+      <a href="https://wa.me/5516999998888">WhatsApp</a>
       <a href="javascript:alert(1)">Facebook</a>
       <a href="https://evil.example.com/phishing">Facebook</a>
       <a href="intent://bad#Intent;end">Instagram</a>
@@ -56,14 +57,15 @@ describe('socialMedia e chapels parsers', () => {
       facebook: 'https://www.facebook.com/paroquiamock',
       instagram: 'https://www.instagram.com/paroquiamock',
       youtube: 'https://www.youtube.com/channel/UC123456',
+      whatsapp: 'https://wa.me/5516999998888',
     });
   });
 
-  it('parseChapels extrai capelas e comunidades com endereço', () => {
-    const text = `Local e Contato\nDados\nCapela São Benedito\nRua A, 100\nCEP 14400-000\nCapela Nossa Senhora\nRua B, 200\nCompartilhar`;
+  it('parseChapels extrai capelas, comunidades e santuários com endereço', () => {
+    const text = `Local e Contato\nDados\nCapela São Benedito\nRua A, 100\nCEP 14400-000\nSantuário Senhor Bom Jesus\nRua B, 200\nCompartilhar`;
     expect(parseChapels(text, '')).toEqual([
       { name: 'Capela São Benedito', address: 'Rua A, 100 - CEP 14400-000' },
-      { name: 'Capela Nossa Senhora', address: 'Rua B, 200' },
+      { name: 'Santuário Senhor Bom Jesus', address: 'Rua B, 200' },
     ]);
   });
 });

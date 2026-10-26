@@ -24,6 +24,11 @@ function parseSocialMedia(html) {
     if (yt && !yt.includes('ucdr7rudq6tx82gc0vv6eqrw')) {
       social.youtube = yt;
     }
+
+    const wa = toHttpsUrl(href, { hosts: ['wa.me', 'api.whatsapp.com', 'whatsapp.com'] });
+    if (wa) {
+      social.whatsapp = wa;
+    }
   });
   return Object.keys(social).length ? social : null;
 }
@@ -39,12 +44,12 @@ function parseChapels(text, parishName) {
 
   for (let i = 0; i < lines.length; i += 1) {
     const line = lines[i];
-    if (/^(capela|comunidade)\b/i.test(line) && !/^(capela|comunidade)\s+são\s+josé\s+-\s+franca/i.test(line)) {
+    if (/^(capela|comunidade|santu[aá]rio|quase-par[oó]quia|igreja)\b/i.test(line) && !/^(capela|comunidade)\s+são\s+josé\s+-\s+franca/i.test(line)) {
       if (parishName && line.toLowerCase().includes(parishName.toLowerCase())) continue;
       const name = line;
       const addressParts = [];
       let j = i + 1;
-      while (j < lines.length && !/^(capela|comunidade|dados|missas|expediente|itens|compartilhar|descrição)/i.test(lines[j]) && addressParts.length < 3) {
+      while (j < lines.length && !/^(capela|comunidade|santu[aá]rio|quase-par[oó]quia|igreja|dados|missas|expediente|itens|compartilhar|descrição)/i.test(lines[j]) && addressParts.length < 3) {
         addressParts.push(lines[j]);
         j += 1;
       }
@@ -154,8 +159,12 @@ function parseParish(html, sourceId) {
       ...splitPeople(field(body, 'Pároco')).map((n) => ({ name: n, title: 'Pároco' })),
       ...splitPeople(field(body, 'Administrador Paroquial')).map((n) => ({ name: n, title: 'Administrador Paroquial' })),
       ...splitPeople(field(body, 'Reitor')).map((n) => ({ name: n, title: 'Reitor' })),
+      ...splitPeople(field(body, 'Vigário Geral')).map((n) => ({ name: n, title: 'Vigário Geral' })),
       ...splitPeople(field(body, 'Vigário paroquial')).map((n) => ({ name: n, title: 'Vigário Paroquial' })),
       ...splitPeople(field(body, 'Vigário')).map((n) => ({ name: n, title: 'Vigário' })),
+      ...splitPeople(field(body, 'Vigário Forâneo')).map((n) => ({ name: n, title: 'Vigário Forâneo' })),
+      ...splitPeople(field(body, 'Chanceler')).map((n) => ({ name: n, title: 'Chanceler' })),
+      ...splitPeople(field(body, 'Padre Residente')).map((n) => ({ name: n, title: 'Padre Residente' })),
       ...splitPeople(field(body, 'Diácono permanente')).map((n) => ({ name: n, title: 'Diácono Permanente' })),
       ...splitPeople(field(body, 'Diácono')).map((n) => ({ name: n, title: 'Diácono' })),
       ...splitPeople(field(body, 'Cooperador')).map((n) => ({ name: n, title: /di[aá]cono/i.test(n) ? 'Diácono' : 'Cooperador' })),
