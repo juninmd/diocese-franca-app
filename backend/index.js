@@ -10,6 +10,8 @@ const newsRouter = require('./routes/news');
 const { cacheControl, noStore } = require('./middleware/cache');
 const { getCatalog } = require('./utils/catalog');
 const { readCached, updatedAt } = require('./utils/fileStore');
+const { evaluateHealth } = require('./utils/health');
+const { version: VERSION } = require('./package.json');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -47,17 +49,24 @@ app.use((req, res, next) => {
 
 app.get('/api/health', noStore, (req, res) => {
   const catalog = getCatalog();
-  res.json({
-    status: 'healthy',
+  const catalogUpdatedAt = updatedAt('churches.json');
+  const health = evaluateHealth({
+    churchesCount: catalog.churches.length,
+    catalogUpdatedAt,
+    maxAgeDays: Number(process.env.DATA_MAX_AGE_DAYS) || undefined
+  });
+  res.status(health.status === 'unhealthy' ? 503 : 200).json({
+    status: health.status,
+    errors: health.errors,
     timestamp: new Date().toISOString(),
     uptime: process.uptime(),
-    version: '1.0.0',
+    version: VERSION,
     data: {
       churches: catalog.churches.length,
       priests: catalog.priests.length,
       masses: catalog.masses.length,
       news: readCached('news.json', []).length,
-      catalogUpdatedAt: updatedAt('churches.json'),
+      catalogUpdatedAt,
       newsUpdatedAt: updatedAt('news.json')
     },
     endpoints: {
@@ -82,7 +91,7 @@ app.use('/api/news', cacheControl({ maxAge: 120 }), newsRouter);
 app.get('/', (req, res) => {
   res.json({
     message: 'Diocese de Franca API',
-    version: '1.0.0',
+    version: VERSION,
     description: 'API REST para o aplicativo da Diocese de Franca',
     documentation: {
       health: '/api/health',
