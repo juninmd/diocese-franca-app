@@ -1,10 +1,10 @@
 # Diocese de Franca - App
 
-![Diocese de Franca Banner](mobile/screenshots/home_full.png?v=36)
+![Diocese de Franca Banner](mobile/screenshots/home_full.png?v=37)
 
 Aplicativo completo para a Diocese de Franca com backend API REST e app React Native.
 
-> **Status: 100% Funcional e em Produção** - Backend Tests: 107/107 passing | E2E Playwright Tests: 18/18 passing
+> **Status: 100% Funcional e em Produção** - Backend Tests: 111/111 passing | E2E Playwright Tests: 18/18 passing
 
 ## Funcionalidades
 
@@ -16,13 +16,13 @@ Aplicativo completo para a Diocese de Franca com backend API REST e app React Na
 - Respostas padronizadas com wrapper `{ success, count, data }`
 - **Scraper Aprimorado (`backend/scraper.js`)**: Raspagem completa e autônoma de https://diocesefranca.org.br/ trazendo:
   - **Notícias**: títulos, categorias, fotos, links e data de publicação (extraída do carimbo no nome da imagem, sem inventar "hoje").
-  - **Paróquias**: 41 paróquias com endereços, contatos, expediente, redes sociais (Facebook, Instagram, YouTube e WhatsApp), capelas, comunidades e santuários vinculados e links de imagem.
-  - **Padres e Clero**: 95 sacerdotes e diáconos (incluindo Bispo Diocesano, Párocos, Vigários Gerais, Administradores Paroquiais, Reitores, Chanceleres e Diáconos Permanentes) vinculados a cada comunidade.
+  - **Paróquias**: 41 paróquias com endereços, contatos, expediente, redes sociais (Facebook, Instagram, YouTube e WhatsApp), capelas, comunidades, santuários, mosteiros e conventos vinculados e links de imagem.
+  - **Padres e Clero**: 95 sacerdotes e diáconos (incluindo Bispo Diocesano, Párocos, Vigários Gerais, Vigários Episcopais, Administradores Paroquiais, Reitores, Chanceleres, Diretores Espirituais, Párocos Eméritos, Padres Auxiliares, Assessores Diocesanos, Diáconos Permanentes e Colaboradores) vinculados a cada comunidade.
   - **Horários de Missa**: 251 horários semanais estruturados por dia e horário ("06h30; 11h30 e 19 h", dias colados na mesma linha e listas "a/e" são interpretados; o que é irregular vira nota).
 - **Igrejas próximas** (`/api/churches/nearby`): ordena as paróquias pela distância (fórmula de Haversine) até uma coordenada e calcula a próxima missa de cada uma.
 - **Cache no backend**: leitura dos JSONs com invalidação por `mtime` (o scraper atualiza a API sem reinício), `Cache-Control` + `ETag`/304 e índices por id.
 - **Scraper seguro**: escrita atômica e recusa de sobrescrever dados com resultado vazio ou muito menor (site fora do ar / layout alterado); ids de padres estáveis entre execuções.
-- **92 testes automatizados (Jest)** cobrindo endpoints, cache HTTP, parsers (notícias, paróquias, redes sociais, capelas, missas), construção do catálogo, integridade dos JSONs, geolocalização, próxima missa (fuso de Brasília) e normalização de nomes.
+- **111 testes automatizados (Jest em 13 suítes)** cobrindo endpoints, cache HTTP, parsers (notícias, paróquias, redes sociais, capelas, missas), construção do catálogo, integridade dos JSONs, geolocalização, próxima missa (fuso de Brasília) e normalização de nomes.
 
 ### Mobile App
 - Interface moderna com design profissional
@@ -63,14 +63,14 @@ Aplicativo completo para a Diocese de Franca com backend API REST e app React Na
 - Node.js + Express.js 5.x
 - Axios + Cheerio + HTML-Entities
 - CORS, Compression, Helmet
-- Jest (92 testes)
+- Jest (111 testes em 13 suítes)
 
 ### Mobile
 - React Native (Expo SDK 54)
 - React Navigation 7
 - AsyncStorage (favoritos persistentes)
 - @expo/vector-icons (Ionicons)
-- Playwright E2E (17 testes)
+- Playwright E2E (18 testes)
 
 ## Estrutura do Projeto
 
@@ -160,11 +160,11 @@ pnpm start            # Expo (também: pnpm android | pnpm ios | pnpm web)
 ## Testes
 
 ```bash
-# Backend: 92 testes Jest em 11 suítes
+# Backend: 111 testes Jest em 13 suítes
 cd backend
 pnpm test
 
-# Mobile: 17 testes E2E Playwright contra o bundle web exportado
+# Mobile: 18 testes E2E Playwright contra o bundle web exportado
 cd ../mobile
 pnpm install
 npx expo export -p web      # gera mobile/dist
@@ -226,40 +226,40 @@ Não há linter configurado no repositório (nenhum script `lint` em `backend/` 
 
 ### Screenshots (Web Output E2E Test)
 **Home Screen**
-![Home Screen](mobile/screenshots/home_full.png?v=36)
+![Home Screen](mobile/screenshots/home_full.png?v=37)
 
 **News Section**
-![News Section](mobile/screenshots/news_section.png?v=36)
+![News Section](mobile/screenshots/news_section.png?v=37)
 
 **Igrejas Screen**
-![Igrejas Screen](mobile/screenshots/churches_full.png?v=36)
+![Igrejas Screen](mobile/screenshots/churches_full.png?v=37)
 
 **Detalhes da Igreja (Redes Sociais e Capelas)**
-![Detalhes da Igreja](mobile/screenshots/church_details_full.png?v=36)
+![Detalhes da Igreja](mobile/screenshots/church_details_full.png?v=37)
 
 **Padres Screen**
-![Padres Screen](mobile/screenshots/priests_full.png?v=36)
+![Padres Screen](mobile/screenshots/priests_full.png?v=37)
 
 **Missas Screen**
-![Missas Screen](mobile/screenshots/masses_full.png?v=36)
+![Missas Screen](mobile/screenshots/masses_full.png?v=37)
 
 **Missas (Empty State)**
-![Missas (Empty State)](mobile/screenshots/masses_empty.png?v=36)
+![Missas (Empty State)](mobile/screenshots/masses_empty.png?v=37)
 
 **Lembrete de Missa**
-![Lembrete de Missa](mobile/screenshots/masses_lembrete.png?v=36)
+![Lembrete de Missa](mobile/screenshots/masses_lembrete.png?v=37)
 
 **Igrejas (Empty State)**
-![Igrejas (Empty State)](mobile/screenshots/churches_empty.png?v=36)
+![Igrejas (Empty State)](mobile/screenshots/churches_empty.png?v=37)
 
 **Padres (Empty State)**
-![Padres (Empty State)](mobile/screenshots/priests_empty.png?v=36)
+![Padres (Empty State)](mobile/screenshots/priests_empty.png?v=37)
 
 **Igreja Próxima**
-![Igreja Próxima](mobile/screenshots/churches_nearby.png?v=36)
+![Igreja Próxima](mobile/screenshots/churches_nearby.png?v=37)
 
 **Igreja Próxima (Permissão Negada)**
-![Igreja Próxima Permissão Negada](mobile/screenshots/churches_nearby_denied.png?v=36)
+![Igreja Próxima Permissão Negada](mobile/screenshots/churches_nearby_denied.png?v=37)
 
 ## Licença
 

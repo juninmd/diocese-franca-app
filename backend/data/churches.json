@@ -1130,6 +1130,10 @@
     },
     "chapels": [
       {
+        "name": "Igreja Histórica",
+        "address": "Rua Tuffy Jorge, 478, Vila Formosa, 14405-146"
+      },
+      {
         "name": "Capela Nossa Senhora do Sagrado Coração",
         "address": "Rua Abrão Jorge, 3469 - Jardim Guanabara - CEP: 14.405-397"
       },
