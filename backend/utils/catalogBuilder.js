@@ -12,7 +12,7 @@ const CONCURRENCY = 6;
 
 const pageUrl = (id) => `${SITE}/?menu=noticia_detalhe&id=${id}&id_orgao=1`;
 
-const ORDERS = 'OFMCap|OFMConv|OFM|OAR|SJS|CSsR|SDB|OSA|OSB|OCD|OMI|MCCJ|SCJ|SVD|MSC|IMC|FDP|SSS|CSS|CP|CM|OP|SJ';
+const ORDERS = 'OFMCap|OFMConv|OFM|OAR|SJS|CSsR|SDB|OSA|OSB|OCD|OMI|MCCJ|SCJ|SVD|MSC|IMC|FDP|SSS|CSS|CP|CM|OP|SJ|SJC';
 
 // "Pe Fulano , sjs" -> "Pe. Fulano, SJS"
 const normalizeName = (name) =>

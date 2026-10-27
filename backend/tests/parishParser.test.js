@@ -61,11 +61,12 @@ describe('socialMedia e chapels parsers', () => {
     });
   });
 
-  it('parseChapels extrai capelas, comunidades e santuários com endereço', () => {
-    const text = `Local e Contato\nDados\nCapela São Benedito\nRua A, 100\nCEP 14400-000\nSantuário Senhor Bom Jesus\nRua B, 200\nCompartilhar`;
+  it('parseChapels extrai capelas, comunidades, santuários, mosteiros e conventos com endereço', () => {
+    const text = `Local e Contato\nDados\nCapela São Benedito\nRua A, 100\nCEP 14400-000\nSantuário Senhor Bom Jesus\nRua B, 200\nMosteiro Santa Teresa\nRua C, 300\nCompartilhar`;
     expect(parseChapels(text, '')).toEqual([
       { name: 'Capela São Benedito', address: 'Rua A, 100 - CEP 14400-000' },
       { name: 'Santuário Senhor Bom Jesus', address: 'Rua B, 200' },
+      { name: 'Mosteiro Santa Teresa', address: 'Rua C, 300' },
     ]);
   });
 });
@@ -98,11 +99,18 @@ describe('parseParish - variações do site', () => {
 
   it('lê endereço em várias linhas, CEP com espaços e cidade com "/SP"', () => {
     const p = parseParish(
-      wrap('Endereço : Rua\nPayaguas, 826. CEP 14 500-000<br>\nCidade/UF : Ituverava/SP<br>\nTelefones: (16)3172 1607 WhatsApp<br>\nDados\nPároco : Pe Alguém<br>\nVigário paroquial : Pe. Um, sjs<br>\nVigário paroquial: Pe. Dois, sjs<br>\nMissas:<br>Domingo: 9h<br>'),
+      wrap('Endereço : Rua\nPayaguas, 826. CEP 14 500-000<br>\nCidade/UF : Ituverava/SP<br>\nTelefones: (16)3172 1607 WhatsApp<br>\nDados\nPároco : Pe Alguém<br>\nVigário paroquial : Pe. Um, sjs<br>\nVigário paroquial: Pe. Dois, sjs<br>\nVigário Episcopal: Pe. Três<br>\nDiretor Espiritual: Pe. Quatro<br>\nPároco Emérito: Pe. Cinco<br>\nPadre Auxiliar: Pe. Seis<br>\nAssessor Diocesano: Pe. Sete<br>\nDiácono Colaborador: Diácono Oito<br>\nColaborador: Pe. Nove<br>\nMissas:<br>Domingo: 9h<br>'),
       7
     );
     expect(p).toMatchObject({ address: 'Rua Payaguas - 826', zipCode: '14500-000', city: 'Ituverava', state: 'SP', phone: '(16) 3172-1607' });
     expect(p.clergy.filter((c) => c.title === 'Vigário Paroquial')).toHaveLength(2);
+    expect(p.clergy).toContainEqual({ name: 'Pe. Três', title: 'Vigário Episcopal' });
+    expect(p.clergy).toContainEqual({ name: 'Pe. Quatro', title: 'Diretor Espiritual' });
+    expect(p.clergy).toContainEqual({ name: 'Pe. Cinco', title: 'Pároco Emérito' });
+    expect(p.clergy).toContainEqual({ name: 'Pe. Seis', title: 'Padre Auxiliar' });
+    expect(p.clergy).toContainEqual({ name: 'Pe. Sete', title: 'Assessor Diocesano' });
+    expect(p.clergy).toContainEqual({ name: 'Diácono Oito', title: 'Diácono Colaborador' });
+    expect(p.clergy).toContainEqual({ name: 'Pe. Nove', title: 'Colaborador' });
   });
 
   it('remove caixa postal do endereço', () => {
