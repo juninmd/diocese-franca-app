@@ -1,6 +1,6 @@
 # Diocese de Franca - App
 
-![Diocese de Franca Banner](mobile/screenshots/home_full.png?v=37)
+![Diocese de Franca Banner](mobile/screenshots/home_full.png?v=38)
 
 Aplicativo completo para a Diocese de Franca com backend API REST e app React Native.
 
@@ -133,7 +133,7 @@ diocese-franca-app/
 | `backend/.env.example` | `NODE_ENV` | Ambiente de execução |
 | `mobile/.env.example` | `API_BASE_URL` | Documentada no exemplo, mas **ainda não é lida pelo código** |
 
-O backend lê `PORT` direto de `process.env` (não carrega arquivo `.env` sozinho; exporte a variável no shell).
+O backend lê `PORT` direto de `processenv` (não carrega arquivo `.env` sozinho; exporte a variável no shell).
 No mobile, a URL da API está fixa em `mobile/src/services/api.js` (`http://localhost:3000`); para emulador Android ou
 dispositivo físico, edite a constante `API_BASE_URL` nesse arquivo.
 
@@ -226,40 +226,40 @@ Não há linter configurado no repositório (nenhum script `lint` em `backend/` 
 
 ### Screenshots (Web Output E2E Test)
 **Home Screen**
-![Home Screen](mobile/screenshots/home_full.png?v=37)
+![Home Screen](mobile/screenshots/home_full.png?v=38)
 
 **News Section**
-![News Section](mobile/screenshots/news_section.png?v=37)
+![News Section](mobile/screenshots/news_section.png?v=38)
 
 **Igrejas Screen**
-![Igrejas Screen](mobile/screenshots/churches_full.png?v=37)
+![Igrejas Screen](mobile/screenshots/churches_full.png?v=38)
 
 **Detalhes da Igreja (Redes Sociais e Capelas)**
-![Detalhes da Igreja](mobile/screenshots/church_details_full.png?v=37)
+![Detalhes da Igreja](mobile/screenshots/church_details_full.png?v=38)
 
 **Padres Screen**
-![Padres Screen](mobile/screenshots/priests_full.png?v=37)
+![Padres Screen](mobile/screenshots/priests_full.png?v=38)
 
 **Missas Screen**
-![Missas Screen](mobile/screenshots/masses_full.png?v=37)
+![Missas Screen](mobile/screenshots/masses_full.png?v=38)
 
 **Missas (Empty State)**
-![Missas (Empty State)](mobile/screenshots/masses_empty.png?v=37)
+![Missas (Empty State)](mobile/screenshots/masses_empty.png?v=38)
 
 **Lembrete de Missa**
-![Lembrete de Missa](mobile/screenshots/masses_lembrete.png?v=37)
+![Lembrete de Missa](mobile/screenshots/masses_lembrete.png?v=38)
 
 **Igrejas (Empty State)**
-![Igrejas (Empty State)](mobile/screenshots/churches_empty.png?v=37)
+![Igrejas (Empty State)](mobile/screenshots/churches_empty.png?v=38)
 
 **Padres (Empty State)**
-![Padres (Empty State)](mobile/screenshots/priests_empty.png?v=37)
+![Padres (Empty State)](mobile/screenshots/priests_empty.png?v=38)
 
 **Igreja Próxima**
-![Igreja Próxima](mobile/screenshots/churches_nearby.png?v=37)
+![Igreja Próxima](mobile/screenshots/churches_nearby.png?v=38)
 
 **Igreja Próxima (Permissão Negada)**
-![Igreja Próxima Permissão Negada](mobile/screenshots/churches_nearby_denied.png?v=37)
+![Igreja Próxima Permissão Negada](mobile/screenshots/churches_nearby_denied.png?v=38)
 
 ## Licença
 
