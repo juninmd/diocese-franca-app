@@ -28,7 +28,10 @@
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
-      "permissions": ["ACCESS_COARSE_LOCATION", "ACCESS_FINE_LOCATION"]
+      "permissions": [
+        "ACCESS_COARSE_LOCATION",
+        "ACCESS_FINE_LOCATION"
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png",
@@ -47,7 +50,8 @@
           "icon": "./assets/icon.png",
           "color": "#7A1E2C"
         }
-      ]
+      ],
+      "expo-font"
     ]
   }
 }
