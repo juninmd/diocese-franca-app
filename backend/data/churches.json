@@ -1,5 +1,119 @@
 [
   {
+    "id": 2015,
+    "name": "Menino Jesus de Praga",
+    "city": "Franca",
+    "state": "SP",
+    "address": "Rua Sacramento, n°605 - Jardim Pedreira",
+    "zipCode": "14400-970",
+    "phone": "(16) 3721-3246",
+    "email": "meninojesus@diocesefranca.org.br",
+    "foundedAt": "1982-11-21",
+    "officeHours": [
+      "Segunda a sexta-feira: das 12h30 às 18h30",
+      "Sábado: das 8h às 11h30"
+    ],
+    "description": null,
+    "image": "https://www.diocesefranca.org.br/images/20260524122828_1000253831.jpg",
+    "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2015&id_orgao=1",
+    "socialMedia": {
+      "facebook": "https://www.facebook.com/pmjesusfranca/"
+    },
+    "chapels": [
+      {
+        "name": "Capela Divino Pai Eterno",
+        "address": "Rua Rio Tocantins, 1470 Esquina com Purus, Residencial Amazonas"
+      }
+    ],
+    "massNotes": [],
+    "latitude": -20.5381768,
+    "longitude": -47.4009795,
+    "coordinatesVerified": false,
+    "coordinatesPrecision": "city"
+  },
+  {
+    "id": 2014,
+    "name": "Paróquia Divino Espírito Santo",
+    "city": "Nuporanga",
+    "state": "SP",
+    "address": "Praça Eloy Lima, 213 - Centro",
+    "zipCode": "14670-000",
+    "phone": "(16) 3847-2309",
+    "email": "divespsanto@diocesefranca.org.br",
+    "foundedAt": "1874-07-04",
+    "officeHours": [
+      "Terça à sexta-feira: 08h – 11h30 / 13h - 16h",
+      "Sábado: 08h-11h"
+    ],
+    "description": null,
+    "image": "https://www.diocesefranca.org.br/images/20210403030855_1.jpg",
+    "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2014&id_orgao=1",
+    "socialMedia": {
+      "youtube": "https://www.youtube.com/channel/UCaueed00VV7odvzIONG6ZXg",
+      "facebook": "https://www.facebook.com/pages/Par%C3%B3quia-Divino-Esp%C3%ADrito-Santo/1001801993221024?rf=2213524522006115"
+    },
+    "chapels": [
+      {
+        "name": "Capela Santa Luzia",
+        "address": "Bairro Amaro Gea - Missa: Domingo às 08h"
+      },
+      {
+        "name": "Capela São Geraldo",
+        "address": "Vila Diogo, 355, CEP: 14.670-000"
+      },
+      {
+        "name": "Capela Santos Reis",
+        "address": "Missa: Terça-feira às 19h"
+      }
+    ],
+    "massNotes": [
+      "1ª Sexta-feira do mês às 19h"
+    ],
+    "latitude": -20.730877,
+    "longitude": -47.7522561,
+    "coordinatesVerified": false,
+    "coordinatesPrecision": "city"
+  },
+  {
+    "id": 2016,
+    "name": "Paróquia Nossa Senhora Aparecida",
+    "city": "São Joaquim da Barra",
+    "state": "SP",
+    "address": "Praça Nossa Senhora Aparecida, s/n° - João Paulo II",
+    "zipCode": "14600-000",
+    "phone": "(16) 3811-7899",
+    "email": "paroquianos2010@hotmail.com",
+    "foundedAt": "2000-02-20",
+    "officeHours": [
+      "Segunda -feira: 13h - 17h",
+      "Terça a sexta-feira: 8h - 11h30 / 13h - 17h",
+      "Sábado: 8h - 11h"
+    ],
+    "description": null,
+    "image": "https://www.diocesefranca.org.br/images/20210403031209_3.jpg",
+    "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2016&id_orgao=1",
+    "socialMedia": null,
+    "chapels": [
+      {
+        "name": "Capela São José",
+        "address": "Rua São Paulo, s/n, CEP: 14.600-000"
+      },
+      {
+        "name": "Comunidade São João Batista - João Mattaraia",
+        "address": "Rua Isaac Martins de Andrade, 560 - Bairro João Mattaraia, CEP: 14.600-000"
+      },
+      {
+        "name": "Comunidade Santa Terezinha",
+        "address": "Bairro Santa Teresinha - Missa: Terça-feira, 19h30"
+      }
+    ],
+    "massNotes": [],
+    "latitude": -20.5814993,
+    "longitude": -47.8608238,
+    "coordinatesVerified": false,
+    "coordinatesPrecision": "city"
+  },
+  {
     "id": 2042,
     "name": "Paróquia Nossa Senhora Aparecida",
     "city": "Restinga",
@@ -512,6 +626,48 @@
     ],
     "latitude": -20.5381768,
     "longitude": -47.4009795,
+    "coordinatesVerified": false,
+    "coordinatesPrecision": "city"
+  },
+  {
+    "id": 2017,
+    "name": "Paróquia Nosso Senhor Jesus Cristo Rei do Universo",
+    "city": "Orlândia",
+    "state": "SP",
+    "address": "Avenida E, 400 - Praça Cristo Rei",
+    "zipCode": null,
+    "phone": "(16) 3826-1314",
+    "email": "dfcristorei@hotmail.com",
+    "foundedAt": "2000-03-19",
+    "officeHours": [
+      "Segunda a Sexta-feira : 08h - 17h",
+      "Sábado: 08h - 11h30"
+    ],
+    "description": null,
+    "image": "https://www.diocesefranca.org.br/images/20210604151913_20210603160357_Par%C3%B3quia%20Cristo%20Rei%20Orlandia%20imagem%20atualizada.jpg",
+    "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2017&id_orgao=1",
+    "socialMedia": null,
+    "chapels": [
+      {
+        "name": "Capela São Vicente de Paulo",
+        "address": "Avenida G, s/n° - Jardim Boa Vista"
+      },
+      {
+        "name": "Capela Santa Rita de Cássia",
+        "address": "Avenida X, s/n° - Praça Santa Rita"
+      },
+      {
+        "name": "Comunidade Santa Terezinha",
+        "address": "Rua 9, 1571 A – Jardim Parisi - Missa: Domingo: 08h"
+      },
+      {
+        "name": "Comunidade Santa Zita e Santo Antônio",
+        "address": "Avenida M, 1106 – Jardim Siena"
+      }
+    ],
+    "massNotes": [],
+    "latitude": -20.720278,
+    "longitude": -47.886667,
     "coordinatesVerified": false,
     "coordinatesPrecision": "city"
   },

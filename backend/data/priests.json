@@ -7,7 +7,7 @@
     "email": null,
     "phone": "(16) 3701-0222",
     "bio": "4º Bispo Diocesano de Franca, nascido em Adamantina/SP (09/04/1957), com posse em 15/12/2013.",
-    "image": null,
+    "image": "https://www.diocesefranca.org.br/images/20210403003119_bispo.png",
     "churchIds": [
       2080
     ]
@@ -1233,6 +1233,110 @@
     "email": "saojudas@diocesefranca.org.br",
     "phone": "(16) 3720-3057",
     "bio": "Cooperador da Paróquia São Judas (Franca/SP).",
+    "image": null
+  },
+  {
+    "id": 98,
+    "name": "Monsenhor Sebastião Fábio Girolamo",
+    "title": "Pároco",
+    "churchId": 2015,
+    "churchIds": [
+      2015
+    ],
+    "email": "meninojesus@diocesefranca.org.br",
+    "phone": "(16) 3721-3246",
+    "bio": "Pároco da Menino Jesus de Praga (Franca/SP).",
+    "image": null
+  },
+  {
+    "id": 99,
+    "name": "Pe. Flávio Augusto Cícero",
+    "title": "Vigário Paroquial",
+    "churchId": 2015,
+    "churchIds": [
+      2015
+    ],
+    "email": "meninojesus@diocesefranca.org.br",
+    "phone": "(16) 3721-3246",
+    "bio": "Vigário Paroquial da Menino Jesus de Praga (Franca/SP).",
+    "image": null
+  },
+  {
+    "id": 100,
+    "name": "Diácono Amélio Rosa Barbosa Filho",
+    "title": "Diácono",
+    "churchId": 2015,
+    "churchIds": [
+      2015
+    ],
+    "email": "meninojesus@diocesefranca.org.br",
+    "phone": "(16) 3721-3246",
+    "bio": "Diácono da Menino Jesus de Praga (Franca/SP).",
+    "image": null
+  },
+  {
+    "id": 101,
+    "name": "Pe. Fabiano Eduardo da Silva",
+    "title": "Pároco",
+    "churchId": 2014,
+    "churchIds": [
+      2014
+    ],
+    "email": "divespsanto@diocesefranca.org.br",
+    "phone": "(16) 3847-2309",
+    "bio": "Pároco da Paróquia Divino Espírito Santo (Nuporanga/SP).",
+    "image": null
+  },
+  {
+    "id": 102,
+    "name": "Pe. Alessandro Lopes Lança",
+    "title": "Pároco",
+    "churchId": 2016,
+    "churchIds": [
+      2016
+    ],
+    "email": "paroquianos2010@hotmail.com",
+    "phone": "(16) 3811-7899",
+    "bio": "Pároco da Paróquia Nossa Senhora Aparecida (São Joaquim da Barra/SP).",
+    "image": null
+  },
+  {
+    "id": 103,
+    "name": "Pe. Carlos David Urbinati",
+    "title": "Pároco",
+    "churchId": 2017,
+    "churchIds": [
+      2017
+    ],
+    "email": "dfcristorei@hotmail.com",
+    "phone": "(16) 3826-1314",
+    "bio": "Pároco da Paróquia Nosso Senhor Jesus Cristo Rei do Universo (Orlândia/SP).",
+    "image": null
+  },
+  {
+    "id": 104,
+    "name": "Pe. Mário Reis Trombetta",
+    "title": "Vigário Paroquial",
+    "churchId": 2017,
+    "churchIds": [
+      2017
+    ],
+    "email": "dfcristorei@hotmail.com",
+    "phone": "(16) 3826-1314",
+    "bio": "Vigário Paroquial da Paróquia Nosso Senhor Jesus Cristo Rei do Universo (Orlândia/SP).",
+    "image": null
+  },
+  {
+    "id": 105,
+    "name": "Diácono Messias Alves dos Santos",
+    "title": "Diácono",
+    "churchId": 2017,
+    "churchIds": [
+      2017
+    ],
+    "email": "dfcristorei@hotmail.com",
+    "phone": "(16) 3826-1314",
+    "bio": "Diácono da Paróquia Nosso Senhor Jesus Cristo Rei do Universo (Orlândia/SP).",
     "image": null
   }
 ]
