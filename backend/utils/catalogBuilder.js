@@ -4,8 +4,8 @@ const { parseParish, SITE } = require('./parishParser');
 const { htmlToText } = require('./htmlText');
 const { readJson, writeJson } = require('./fileStore');
 
-const FIRST_ID = 2030;
-const LAST_ID = 2400;
+const FIRST_ID = 2014;
+const LAST_ID = 2265;
 const BISHOP_PAGE_ID = 1865;
 const SEAT_ID = 2080; // Sé Catedral
 const CONCURRENCY = 6;
@@ -52,12 +52,14 @@ async function parseBishop(log = console) {
   const seat = (text.match(/Nomeado Bispo de Franca[^\n]*\n\s*Posse:\s*(\d{2}\/\d{2}\/\d{4})/) || [])[1];
   const phone = (text.match(/Fone:\s*(\(\d{2}\)\s?\d{4}-\d{4})/) || [])[1];
   const ordinal = (text.match(/(\d+)º Bispo Diocesano/) || [])[1];
+  const imgMatch = html.match(/<img src="([^"]+)"[^>]*class="scale_image2"/);
+  const image = imgMatch ? `${SITE}/${imgMatch[1]}` : null;
   const bio = [
     `${ordinal ? `${ordinal}º ` : ''}Bispo Diocesano de Franca`,
     born.length ? `nascido em ${born[0].trim()} (${born[1]})` : '',
     seat ? `com posse em ${seat}` : '',
   ].filter(Boolean).join(', ') + '.';
-  return { name: name.trim(), phone: phone || null, bio };
+  return { name: name.trim(), phone: phone || null, bio, image };
 }
 
 // Coordenadas por cidade (Photon/OpenStreetMap), em cache no repositório. Precisão: cidade.
@@ -107,7 +109,7 @@ function buildCatalog(parishes, coords, bishop, previousPriests = []) {
 
   const priests = [];
   if (bishop) {
-    priests.push({ id: idFor(bishop.name), name: bishop.name, title: 'Bispo Diocesano', churchId: SEAT_ID, email: null, phone: bishop.phone, bio: bishop.bio, image: null });
+    priests.push({ id: idFor(bishop.name), name: bishop.name, title: 'Bispo Diocesano', churchId: SEAT_ID, email: null, phone: bishop.phone, bio: bishop.bio, image: bishop.image || null });
   }
   // Um padre pode atender mais de uma paróquia: fica um único registro, com todas em `churchIds`.
   const byName = new Map(priests.map((p) => [p.name, p]));

@@ -1,6 +1,6 @@
 # Diocese de Franca - App
 
-![Diocese de Franca Banner](mobile/screenshots/home_full.png?v=38)
+![Diocese de Franca Banner](mobile/screenshots/home_full.png?v=39)
 
 Aplicativo completo para a Diocese de Franca com backend API REST e app React Native.
 
@@ -16,9 +16,9 @@ Aplicativo completo para a Diocese de Franca com backend API REST e app React Na
 - Respostas padronizadas com wrapper `{ success, count, data }`
 - **Scraper Aprimorado (`backend/scraper.js`)**: Raspagem completa e autônoma de https://diocesefranca.org.br/ trazendo:
   - **Notícias**: títulos, categorias, fotos, links e data de publicação (extraída do carimbo no nome da imagem, sem inventar "hoje").
-  - **Paróquias**: 41 paróquias com endereços, contatos, expediente, redes sociais (Facebook, Instagram, YouTube e WhatsApp), capelas, comunidades, santuários, mosteiros e conventos vinculados e links de imagem.
-  - **Padres e Clero**: 95 sacerdotes e diáconos (incluindo Bispo Diocesano, Párocos, Vigários Gerais, Vigários Episcopais, Administradores Paroquiais, Reitores, Chanceleres, Diretores Espirituais, Párocos Eméritos, Padres Auxiliares, Assessores Diocesanos, Diáconos Permanentes e Colaboradores) vinculados a cada comunidade.
-  - **Horários de Missa**: 251 horários semanais estruturados por dia e horário ("06h30; 11h30 e 19 h", dias colados na mesma linha e listas "a/e" são interpretados; o que é irregular vira nota).
+  - **Paróquias**: 45 paróquias com endereços, contatos, expediente, redes sociais (Facebook, Instagram, YouTube e WhatsApp), capelas, comunidades, santuários, mosteiros e conventos vinculados e links de imagem.
+  - **Padres e Clero**: 103 sacerdotes e diáconos (incluindo foto oficial do Bispo Diocesano Dom Paulo Roberto Beloto, Párocos, Vigários Gerais, Vigários Episcopais, Administradores Paroquiais, Reitores, Chanceleres, Diretores Espirituais, Párocos Eméritos, Padres Auxiliares, Assessores Diocesanos, Diáconos Permanentes e Colaboradores) vinculados a cada comunidade.
+  - **Horários de Missa**: 271 horários semanais estruturados por dia e horário ("06h30; 11h30 e 19 h", dias colados na mesma linha e listas "a/e" são interpretados; o que é irregular vira nota).
 - **Igrejas próximas** (`/api/churches/nearby`): ordena as paróquias pela distância (fórmula de Haversine) até uma coordenada e calcula a próxima missa de cada uma.
 - **Cache no backend**: leitura dos JSONs com invalidação por `mtime` (o scraper atualiza a API sem reinício), `Cache-Control` + `ETag`/304 e índices por id.
 - **Scraper seguro**: escrita atômica e recusa de sobrescrever dados com resultado vazio ou muito menor (site fora do ar / layout alterado); ids de padres estáveis entre execuções.
@@ -217,49 +217,49 @@ Não há linter configurado no repositório (nenhum script `lint` em `backend/` 
 
 | Entidade | Quantidade Raspada |
 |----------|--------------------|
-| Paróquias | 41 |
-| Padres / Clero | 95 |
-| Horários de Missa | 251 |
+| Paróquias | 45 |
+| Padres / Clero | 103 |
+| Horários de Missa | 271 |
 | Notícias em Destaque | 5 |
 
 ## Screenshots
 
 ### Screenshots (Web Output E2E Test)
 **Home Screen**
-![Home Screen](mobile/screenshots/home_full.png?v=38)
+![Home Screen](mobile/screenshots/home_full.png?v=39)
 
 **News Section**
-![News Section](mobile/screenshots/news_section.png?v=38)
+![News Section](mobile/screenshots/news_section.png?v=39)
 
 **Igrejas Screen**
-![Igrejas Screen](mobile/screenshots/churches_full.png?v=38)
+![Igrejas Screen](mobile/screenshots/churches_full.png?v=39)
 
 **Detalhes da Igreja (Redes Sociais e Capelas)**
-![Detalhes da Igreja](mobile/screenshots/church_details_full.png?v=38)
+![Detalhes da Igreja](mobile/screenshots/church_details_full.png?v=39)
 
 **Padres Screen**
-![Padres Screen](mobile/screenshots/priests_full.png?v=38)
+![Padres Screen](mobile/screenshots/priests_full.png?v=39)
 
 **Missas Screen**
-![Missas Screen](mobile/screenshots/masses_full.png?v=38)
+![Missas Screen](mobile/screenshots/masses_full.png?v=39)
 
 **Missas (Empty State)**
-![Missas (Empty State)](mobile/screenshots/masses_empty.png?v=38)
+![Missas (Empty State)](mobile/screenshots/masses_empty.png?v=39)
 
 **Lembrete de Missa**
-![Lembrete de Missa](mobile/screenshots/masses_lembrete.png?v=38)
+![Lembrete de Missa](mobile/screenshots/masses_lembrete.png?v=39)
 
 **Igrejas (Empty State)**
-![Igrejas (Empty State)](mobile/screenshots/churches_empty.png?v=38)
+![Igrejas (Empty State)](mobile/screenshots/churches_empty.png?v=39)
 
 **Padres (Empty State)**
-![Padres (Empty State)](mobile/screenshots/priests_empty.png?v=38)
+![Padres (Empty State)](mobile/screenshots/priests_empty.png?v=39)
 
 **Igreja Próxima**
-![Igreja Próxima](mobile/screenshots/churches_nearby.png?v=38)
+![Igreja Próxima](mobile/screenshots/churches_nearby.png?v=39)
 
 **Igreja Próxima (Permissão Negada)**
-![Igreja Próxima Permissão Negada](mobile/screenshots/churches_nearby_denied.png?v=38)
+![Igreja Próxima Permissão Negada](mobile/screenshots/churches_nearby_denied.png?v=39)
 
 ## Licença
 

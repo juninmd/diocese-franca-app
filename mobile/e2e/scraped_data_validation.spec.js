@@ -23,8 +23,8 @@ test('scraped data validation - verifies parishes, priests and mass schedules', 
     await churchesTab.click({ force: true });
     await page.waitForTimeout(1000);
 
-    // Verify catedral or parish name is visible
-    await expect(page.getByText(/Catedral|Nossa Senhora|Paróquia/i).first()).toBeVisible({ timeout: 8000 });
+    // Verify catedral or parish name is visible, including newly scraped parishes
+    await expect(page.getByText(/Catedral|Menino Jesus|Paróquia/i).first()).toBeVisible({ timeout: 8000 });
   }
 
   // 4. Navigate to Missas tab
