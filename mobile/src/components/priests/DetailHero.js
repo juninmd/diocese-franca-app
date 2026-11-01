@@ -14,6 +14,16 @@ export function DetailHero({ priest }) {
       <PriestAvatar name={priest.name} image={priest.image} size={88} bg={colors.goldLight} color={colors.onGold} />
       <Text variant="overline" style={{ color: colors.goldLight }}>{priest.title}</Text>
       <Text variant="display" style={styles.name}>{priest.name}</Text>
+      {(priest.birthDate || priest.ordinationDate) && (
+        <View style={styles.datesRow}>
+          {priest.birthDate ? (
+            <Text variant="caption" style={styles.dateBadge}>Nascimento: {priest.birthDate}</Text>
+          ) : null}
+          {priest.ordinationDate ? (
+            <Text variant="caption" style={styles.dateBadge}>Ordenação: {priest.ordinationDate}</Text>
+          ) : null}
+        </View>
+      )}
     </View>
   );
 }
@@ -22,4 +32,13 @@ const styles = StyleSheet.create({
   card: { overflow: 'hidden', borderRadius: radius.xl, backgroundColor: colors.primaryDark, padding: 24, gap: 10 },
   art: { position: 'absolute', right: -4, bottom: -8, opacity: 0.3 },
   name: { color: colors.cream, fontSize: 30, lineHeight: 34 },
+  datesRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, marginTop: 4 },
+  dateBadge: {
+    backgroundColor: 'rgba(255, 255, 255, 0.15)',
+    color: colors.cream,
+    paddingHorizontal: 8,
+    paddingVertical: 3,
+    borderRadius: 6,
+    fontSize: 12,
+  },
 });

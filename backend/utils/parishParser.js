@@ -130,8 +130,16 @@ function parseParish(html, sourceId) {
   const { name, city: titleCity, state: titleState } = parseTitle(htmlToText(title).trim());
   const [cityName, uf] = field(body, 'Cidade/UF').split(/\s*[-/]\s*(?=[A-Z]{2}$)/);
   const contact = body.slice(body.indexOf('Cidade/UF'), body.search(/^\s*Dados\s*$/m) > 0 ? body.search(/^\s*Dados\s*$/m) : undefined);
-  const office = body.match(/Expediente da secretaria\s*:?([\s\S]*?)(?=\bMissas?[^:\n]{0,20}:)/i);
-  const massBlock = body.match(/\bMissas?[^:\n]{0,20}:([\s\S]*)/i);
+  const office = body.match(/Expediente da secretaria\s*:?([\s\S]*?)(?=\bMissas?[^:\n]{0,20}:|\bHorário de\s+Atendimento|\bAtendimento\b)/i)
+    || body.match(/Expediente da secretaria\s*:?([\s\S]*?)(?=\bMissas?[^:\n]{0,20}:)/i);
+
+  // Extração de horários de atendimento do padre / confissões
+  const attendanceMatch = body.match(/(?:hor[áa]rio\s+de\s+)?(?:atendimento(?:s|\s+do\s+padre|\s+dos\s+padres|s?\s+presenciais)?|confiss[õo]es?)\s*:?([\s\S]*?)(?=\bMissas?[^:\n]{0,20}:|\bCapela|\bComunidade|\bDescri[çc][ãa]o|$)/i);
+  const priestAttendance = attendanceMatch
+    ? lines(attendanceMatch[1]).filter((l) => !STOP_MASSES.test(l) && !/^missas?/i.test(l)).slice(0, 4)
+    : [];
+
+  const massBlock = body.match(/\bMissas?[^:\n]{0,20}:?([\s\S]*)/i);
   const massLines = [];
   for (const line of lines(massBlock ? massBlock[1] : '')) {
     if (STOP_MASSES.test(line)) break;
@@ -152,6 +160,7 @@ function parseParish(html, sourceId) {
     email: (contact.match(EMAIL) || [])[0] || null,
     foundedAt: toIsoDate(field(body, 'Data Criação')),
     officeHours: office ? lines(office[1]) : [],
+    priestAttendance,
     description,
     image: image ? toHttpsUrl(`${SITE}/${image[1]}`) : null,
     website: toHttpsUrl(`${SITE}/?menu=noticia_detalhe&id=${sourceId}&id_orgao=1`),
