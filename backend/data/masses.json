@@ -1529,368 +1529,396 @@
     "id": 219,
     "churchId": 2075,
     "dayOfWeek": "Domingo",
-    "time": "10:00",
+    "time": "08:30",
     "type": "Missa Dominical"
   },
   {
     "id": 220,
     "churchId": 2075,
-    "dayOfWeek": "Quinta-feira",
-    "time": "19:30",
-    "type": "Missa Semanal"
+    "dayOfWeek": "Domingo",
+    "time": "19:00",
+    "type": "Missa Dominical"
   },
   {
     "id": 221,
+    "churchId": 2075,
+    "dayOfWeek": "Terça-feira",
+    "time": "19:00",
+    "type": "Missa Semanal"
+  },
+  {
+    "id": 222,
+    "churchId": 2075,
+    "dayOfWeek": "Quarta-feira",
+    "time": "07:00",
+    "type": "Missa Semanal"
+  },
+  {
+    "id": 223,
+    "churchId": 2075,
+    "dayOfWeek": "Quinta-feira",
+    "time": "19:00",
+    "type": "Missa Semanal"
+  },
+  {
+    "id": 224,
+    "churchId": 2075,
+    "dayOfWeek": "Sexta-feira",
+    "time": "07:00",
+    "type": "Missa Semanal"
+  },
+  {
+    "id": 225,
     "churchId": 2076,
     "dayOfWeek": "Domingo",
     "time": "07:00",
     "type": "Missa Dominical"
   },
   {
-    "id": 222,
+    "id": 226,
     "churchId": 2076,
     "dayOfWeek": "Domingo",
     "time": "09:00",
     "type": "Missa Dominical"
   },
   {
-    "id": 223,
+    "id": 227,
     "churchId": 2076,
     "dayOfWeek": "Domingo",
     "time": "19:00",
     "type": "Missa Dominical"
   },
   {
-    "id": 224,
+    "id": 228,
     "churchId": 2076,
     "dayOfWeek": "Terça-feira",
     "time": "19:00",
     "type": "Missa Semanal"
   },
   {
-    "id": 225,
+    "id": 229,
     "churchId": 2076,
     "dayOfWeek": "Quarta-feira",
     "time": "19:00",
     "type": "Missa Semanal"
   },
   {
-    "id": 226,
+    "id": 230,
     "churchId": 2076,
     "dayOfWeek": "Quinta-feira",
     "time": "19:00",
     "type": "Missa Semanal"
   },
   {
-    "id": 227,
+    "id": 231,
     "churchId": 2076,
     "dayOfWeek": "Sexta-feira",
     "time": "19:00",
     "type": "Missa Semanal"
   },
   {
-    "id": 228,
+    "id": 232,
     "churchId": 2076,
     "dayOfWeek": "Sábado",
     "time": "19:00",
     "type": "Missa Semanal"
   },
   {
-    "id": 229,
+    "id": 233,
     "churchId": 2077,
     "dayOfWeek": "Domingo",
     "time": "08:00",
     "type": "Missa Dominical"
   },
   {
-    "id": 230,
+    "id": 234,
     "churchId": 2077,
     "dayOfWeek": "Sábado",
     "time": "18:00",
     "type": "Missa Semanal"
   },
   {
-    "id": 231,
+    "id": 235,
     "churchId": 2078,
     "dayOfWeek": "Domingo",
     "time": "19:00",
     "type": "Missa Dominical"
   },
   {
-    "id": 232,
+    "id": 236,
     "churchId": 2078,
     "dayOfWeek": "Quinta-feira",
     "time": "19:00",
     "type": "Missa Semanal"
   },
   {
-    "id": 233,
+    "id": 237,
     "churchId": 2078,
     "dayOfWeek": "Sexta-feira",
     "time": "08:00",
     "type": "Missa Semanal"
   },
   {
-    "id": 234,
+    "id": 238,
     "churchId": 2078,
     "dayOfWeek": "Sábado",
     "time": "18:30",
     "type": "Missa Semanal"
   },
   {
-    "id": 235,
+    "id": 239,
     "churchId": 2079,
     "dayOfWeek": "Domingo",
     "time": "07:00",
     "type": "Missa Dominical"
   },
   {
-    "id": 236,
+    "id": 240,
     "churchId": 2079,
     "dayOfWeek": "Domingo",
     "time": "09:00",
     "type": "Missa Dominical"
   },
   {
-    "id": 237,
+    "id": 241,
     "churchId": 2079,
     "dayOfWeek": "Domingo",
     "time": "19:00",
     "type": "Missa Dominical"
   },
   {
-    "id": 238,
+    "id": 242,
     "churchId": 2079,
     "dayOfWeek": "Terça-feira",
     "time": "06:00",
     "type": "Missa Semanal"
   },
   {
-    "id": 239,
+    "id": 243,
     "churchId": 2079,
     "dayOfWeek": "Quarta-feira",
     "time": "19:30",
     "type": "Missa Semanal"
   },
   {
-    "id": 240,
+    "id": 244,
     "churchId": 2079,
     "dayOfWeek": "Quinta-feira",
     "time": "15:00",
     "type": "Missa Semanal"
   },
   {
-    "id": 241,
+    "id": 245,
     "churchId": 2079,
     "dayOfWeek": "Sexta-feira",
     "time": "19:30",
     "type": "Missa Semanal"
   },
   {
-    "id": 242,
+    "id": 246,
     "churchId": 2064,
     "dayOfWeek": "Domingo",
     "time": "07:00",
     "type": "Missa Dominical"
   },
   {
-    "id": 243,
+    "id": 247,
     "churchId": 2064,
     "dayOfWeek": "Domingo",
     "time": "09:00",
     "type": "Missa Dominical"
   },
   {
-    "id": 244,
+    "id": 248,
     "churchId": 2064,
     "dayOfWeek": "Domingo",
     "time": "11:00",
     "type": "Missa Dominical"
   },
   {
-    "id": 245,
+    "id": 249,
     "churchId": 2064,
     "dayOfWeek": "Domingo",
     "time": "17:00",
     "type": "Missa Dominical"
   },
   {
-    "id": 246,
+    "id": 250,
     "churchId": 2064,
     "dayOfWeek": "Domingo",
     "time": "19:00",
     "type": "Missa Dominical"
   },
   {
-    "id": 247,
-    "churchId": 2064,
-    "dayOfWeek": "Segunda-feira",
-    "time": "19:00",
-    "type": "Missa Semanal"
-  },
-  {
-    "id": 248,
-    "churchId": 2064,
-    "dayOfWeek": "Terça-feira",
-    "time": "07:00",
-    "type": "Missa Semanal"
-  },
-  {
-    "id": 249,
-    "churchId": 2064,
-    "dayOfWeek": "Terça-feira",
-    "time": "19:00",
-    "type": "Missa Semanal"
-  },
-  {
-    "id": 250,
-    "churchId": 2064,
-    "dayOfWeek": "Quarta-feira",
-    "time": "07:00",
-    "type": "Missa Semanal"
-  },
-  {
     "id": 251,
     "churchId": 2064,
-    "dayOfWeek": "Quarta-feira",
+    "dayOfWeek": "Segunda-feira",
     "time": "19:00",
     "type": "Missa Semanal"
   },
   {
     "id": 252,
     "churchId": 2064,
-    "dayOfWeek": "Quinta-feira",
+    "dayOfWeek": "Terça-feira",
     "time": "07:00",
     "type": "Missa Semanal"
   },
   {
     "id": 253,
     "churchId": 2064,
-    "dayOfWeek": "Quinta-feira",
+    "dayOfWeek": "Terça-feira",
     "time": "19:00",
     "type": "Missa Semanal"
   },
   {
     "id": 254,
     "churchId": 2064,
-    "dayOfWeek": "Sexta-feira",
+    "dayOfWeek": "Quarta-feira",
     "time": "07:00",
     "type": "Missa Semanal"
   },
   {
     "id": 255,
     "churchId": 2064,
-    "dayOfWeek": "Sexta-feira",
+    "dayOfWeek": "Quarta-feira",
     "time": "19:00",
     "type": "Missa Semanal"
   },
   {
     "id": 256,
     "churchId": 2064,
+    "dayOfWeek": "Quinta-feira",
+    "time": "07:00",
+    "type": "Missa Semanal"
+  },
+  {
+    "id": 257,
+    "churchId": 2064,
+    "dayOfWeek": "Quinta-feira",
+    "time": "19:00",
+    "type": "Missa Semanal"
+  },
+  {
+    "id": 258,
+    "churchId": 2064,
+    "dayOfWeek": "Sexta-feira",
+    "time": "07:00",
+    "type": "Missa Semanal"
+  },
+  {
+    "id": 259,
+    "churchId": 2064,
+    "dayOfWeek": "Sexta-feira",
+    "time": "19:00",
+    "type": "Missa Semanal"
+  },
+  {
+    "id": 260,
+    "churchId": 2064,
     "dayOfWeek": "Sábado",
     "time": "17:00",
     "type": "Missa Semanal"
   },
   {
-    "id": 257,
+    "id": 261,
     "churchId": 2064,
     "dayOfWeek": "Sábado",
     "time": "19:00",
     "type": "Missa Semanal"
   },
   {
-    "id": 258,
+    "id": 262,
     "churchId": 2080,
     "dayOfWeek": "Domingo",
     "time": "07:00",
     "type": "Missa Dominical"
   },
   {
-    "id": 259,
+    "id": 263,
     "churchId": 2080,
     "dayOfWeek": "Domingo",
     "time": "09:00",
     "type": "Missa Dominical"
   },
   {
-    "id": 260,
+    "id": 264,
     "churchId": 2080,
     "dayOfWeek": "Domingo",
     "time": "10:30",
     "type": "Missa Dominical"
   },
   {
-    "id": 261,
+    "id": 265,
     "churchId": 2080,
     "dayOfWeek": "Domingo",
     "time": "17:00",
     "type": "Missa Dominical"
   },
   {
-    "id": 262,
+    "id": 266,
     "churchId": 2080,
     "dayOfWeek": "Domingo",
     "time": "19:00",
     "type": "Missa Dominical"
   },
   {
-    "id": 263,
+    "id": 267,
     "churchId": 2080,
     "dayOfWeek": "Segunda-feira",
     "time": "07:00",
     "type": "Missa Semanal"
   },
   {
-    "id": 264,
-    "churchId": 2080,
-    "dayOfWeek": "Terça-feira",
-    "time": "07:00",
-    "type": "Missa Semanal"
-  },
-  {
-    "id": 265,
-    "churchId": 2080,
-    "dayOfWeek": "Terça-feira",
-    "time": "19:00",
-    "type": "Missa Semanal"
-  },
-  {
-    "id": 266,
-    "churchId": 2080,
-    "dayOfWeek": "Quarta-feira",
-    "time": "07:00",
-    "type": "Missa Semanal"
-  },
-  {
-    "id": 267,
-    "churchId": 2080,
-    "dayOfWeek": "Quarta-feira",
-    "time": "19:00",
-    "type": "Missa Semanal"
-  },
-  {
     "id": 268,
     "churchId": 2080,
-    "dayOfWeek": "Quinta-feira",
+    "dayOfWeek": "Terça-feira",
     "time": "07:00",
     "type": "Missa Semanal"
   },
   {
     "id": 269,
     "churchId": 2080,
-    "dayOfWeek": "Quinta-feira",
+    "dayOfWeek": "Terça-feira",
     "time": "19:00",
     "type": "Missa Semanal"
   },
   {
     "id": 270,
     "churchId": 2080,
-    "dayOfWeek": "Sexta-feira",
+    "dayOfWeek": "Quarta-feira",
     "time": "07:00",
     "type": "Missa Semanal"
   },
   {
     "id": 271,
+    "churchId": 2080,
+    "dayOfWeek": "Quarta-feira",
+    "time": "19:00",
+    "type": "Missa Semanal"
+  },
+  {
+    "id": 272,
+    "churchId": 2080,
+    "dayOfWeek": "Quinta-feira",
+    "time": "07:00",
+    "type": "Missa Semanal"
+  },
+  {
+    "id": 273,
+    "churchId": 2080,
+    "dayOfWeek": "Quinta-feira",
+    "time": "19:00",
+    "type": "Missa Semanal"
+  },
+  {
+    "id": 274,
+    "churchId": 2080,
+    "dayOfWeek": "Sexta-feira",
+    "time": "07:00",
+    "type": "Missa Semanal"
+  },
+  {
+    "id": 275,
     "churchId": 2080,
     "dayOfWeek": "Sábado",
     "time": "19:00",

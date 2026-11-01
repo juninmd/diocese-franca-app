@@ -3,6 +3,7 @@ const { fetchHtml, sleep } = require('./http');
 const { parseParish, SITE } = require('./parishParser');
 const { htmlToText } = require('./htmlText');
 const { readJson, writeJson } = require('./fileStore');
+const { crawlForanias, crawlClergyDirectory } = require('./dioceseEnricher');
 
 const FIRST_ID = 2014;
 const LAST_ID = 2265;
@@ -88,10 +89,19 @@ async function cityCoords(cities, { log = console } = {}) {
 }
 
 // `previousPriests` (priests.json atual) preserva os ids: o app guarda favoritos por id de padre.
-function buildCatalog(parishes, coords, bishop, previousPriests = []) {
+function buildCatalog(parishes, coords, bishop, previousPriests = [], foraniaMap = new Map(), clergyDirectory = new Map()) {
   const churches = parishes.map(({ sourceId, clergy, masses, ...p }) => {
     const [latitude, longitude] = coords[`${p.city}|${p.state}`] || [null, null];
-    return { id: sourceId, ...p, latitude, longitude, coordinatesVerified: false, coordinatesPrecision: 'city' };
+    const forania = foraniaMap.get(sourceId) || null;
+    return {
+      id: sourceId,
+      ...p,
+      forania,
+      latitude,
+      longitude,
+      coordinatesVerified: false,
+      coordinatesPrecision: 'city',
+    };
   });
 
   const massList = [];
@@ -109,8 +119,32 @@ function buildCatalog(parishes, coords, bishop, previousPriests = []) {
 
   const priests = [];
   if (bishop) {
-    priests.push({ id: idFor(bishop.name), name: bishop.name, title: 'Bispo Diocesano', churchId: SEAT_ID, email: null, phone: bishop.phone, bio: bishop.bio, image: bishop.image || null });
+    priests.push({
+      id: idFor(bishop.name),
+      name: bishop.name,
+      title: 'Bispo Diocesano',
+      churchId: SEAT_ID,
+      email: null,
+      phone: bishop.phone,
+      bio: bishop.bio,
+      image: bishop.image || null,
+      birthDate: '09/04/1957',
+      ordinationDate: '15/12/2013',
+    });
   }
+
+  // Encontra informações enriquecidas de clero por proximidade de nome
+  const findDirectoryEntry = (name) => {
+    const norm = name.toLowerCase().replace(/^(?:pe\.?|diácono|frei|monsenhor|fr\.)\s+/i, '').trim();
+    for (const [key, val] of clergyDirectory.entries()) {
+      const keyNorm = key.replace(/^(?:pe\.?|diácono|frei|monsenhor|fr\.)\s+/i, '').trim();
+      if (norm === keyNorm || norm.includes(keyNorm) || keyNorm.includes(norm)) {
+        return val;
+      }
+    }
+    return null;
+  };
+
   // Um padre pode atender mais de uma paróquia: fica um único registro, com todas em `churchIds`.
   const byName = new Map(priests.map((p) => [p.name, p]));
   priests.forEach((p) => { p.churchIds = [p.churchId]; });
@@ -121,9 +155,19 @@ function buildCatalog(parishes, coords, bishop, previousPriests = []) {
       if (!known.churchIds.includes(p.sourceId)) known.churchIds.push(p.sourceId);
       return;
     }
+    const dirEntry = findDirectoryEntry(name);
     const priest = {
-      id: idFor(name), name, title: c.title, churchId: p.sourceId, churchIds: [p.sourceId], email: p.email, phone: p.phone,
-      bio: `${c.title} da ${p.name} (${p.city}/${p.state}).`, image: null,
+      id: idFor(name),
+      name,
+      title: c.title,
+      churchId: p.sourceId,
+      churchIds: [p.sourceId],
+      email: p.email,
+      phone: p.phone,
+      bio: `${c.title} da ${p.name} (${p.city}/${p.state}).`,
+      image: (dirEntry && dirEntry.image) || null,
+      birthDate: (dirEntry && dirEntry.birthDate) || null,
+      ordinationDate: (dirEntry && dirEntry.ordinationDate) || null,
     };
     byName.set(name, priest);
     priests.push(priest);
@@ -135,10 +179,15 @@ function buildCatalog(parishes, coords, bishop, previousPriests = []) {
 
 /** Catálogo bruto (sem de-para): churches, masses, priests. */
 async function scrapeCatalogData({ log = console, ...crawlOptions } = {}) {
-  const parishes = await crawlParishes({ log, ...crawlOptions });
+  const [parishes, bishop, foraniaMapResult, clergyDirResult] = await Promise.all([
+    crawlParishes({ log, ...crawlOptions }),
+    parseBishop(log).catch((err) => { log.warn(`Erro ao raspar bispo: ${err.message}`); return null; }),
+    crawlForanias({ log }).catch((err) => { log.warn(`Erro ao raspar foranias: ${err.message}`); return new Map(); }),
+    crawlClergyDirectory({ log }).catch((err) => { log.warn(`Erro ao raspar clero: ${err.message}`); return new Map(); }),
+  ]);
   if (!parishes.length) return { churches: [], masses: [], priests: [] };
   const coords = await cityCoords([...new Set(parishes.map((p) => `${p.city}|${p.state}`))], { log });
-  return buildCatalog(parishes, coords, await parseBishop(log), readJson('priests.json', []));
+  return buildCatalog(parishes, coords, bishop, readJson('priests.json', []), foraniaMapResult || new Map(), clergyDirResult || new Map());
 }
 
 module.exports = { scrapeCatalogData, buildCatalog, crawlParishes, parseBishop, cityCoords, normalizeName, pageUrl, FIRST_ID, LAST_ID };

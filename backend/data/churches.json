@@ -13,6 +13,7 @@
       "Segunda a sexta-feira: das 12h30 às 18h30",
       "Sábado: das 8h às 11h30"
     ],
+    "priestAttendance": [],
     "description": null,
     "image": "https://www.diocesefranca.org.br/images/20260524122828_1000253831.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2015&id_orgao=1",
@@ -26,6 +27,7 @@
       }
     ],
     "massNotes": [],
+    "forania": "Nossa Senhora da Conceição",
     "latitude": -20.5381768,
     "longitude": -47.4009795,
     "coordinatesVerified": false,
@@ -45,6 +47,7 @@
       "Terça à sexta-feira: 08h – 11h30 / 13h - 16h",
       "Sábado: 08h-11h"
     ],
+    "priestAttendance": [],
     "description": null,
     "image": "https://www.diocesefranca.org.br/images/20210403030855_1.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2014&id_orgao=1",
@@ -69,6 +72,7 @@
     "massNotes": [
       "1ª Sexta-feira do mês às 19h"
     ],
+    "forania": "São Joaquim",
     "latitude": -20.730877,
     "longitude": -47.7522561,
     "coordinatesVerified": false,
@@ -89,6 +93,7 @@
       "Terça a sexta-feira: 8h - 11h30 / 13h - 17h",
       "Sábado: 8h - 11h"
     ],
+    "priestAttendance": [],
     "description": null,
     "image": "https://www.diocesefranca.org.br/images/20210403031209_3.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2016&id_orgao=1",
@@ -108,6 +113,7 @@
       }
     ],
     "massNotes": [],
+    "forania": "São Joaquim",
     "latitude": -20.5814993,
     "longitude": -47.8608238,
     "coordinatesVerified": false,
@@ -127,6 +133,7 @@
       "Segunda à sexta-feira: 9h - 12h / 13h - 18h",
       "Sábado: 8h - 12h"
     ],
+    "priestAttendance": [],
     "description": null,
     "image": "https://www.diocesefranca.org.br/images/20210412141717_igraja%20restinga.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2042&id_orgao=1",
@@ -146,6 +153,7 @@
       }
     ],
     "massNotes": [],
+    "forania": "Nossa Senhora da Conceição",
     "latitude": -20.6032343,
     "longitude": -47.4830912,
     "coordinatesVerified": false,
@@ -163,8 +171,9 @@
     "foundedAt": "1968-01-20",
     "officeHours": [
       "Segunda a sexta-feira: 09h -11h / 14h - 17h",
-      "Sábado: 09h - 10h30",
-      "Atendimento do padre",
+      "Sábado: 09h - 10h30"
+    ],
+    "priestAttendance": [
       "Terça a quinta -feira: das 09h - 11h / 14h - 16h",
       "Visita aos doentes: Sábado, à partir das 10h."
     ],
@@ -199,6 +208,7 @@
       }
     ],
     "massNotes": [],
+    "forania": "Nossa Senhora Aparecida",
     "latitude": -20.6406814,
     "longitude": -47.2193817,
     "coordinatesVerified": false,
@@ -218,6 +228,7 @@
       "Segunda-feira: 8h as 11h – serviço interno",
       "Terça a sexta-feira: 8h -11h / 13h -17h"
     ],
+    "priestAttendance": [],
     "description": null,
     "image": "https://www.diocesefranca.org.br/images/20210412150313_igreja%20pedregulho.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2044&id_orgao=1",
@@ -266,6 +277,7 @@
     "massNotes": [
       "1ª Sexta-feira mês às 06h30: Missa Votiva ao Sagrado Coração de Jesus"
     ],
+    "forania": "Beata Rita Amada de Jesus",
     "latitude": -20.25071,
     "longitude": -47.4808786,
     "coordinatesVerified": false,
@@ -285,6 +297,7 @@
       "Segunda a sexta-feira: 9h00 - 18h00",
       "Sábado: 8h30 - 11h30"
     ],
+    "priestAttendance": [],
     "description": null,
     "image": "https://www.diocesefranca.org.br/images/20210412151344_igraja%20franca.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2045&id_orgao=1",
@@ -330,6 +343,7 @@
       }
     ],
     "massNotes": [],
+    "forania": "Nossa Senhora Aparecida",
     "latitude": -20.5381768,
     "longitude": -47.4009795,
     "coordinatesVerified": false,
@@ -348,6 +362,7 @@
     "officeHours": [
       "Segunda a Sexta-feira: 9h – 11h / 13h – 17h"
     ],
+    "priestAttendance": [],
     "description": null,
     "image": "https://www.diocesefranca.org.br/images/20210412152110_igraja%20cristais%20paulista.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2046&id_orgao=1",
@@ -381,6 +396,7 @@
     "massNotes": [
       "1ª Sexta de cada mês: 19h"
     ],
+    "forania": "Santa Gianna",
     "latitude": -20.403569,
     "longitude": -47.420915,
     "coordinatesVerified": false,
@@ -400,6 +416,7 @@
       "Terça a Sexta-feira: 08h - 14h",
       "Sábado: 08h às 12h"
     ],
+    "priestAttendance": [],
     "description": "Localizada no Recanto Elimar, em Franca, a Paróquia Nossa Senhora da Guia foi instalada canonicamente no dia 05 de março de 2016, tendo como primeiro pároco o padre Carlos David Urbinati.",
     "image": "https://www.diocesefranca.org.br/images/20210412210022_igreja%20nossa%20senhora%20da%20guia.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2047&id_orgao=1",
@@ -414,6 +431,7 @@
       }
     ],
     "massNotes": [],
+    "forania": "Nossa Senhora Aparecida",
     "latitude": -20.5381768,
     "longitude": -47.4009795,
     "coordinatesVerified": false,
@@ -433,6 +451,7 @@
       "Segunda a sexta-feira: 8h - 17h30",
       "Sábado: 8h30 -11h30"
     ],
+    "priestAttendance": [],
     "description": null,
     "image": "https://www.diocesefranca.org.br/images/20210413011346_IMG_0466A2-79C9CF-25437D-88E7B1-0BED5C-59667B.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2049&id_orgao=1",
@@ -446,6 +465,7 @@
       "1ª sexta-feira do mês: 15h",
       "Dias 22 de cada mês, 15h (exceto quinta-feira, sabádo e domingo)"
     ],
+    "forania": "Nossa Senhora da Conceição",
     "latitude": -20.5381768,
     "longitude": -47.4009795,
     "coordinatesVerified": false,
@@ -469,6 +489,7 @@
       "Capela Nossa Senhora Aparecida",
       "CEP: 13.360-000 - Distrito de Capivari"
     ],
+    "priestAttendance": [],
     "description": null,
     "image": "https://www.diocesefranca.org.br/images/20210413011738_2.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2050&id_orgao=1",
@@ -500,6 +521,7 @@
       }
     ],
     "massNotes": [],
+    "forania": "Beata Rita Amada de Jesus",
     "latitude": -20.3366604,
     "longitude": -47.7797924,
     "coordinatesVerified": false,
@@ -519,6 +541,7 @@
       "Segunda à sexta- feira: 07h30 - 11h30 e 13h30 - 17h",
       "Sábado: 8h -11h"
     ],
+    "priestAttendance": [],
     "description": null,
     "image": "https://www.diocesefranca.org.br/images/20210412140607_atrocinio-paulista.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2041&id_orgao=1",
@@ -549,6 +572,7 @@
       "1ª Sexta-feira: 6h45 e 20h",
       "2ª Terça-feira: missa no Lar São Vicente de Paulo15h"
     ],
+    "forania": "Nossa Senhora Aparecida",
     "latitude": -20.6395883,
     "longitude": -47.28231,
     "coordinatesVerified": false,
@@ -566,8 +590,9 @@
     "foundedAt": "2011-07-28",
     "officeHours": [
       "Segunda-feira a sexta-feira: 08h às 12h e das 13h30 às 17h30",
-      "Sábado das 08h às 11h",
-      "Horário de atendimentos",
+      "Sábado das 08h às 11h"
+    ],
+    "priestAttendance": [
       "Quarta-feira das 14h às 17h30",
       "1° e 3° sábados do mês das 09h às 11h"
     ],
@@ -583,6 +608,7 @@
       "1⁰ Sábado do mês às 09h",
       "Missas Votivas conforme avisos semanais."
     ],
+    "forania": "Beata Rita Amada de Jesus",
     "latitude": -20.1933264,
     "longitude": -47.7097165,
     "coordinatesVerified": false,
@@ -603,6 +629,7 @@
       "Sábado: 8h30 às 11h",
       "Horário das"
     ],
+    "priestAttendance": [],
     "description": null,
     "image": "https://www.diocesefranca.org.br/images/20210607170423_IMG_485BA8-574F46-D3972A-DE4F4F-9B3CF4-78F065.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2230&id_orgao=1",
@@ -624,6 +651,7 @@
       "1ª sexta-feira do mês : 19h30",
       "Todo dia 13 de cada mês: 19h30 (suscetível a mudança)"
     ],
+    "forania": "Santa Gianna",
     "latitude": -20.5381768,
     "longitude": -47.4009795,
     "coordinatesVerified": false,
@@ -643,6 +671,7 @@
       "Segunda a Sexta-feira : 08h - 17h",
       "Sábado: 08h - 11h30"
     ],
+    "priestAttendance": [],
     "description": null,
     "image": "https://www.diocesefranca.org.br/images/20210604151913_20210603160357_Par%C3%B3quia%20Cristo%20Rei%20Orlandia%20imagem%20atualizada.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2017&id_orgao=1",
@@ -666,6 +695,7 @@
       }
     ],
     "massNotes": [],
+    "forania": "São Joaquim",
     "latitude": -20.720278,
     "longitude": -47.886667,
     "coordinatesVerified": false,
@@ -685,6 +715,7 @@
       "Segunda a sexta-feira: 08hs às 12hs e das 13h às 17h",
       "Sábado: 08h às 11h"
     ],
+    "priestAttendance": [],
     "description": null,
     "image": "https://www.diocesefranca.org.br/images/20210413012114_4.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2052&id_orgao=1",
@@ -707,6 +738,7 @@
       }
     ],
     "massNotes": [],
+    "forania": "Santa Gianna",
     "latitude": -20.5381768,
     "longitude": -47.4009795,
     "coordinatesVerified": false,
@@ -723,6 +755,11 @@
     "email": "sagradocoracaodejesusfranca@hotmail.com",
     "foundedAt": "2011-08-28",
     "officeHours": [],
+    "priestAttendance": [
+      "com os padres",
+      "Terça a Sexta-feira: 09h às 11h e das 14h30 às 17h",
+      "Sábado das 08h às 11h"
+    ],
     "description": "Com o loteamento do Jardim Paulistano, nos anos 1980, na zona leste desta cidade, houve uma grande demanda de pessoas vindas de várias partes da cidade, incentivados pela facilidade em adquirir terreno em 36 meses a preço sem juros com 300 a 400 mt², além do Distrito Industrial…",
     "image": "https://www.diocesefranca.org.br/images/20210413012628_5.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2053&id_orgao=1",
@@ -754,6 +791,7 @@
     "massNotes": [
       "1ª Sexta – feira do mês às 18h15 Adoração ao Santíssimo e 19h missa"
     ],
+    "forania": "Nossa Senhora Aparecida",
     "latitude": -20.5381768,
     "longitude": -47.4009795,
     "coordinatesVerified": false,
@@ -771,8 +809,10 @@
     "foundedAt": "1998-07-26",
     "officeHours": [
       "Segunda a sexta-feira: 12h às 17h",
-      "Sábados: das 09h30 às 12h",
-      "Horário de Atendimentos dos Padres",
+      "Sábados: das 09h30 às 12h"
+    ],
+    "priestAttendance": [
+      "dos Padres",
       "Terça a Sexta-feira: 09h30 às 12h e das 14h30 às 17h",
       "Sábado: das 09h30 às 12h"
     ],
@@ -797,6 +837,7 @@
       }
     ],
     "massNotes": [],
+    "forania": "Nossa Senhora Aparecida",
     "latitude": -20.5381768,
     "longitude": -47.4009795,
     "coordinatesVerified": false,
@@ -816,6 +857,7 @@
       "Segunda a sexta-feira: 8h - 12h",
       "Sábado: 8h - 11h"
     ],
+    "priestAttendance": [],
     "description": null,
     "image": "https://www.diocesefranca.org.br/images/20210413012523_6.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2054&id_orgao=1",
@@ -827,6 +869,7 @@
       }
     ],
     "massNotes": [],
+    "forania": "Santa Gianna",
     "latitude": -20.458063,
     "longitude": -47.5911289,
     "coordinatesVerified": false,
@@ -846,6 +889,7 @@
       "3ª à 6ª: 8h30 - 12h00 / 14h00 - 18h",
       "Sábado: 8h - 11h30"
     ],
+    "priestAttendance": [],
     "description": null,
     "image": "https://www.diocesefranca.org.br/images/20210413013106_7.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2055&id_orgao=1",
@@ -864,6 +908,7 @@
       }
     ],
     "massNotes": [],
+    "forania": "Santa Gianna",
     "latitude": -20.5381768,
     "longitude": -47.4009795,
     "coordinatesVerified": false,
@@ -883,6 +928,7 @@
       "2ª à 6ª: 12h30 às 18h",
       "Sábado: 8h - 12h"
     ],
+    "priestAttendance": [],
     "description": null,
     "image": "https://www.diocesefranca.org.br/images/20210604171137_Paroquia%20Santa%20Gianna.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2056&id_orgao=1",
@@ -910,6 +956,7 @@
       }
     ],
     "massNotes": [],
+    "forania": "Santa Gianna",
     "latitude": -20.5381768,
     "longitude": -47.4009795,
     "coordinatesVerified": false,
@@ -930,6 +977,7 @@
       "Terça-feira a Sexta-feira: das 8:00 às 11h e das 13h às 17h",
       "Sábado: 8:00 às 12:00"
     ],
+    "priestAttendance": [],
     "description": null,
     "image": "https://www.diocesefranca.org.br/images/20210413013437_9.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2057&id_orgao=1",
@@ -952,6 +1000,7 @@
       "Todo dia 13 às 19:15 Missa de Santa Luzia",
       "Todo dia 22 às 19:15 Missa de Santa Rita"
     ],
+    "forania": "Nossa Senhora da Conceição",
     "latitude": -20.5381768,
     "longitude": -47.4009795,
     "coordinatesVerified": false,
@@ -968,8 +1017,9 @@
     "email": "paroquiasantamonicafranca@gmail.com",
     "foundedAt": "2011-05-20",
     "officeHours": [
-      "Terça à Sexta-feira: 8h - 11h / 13h30 - 16h Sábado: 08h - 11h",
-      "Atendimento do Padre:",
+      "Terça à Sexta-feira: 8h - 11h / 13h30 - 16h Sábado: 08h - 11h"
+    ],
+    "priestAttendance": [
       "Terça à Sexta-feira: 9h - 11h"
     ],
     "description": null,
@@ -982,6 +1032,7 @@
     "massNotes": [
       "Primeira terça- feira do mês: Missa nas casas Domingo: 8h, 10h30, 19h"
     ],
+    "forania": "Santa Gianna",
     "latitude": -20.5381768,
     "longitude": -47.4009795,
     "coordinatesVerified": false,
@@ -1001,6 +1052,7 @@
       "Segunda a sexta-feira: 08h às 12h - 14h às 17h",
       "Sábado: 08h - 12h"
     ],
+    "priestAttendance": [],
     "description": null,
     "image": "https://www.diocesefranca.org.br/images/20210413013822_11.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2059&id_orgao=1",
@@ -1023,6 +1075,7 @@
       "Quinta-feira às 14h30, Missa com Adoração Nossa Senhora Perpétuo Socorro",
       "Missa Votiva a Santa Rita todo dia 22 de cada mês, às 19h, exceto no sábado que continua às 18h30"
     ],
+    "forania": "Nossa Senhora Aparecida",
     "latitude": -20.5381768,
     "longitude": -47.4009795,
     "coordinatesVerified": false,
@@ -1042,6 +1095,7 @@
       "Segunda à sexta-feira: 8h - 17h30",
       "Sábado: 8h - 11h"
     ],
+    "priestAttendance": [],
     "description": null,
     "image": "https://www.diocesefranca.org.br/images/20210413014049_13.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2060&id_orgao=1",
@@ -1109,6 +1163,7 @@
       }
     ],
     "massNotes": [],
+    "forania": "Beata Rita Amada de Jesus",
     "latitude": -20.0411748,
     "longitude": -47.7476682,
     "coordinatesVerified": false,
@@ -1127,6 +1182,7 @@
     "officeHours": [
       "Segunda à sexta-feira: 8h -11h30 / 13h30 - 17h"
     ],
+    "priestAttendance": [],
     "description": null,
     "image": "https://www.diocesefranca.org.br/images/20210413014211_14.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2061&id_orgao=1",
@@ -1150,6 +1206,7 @@
       }
     ],
     "massNotes": [],
+    "forania": "São Joaquim",
     "latitude": -20.769612,
     "longitude": -47.836873,
     "coordinatesVerified": false,
@@ -1166,6 +1223,7 @@
     "email": "paroquiasantateresinhafranca@gmail.com",
     "foundedAt": "2014-05-18",
     "officeHours": [],
+    "priestAttendance": [],
     "description": null,
     "image": "https://www.diocesefranca.org.br/images/20210413014308_15.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2062&id_orgao=1",
@@ -1185,6 +1243,7 @@
       "Missas Devocionais (na Matriz)",
       "Toda 1° sexta-feira do mês: Missa do Sagrado Coração de Jesus às 07h e às 18h."
     ],
+    "forania": "Santa Gianna",
     "latitude": -20.5381768,
     "longitude": -47.4009795,
     "coordinatesVerified": false,
@@ -1204,6 +1263,7 @@
       "Segunda a sexta-feira : 08h00 - 11h30 / 13h00 - 17h30",
       "Sábado: 08h00 - 11h30"
     ],
+    "priestAttendance": [],
     "description": null,
     "image": "https://www.diocesefranca.org.br/images/20210413014852_16.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2063&id_orgao=1",
@@ -1233,6 +1293,7 @@
       }
     ],
     "massNotes": [],
+    "forania": "Beata Rita Amada de Jesus",
     "latitude": -20.0876144,
     "longitude": -47.789201,
     "coordinatesVerified": false,
@@ -1251,6 +1312,7 @@
     "officeHours": [
       "Segunda a sexta-feira: 8h - 11 / 13h - 17h"
     ],
+    "priestAttendance": [],
     "description": null,
     "image": "https://www.diocesefranca.org.br/images/20210413031400_download.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2065&id_orgao=1",
@@ -1260,6 +1322,7 @@
     },
     "chapels": [],
     "massNotes": [],
+    "forania": "Beata Rita Amada de Jesus",
     "latitude": -20.0811589,
     "longitude": -47.4210736,
     "coordinatesVerified": false,
@@ -1276,6 +1339,7 @@
     "email": "sbenedito@diocesefranca.org.br",
     "foundedAt": "1968-05-19",
     "officeHours": [],
+    "priestAttendance": [],
     "description": null,
     "image": "https://www.diocesefranca.org.br/images/20210413015735_20.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2067&id_orgao=1",
@@ -1305,6 +1369,7 @@
     "massNotes": [
       "Quinta às 15h, na Matriz : Missa e novena de Nª Srª do Perpétuo Socorro"
     ],
+    "forania": "Santa Gianna",
     "latitude": -20.5381768,
     "longitude": -47.4009795,
     "coordinatesVerified": false,
@@ -1324,6 +1389,7 @@
       "Segunda a Sexta: 9h às 12h30 e 14h às 16h30",
       "Sábado: 08h00 - 12h00"
     ],
+    "priestAttendance": [],
     "description": "A Paróquia São Crispim foi instalada, canonicamente, no dia 24 de outubro de 1999, sendo desmembrada da Paróquia São Benedito, tendo Pe. Devair Araújo da Fonseca como primeiro pároco.",
     "image": "https://www.diocesefranca.org.br/images/20210413015844_21.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2068&id_orgao=1",
@@ -1347,6 +1413,7 @@
       }
     ],
     "massNotes": [],
+    "forania": "Santa Gianna",
     "latitude": -20.5381768,
     "longitude": -47.4009795,
     "coordinatesVerified": false,
@@ -1366,6 +1433,7 @@
       "Terça a sexta-feira: 10h30 - 16h30",
       "Sábado: 08h - 12h"
     ],
+    "priestAttendance": [],
     "description": null,
     "image": "https://www.diocesefranca.org.br/images/20210413020004_22.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2069&id_orgao=1",
@@ -1381,6 +1449,7 @@
     "massNotes": [
       "1ª Sexta do mês 19h00"
     ],
+    "forania": "Nossa Senhora Aparecida",
     "latitude": -20.5381768,
     "longitude": -47.4009795,
     "coordinatesVerified": false,
@@ -1400,6 +1469,7 @@
       "Segunda a sexta-feira: 8h – 11h30; 13h30 - 17h30",
       "Sábado: 8h - 12h"
     ],
+    "priestAttendance": [],
     "description": null,
     "image": "https://www.diocesefranca.org.br/images/20210413020052_23.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2070&id_orgao=1",
@@ -1417,6 +1487,7 @@
       }
     ],
     "massNotes": [],
+    "forania": "Nossa Senhora Aparecida",
     "latitude": -20.5381768,
     "longitude": -47.4009795,
     "coordinatesVerified": false,
@@ -1436,6 +1507,7 @@
       "Segunda à sexta-feira: 11h15 - 17h30",
       "Sábado: 8h - 12h"
     ],
+    "priestAttendance": [],
     "description": null,
     "image": "https://www.diocesefranca.org.br/images/20210608141128_Sao%20Joao%20Batista%20Ituverava.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2257&id_orgao=1",
@@ -1454,6 +1526,7 @@
       }
     ],
     "massNotes": [],
+    "forania": "Beata Rita Amada de Jesus",
     "latitude": -20.3366604,
     "longitude": -47.7797924,
     "coordinatesVerified": false,
@@ -1474,6 +1547,7 @@
       "Terça a sexta-feira: 8h - 17h30",
       "Sábado: 8h - 11h"
     ],
+    "priestAttendance": [],
     "description": null,
     "image": "https://www.diocesefranca.org.br/images/20210413020244_24.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2071&id_orgao=1",
@@ -1508,6 +1582,7 @@
       "3ª Quarta-feira do mês, missa votiva de São José",
       "1ª Sexta-feira do mês missa Sagrado Coração de Jesus"
     ],
+    "forania": "São Joaquim",
     "latitude": -20.5814993,
     "longitude": -47.8608238,
     "coordinatesVerified": false,
@@ -1527,6 +1602,7 @@
       "Terça à sexta-feira: 8h - 11h / 13h - 17h",
       "Sábado: 8h - 11h"
     ],
+    "priestAttendance": [],
     "description": "Em fins do século XIX, o café começou a ser cultivado no Norte do Estado, atraindo grandes levas de famílias que, aos pouco, formavam pequenas comunidades. Nasceu assim, entre os Ribeirões Buritis e Lageado, o patrimônio de São José das Pitangueiras, onde foi construída uma…",
     "image": "https://www.diocesefranca.org.br/images/20210413025811_Par%C3%B3quia_S%C3%A3o_Jos%C3%A9,_S%C3%A3o_Jos%C3%A9_da_Bela_Vista_(SP),_Brazil.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2072&id_orgao=1",
@@ -1545,6 +1621,7 @@
       "Todas terças-feiras, missa na Comunidade",
       "Capela Nossa Senhora de Fátima, Vila Marta às 19h30"
     ],
+    "forania": "São Joaquim",
     "latitude": -20.5934194,
     "longitude": -47.6416942,
     "coordinatesVerified": false,
@@ -1565,6 +1642,7 @@
       "Terça a sexta-feira: 8h -17h",
       "Sábado: 8h as 11h30"
     ],
+    "priestAttendance": [],
     "description": null,
     "image": "https://www.diocesefranca.org.br/images/20210413020559_26.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2073&id_orgao=1",
@@ -1611,6 +1689,7 @@
       "1ª Sexta-feira do mês: 7h e Adoração ao Santíssimo durante todo o dia.",
       "Sábado: 17h30, 18h30, 20h (CNC)"
     ],
+    "forania": "São Joaquim",
     "latitude": -20.720278,
     "longitude": -47.886667,
     "coordinatesVerified": false,
@@ -1630,6 +1709,7 @@
       "Segunda a sexta: 08hs às 18hs",
       "Sábado: 08h às 11h"
     ],
+    "priestAttendance": [],
     "description": null,
     "image": "https://www.diocesefranca.org.br/images/20210413020750_27.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2074&id_orgao=1",
@@ -1657,6 +1737,7 @@
       }
     ],
     "massNotes": [],
+    "forania": "Santa Gianna",
     "latitude": -20.5381768,
     "longitude": -47.4009795,
     "coordinatesVerified": false,
@@ -1674,16 +1755,13 @@
     "foundedAt": "2005-06-29",
     "officeHours": [
       "Segunda a sexta-feira das 12h às 18h",
-      "Sábado das 08h30 às 12h",
-      "Horário de Atendimento",
+      "Sábado das 08h30 às 12h"
+    ],
+    "priestAttendance": [
       "Terça, quarta e quinta-feira das 14h às 17h",
-      "Missas",
       "Terça e Quinta-feira: 19h",
       "Quarta e Sexta-feira: 7h",
-      "Sábado: Comunidades Caminho Neo-Catecumenal às 19h30",
-      "Domingo: 08h30 e 19h",
-      "Capela Santa Teresinha do Menino Jesus",
-      "Rua. Dr. Agnelo Morato, 1210 – Prolongamento do Jardim Flórida CEP: 14.403-276"
+      "Sábado:"
     ],
     "description": "A Paróquia São Pedro foi instalada canonicamente no dia 29 de junho de 2005, sendo desmembrada da Paróquia Santa Rita, tendo como primeiro pároco Padre Josenildo Almeida da Silva. Territorialmente faz divisa com a Paróquia Santana, Paróquia Santa Rita, Paróquia Nossa Senhora da…",
     "image": "https://www.diocesefranca.org.br/images/20210413020831_28.jpg",
@@ -1703,7 +1781,10 @@
         "address": "Av. José Marcelo Leite, 2080 – Parque dos Lima"
       }
     ],
-    "massNotes": [],
+    "massNotes": [
+      "Sábado: Comunidades Caminho Neo-Catecumenal às 19h30"
+    ],
+    "forania": "Nossa Senhora Aparecida",
     "latitude": -20.5381768,
     "longitude": -47.4009795,
     "coordinatesVerified": false,
@@ -1724,6 +1805,7 @@
       "Terça à Sexta Feira: das 08h às 13h e das 14h às 17h",
       "Sábados: 08h às 11h"
     ],
+    "priestAttendance": [],
     "description": null,
     "image": "https://www.diocesefranca.org.br/images/20251226175350_1000167251.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2076&id_orgao=1",
@@ -1739,6 +1821,7 @@
       "Último final de semana do mês: Missa dos dizismitas",
       "Todo dia 22 de cada mês: Missa em louvor a Santa Rita com benção das rosas"
     ],
+    "forania": "Nossa Senhora da Conceição",
     "latitude": -20.5381768,
     "longitude": -47.4009795,
     "coordinatesVerified": false,
@@ -1758,6 +1841,9 @@
       "Segunda- feira à Sexta-feira: 08h às 12h e das 13h30 às 17h30",
       "Quinta e sexta-feira: Atendimentos presenciais na secretaria"
     ],
+    "priestAttendance": [
+      "presenciais na secretaria"
+    ],
     "description": "A Paróquia São Sebastião foi instalada, canonicamente, no dia 10 de Agosto de 2011, sendo desmembrada da Paróquia Nossa Senhora da Abadia - Cristais Paulista/SP, tendo Pe. Josenildo Almeida da Silva como primeiro pároco. Territorialmente, faz divisa com a Paróquia São João…",
     "image": "https://www.diocesefranca.org.br/images/20210413021045_30.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2077&id_orgao=1",
@@ -1767,6 +1853,7 @@
     },
     "chapels": [],
     "massNotes": [],
+    "forania": "Beata Rita Amada de Jesus",
     "latitude": -20.3104773,
     "longitude": -47.5915669,
     "coordinatesVerified": false,
@@ -1786,6 +1873,7 @@
       "Segunda-feira a Sexta-feira: 08h – 11h30 e 13h30 – 17h30",
       "Sábado 08h – 11h30"
     ],
+    "priestAttendance": [],
     "description": "Aos 19 dias do mês de Março do ano de 1924, Dom Aberto José Gonçalves, por graça de Deus e para melhor atender o bem espiritual do povo de Guará, cria a Paróquia, desmembrando-a da Paróquia de Ituverava.",
     "image": "https://www.diocesefranca.org.br/images/20240902141852_WhatsApp-Image-2024-08-29-at-17.41.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2078&id_orgao=1",
@@ -1808,6 +1896,7 @@
       }
     ],
     "massNotes": [],
+    "forania": "São Joaquim",
     "latitude": -20.4290496,
     "longitude": -47.8250067,
     "coordinatesVerified": false,
@@ -1825,8 +1914,9 @@
     "foundedAt": "1990-09-27",
     "officeHours": [
       "Terça a Sexta-Feira: 8h às 11h30 e 13h às 17h30",
-      "Sábado: 8h às 11h",
-      "Horário de Atendimento dos Padres:",
+      "Sábado: 8h às 11h"
+    ],
+    "priestAttendance": [
       "Agendar na secretaria paroquial: (16) 3704-8465"
     ],
     "description": "A Paróquia São Vicente de Paulo foi instalada canonicamente no dia do seu padroeiro, 27 de setembro de 1990, sendo desmembrada da Paróquia São Benedito. Teve como primeiro pároco Padre Luis Antonio Brentini, o segundo Padre Jacinto Ferreira Neto, terceiro Padre Idair Perina,…",
@@ -1854,6 +1944,7 @@
     "massNotes": [
       "Sábado: (Salão Paroquial) Missa Cominidade Neocatecumenal: 18h"
     ],
+    "forania": "Santa Gianna",
     "latitude": -20.5381768,
     "longitude": -47.4009795,
     "coordinatesVerified": false,
@@ -1873,6 +1964,7 @@
       "Segunda a Sexta-feira: 8h - 12h / 13h - 17h",
       "Sábado: 8h30 - 11h30"
     ],
+    "priestAttendance": [],
     "description": null,
     "image": "https://www.diocesefranca.org.br/images/20210413015357_17.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2064&id_orgao=1",
@@ -1890,6 +1982,7 @@
       "18h50: Benção do Santíssimo Sacramento",
       "19h: Santa Missa"
     ],
+    "forania": "Nossa Senhora da Conceição",
     "latitude": -20.5381768,
     "longitude": -47.4009795,
     "coordinatesVerified": false,
@@ -1909,6 +2002,7 @@
       "Segunda a Sexta-feira: 8h - 12h15 e 13h30 - 17h",
       "Sábado 08h às 11h"
     ],
+    "priestAttendance": [],
     "description": null,
     "image": "https://www.diocesefranca.org.br/images/20210413021455_33.jpg",
     "website": "https://www.diocesefranca.org.br/?menu=noticia_detalhe&id=2080&id_orgao=1",
@@ -1928,6 +2022,7 @@
       }
     ],
     "massNotes": [],
+    "forania": "Nossa Senhora da Conceição",
     "latitude": -20.5381768,
     "longitude": -47.4009795,
     "coordinatesVerified": false,
