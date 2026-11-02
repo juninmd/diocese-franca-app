@@ -104,12 +104,21 @@ async function crawlClergyDirectory({ log = console } = {}) {
     });
   }
 
-  // 2. Padres (id=2001, páginas 1 a 7)
-  for (let cpg = 1; cpg <= 7; cpg++) {
+  // 2. Padres (id=2001, paginação dinâmica)
+  const firstPriestHtml = await fetchHtml(`${SITE}/?menu=noticia_detalhe&id=2001`, { log });
+  let maxPages = 7;
+  if (firstPriestHtml) {
+    const $firstP = cheerio.load(firstPriestHtml);
+    const pageText = $firstP('body').text();
+    const pageMatch = pageText.match(/Página\s+\d+\s+de\s+(\d+)/i);
+    if (pageMatch) maxPages = parseInt(pageMatch[1], 10);
+  }
+
+  for (let cpg = 1; cpg <= maxPages; cpg++) {
     const url = cpg === 1
       ? `${SITE}/?menu=noticia_detalhe&id=2001`
       : `${SITE}/?menu=noticia_detalhe&id=2001&cpg=${cpg}`;
-    const html = await fetchHtml(url, { log });
+    const html = cpg === 1 ? firstPriestHtml : await fetchHtml(url, { log });
     if (!html) continue;
     const $p = cheerio.load(html);
     $p('.read_post_list li').each((_, el) => {

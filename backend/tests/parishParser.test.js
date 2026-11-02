@@ -141,4 +141,25 @@ describe('parseParish - HTML colado do Word (quebras de linha dentro de rótulos
     expect(parish.masses.map((m) => `${m.dayOfWeek} ${m.time}`)).toEqual(['Domingo 08:30', 'Domingo 18:00', 'Terça-feira 19:30', 'Sábado 19:00']);
     expect(parish.description).toMatch(/^Localizada no Recanto Elimar, em Franca/);
   });
+
+  it('extrai corretamente horário de atendimento do padre mesmo após a seção de missas', () => {
+    const wrapP = (lines) => `<h2 class="title">Paróquia São Sebastião (Jeriquara-SP)</h2><div class="text_post_block"><p>Local e Contato</p>${lines.map((l) => `<p>${l}</p>`).join('')}<p>Compartilhar</p></div>`;
+    const p = parseParish(
+      wrapP([
+        'Endereço : Praça São Sebastião, 60',
+        'Cidade/UF : Jeriquara-SP',
+        'Expediente da secretaria:',
+        'Segunda a sexta: 8h às 12h',
+        'Missas:',
+        'Sábado: 18h',
+        'Domingo: 8h',
+        'Atendimento do Padre:',
+        'Quinta-feira das 13h30 às 16h',
+        'Descrição',
+        'Paróquia centenária...',
+      ]),
+      2077
+    );
+    expect(p.priestAttendance).toEqual(['Quinta-feira das 13h30 às 16h']);
+  });
 });

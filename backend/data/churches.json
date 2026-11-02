@@ -756,7 +756,6 @@
     "foundedAt": "2011-08-28",
     "officeHours": [],
     "priestAttendance": [
-      "com os padres",
       "Terça a Sexta-feira: 09h às 11h e das 14h30 às 17h",
       "Sábado das 08h às 11h"
     ],
@@ -812,7 +811,6 @@
       "Sábados: das 09h30 às 12h"
     ],
     "priestAttendance": [
-      "dos Padres",
       "Terça a Sexta-feira: 09h30 às 12h e das 14h30 às 17h",
       "Sábado: das 09h30 às 12h"
     ],
@@ -1758,10 +1756,7 @@
       "Sábado das 08h30 às 12h"
     ],
     "priestAttendance": [
-      "Terça, quarta e quinta-feira das 14h às 17h",
-      "Terça e Quinta-feira: 19h",
-      "Quarta e Sexta-feira: 7h",
-      "Sábado:"
+      "Terça, quarta e quinta-feira das 14h às 17h"
     ],
     "description": "A Paróquia São Pedro foi instalada canonicamente no dia 29 de junho de 2005, sendo desmembrada da Paróquia Santa Rita, tendo como primeiro pároco Padre Josenildo Almeida da Silva. Territorialmente faz divisa com a Paróquia Santana, Paróquia Santa Rita, Paróquia Nossa Senhora da…",
     "image": "https://www.diocesefranca.org.br/images/20210413020831_28.jpg",
@@ -1842,7 +1837,7 @@
       "Quinta e sexta-feira: Atendimentos presenciais na secretaria"
     ],
     "priestAttendance": [
-      "presenciais na secretaria"
+      "Quinta-feira das 13h30 às 16h"
     ],
     "description": "A Paróquia São Sebastião foi instalada, canonicamente, no dia 10 de Agosto de 2011, sendo desmembrada da Paróquia Nossa Senhora da Abadia - Cristais Paulista/SP, tendo Pe. Josenildo Almeida da Silva como primeiro pároco. Territorialmente, faz divisa com a Paróquia São João…",
     "image": "https://www.diocesefranca.org.br/images/20210413021045_30.jpg",

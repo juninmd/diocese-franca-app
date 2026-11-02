@@ -133,15 +133,37 @@ function buildCatalog(parishes, coords, bishop, previousPriests = [], foraniaMap
     });
   }
 
-  // Encontra informações enriquecidas de clero por proximidade de nome
+  // Encontra informações enriquecidas de clero por proximidade e normalização resiliente de nome
+  const cleanClergyName = (str) =>
+    (str || '')
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/^(?:pe\.?|padre|diacono|diácono|frei|monsenhor|fr\.|cônego|conego)\s+/i, '')
+      .replace(/,.*$/, '')
+      .replace(/\s+/g, ' ')
+      .trim();
+
   const findDirectoryEntry = (name) => {
-    const norm = name.toLowerCase().replace(/^(?:pe\.?|diácono|frei|monsenhor|fr\.)\s+/i, '').trim();
+    const norm = cleanClergyName(name);
+    // 1. Busca exata ou substring direta
     for (const [key, val] of clergyDirectory.entries()) {
-      const keyNorm = key.replace(/^(?:pe\.?|diácono|frei|monsenhor|fr\.)\s+/i, '').trim();
-      if (norm === keyNorm || norm.includes(keyNorm) || keyNorm.includes(norm)) {
+      const keyNorm = cleanClergyName(val.name || key);
+      if (norm === keyNorm || (norm.length > 5 && keyNorm.includes(norm)) || (keyNorm.length > 5 && norm.includes(keyNorm))) {
         return val;
       }
     }
+
+    // 2. Busca por palavras com tolerância (ex.: Sousa/Souza, prenomes compostos)
+    const normVariant = norm.replace(/\bsousa\b/g, 'souza');
+    const pWords = normVariant.split(' ').filter((w) => w.length > 2);
+    for (const [key, val] of clergyDirectory.entries()) {
+      const keyNorm = cleanClergyName(val.name || key).replace(/\bsousa\b/g, 'souza');
+      const dWords = keyNorm.split(' ').filter((w) => w.length > 2);
+      if (pWords.length >= 2 && pWords.every((w) => dWords.includes(w))) return val;
+      if (dWords.length >= 2 && dWords.every((w) => pWords.includes(w))) return val;
+    }
+
     return null;
   };
 

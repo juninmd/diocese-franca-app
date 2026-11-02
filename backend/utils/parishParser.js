@@ -134,10 +134,33 @@ function parseParish(html, sourceId) {
     || body.match(/Expediente da secretaria\s*:?([\s\S]*?)(?=\bMissas?[^:\n]{0,20}:)/i);
 
   // Extração de horários de atendimento do padre / confissões
-  const attendanceMatch = body.match(/(?:hor[áa]rio\s+de\s+)?(?:atendimento(?:s|\s+do\s+padre|\s+dos\s+padres|s?\s+presenciais)?|confiss[õo]es?)\s*:?([\s\S]*?)(?=\bMissas?[^:\n]{0,20}:|\bCapela|\bComunidade|\bDescri[çc][ãa]o|$)/i);
-  const priestAttendance = attendanceMatch
-    ? lines(attendanceMatch[1]).filter((l) => !STOP_MASSES.test(l) && !/^missas?/i.test(l)).slice(0, 4)
-    : [];
+  const allLines = lines(body);
+  const priestAttendance = [];
+  let inAttendance = false;
+
+  for (let i = 0; i < allLines.length; i += 1) {
+    const line = allLines[i];
+    if (/^(?:hor[áa]rio\s+de\s+)?atendimento(?:s|\s+do\s+padre|\s+dos\s+padres|s?\s+presenciais)?\s*:?/i.test(line) ||
+        /^confiss[õo]es?\s*:?/i.test(line)) {
+      inAttendance = true;
+      const afterColon = line
+        .replace(/^(?:hor[áa]rio\s+de\s+)?atendimento(?:s|\s+do\s+padre|\s+dos\s+padres|s?\s+presenciais)?\s*:?/i, '')
+        .replace(/^confiss[õo]es?\s*:?/i, '')
+        .trim();
+      if (afterColon && !/^(?:com\s+os\s+padres|dos\s+padres|presenciais\s+na\s+secretaria)$/i.test(afterColon)) {
+        priestAttendance.push(afterColon);
+      }
+      continue;
+    }
+    if (inAttendance) {
+      if (/^(?:missas?[^:\n]{0,20}:?|expediente|dados|capela|comunidade|descri[çc][ãa]o|itens|compartilhar|redes|local|cidade)/i.test(line)) {
+        inAttendance = false;
+        continue;
+      }
+      if (/^(?:com\s+os\s+padres|dos\s+padres|presenciais\s+na\s+secretaria)$/i.test(line)) continue;
+      priestAttendance.push(line);
+    }
+  }
 
   const massBlock = body.match(/\bMissas?[^:\n]{0,20}:?([\s\S]*)/i);
   const massLines = [];
@@ -160,7 +183,7 @@ function parseParish(html, sourceId) {
     email: (contact.match(EMAIL) || [])[0] || null,
     foundedAt: toIsoDate(field(body, 'Data Criação')),
     officeHours: office ? lines(office[1]) : [],
-    priestAttendance,
+    priestAttendance: priestAttendance.slice(0, 4),
     description,
     image: image ? toHttpsUrl(`${SITE}/${image[1]}`) : null,
     website: toHttpsUrl(`${SITE}/?menu=noticia_detalhe&id=${sourceId}&id_orgao=1`),

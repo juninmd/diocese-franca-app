@@ -55,9 +55,9 @@
     "email": null,
     "phone": "(16) 97405-1369",
     "bio": "Pároco da Paróquia Nossa Senhora Aparecida (Itirapuã/SP).",
-    "image": null,
-    "birthDate": null,
-    "ordinationDate": null
+    "image": "https://www.diocesefranca.org.br/images/20210918172655_Pe.%20Osvaldo%20de%20Souza%20Filho.jpg",
+    "birthDate": "25/01/1973",
+    "ordinationDate": "12/12/2008"
   },
   {
     "id": 5,
@@ -160,9 +160,9 @@
     "email": "paroquiaabadia@hotmail.com",
     "phone": "(16) 3133-1127",
     "bio": "Pároco da Paróquia Nossa Senhora da D'Abadia (Cristais Paulista/SP).",
-    "image": null,
-    "birthDate": null,
-    "ordinationDate": null
+    "image": "https://www.diocesefranca.org.br/images/20211020121206_Pe.%20Wallace%20Nunes%20de%20Aguiar%20Hon+%C2%A6rio.jpg",
+    "birthDate": "26/08/1988",
+    "ordinationDate": "01/07/2016"
   },
   {
     "id": 12,
@@ -220,9 +220,9 @@
     "email": "paroquiansdcarmo@gmail.com",
     "phone": "(16) 3839-2788",
     "bio": "Pároco da Paróquia Nossa Senhora do Carmo (Ituverava/SP).",
-    "image": null,
-    "birthDate": null,
-    "ordinationDate": null
+    "image": "https://www.diocesefranca.org.br/images/20210918170552_Pe.%20Marco%20Ant+%C2%A6nio%20Bognoti.jpg",
+    "birthDate": "15/06/1963",
+    "ordinationDate": "14/05/1994"
   },
   {
     "id": 16,
@@ -326,9 +326,9 @@
     "email": "paroquianspatrocinio@gmail.com",
     "phone": "(16) 3751-1006",
     "bio": "Pároco da Paróquia Nossa Senhora do Patrocínio (Buritizal/SP).",
-    "image": null,
-    "birthDate": null,
-    "ordinationDate": null
+    "image": "https://www.diocesefranca.org.br/images/20210918165749_Pe.%20Fabiano%20R.%20Oliveira.jpg",
+    "birthDate": "25/03/1982",
+    "ordinationDate": "22/02/2020"
   },
   {
     "id": 23,
@@ -446,9 +446,9 @@
     "email": "santana@diocesefranca.org.br",
     "phone": "(16) 3701-8533",
     "bio": "Vigário Paroquial da Paróquia Sant’Ana (Franca/SP).",
-    "image": null,
-    "birthDate": null,
-    "ordinationDate": null
+    "image": "https://www.diocesefranca.org.br/images/20210918170431_Pe.%20Luiz%20Carlos%20de%20Souza.jpg",
+    "birthDate": "15/03/1958",
+    "ordinationDate": "20/12/2002"
   },
   {
     "id": 31,
@@ -476,9 +476,9 @@
     "email": "psedwiges@diocesefranca.org.br",
     "phone": "(16) 3432-0161",
     "bio": "Pároco da Paróquia Santa Edwiges (Franca/SP).",
-    "image": null,
-    "birthDate": null,
-    "ordinationDate": null
+    "image": "https://www.diocesefranca.org.br/images/20210918164639_Pe.%20C+%C2%AElio%20Adriano%20Cintra.jpg",
+    "birthDate": "26/05/1970",
+    "ordinationDate": "28/02/2003"
   },
   {
     "id": 33,
@@ -491,9 +491,9 @@
     "email": "santagianna121@gmail.com",
     "phone": "(16) 3703-5767",
     "bio": "Pároco da Paróquia Santa Gianna (Franca/SP).",
-    "image": null,
-    "birthDate": null,
-    "ordinationDate": null
+    "image": "https://www.diocesefranca.org.br/images/20211008135242_Pe.%20Vilmar%20Volpato.jpg",
+    "birthDate": "04/03/1963",
+    "ordinationDate": "12/02/1993"
   },
   {
     "id": 34,
@@ -536,9 +536,9 @@
     "email": "santaluzia@diocesefranca.org.br",
     "phone": "(16) 3721-0036",
     "bio": "Pároco da Paróquia Santa Luzia (Franca/SP).",
-    "image": null,
-    "birthDate": null,
-    "ordinationDate": null
+    "image": "https://www.diocesefranca.org.br/images/20210918165655_Pe.%20Everaldo%20Donizete%20Campanaro.jpg",
+    "birthDate": "30/05/1971",
+    "ordinationDate": "22/02/2008"
   },
   {
     "id": 38,
@@ -596,9 +596,9 @@
     "email": "dfigarapava@hotmail.com",
     "phone": "(16) 3172-1607",
     "bio": "Pároco da Paróquia Santa Rita de Cássia (Igarapava/SP).",
-    "image": null,
-    "birthDate": null,
-    "ordinationDate": null
+    "image": "https://www.diocesefranca.org.br/images/20210918170400_Pe.%20Luciano%20Resende%20Caixeta.jpg",
+    "birthDate": "05/10/1978",
+    "ordinationDate": "17/12/2005"
   },
   {
     "id": 42,
@@ -641,9 +641,9 @@
     "email": "paroquia@paroquiasantaritasales.org.br",
     "phone": "(16) 3852-1021",
     "bio": "Pároco da Paróquia Santa Rita de Cássia (Sales Oliveira/SP).",
-    "image": null,
-    "birthDate": null,
-    "ordinationDate": null
+    "image": "https://www.diocesefranca.org.br/images/20210918164931_Pe.%20Danilo%20Juscelino%20da%20Silva.jpg",
+    "birthDate": "25/03/1993",
+    "ordinationDate": "31/01/2020"
   },
   {
     "id": 45,
@@ -656,9 +656,9 @@
     "email": "paroquia@paroquiasantaritasales.org.br",
     "phone": "(16) 3852-1021",
     "bio": "Vigário Paroquial da Paróquia Santa Rita de Cássia (Sales Oliveira/SP).",
-    "image": null,
-    "birthDate": null,
-    "ordinationDate": null
+    "image": "https://www.diocesefranca.org.br/images/20210607085619_diocesefranca.org.br][283]pe_francisco_milanesio.jpg",
+    "birthDate": "03/03/1944",
+    "ordinationDate": "29/06/1969"
   },
   {
     "id": 46,
@@ -671,9 +671,9 @@
     "email": "paroquia@paroquiasantaritasales.org.br",
     "phone": "(16) 3852-1021",
     "bio": "Diácono da Paróquia Santa Rita de Cássia (Sales Oliveira/SP).",
-    "image": null,
-    "birthDate": null,
-    "ordinationDate": null
+    "image": "https://www.diocesefranca.org.br/images/20210607174100_14.jpg",
+    "birthDate": "05/12/1960",
+    "ordinationDate": "25/03/2001"
   },
   {
     "id": 47,
@@ -746,9 +746,9 @@
     "email": "sbenedito@diocesefranca.org.br",
     "phone": "(16) 3701-5605",
     "bio": "Pároco da Paróquia São Benedito (Franca/SP).",
-    "image": null,
-    "birthDate": null,
-    "ordinationDate": null
+    "image": "https://www.diocesefranca.org.br/images/20210918170058_Pe.%20Idair%20Perina.jpg",
+    "birthDate": "09/03/1964",
+    "ordinationDate": "14/08/1992"
   },
   {
     "id": 52,
@@ -791,9 +791,9 @@
     "email": "paroquiasaocrispim@diocesefranca.org.br",
     "phone": "(16) 3703-8330",
     "bio": "Pároco da Paróquia São Crispim (Franca/SP).",
-    "image": null,
-    "birthDate": null,
-    "ordinationDate": null
+    "image": "https://www.diocesefranca.org.br/images/20210918170037_Pe.%20Geraldo%20Jos+%C2%AE%20Urbinatti.jpg",
+    "birthDate": "08/03/1962",
+    "ordinationDate": "05/02/1993"
   },
   {
     "id": 55,
@@ -806,9 +806,9 @@
     "email": "paroquiasaocrispim@diocesefranca.org.br",
     "phone": "(16) 3703-8330",
     "bio": "Vigário Paroquial da Paróquia São Crispim (Franca/SP).",
-    "image": null,
-    "birthDate": null,
-    "ordinationDate": null
+    "image": "https://www.diocesefranca.org.br/images/20210918170129_Pe.%20Jaysson%20Fran+%C2%BAa%20Alves.jpg",
+    "birthDate": "10/03/1991",
+    "ordinationDate": "25/01/2020"
   },
   {
     "id": 56,
@@ -821,9 +821,9 @@
     "email": "paroquiasaocrispim@diocesefranca.org.br",
     "phone": "(16) 3703-8330",
     "bio": "Diácono da Paróquia São Crispim (Franca/SP).",
-    "image": null,
-    "birthDate": null,
-    "ordinationDate": null
+    "image": "https://www.diocesefranca.org.br/images/20210607173303_5.jpg",
+    "birthDate": "11/11/1963",
+    "ordinationDate": "12/10/2007"
   },
   {
     "id": 57,
@@ -866,9 +866,9 @@
     "email": "igrejasaojoao@hotmail.com",
     "phone": "(16) 3701-8468",
     "bio": "Vigário Paroquial da Paróquia São João Batista (Franca/SP).",
-    "image": null,
-    "birthDate": null,
-    "ordinationDate": null
+    "image": "https://www.diocesefranca.org.br/images/20211008135210_Pe.%20Wellington%20Eust+%C3%ADquio%20de%20Oliveira.jpg",
+    "birthDate": "05/10/1979",
+    "ordinationDate": "16/12/2005"
   },
   {
     "id": 60,
@@ -881,9 +881,9 @@
     "email": "paroquiasjbituverava@hotmail.com",
     "phone": "(16) 99998-4101",
     "bio": "Pároco da Paróquia São João Batista (Ituverava/SP).",
-    "image": null,
-    "birthDate": null,
-    "ordinationDate": null
+    "image": "https://www.diocesefranca.org.br/images/20210918164039_Pe.%20Adailson%20Ferreira%20de%20Oliveira.jpg",
+    "birthDate": "15/11/1980",
+    "ordinationDate": "16/03/2012"
   },
   {
     "id": 61,
@@ -941,9 +941,9 @@
     "email": "psjoaquim@outlook.com",
     "phone": "(16) 3818-2394",
     "bio": "Diácono da Paróquia São Joaquim (São Joaquim da Barra/SP).",
-    "image": null,
-    "birthDate": null,
-    "ordinationDate": null
+    "image": "https://www.diocesefranca.org.br/images/20210607173729_10.jpg",
+    "birthDate": "05/04/1945",
+    "ordinationDate": "12/10/2007"
   },
   {
     "id": 65,
@@ -956,9 +956,9 @@
     "email": "psjoaquim@outlook.com",
     "phone": "(16) 3818-2394",
     "bio": "Diácono da Paróquia São Joaquim (São Joaquim da Barra/SP).",
-    "image": null,
-    "birthDate": null,
-    "ordinationDate": null
+    "image": "https://www.diocesefranca.org.br/images/20210607173807_11.jpg",
+    "birthDate": "06/11/1965",
+    "ordinationDate": "29/04/2016"
   },
   {
     "id": 66,
@@ -986,9 +986,9 @@
     "email": "paroquia@psaojose.org.br",
     "phone": "(16) 3142-1311",
     "bio": "Pároco da Paróquia São José (São José da Bela Vista/SP).",
-    "image": null,
-    "birthDate": null,
-    "ordinationDate": null
+    "image": "https://www.diocesefranca.org.br/images/20210918170321_Pe.%20Luan%20Marques.jpg",
+    "birthDate": "04/10/1989",
+    "ordinationDate": "02/02/2018"
   },
   {
     "id": 68,
@@ -1016,9 +1016,9 @@
     "email": "pqsjorlandia@gmail.com",
     "phone": "(16) 3826-1315",
     "bio": "Vigário Paroquial da Paróquia São José (Orlândia/SP).",
-    "image": null,
-    "birthDate": null,
-    "ordinationDate": null
+    "image": "https://www.diocesefranca.org.br/images/20210918170454_Pe.%20M+%C3%ADrcio%20Barbosa%20Rigolin.jpg",
+    "birthDate": "26/06/1957",
+    "ordinationDate": "16/12/1987"
   },
   {
     "id": 70,
@@ -1031,9 +1031,9 @@
     "email": "pqsjorlandia@gmail.com",
     "phone": "(16) 3826-1315",
     "bio": "Diácono da Paróquia São José (Orlândia/SP).",
-    "image": null,
-    "birthDate": null,
-    "ordinationDate": null
+    "image": "https://www.diocesefranca.org.br/images/20210607174430_18.jpg",
+    "birthDate": "15/04/1956",
+    "ordinationDate": "25/03/2001"
   },
   {
     "id": 71,
@@ -1136,9 +1136,9 @@
     "email": "pssebastiaofranca@hotmail.com",
     "phone": "(16) 99154-8258",
     "bio": "Pároco da Paróquia São Sebastião (Franca/SP).",
-    "image": null,
-    "birthDate": null,
-    "ordinationDate": null
+    "image": "https://www.diocesefranca.org.br/images/20211008135138_Pe.%20Valdomiro%20Jos+%C2%AE%20de%20Souza.jpg",
+    "birthDate": "16/10/1969",
+    "ordinationDate": "23/12/1999"
   },
   {
     "id": 79,
@@ -1151,9 +1151,9 @@
     "email": "pssebastiaofranca@hotmail.com",
     "phone": "(16) 99154-8258",
     "bio": "Vigário Paroquial da Paróquia São Sebastião (Franca/SP).",
-    "image": null,
-    "birthDate": null,
-    "ordinationDate": null
+    "image": "https://www.diocesefranca.org.br/images/20210617085308_2.png",
+    "birthDate": "20/03/1967",
+    "ordinationDate": "10/02/1994"
   },
   {
     "id": 80,
@@ -1181,9 +1181,9 @@
     "email": "dfparoquiaguara@gmail.com",
     "phone": "(16) 3831-1730",
     "bio": "Pároco da Paróquia São Sebastião e Santo Antônio (Guará/SP).",
-    "image": null,
-    "birthDate": null,
-    "ordinationDate": null
+    "image": "https://www.diocesefranca.org.br/images/20210918165625_Pe.%20Edson%20Francisco%20dos%20Santos.jpg",
+    "birthDate": "04/04/1966",
+    "ordinationDate": "01/05/1996"
   },
   {
     "id": 82,
@@ -1196,9 +1196,9 @@
     "email": "dfparoquiaguara@gmail.com",
     "phone": "(16) 3831-1730",
     "bio": "Vigário Paroquial da Paróquia São Sebastião e Santo Antônio (Guará/SP).",
-    "image": null,
-    "birthDate": null,
-    "ordinationDate": null
+    "image": "https://www.diocesefranca.org.br/images/20210918164831_Pe.%20Cec+%C2%A1lio%20dos%20Santos.jpg",
+    "birthDate": "13/08/1963",
+    "ordinationDate": "08/12/1995"
   },
   {
     "id": 83,
@@ -1211,9 +1211,9 @@
     "email": "dfparoquiaguara@gmail.com",
     "phone": "(16) 3831-1730",
     "bio": "Diácono da Paróquia São Sebastião e Santo Antônio (Guará/SP).",
-    "image": null,
-    "birthDate": null,
-    "ordinationDate": null
+    "image": "https://www.diocesefranca.org.br/images/20210608100239_04.jpg",
+    "birthDate": "12/02/1947",
+    "ordinationDate": "29/04/2016"
   },
   {
     "id": 84,
@@ -1271,9 +1271,9 @@
     "email": "psvpaulo@diocesefranca.org.br",
     "phone": "(16) 3704-8465",
     "bio": "Diácono da Paróquia São Vicente de Paulo (Franca/SP).",
-    "image": null,
-    "birthDate": null,
-    "ordinationDate": null
+    "image": "https://www.diocesefranca.org.br/images/20210607172356_diocesefranca.org.br][433]diacono-claudio-jose-soares.jpg",
+    "birthDate": "09/12/1967",
+    "ordinationDate": "29/04/2016"
   },
   {
     "id": 88,
@@ -1286,9 +1286,9 @@
     "email": "psvpaulo@diocesefranca.org.br",
     "phone": "(16) 3704-8465",
     "bio": "Diácono da Paróquia São Vicente de Paulo (Franca/SP).",
-    "image": null,
-    "birthDate": null,
-    "ordinationDate": null
+    "image": "https://www.diocesefranca.org.br/images/20210918160847_Di+%C3%ADcono%20Julio%20C+%C2%AEsar%20Naves.png",
+    "birthDate": "22/07/1958",
+    "ordinationDate": "29/04/2016"
   },
   {
     "id": 89,
@@ -1301,9 +1301,9 @@
     "email": "psantoniofranca@gmail.com",
     "phone": "(16) 99129-8923",
     "bio": "Pároco da Santuário Diocesano Santo Antônio (Franca/SP).",
-    "image": null,
-    "birthDate": null,
-    "ordinationDate": null
+    "image": "https://www.diocesefranca.org.br/images/20210918172913_Pe.%20Raphael%20Rom+%C3%BAo.jpg",
+    "birthDate": "23/09/1983",
+    "ordinationDate": "15/07/2012"
   },
   {
     "id": 90,
@@ -1346,9 +1346,9 @@
     "email": "catedral@diocesefranca.org.br",
     "phone": "(16) 3721-4085",
     "bio": "Vigário Paroquial da Sé Catedral Nossa Senhora da Conceição (Franca/SP).",
-    "image": null,
-    "birthDate": null,
-    "ordinationDate": null
+    "image": "https://www.diocesefranca.org.br/images/20210918164003_Padre%20Luiz%20Ricardo%20Tertuliano.jpg",
+    "birthDate": "15/06/1973",
+    "ordinationDate": "15/02/2020"
   },
   {
     "id": 93,
@@ -1376,9 +1376,9 @@
     "email": "nsguia@diocesefranca.org.br",
     "phone": "(16) 99104-6520",
     "bio": "Pároco da Paróquia Nossa Senhora da Guia (Franca/SP).",
-    "image": null,
-    "birthDate": null,
-    "ordinationDate": null
+    "image": "https://www.diocesefranca.org.br/images/20210918170224_Pe.%20Josenildo%20Almeida%20da%20Silva.jpg",
+    "birthDate": "26/08/1963",
+    "ordinationDate": "10/08/2001"
   },
   {
     "id": 95,
@@ -1436,9 +1436,9 @@
     "email": "meninojesus@diocesefranca.org.br",
     "phone": "(16) 3721-3246",
     "bio": "Pároco da Menino Jesus de Praga (Franca/SP).",
-    "image": null,
-    "birthDate": null,
-    "ordinationDate": null
+    "image": "https://www.diocesefranca.org.br/images/20210918173208_Pe.%20Sebasti+%C3%BAo%20F+%C3%ADbio%20Girolamo.jpg",
+    "birthDate": "20/01/1949",
+    "ordinationDate": "11/03/1977"
   },
   {
     "id": 99,
@@ -1451,9 +1451,9 @@
     "email": "meninojesus@diocesefranca.org.br",
     "phone": "(16) 3721-3246",
     "bio": "Vigário Paroquial da Menino Jesus de Praga (Franca/SP).",
-    "image": null,
-    "birthDate": null,
-    "ordinationDate": null
+    "image": "https://www.diocesefranca.org.br/images/20210918165842_Pe.%20Fl+%C3%ADvio%20Augusto%20C+%C2%A1cero.jpg",
+    "birthDate": "16/01/1977",
+    "ordinationDate": "05/02/2001"
   },
   {
     "id": 100,
@@ -1481,9 +1481,9 @@
     "email": "divespsanto@diocesefranca.org.br",
     "phone": "(16) 3847-2309",
     "bio": "Pároco da Paróquia Divino Espírito Santo (Nuporanga/SP).",
-    "image": null,
-    "birthDate": null,
-    "ordinationDate": null
+    "image": "https://www.diocesefranca.org.br/images/20210918165727_Pe.%20Fabiano%20Eduardo%20da%20Silva.jpg",
+    "birthDate": "14/09/1975",
+    "ordinationDate": "16/12/2005"
   },
   {
     "id": 102,
