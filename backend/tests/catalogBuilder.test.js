@@ -43,6 +43,29 @@ describe('normalizeName', () => {
   });
 });
 
+describe('enriquecimento de clero com matching resiliente', () => {
+  it('enriquece padre mesmo com divergência fonética/digitação (ex: Golçalves vs Gonçalves)', () => {
+    const parishes = [
+      parish(15, 'Paróquia D', [{ name: 'Pe. Juliano Gonçalves Delgado', title: 'Pároco' }]),
+    ];
+    const clergyDir = new Map([
+      ['pe. juliano golçalves delgado', {
+        name: 'Pe. Juliano Golçalves Delgado',
+        birthDate: '01/11/1978',
+        ordinationDate: '16/03/2012',
+        image: 'https://diocesefranca.org.br/images/pe_juliano.jpg',
+      }],
+    ]);
+    const catalog = buildCatalog(parishes, {}, null, [], new Map(), clergyDir);
+    expect(catalog.priests[0]).toMatchObject({
+      name: 'Pe. Juliano Gonçalves Delgado',
+      birthDate: '01/11/1978',
+      ordinationDate: '16/03/2012',
+      image: 'https://diocesefranca.org.br/images/pe_juliano.jpg',
+    });
+  });
+});
+
 describe('ids estáveis de padres', () => {
   it('reaproveita o id de quem já existia e numera novos a partir do maior id', () => {
     const parishes = [{

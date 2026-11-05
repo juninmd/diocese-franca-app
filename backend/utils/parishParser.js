@@ -59,6 +59,7 @@ function parseChapels(text, parishName) {
   return chapels;
 }
 const PHONE = /\(?\d{2}\)?\s?9?\d{4}[-\s]?\d{4}/g;
+const LOCAL_PHONE = /(?:^|[^\d])([23]\d{3}[-\s]?\d{4})(?:[^\d]|$)/;
 const EMAIL = /[\w.+-]+@[\w-]+(?:\.[\w-]+)+/g;
 const STOP_MASSES = /^(capela|comunidade|descri[çc][ãa]o|lar |compartilhar|santu[aá]rio|igreja|itens relacionados|atendimento)/i;
 
@@ -71,7 +72,10 @@ const addressField = (text) =>
   ((text.match(/Endereço\s*:([\s\S]*?)\n\s*Cidade\/UF/i) || [])[1] || '').replace(/\s+/g, ' ').trim();
 
 const formatPhone = (raw) => {
-  const digits = raw.replace(/\D/g, '');
+  let digits = raw.replace(/\D/g, '');
+  if (digits.length === 8) {
+    digits = `16${digits}`;
+  }
   return `(${digits.slice(0, 2)}) ${digits.slice(2, -4)}-${digits.slice(-4)}`;
 };
 
@@ -130,8 +134,11 @@ function parseParish(html, sourceId) {
   const { name, city: titleCity, state: titleState } = parseTitle(htmlToText(title).trim());
   const [cityName, uf] = field(body, 'Cidade/UF').split(/\s*[-/]\s*(?=[A-Z]{2}$)/);
   const contact = body.slice(body.indexOf('Cidade/UF'), body.search(/^\s*Dados\s*$/m) > 0 ? body.search(/^\s*Dados\s*$/m) : undefined);
-  const office = body.match(/Expediente da secretaria\s*:?([\s\S]*?)(?=\bMissas?[^:\n]{0,20}:|\bHorário de\s+Atendimento|\bAtendimento\b)/i)
-    || body.match(/Expediente da secretaria\s*:?([\s\S]*?)(?=\bMissas?[^:\n]{0,20}:)/i);
+  const office = body.match(/Expediente(?:\s+da)?\s+secretaria(?:\s+paroquial)?\s*:?([\s\S]*?)(?=\bMissas?[^:\n]{0,20}:|\bHorários?\s+de\s+Missas?|\bHorário de\s+Atendimento|\bAtendimento\b)/i)
+    || body.match(/Expediente(?:\s+da)?\s+secretaria(?:\s+paroquial)?\s*:?([\s\S]*?)(?=\bMissas?[^:\n]{0,20}:|\bHorários?\s+de\s+Missas?)/i);
+
+  const matchedPhone = (contact.match(PHONE) || [])[0]
+    || (contact.match(LOCAL_PHONE) ? contact.match(LOCAL_PHONE)[1] : null);
 
   // Extração de horários de atendimento do padre / confissões
   const allLines = lines(body);
@@ -179,7 +186,7 @@ function parseParish(html, sourceId) {
     state: (uf || titleState).trim(),
     address: cleanAddress(addressField(body)),
     zipCode: formatZip(addressField(body)),
-    phone: (contact.match(PHONE) || [])[0] ? formatPhone(contact.match(PHONE)[0]) : null,
+    phone: matchedPhone ? formatPhone(matchedPhone) : null,
     email: (contact.match(EMAIL) || [])[0] || null,
     foundedAt: toIsoDate(field(body, 'Data Criação')),
     officeHours: office ? lines(office[1]) : [],

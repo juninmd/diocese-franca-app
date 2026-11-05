@@ -1,12 +1,12 @@
 # Diocese de Franca - App
 
 <p align="center">
-  <img src="mobile/screenshots/home_full.png?v=41" alt="Diocese de Franca Banner" width="100%" />
+  <img src="mobile/screenshots/home_full.png?v=42" alt="Diocese de Franca Banner" width="100%" />
 </p>
 
 Aplicativo completo para a Diocese de Franca com backend API REST e app React Native.
 
-> **Status: 100% Funcional e em Produção** - Backend Tests: 115/115 passing | E2E Playwright Tests: 21/21 passing
+> **Status: 100% Funcional e em Produção** - Backend Tests: 118/118 passing | E2E Playwright Tests: 21/21 passing
 
 ## Funcionalidades
 
@@ -18,13 +18,13 @@ Aplicativo completo para a Diocese de Franca com backend API REST e app React Na
 - Respostas padronizadas com wrapper `{ success, count, data }`
 - **Scraper Aprimorado (`backend/scraper.js` e `backend/utils/dioceseEnricher.js`)**: Raspagem completa e autônoma de https://diocesefranca.org.br/ trazendo:
   - **Notícias**: títulos, categorias, fotos, links e data de publicação (extraída do carimbo no nome da imagem, sem inventar "hoje").
-  - **Paróquias e Foranias**: 45 paróquias com endereços, contatos, expediente, horários de atendimento do padre (`priestAttendance`), vínculo com as 5 Foranias da Diocese (Beata Rita Amada de Jesus, Nossa Senhora Aparecida, Nossa Senhora da Conceição, Santa Gianna e São Joaquim), redes sociais (Facebook, Instagram, YouTube e WhatsApp), capelas, comunidades, santuários, mosteiros e conventos vinculados e links de imagem.
-  - **Padres e Clero Enriquecido**: 103 sacerdotes e diáconos (incluindo foto oficial do Bispo Diocesano Dom Paulo Roberto Beloto, Párocos, Vigários Gerais, Vigários Episcopais, Administradores Paroquiais, Reitores, Chanceleres, Diretores Espirituais, Párocos Eméritos, Padres Auxiliares, Assessores Diocesanos, Diáconos Permanentes e Colaboradores) vinculados a cada comunidade, com fotos oficiais, data de nascimento (`birthDate`) e data de ordenação (`ordinationDate`). Cobertura expandida para 68 sacerdotes e diáconos com biografia e fotos oficiais através de paginação dinâmica e matching ortográfico resiliente.
+  - **Paróquias e Foranias**: 45 paróquias com endereços, contatos, expediente (cobertura total de 45 paróquias com expediente da secretaria após flexibilização dos rótulos), horários de atendimento do padre (`priestAttendance`), vínculo com as 5 Foranias da Diocese (Beata Rita Amada de Jesus, Nossa Senhora Aparecida, Nossa Senhora da Conceição, Santa Gianna e São Joaquim), redes sociais (Facebook, Instagram, YouTube e WhatsApp), capelas, comunidades, santuários, mosteiros e conventos vinculados e links de imagem.
+  - **Padres e Clero Enriquecido**: 103 sacerdotes e diáconos (incluindo foto oficial do Bispo Diocesano Dom Paulo Roberto Beloto, Párocos, Vigários Gerais, Vigários Episcopais, Administradores Paroquiais, Reitores, Chanceleres, Diretores Espirituais, Párocos Eméritos, Padres Auxiliares, Assessores Diocesanos, Diáconos Permanentes e Colaboradores) vinculados a cada comunidade, com fotos oficiais, data de nascimento (`birthDate`) e data de ordenação (`ordinationDate`). Cobertura expandida para 69 sacerdotes e diáconos com biografia e fotos oficiais através de paginação dinâmica e matching ortográfico e fonético resiliente.
   - **Horários de Missa**: 275 horários semanais estruturados por dia e horário ("06h30; 11h30 e 19 h", dias colados na mesma linha, listas "a/e" e novos formatos são interpretados; o que é irregular vira nota).
 - **Igrejas próximas** (`/api/churches/nearby`): ordena as paróquias pela distância (fórmula de Haversine) até uma coordenada e calcula a próxima missa de cada uma.
 - **Cache no backend**: leitura dos JSONs com invalidação por `mtime` (o scraper atualiza a API sem reinício), `Cache-Control` + `ETag`/304 e índices por id.
 - **Scraper seguro**: escrita atômica e recusa de sobrescrever dados com resultado vazio ou muito menor (site fora do ar / layout alterado); ids de padres estáveis entre execuções.
-- **115 testes automatizados (Jest em 14 suítes)** cobrindo endpoints, cache HTTP, parsers (notícias, paróquias, foranias, clero enriquecido, redes sociais, capelas, missas), construção do catálogo, integridade dos JSONs, geolocalização, próxima missa (fuso de Brasília) e normalização de nomes.
+- **118 testes automatizados (Jest em 14 suítes)** cobrindo endpoints, cache HTTP, parsers (notícias, paróquias, foranias, clero enriquecido, redes sociais, capelas, missas, telefones locais com DDD e variantes de expediente), construção do catálogo, integridade dos JSONs, geolocalização, próxima missa (fuso de Brasília) e normalização de nomes.
 
 ### Mobile App
 - Interface moderna com design profissional
@@ -66,7 +66,7 @@ Aplicativo completo para a Diocese de Franca com backend API REST e app React Na
 - Node.js + Express.js 5.x
 - Axios + Cheerio + HTML-Entities
 - CORS, Compression, Helmet
-- Jest (115 testes em 14 suítes)
+- Jest (118 testes em 14 suítes)
 
 ### Mobile
 - React Native (Expo SDK 54)
@@ -163,7 +163,7 @@ pnpm start            # Expo (também: pnpm android | pnpm ios | pnpm web)
 ## Testes
 
 ```bash
-# Backend: 115 testes Jest em 14 suítes
+# Backend: 118 testes Jest em 14 suítes
 cd backend
 pnpm test
 
@@ -223,52 +223,53 @@ Não há linter configurado no repositório (nenhum script `lint` em `backend/` 
 | Paróquias | 45 |
 | Foranias Mapeadas | 5 (100% de cobertura diocesana) |
 | Padres / Clero Total | 103 |
-| Clero com Biografia & Foto Oficial | 68 (66% de enriquecimento) |
+| Clero com Biografia & Foto Oficial | 69 (67% de enriquecimento) |
 | Horários de Missa | 275 |
 | Paróquias com Atendimento do Padre | 8 |
+| Paróquias com Horário de Secretaria | 45 (100% de cobertura) |
 | Notícias em Destaque | 5 |
 
 ## Screenshots
 
 ### Screenshots (Web Output E2E Test)
 **Home Screen**
-![Home Screen](mobile/screenshots/home_full.png?v=41)
+![Home Screen](mobile/screenshots/home_full.png?v=42)
 
 **News Section**
-![News Section](mobile/screenshots/news_section.png?v=41)
+![News Section](mobile/screenshots/news_section.png?v=42)
 
 **Igrejas Screen**
-![Igrejas Screen](mobile/screenshots/churches_full.png?v=41)
+![Igrejas Screen](mobile/screenshots/churches_full.png?v=42)
 
 **Detalhes da Igreja (Forania, Redes Sociais, Atendimento e Capelas)**
-![Detalhes da Igreja](mobile/screenshots/church_details_full.png?v=41)
+![Detalhes da Igreja](mobile/screenshots/church_details_full.png?v=42)
 
 **Padres Screen**
-![Padres Screen](mobile/screenshots/priests_full.png?v=41)
+![Padres Screen](mobile/screenshots/priests_full.png?v=42)
 
 **Missas Screen**
-![Missas Screen](mobile/screenshots/masses_full.png?v=41)
+![Missas Screen](mobile/screenshots/masses_full.png?v=42)
 
 **Missas (Empty State)**
-![Missas (Empty State)](mobile/screenshots/masses_empty.png?v=41)
+![Missas (Empty State)](mobile/screenshots/masses_empty.png?v=42)
 
 **Lembrete de Missa**
-![Lembrete de Missa](mobile/screenshots/masses_lembrete.png?v=41)
+![Lembrete de Missa](mobile/screenshots/masses_lembrete.png?v=42)
 
 **Igrejas (Empty State)**
-![Igrejas (Empty State)](mobile/screenshots/churches_empty.png?v=41)
+![Igrejas (Empty State)](mobile/screenshots/churches_empty.png?v=42)
 
 **Padres (Empty State)**
-![Padres (Empty State)](mobile/screenshots/priests_empty.png?v=41)
+![Padres (Empty State)](mobile/screenshots/priests_empty.png?v=42)
 
 **Igreja Próxima**
-![Igreja Próxima](mobile/screenshots/churches_nearby.png?v=41)
+![Igreja Próxima](mobile/screenshots/churches_nearby.png?v=42)
 
 **Igreja Próxima (Permissão Negada)**
-![Igreja Próxima Permissão Negada](mobile/screenshots/churches_nearby_denied.png?v=41)
+![Igreja Próxima Permissão Negada](mobile/screenshots/churches_nearby_denied.png?v=42)
 
 **Homologação Scraper Aprimorado**
-![Homologação Scraper](mobile/screenshots/scraper_enhanced_homologation.png?v=41)
+![Homologação Scraper](mobile/screenshots/scraper_enhanced_homologation.png?v=42)
 
 ## Licença
 
