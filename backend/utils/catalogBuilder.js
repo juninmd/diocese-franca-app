@@ -154,11 +154,15 @@ function buildCatalog(parishes, coords, bishop, previousPriests = [], foraniaMap
       }
     }
 
-    // 2. Busca por palavras com tolerância (ex.: Sousa/Souza, prenomes compostos)
-    const normVariant = norm.replace(/\bsousa\b/g, 'souza');
+    // 2. Busca por palavras com tolerância ortográfica (ex.: Sousa/Souza, Golçalves/Gonçalves)
+    const normVariant = norm
+      .replace(/\bsousa\b/g, 'souza')
+      .replace(/\bgolcalves\b/g, 'goncalves');
     const pWords = normVariant.split(' ').filter((w) => w.length > 2);
     for (const [key, val] of clergyDirectory.entries()) {
-      const keyNorm = cleanClergyName(val.name || key).replace(/\bsousa\b/g, 'souza');
+      const keyNorm = cleanClergyName(val.name || key)
+        .replace(/\bsousa\b/g, 'souza')
+        .replace(/\bgolcalves\b/g, 'goncalves');
       const dWords = keyNorm.split(' ').filter((w) => w.length > 2);
       if (pWords.length >= 2 && pWords.every((w) => dWords.includes(w))) return val;
       if (dWords.length >= 2 && dWords.every((w) => pWords.includes(w))) return val;

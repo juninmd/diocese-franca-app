@@ -754,7 +754,10 @@
     "phone": "(16) 3703-3938",
     "email": "sagradocoracaodejesusfranca@hotmail.com",
     "foundedAt": "2011-08-28",
-    "officeHours": [],
+    "officeHours": [
+      "Terça a Sexta-feira das 08h30 às 12h30 e das 14h às 18h",
+      "Sábado das 08h às 12h"
+    ],
     "priestAttendance": [
       "Terça a Sexta-feira: 09h às 11h e das 14h30 às 17h",
       "Sábado das 08h às 11h"
@@ -1220,7 +1223,10 @@
     "phone": "(16) 3703-1309",
     "email": "paroquiasantateresinhafranca@gmail.com",
     "foundedAt": "2014-05-18",
-    "officeHours": [],
+    "officeHours": [
+      "Segunda a sexta feira: 08h00 às 13h e 14h às 17h00",
+      "Sábado: 08h00 as 12h00"
+    ],
     "priestAttendance": [],
     "description": null,
     "image": "https://www.diocesefranca.org.br/images/20210413014308_15.jpg",
@@ -1336,7 +1342,10 @@
     "phone": "(16) 3701-5605",
     "email": "sbenedito@diocesefranca.org.br",
     "foundedAt": "1968-05-19",
-    "officeHours": [],
+    "officeHours": [
+      "Segunda à Sexta - das 8h às 11h e 13h às 18h",
+      "Sábado - 8h às 11h30"
+    ],
     "priestAttendance": [],
     "description": null,
     "image": "https://www.diocesefranca.org.br/images/20210413015735_20.jpg",
@@ -1424,7 +1433,7 @@
     "state": "SP",
     "address": "Rua Dom Bernardo José Bueno Mielle, 1714 - Jardim Aeroporto III",
     "zipCode": "14404-261",
-    "phone": null,
+    "phone": "(16) 3701-5903",
     "email": "secretaria@prsaofrancisco.com.br",
     "foundedAt": "2014-04-27",
     "officeHours": [

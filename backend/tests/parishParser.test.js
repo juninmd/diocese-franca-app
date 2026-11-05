@@ -117,6 +117,19 @@ describe('parseParish - variações do site', () => {
     const p = parseParish(wrap('Endereço : Praça Hélvio, 193 - C. P. 104<br>\nCidade/UF : Ituverava-SP<br>\nDados\nPároco : Pe. X<br>'), 8);
     expect(p.address).toBe('Praça Hélvio - 193');
   });
+
+  it('extrai telefone local sem DDD e assume DDD 16 da Diocese', () => {
+    const p = parseParish(wrap('Endereço : Rua Teste, 100<br>\nCidade/UF : Franca-SP<br>\n<span class="phone icon"></span>3701-5903 | | |<br>\nDados\nPároco : Pe. Teste<br>'), 9);
+    expect(p.phone).toBe('(16) 3701-5903');
+  });
+
+  it('extrai expediente com variações como "Expediente Secretaria" e "Expediente secretaria paroquial"', () => {
+    const p1 = parseParish(wrap('Endereço : Rua Teste, 100<br>\nCidade/UF : Franca-SP<br>\nDados\nPároco : Pe. Teste<br>\nExpediente Secretaria<br>Terça a Sexta: 08h30 às 18h<br>Sábado: 08h às 12h<br>\nMissas:<br>Domingo: 07h<br>'), 10);
+    expect(p1.officeHours).toEqual(['Terça a Sexta: 08h30 às 18h', 'Sábado: 08h às 12h']);
+
+    const p2 = parseParish(wrap('Endereço : Rua Teste, 100<br>\nCidade/UF : Franca-SP<br>\nDados\nPároco : Pe. Teste<br>\nExpediente secretaria paroquial:<br>Segunda a sexta feira: 08h00 às 17h00<br>Sábado: 08h00 as 12h00<br>\nHorários de Missas:<br>Domingo: 08h<br>'), 11);
+    expect(p2.officeHours).toEqual(['Segunda a sexta feira: 08h00 às 17h00', 'Sábado: 08h00 as 12h00']);
+  });
 });
 
 describe('parseParish - HTML colado do Word (quebras de linha dentro de rótulos)', () => {
