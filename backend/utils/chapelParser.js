@@ -23,17 +23,19 @@ function parseChapels(text, parishName) {
     if (parishName && line.toLowerCase().includes(parishName.toLowerCase())) continue;
     const addressParts = [];
     const massLines = [];
-    let j = i + 1;
-    while (j < lines.length && !MASS_LABEL.test(lines[j]) && !scheduleish(lines[j]) && !STOP.test(lines[j]) && addressParts.length < 3) {
-      addressParts.push(lines[j]);
-      j += 1;
+    const extra = []; // texto após os horários (local/observação): não se perde
+    for (let j = i + 1; j < lines.length && j <= i + 10 && !STOP.test(lines[j]); j += 1) {
+      const current = lines[j];
+      const isMass = MASS_LABEL.test(current) || scheduleish(current) || (massLines.length > 0 && TIME.test(current));
+      if (isMass) {
+        const rest = current.replace(MASS_LABEL, '').trim();
+        if (rest) massLines.push(rest);
+      } else if (!massLines.length && addressParts.length < 3) addressParts.push(current);
+      else if (!massLines.length) break;
+      else if (!addressParts.length) addressParts.push(current);
+      else extra.push(current);
     }
-    // Horários: "Missas:" (com ou sem texto na mesma linha) e as linhas de dia/horário seguintes.
-    while (j < lines.length && !STOP.test(lines[j]) && (MASS_LABEL.test(lines[j]) || scheduleish(lines[j]))) {
-      const rest = lines[j].replace(MASS_LABEL, '').trim();
-      if (rest) massLines.push(rest);
-      j += 1;
-    }
+    if (extra.length) massLines.push(extra.join(' - '));
     const chapel = { name: line, address: addressParts.join(' - ') || null };
     if (massLines.length) {
       const { masses, notes } = parseMassLines(massLines);

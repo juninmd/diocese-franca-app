@@ -21,6 +21,14 @@ describe('capelas com horários próprios', () => {
     ]);
   });
 
+  it('local informado depois do horário vira endereço; "Todo dia 22" fica como nota', () => {
+    const text = 'Capela A\n2ª Quarta-feira do mês, às 19h30.\nAv. São Vicente, 7316\nCapela B\nRua D\nTerça-feira: 19h\nTodo dia 22: 19h\nDados';
+    expect(parseChapels(text, '')).toEqual([
+      { name: 'Capela A', address: 'Av. São Vicente, 7316', massNotes: ['2ª Quarta-feira do mês, às 19h30.'] },
+      { name: 'Capela B', address: 'Rua D', masses: [{ dayOfWeek: 'Terça-feira', time: '19:00' }], massNotes: ['Todo dia 22: 19h'] },
+    ]);
+  });
+
   it('aceita dias no plural', () => {
     expect(parseMassLines(['Domingos e Quartas-feiras: 19h']).masses.map((m) => m.dayOfWeek)).toEqual(['Domingo', 'Quarta-feira']);
   });

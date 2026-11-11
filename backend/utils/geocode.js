@@ -25,15 +25,17 @@ const orago = (name) => name.replace(/^(Paróquia|Santuário( Diocesano)?|Sé Ca
 
 const queriesFor = (church) => [
   church.address ? `${cleanAddress(church.address)}, ${church.city}, ${church.state}` : null,
+  // só rua + número (o bairro do site às vezes confunde o Nominatim)
+  church.address ? `${cleanAddress(church.address.split(/\s+-\s+/)[0])}, ${church.city}, ${church.state}` : null,
   `Igreja ${orago(church.name)}, ${church.city}, ${church.state}`,
   `${church.name}, ${church.city}, ${church.state}`,
-].filter(Boolean);
+].filter((q, i, all) => q && all.indexOf(q) === i);
 
 async function lookup(query, center) {
   const { data } = await axios.get(NOMINATIM, {
     params: { q: query, format: 'json', limit: 3, countrycodes: 'br' },
     headers: { 'User-Agent': USER_AGENT },
-    timeout: 10000,
+    timeout: 20000,
   });
   const hit = (data || [])
     .map((r) => [Number(r.lat), Number(r.lon)])
