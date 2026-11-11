@@ -2,8 +2,8 @@ const { parseMassLines } = require('./massParser');
 
 // Capelas/comunidades vinculadas à paróquia, com endereço e horários próprios de missa
 // (portado do bot juninmd/missas-franca: "Missas : Quintas-feira às 19h / Domingo às 10h30").
-const HEADER = /^(capela|comunidade|santu[aá]rio|quase-par[oó]quia|igreja|mosteiro|convento|orat[oó]rio)\b/i;
-const STOP = /^(capela|comunidade|santu[aá]rio|quase-par[oó]quia|igreja|mosteiro|convento|orat[oó]rio|dados|expediente|itens|compartilhar|descri[çc][ãa]o|atendimento)/i;
+const HEADER = /^(c\s?apela|comunidade|santu[aá]rio|quase-par[oó]quia|igreja|mosteiro|convento|orat[oó]rio)\b/i;
+const STOP = /^(c\s?apela|comunidade|santu[aá]rio|quase-par[oó]quia|igreja|mosteiro|convento|orat[oó]rio|dados|expediente|itens|compartilhar|descri[çc][ãa]o|atendimento)/i;
 const MASS_LABEL = /^missas?\s*:?\s*/i;
 const DAY = /\b(domingo|segunda|ter[çc]a|quarta|quinta|sexta|s[áa]bado)/i;
 const TIME = /\b\d{1,2}\s?(?:h|:\d{2})/i;
@@ -27,7 +27,8 @@ function parseChapels(text, parishName) {
     for (let j = i + 1; j < lines.length && j <= i + 10 && !STOP.test(lines[j]); j += 1) {
       const current = lines[j];
       const isMass = MASS_LABEL.test(current) || scheduleish(current) || (massLines.length > 0 && TIME.test(current));
-      if (isMass) {
+      if (extra.length) extra.push(current); // depois de texto livre, nada vira horário estruturado
+      else if (isMass) {
         const rest = current.replace(MASS_LABEL, '').trim();
         if (rest) massLines.push(rest);
       } else if (!massLines.length && addressParts.length < 3) addressParts.push(current);
@@ -35,13 +36,11 @@ function parseChapels(text, parishName) {
       else if (!addressParts.length) addressParts.push(current);
       else extra.push(current);
     }
-    if (extra.length) massLines.push(extra.join(' - '));
-    const chapel = { name: line, address: addressParts.join(' - ') || null };
-    if (massLines.length) {
-      const { masses, notes } = parseMassLines(massLines);
-      if (masses.length) chapel.masses = masses;
-      if (notes.length) chapel.massNotes = notes;
-    }
+    const chapel = { name: line.replace(/^c\s+apela/i, 'Capela'), address: addressParts.join(' - ') || null };
+    const { masses, notes } = parseMassLines(massLines);
+    if (extra.length) notes.push(extra.join(' - '));
+    if (masses.length) chapel.masses = masses;
+    if (notes.length) chapel.massNotes = notes;
     chapels.push(chapel);
   }
   return chapels;

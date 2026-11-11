@@ -9,15 +9,35 @@
     "latitude": -20.5455051,
     "longitude": -47.4118438
   },
+  "2017": {
+    "address": "Avenida E, 400 - Praça Cristo Rei",
+    "latitude": -20.7169348,
+    "longitude": -47.8758427
+  },
   "2041": {
     "address": "Rua Cônego Ernesto Peregrino, 1539 - Centro",
     "latitude": -20.6401665,
     "longitude": -47.2819881
   },
+  "2042": {
+    "address": "Rua Olívia Martins Ferreira, 640 - Centro",
+    "latitude": -20.6038171,
+    "longitude": -47.4824193
+  },
+  "2043": {
+    "address": "Rua Coronel Messias Rosa, 4794 - Centro",
+    "latitude": -20.6410715,
+    "longitude": -47.2201857
+  },
   "2044": {
     "address": "Praça Pe. Luiz Sávio - 10",
     "latitude": -20.2566744,
     "longitude": -47.4765101
+  },
+  "2045": {
+    "address": "Rua Distrito Federal, 1285 - São José",
+    "latitude": -20.5315124,
+    "longitude": -47.3833157
   },
   "2047": {
     "address": "Avenida João Batista Paula Silva, 471 - Recanto Elimar II",
@@ -39,10 +59,35 @@
     "latitude": -20.5297171,
     "longitude": -47.4326319
   },
+  "2053": {
+    "address": "Rua Gilberto de Aguilar, n°771 - Jardim Paulistano II",
+    "latitude": -20.5246244,
+    "longitude": -47.3588096
+  },
+  "2055": {
+    "address": "Av Pe. Antônio Vieira, 555 - Residencial Nova Franca",
+    "latitude": -20.5031949,
+    "longitude": -47.3904652
+  },
+  "2056": {
+    "address": "Avenida José Lopes Ribeiro, 4213 - Jd Luiza II",
+    "latitude": -20.4858137,
+    "longitude": -47.424918
+  },
+  "2057": {
+    "address": "Praça Frei Roque Pissioni, S/N - Bairro São Joaquim",
+    "latitude": -20.5394278,
+    "longitude": -47.4274065
+  },
   "2058": {
     "address": "Rua Emílio Bertoni,1820 - Jardim Dr. Antônio Petráglia",
     "latitude": -20.5009735,
     "longitude": -47.3706184
+  },
+  "2062": {
+    "address": "Rua Paulo Francisco Queiroz Arruda, 760 - Jd. Redentor",
+    "latitude": -20.5046521,
+    "longitude": -47.4009643
   },
   "2063": {
     "address": "Rua Capitão Scandiuzzi - n°1095",
@@ -68,6 +113,11 @@
     "address": "Av Teodomiro Ramos, 760 - City Petrópolis",
     "latitude": -20.4763681,
     "longitude": -47.3954777
+  },
+  "2070": {
+    "address": "Rua José Deocleciano Ribeiro, 4611 - Jardim Noêmia",
+    "latitude": -20.5551752,
+    "longitude": -47.3736741
   },
   "2071": {
     "address": "Rua São Paulo - 1496 Centro",
