@@ -1,0 +1,62 @@
+name: Android APK
+
+on:
+  pull_request:
+    paths: ['mobile/**', '.github/workflows/android-apk.yml']
+  push:
+    branches: [master]
+    paths: ['mobile/**']
+  workflow_dispatch:
+
+concurrency:
+  group: android-apk-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  apk:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # publica o APK numa Release com link fixo
+    timeout-minutes: 60
+    defaults:
+      run:
+        working-directory: mobile
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          package_json_file: mobile/package.json
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: mobile/pnpm-lock.yaml
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+      - uses: gradle/actions/setup-gradle@v4
+      - run: pnpm install --frozen-lockfile
+      - name: Gerar projeto nativo
+        run: npx expo prebuild -p android --no-install --clean
+      - name: Compilar APK (release, assinado com a chave de debug)
+        run: cd android && ./gradlew assembleRelease --no-daemon -PreactNativeArchitectures=arm64-v8a,armeabi-v7a
+      - uses: actions/upload-artifact@v4
+        with:
+          name: diocese-franca-apk
+          path: mobile/android/app/build/outputs/apk/release/app-release.apk
+          retention-days: 30
+      - name: Publicar APK com link direto (Release)
+        if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.event_name == 'pull_request' && 'apk-preview' || 'apk-latest' }}
+        run: |
+          cp android/app/build/outputs/apk/release/app-release.apk diocese-franca.apk
+          if ! gh release view "$TAG" >/dev/null 2>&1; then
+            PRE=$([ "$TAG" = apk-preview ] && echo --prerelease || true)
+            gh release create "$TAG" --target "$GITHUB_SHA" --title "APK ($TAG)" $PRE \
+              --notes "APK do app Diocese de Franca, atualizado automaticamente pelo workflow Android APK."
+          fi
+          gh release upload "$TAG" diocese-franca.apk --clobber
+          echo "Download direto: https://github.com/$GITHUB_REPOSITORY/releases/download/$TAG/diocese-franca.apk" >> "$GITHUB_STEP_SUMMARY"

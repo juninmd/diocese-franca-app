@@ -28,7 +28,7 @@ export function MassSchedule({ masses, nextMass }) {
             onPress={() => setDay(i)}
             style={[styles.day, i === day && styles.dayActive]}
           >
-            <Text variant="label" style={[styles.dayText, i === day && { color: colors.surface }]}>{label}</Text>
+            <Text variant="label" style={[styles.dayText, i === day && { color: colors.onPrimary }]}>{label}</Text>
           </TouchableOpacity>
         ))}
       </View>
@@ -62,5 +62,5 @@ const styles = StyleSheet.create({
   times: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
   time: { paddingVertical: 10, paddingHorizontal: 18, borderRadius: 16, backgroundColor: colors.surface, borderWidth: 1, borderColor: colors.line },
   timeText: { fontFamily: fonts.serif, fontSize: 22, fontWeight: '500', color: colors.ink },
-  none: { padding: 20, borderRadius: 20, borderWidth: 1.5, borderStyle: 'dashed', borderColor: '#CDBFA8' },
+  none: { padding: 20, borderRadius: 20, borderWidth: 1.5, borderStyle: 'dashed', borderColor: colors.line },
 });

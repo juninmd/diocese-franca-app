@@ -30,7 +30,7 @@ export function Pill({ label, tone = 'tint' }) {
 
 const pillTones = {
   tint: { bg: colors.tint, fg: colors.primary },
-  sand: { bg: '#EFE7D7', fg: colors.muted },
+  sand: { bg: colors.sand, fg: colors.muted },
   green: { bg: colors.greenTint, fg: colors.greenInk },
 };
 
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
   chip: { minHeight: TOUCH, paddingHorizontal: 16, borderRadius: radius.pill, justifyContent: 'center', backgroundColor: colors.surface, borderWidth: 1, borderColor: colors.line },
   chipActive: { backgroundColor: colors.primary, borderColor: colors.primary },
   text: { fontSize: 14, fontWeight: '600', color: colors.ink },
-  textActive: { color: colors.surface },
+  textActive: { color: colors.onPrimary },
   pill: { alignSelf: 'flex-start', paddingHorizontal: 10, paddingVertical: 4, borderRadius: radius.sm },
   pillText: { fontSize: 12, fontWeight: '600' },
 });

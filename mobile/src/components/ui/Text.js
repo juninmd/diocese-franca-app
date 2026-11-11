@@ -3,7 +3,7 @@ import { Text as RNText, StyleSheet } from 'react-native';
 import { colors, fonts } from '../../theme';
 import { withFont } from '../../theme/typography';
 
-// Variantes tipográficas: display/title/heading (serifa Newsreader) e corpo (Figtree).
+// Variantes tipográficas: display/title/heading (serifa Fraunces) e corpo (Manrope).
 const variants = StyleSheet.create({
   display: { fontFamily: fonts.serif, fontSize: 36, lineHeight: 40, fontWeight: '500', color: colors.ink, letterSpacing: -0.4 },
   title: { fontFamily: fonts.serif, fontSize: 25, lineHeight: 30, fontWeight: '500', color: colors.ink, letterSpacing: -0.2 },

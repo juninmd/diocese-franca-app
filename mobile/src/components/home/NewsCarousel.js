@@ -59,6 +59,8 @@ export function NewsCarousel({ news, loading, error, onOpen, onRemind, onRetry }
           data={news}
           keyExtractor={(item) => item.id.toString()}
           showsHorizontalScrollIndicator={false}
+          snapToInterval={282}
+          decelerationRate="fast"
           contentContainerStyle={styles.list}
           renderItem={({ item }) => <NewsCard item={item} onOpen={onOpen} onRemind={onRemind} />}
         />
