@@ -4,6 +4,7 @@ import { parseParish, SITE } from './parishParser';
 import { htmlToText } from './htmlText';
 import { readJson, writeJson } from './fileStore';
 import { crawlForanias, crawlClergyDirectory } from './dioceseEnricher';
+import { addressCoords, type AddressCoords } from './geocode';
 import type { Bishop, Church, CityCoords, ClergyDirectoryEntry, Logger, Mass, ParsedParish, Priest, ScrapedCatalog } from '../types';
 
 export interface CrawlOptions {
@@ -59,12 +60,13 @@ export async function crawlParishes({ firstId = FIRST_ID, lastId = LAST_ID, log 
   return parishes.sort((a, b) => a.name.localeCompare(b.name, 'pt-BR'));
 }
 
-export async function parseBishop(log: Logger = console): Promise<Bishop | null> {
-  const html = await fetchHtml(pageUrl(BISHOP_PAGE_ID), { log });
+/** Página "Bispo atual" -> Bishop (datas lidas da página, nunca fixas no código). */
+export function parseBishopPage(html: string): Bishop | null {
   const text = htmlToText(html);
   const name = (text.match(/Bispo atual\s*-\s*(Dom [^\n]+)/) || [])[1];
   if (!name) return null;
   const born = (text.match(/Nascido em ([^-\n]+)- (\d{2}\/\d{2}\/\d{4})/) || []).slice(1);
+  const ordained = (text.match(/Ordenado Presb[ií]tero:\s*(\d{2}\/\d{2}\/\d{4})/i) || [])[1];
   const seat = (text.match(/Nomeado Bispo de Franca[^\n]*\n\s*Posse:\s*(\d{2}\/\d{2}\/\d{4})/) || [])[1];
   const phone = (text.match(/Fone:\s*(\(\d{2}\)\s?\d{4}-\d{4})/) || [])[1];
   const ordinal = (text.match(/(\d+)º Bispo Diocesano/) || [])[1];
@@ -75,7 +77,11 @@ export async function parseBishop(log: Logger = console): Promise<Bishop | null>
     born.length ? `nascido em ${born[0].trim()} (${born[1]})` : '',
     seat ? `com posse em ${seat}` : '',
   ].filter(Boolean).join(', ') + '.';
-  return { name: name.trim(), phone: phone || null, bio, image };
+  return { name: name.trim(), phone: phone || null, bio, image, birthDate: born[1] || null, ordinationDate: ordained || null };
+}
+
+export async function parseBishop(log: Logger = console): Promise<Bishop | null> {
+  return parseBishopPage(await fetchHtml(pageUrl(BISHOP_PAGE_ID), { log }));
 }
 
 // Coordenadas por cidade (Photon/OpenStreetMap), em cache no repositório. Precisão: cidade.
@@ -110,10 +116,14 @@ export function buildCatalog(
   bishop: Bishop | null,
   previousPriests: ReadonlyArray<Pick<Priest, 'id' | 'name'>> = [],
   foraniaMap: ReadonlyMap<number, string> = new Map(),
-  clergyDirectory: ReadonlyMap<string, ClergyDirectoryEntry> = new Map()
+  clergyDirectory: ReadonlyMap<string, ClergyDirectoryEntry> = new Map(),
+  addrCoords: AddressCoords = {}
 ): ScrapedCatalog {
   const churches = parishes.map(({ sourceId, clergy, masses, ...p }): Church => {
-    const [latitude, longitude] = coords[`${p.city}|${p.state}`] || [null, null];
+    // Coordenada do endereço da matriz (geocode.addressCoords) tem precedência sobre o centro da cidade.
+    const precise = addrCoords[String(sourceId)];
+    const usePrecise = !!precise && (precise.address === p.address || !!precise.manual);
+    const [latitude, longitude] = usePrecise ? [precise.latitude, precise.longitude] : coords[`${p.city}|${p.state}`] || [null, null];
     const forania = foraniaMap.get(sourceId) || null;
     return {
       id: sourceId,
@@ -122,7 +132,7 @@ export function buildCatalog(
       latitude,
       longitude,
       coordinatesVerified: false,
-      coordinatesPrecision: 'city',
+      coordinatesPrecision: usePrecise ? 'address' : 'city',
     };
   });
 
@@ -150,8 +160,8 @@ export function buildCatalog(
       phone: bishop.phone,
       bio: bishop.bio,
       image: bishop.image || null,
-      birthDate: '09/04/1957',
-      ordinationDate: '15/12/2013',
+      birthDate: bishop.birthDate || null,
+      ordinationDate: bishop.ordinationDate || null,
       churchIds: [SEAT_ID],
     });
   }
@@ -236,5 +246,6 @@ export async function scrapeCatalogData({ log = console, ...crawlOptions }: Craw
   ]);
   if (!parishes.length) return { churches: [], masses: [], priests: [] };
   const coords = await cityCoords([...new Set(parishes.map((p) => `${p.city}|${p.state}`))], { log });
-  return buildCatalog(parishes, coords, bishop, readJson<Priest[]>('priests.json', []), foraniaMapResult || new Map(), clergyDirResult || new Map());
+  const addrCoords = await addressCoords(parishes.map((p) => ({ ...p, id: p.sourceId })), coords, { log });
+  return buildCatalog(parishes, coords, bishop, readJson<Priest[]>('priests.json', []), foraniaMapResult || new Map(), clergyDirResult || new Map(), addrCoords);
 }

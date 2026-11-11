@@ -1,10 +1,11 @@
 import * as cheerio from 'cheerio';
 import { htmlToText } from './htmlText';
 import { parseMassLines } from './massParser';
+import { parseChapels } from './chapelParser';
 import { toHttpsUrl, SITE } from './safeUrl';
-import type { Chapel, ParsedParish, SocialMedia } from '../types';
+import type { ParsedParish, SocialMedia } from '../types';
 
-export { SITE };
+export { SITE, parseChapels };
 
 export function parseSocialMedia(html: string): SocialMedia | null {
   const $ = cheerio.load(html);
@@ -36,31 +37,6 @@ export function parseSocialMedia(html: string): SocialMedia | null {
   return Object.keys(social).length ? social : null;
 }
 
-export function parseChapels(text: string, parishName: string): Chapel[] {
-  const cut = text.indexOf('Compartilhar');
-  const body = cut > 0 ? text.slice(0, cut) : text;
-  const cutItems = body.indexOf('Itens relacionados');
-  const mainText = cutItems > 0 ? body.slice(0, cutItems) : body;
-
-  const chapels: Chapel[] = [];
-  const lines = mainText.split('\n').map((l) => l.trim()).filter(Boolean);
-
-  for (let i = 0; i < lines.length; i += 1) {
-    const line = lines[i];
-    if (/^(capela|comunidade|santu[aá]rio|quase-par[oó]quia|igreja|mosteiro|convento|orat[oó]rio)\b/i.test(line) && !/^(capela|comunidade)\s+são\s+josé\s+-\s+franca/i.test(line)) {
-      if (parishName && line.toLowerCase().includes(parishName.toLowerCase())) continue;
-      const name = line;
-      const addressParts = [];
-      let j = i + 1;
-      while (j < lines.length && !/^(capela|comunidade|santu[aá]rio|quase-par[oó]quia|igreja|mosteiro|convento|orat[oó]rio|dados|missas|expediente|itens|compartilhar|descrição)/i.test(lines[j]) && addressParts.length < 3) {
-        addressParts.push(lines[j]);
-        j += 1;
-      }
-      chapels.push({ name, address: addressParts.join(' - ') || null });
-    }
-  }
-  return chapels;
-}
 const PHONE = /\(?\d{2}\)?\s?9?\d{4}[-\s]?\d{4}/g;
 const LOCAL_PHONE = /(?:^|[^\d])([23]\d{3}[-\s]?\d{4})(?:[^\d]|$)/;
 const EMAIL = /[\w.+-]+@[\w-]+(?:\.[\w-]+)+/g;

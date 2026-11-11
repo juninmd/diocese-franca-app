@@ -9,7 +9,14 @@ const TOKENS = new RegExp(`(${DAY_KEYS.join('|')})|\\b(a|ate)\\b|${TIME_SOURCE}`
 const JOINERS = /\ba\b|\bate\b|\be\b|[,&]/g;
 
 const normalize = (text: string): string =>
-  text.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[-–\s]*feira/g, '');
+  text
+    .normalize('NFD')
+    .replace(/[̀-ͯ]/g, '')
+    .toLowerCase()
+    .replace(/[-–\s]*feiras?/g, '')
+    .replace(/\bquata\b/g, 'quarta') // erro de digitação recorrente no site
+    // plural: "Quintas-feiras", "Domingos", "Sábados"
+    .replace(new RegExp(`\\b(${DAY_KEYS.join('|')})s\\b`, 'g'), '$1');
 
 const pad = (n: number): string => String(n).padStart(2, '0');
 

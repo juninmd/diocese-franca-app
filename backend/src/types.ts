@@ -16,6 +16,10 @@ export interface SocialMedia {
 export interface Chapel {
   name: string;
   address: string | null;
+  /** horários próprios da capela (quando o site informa) */
+  masses?: WeeklyMass[];
+  /** horários irregulares ("1º domingo do mês") */
+  massNotes?: string[];
 }
 
 /** Função de um clérigo numa paróquia, como aparece na página ("Pároco", "Diácono"...). */
@@ -60,6 +64,7 @@ export interface Church extends Omit<ParsedParish, 'sourceId' | 'clergy' | 'mass
   latitude: number | null;
   longitude: number | null;
   coordinatesVerified: boolean;
+  /** 'address' (geocode do endereço da matriz) ou 'city' (centro da cidade) */
   coordinatesPrecision: string;
 }
 
@@ -145,6 +150,10 @@ export interface Bishop {
   phone: string | null;
   bio: string;
   image?: string | null;
+  /** dd/mm/aaaa, da página "Bispo atual" */
+  birthDate?: string | null;
+  /** ordenação presbiteral (dd/mm/aaaa) */
+  ordinationDate?: string | null;
 }
 
 /** Entrada do diretório de clero (páginas de padres e diáconos do site). */

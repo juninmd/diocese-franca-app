@@ -23,15 +23,25 @@
     "chapels": [
       {
         "name": "Capela Divino Pai Eterno",
-        "address": "Rua Rio Tocantins, 1470 Esquina com Purus, Residencial Amazonas"
+        "address": "Rua Rio Tocantins, 1470 Esquina com Purus, Residencial Amazonas",
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "10:30"
+          },
+          {
+            "dayOfWeek": "Quinta-feira",
+            "time": "19:00"
+          }
+        ]
       }
     ],
     "massNotes": [],
     "forania": "Nossa Senhora da Conceição",
-    "latitude": -20.5381768,
-    "longitude": -47.4009795,
+    "latitude": -20.5455051,
+    "longitude": -47.4118438,
     "coordinatesVerified": false,
-    "coordinatesPrecision": "city"
+    "coordinatesPrecision": "address"
   },
   {
     "id": 2014,
@@ -58,25 +68,43 @@
     "chapels": [
       {
         "name": "Capela Santa Luzia",
-        "address": "Bairro Amaro Gea - Missa: Domingo às 08h"
+        "address": "Bairro Amaro Gea",
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "08:00"
+          }
+        ]
       },
       {
         "name": "Capela São Geraldo",
-        "address": "Vila Diogo, 355, CEP: 14.670-000"
+        "address": "Vila Diogo, 355, CEP: 14.670-000",
+        "masses": [
+          {
+            "dayOfWeek": "Quinta-feira",
+            "time": "19:00"
+          }
+        ]
       },
       {
         "name": "Capela Santos Reis",
-        "address": "Missa: Terça-feira às 19h"
+        "address": null,
+        "masses": [
+          {
+            "dayOfWeek": "Terça-feira",
+            "time": "19:00"
+          }
+        ]
       }
     ],
     "massNotes": [
       "1ª Sexta-feira do mês às 19h"
     ],
     "forania": "São Joaquim",
-    "latitude": -20.730877,
-    "longitude": -47.7522561,
+    "latitude": -20.7310144,
+    "longitude": -47.7511195,
     "coordinatesVerified": false,
-    "coordinatesPrecision": "city"
+    "coordinatesPrecision": "address"
   },
   {
     "id": 2016,
@@ -101,15 +129,41 @@
     "chapels": [
       {
         "name": "Capela São José",
-        "address": "Rua São Paulo, s/n, CEP: 14.600-000"
+        "address": "Rua São Paulo, s/n, CEP: 14.600-000",
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "08:00"
+          },
+          {
+            "dayOfWeek": "Quinta-feira",
+            "time": "19:30"
+          }
+        ]
       },
       {
         "name": "Comunidade São João Batista - João Mattaraia",
-        "address": "Rua Isaac Martins de Andrade, 560 - Bairro João Mattaraia, CEP: 14.600-000"
+        "address": "Rua Isaac Martins de Andrade, 560 - Bairro João Mattaraia, CEP: 14.600-000",
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "09:30"
+          },
+          {
+            "dayOfWeek": "Quarta-feira",
+            "time": "19:30"
+          }
+        ]
       },
       {
         "name": "Comunidade Santa Terezinha",
-        "address": "Bairro Santa Teresinha - Missa: Terça-feira, 19h30"
+        "address": "Bairro Santa Teresinha",
+        "masses": [
+          {
+            "dayOfWeek": "Terça-feira",
+            "time": "19:30"
+          }
+        ]
       }
     ],
     "massNotes": [],
@@ -141,7 +195,10 @@
     "chapels": [
       {
         "name": "Capela Nossa Senhora Aparecida",
-        "address": "Assentamento Boa Sorte - Missa: 3º sábado do mês às 17h"
+        "address": "Assentamento Boa Sorte",
+        "massNotes": [
+          "3º sábado do mês às 17h"
+        ]
       },
       {
         "name": "Capela Nossa Senhora De Fátima",
@@ -154,10 +211,10 @@
     ],
     "massNotes": [],
     "forania": "Nossa Senhora da Conceição",
-    "latitude": -20.6032343,
-    "longitude": -47.4830912,
+    "latitude": -20.6038171,
+    "longitude": -47.4824193,
     "coordinatesVerified": false,
-    "coordinatesPrecision": "city"
+    "coordinatesPrecision": "address"
   },
   {
     "id": 2043,
@@ -184,35 +241,57 @@
     "chapels": [
       {
         "name": "Capela Senhor Bom Jesus",
-        "address": "Missa: 1° Domingo do mês 7h30"
+        "address": null,
+        "massNotes": [
+          "1° Domingo do mês 7h30"
+        ]
       },
       {
         "name": "Capela Santos Reis",
-        "address": "Missa: Quinta-feira às 19h"
+        "address": null,
+        "masses": [
+          {
+            "dayOfWeek": "Quinta-feira",
+            "time": "19:00"
+          }
+        ]
       },
       {
         "name": "Capela Nossa Senhora do Carmo",
-        "address": "Missa : 3° Domingo do mês às 10h30"
+        "address": null,
+        "massNotes": [
+          "3° Domingo do mês às 10h30"
+        ]
       },
       {
         "name": "Capela São Sebastião",
-        "address": "Missa: 4° Domingo do mês 07h30 - Lar São Francisco (Asilo) - Missa: última Quarta-feira do mês 15h"
+        "address": "Lar São Francisco (Asilo)",
+        "massNotes": [
+          "4° Domingo do mês 07h30",
+          "última Quarta-feira do mês 15h"
+        ]
       },
       {
         "name": "Capela Santa Mônica",
-        "address": "Missa: 1⁰ Domingo às 15h"
+        "address": null,
+        "massNotes": [
+          "1⁰ Domingo às 15h"
+        ]
       },
       {
         "name": "Capela Santa Rita de Cásiia",
-        "address": "Missa: 4⁰ Domingo às 15h"
+        "address": null,
+        "massNotes": [
+          "4⁰ Domingo às 15h"
+        ]
       }
     ],
     "massNotes": [],
     "forania": "Nossa Senhora Aparecida",
-    "latitude": -20.6406814,
-    "longitude": -47.2193817,
+    "latitude": -20.6410715,
+    "longitude": -47.2201857,
     "coordinatesVerified": false,
-    "coordinatesPrecision": "city"
+    "coordinatesPrecision": "address"
   },
   {
     "id": 2044,
@@ -239,49 +318,104 @@
     "chapels": [
       {
         "name": "Capela Santa Luzia",
-        "address": "Praça Santa Luzia, nº: 10 - Missa: Quarta-feira: 19h - Domingo: 18h"
+        "address": "Praça Santa Luzia, nº: 10",
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "18:00"
+          },
+          {
+            "dayOfWeek": "Quarta-feira",
+            "time": "19:00"
+          }
+        ]
       },
       {
         "name": "Capela São Sebastião",
-        "address": "Praça Frei Alexandre, S/N Bela Vista - Missa: Sábado 18h30"
+        "address": "Praça Frei Alexandre, S/N Bela Vista",
+        "masses": [
+          {
+            "dayOfWeek": "Sábado",
+            "time": "18:30"
+          }
+        ]
       },
       {
         "name": "Comunidade São José",
-        "address": "R: Geraldo Batista Gabriel; nº: 07, Nova Pedregulho - Missa: Domingo 9h30"
+        "address": "R: Geraldo Batista Gabriel; nº: 07, Nova Pedregulho",
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "09:30"
+          }
+        ]
       },
       {
         "name": "Capela São Francisco de Assis",
-        "address": "Rua Igarapava, S/N - Estreito - Missa: Domingo 10h - 1ª Quinta do Mês: 19h"
+        "address": "Rua Igarapava, S/N - Estreito",
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "10:00"
+          }
+        ],
+        "massNotes": [
+          "1ª Quinta do Mês: 19h"
+        ]
       },
       {
         "name": "Capela Nossa Senhora das Graças",
-        "address": "Praça 25 de Março, S/N - Vila Primavera - Missa: Domingo 8h30"
+        "address": "Praça 25 de Março, S/N - Vila Primavera",
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "08:30"
+          }
+        ]
       },
       {
         "name": "Capela São Pedro",
-        "address": "Praça São Pedro, s/n - Igaçaba"
+        "address": "Praça São Pedro, s/n - Igaçaba",
+        "masses": [
+          {
+            "dayOfWeek": "Sexta-feira",
+            "time": "19:00"
+          }
+        ]
       },
       {
         "name": "Capela São Benedito",
-        "address": "Praça São Benedito, s/n - Alto Porã"
+        "address": "Praça São Benedito, s/n - Alto Porã",
+        "masses": [
+          {
+            "dayOfWeek": "Terça-feira",
+            "time": "19:00"
+          }
+        ]
       },
       {
         "name": "Capela Sagrada Família - Alto Lageado",
-        "address": "Fazenda Alto Lageado - Missa: 2 ª Sexta-feira mês 19h"
+        "address": "Fazenda Alto Lageado",
+        "massNotes": [
+          "2 ª Sexta-feira mês 19h"
+        ]
       },
       {
         "name": "Capela São Sebastião - Taquari",
-        "address": "Fazenda Taquari - Missa: 4ª Sexta-feira, 19h30"
+        "address": "Fazenda Taquari",
+        "massNotes": [
+          "4ª Sexta-feira, 19h30"
+        ]
       }
     ],
     "massNotes": [
       "1ª Sexta-feira mês às 06h30: Missa Votiva ao Sagrado Coração de Jesus"
     ],
     "forania": "Beata Rita Amada de Jesus",
-    "latitude": -20.25071,
-    "longitude": -47.4808786,
+    "latitude": -20.2566744,
+    "longitude": -47.4765101,
     "coordinatesVerified": false,
-    "coordinatesPrecision": "city"
+    "coordinatesPrecision": "address"
   },
   {
     "id": 2045,
@@ -307,47 +441,74 @@
     "chapels": [
       {
         "name": "Capela Nossa Senhora da Penha",
-        "address": "Rua Nassim Miguel, 2081 - Jardim Líbano, CEP 14.403-536"
+        "address": "Rua Nassim Miguel, 2081 - Jardim Líbano, CEP 14.403-536",
+        "massNotes": [
+          "2º e 4° Domingo 19h"
+        ]
       },
       {
         "name": "Capela Senhora de Fátima",
-        "address": "Rua Ceará, 150 - Jardim Riviera, CEP 14.402-029"
+        "address": "Rua Ceará, 150 - Jardim Riviera, CEP 14.402-029",
+        "massNotes": [
+          "1° e 3º Domingo 8h30"
+        ]
       },
       {
         "name": "Capela Santa Marta",
-        "address": "Rua Belém, 1601 - Jardim Brasilândia, CEP 14.402-272"
+        "address": "Rua Belém, 1601 - Jardim Brasilândia, CEP 14.402-272",
+        "massNotes": [
+          "1º e 3° Domingo 19h"
+        ]
       },
       {
         "name": "Capela São Francisco Xavier",
-        "address": "Rua Miguel Ozório Santos Filho, 2280 - Jardim São Luiz I, CEP 14.402-322"
+        "address": "Rua Miguel Ozório Santos Filho, 2280 - Jardim São Luiz I, CEP 14.402-322",
+        "massNotes": [
+          "2º e 4° Domingo 8h30"
+        ]
       },
       {
         "name": "Capela São José",
-        "address": "Rua Espírito Santo, 1780 - Vila Aparecida, CEP 14.401-226"
+        "address": "Rua Espírito Santo, 1780 - Vila Aparecida, CEP 14.401-226",
+        "massNotes": [
+          "2° e 4º Domingo, 08h30"
+        ]
       },
       {
         "name": "Capela São Mateus",
-        "address": "Rua Francisco Miglioranza, 2549 - Jardim Palestina, CEP 14.402-336"
+        "address": "Rua Francisco Miglioranza, 2549 - Jardim Palestina, CEP 14.402-336",
+        "massNotes": [
+          "2º, 3º e 4° Domingo 19h"
+        ]
       },
       {
         "name": "Capela Nossa Senhora das Dores",
-        "address": "Rodovia Franca - Ibiraci, Km 12 (Casa Seca)"
+        "address": "Rodovia Franca - Ibiraci, Km 12 (Casa Seca)",
+        "massNotes": [
+          "1° e 3º Sábado, 19h"
+        ]
       },
       {
         "name": "Capela São Roque",
-        "address": "Rodovia Franca - Ibiraci, Km 23"
+        "address": "Rodovia Franca - Ibiraci, Km 23",
+        "massNotes": [
+          "4º Sábado, 19h"
+        ]
       },
       {
         "name": "Capela Divino Pai Eterno",
-        "address": "Rodovia Franca - Ibiraci, KM 18 - Missa : Última Sexta- feira do mês, 19h30"
+        "address": "Rodovia Franca - Ibiraci, KM 18",
+        "massNotes": [
+          "Última Sexta- feira do mês, 19h30"
+        ]
       }
     ],
     "massNotes": [],
     "forania": "Nossa Senhora Aparecida",
-    "latitude": -20.5381768,
-    "longitude": -47.4009795,
+    "latitude": -20.5315124,
+    "longitude": -47.3833157,
     "coordinatesVerified": false,
-    "coordinatesPrecision": "city"
+    "coordinatesPrecision": "address"
   },
   {
     "id": 2046,
@@ -370,27 +531,56 @@
     "chapels": [
       {
         "name": "Capela Santa Rita",
-        "address": "Terça-feira: 19h - Sábado: 19h - Todo dia 22: 19h"
+        "address": null,
+        "masses": [
+          {
+            "dayOfWeek": "Terça-feira",
+            "time": "19:00"
+          },
+          {
+            "dayOfWeek": "Sábado",
+            "time": "19:00"
+          }
+        ],
+        "massNotes": [
+          "Todo dia 22: 19h"
+        ]
       },
       {
         "name": "Capela Bom Jesus da Lapa - Fazenda Chave da Taquara",
-        "address": "Missa Padroeira 06 de agosto - 5⁰ Domingo do mês: 17h"
+        "address": null,
+        "massNotes": [
+          "Padroeira 06 de agosto",
+          "5⁰ Domingo do mês: 17h"
+        ]
       },
       {
         "name": "Capela Sagrada Família",
-        "address": "Condomínio Ouro Verde - Missa: 1° domingo do mês 10h30"
+        "address": "Condomínio Ouro Verde",
+        "massNotes": [
+          "1° domingo do mês 10h30"
+        ]
       },
       {
         "name": "Capela São José",
-        "address": "Fazenda Borda da Mata - Missa: 2º Domingo do mês 10h30"
+        "address": "Fazenda Borda da Mata",
+        "massNotes": [
+          "2º Domingo do mês 10h30"
+        ]
       },
       {
         "name": "Capela Nossa Senhora Aparecida",
-        "address": "Fazenda Limeira - Missa: 4⁰ domingo do mês 10h30"
+        "address": "Fazenda Limeira",
+        "massNotes": [
+          "4⁰ domingo do mês 10h30"
+        ]
       },
       {
         "name": "Capela Santa Marta",
-        "address": "Missa: 3⁰ domingo do mês 10h30"
+        "address": null,
+        "massNotes": [
+          "3⁰ domingo do mês 10h30"
+        ]
       }
     ],
     "massNotes": [
@@ -427,15 +617,25 @@
     "chapels": [
       {
         "name": "Comunidade São Marcos",
-        "address": "Rua Ana Carolina Ferreira Arantes, nº 5595 - Bairro: Residencial Antonio Gonzales, CEP 14.403-833"
+        "address": "Rua Ana Carolina Ferreira Arantes, nº 5595 - Bairro: Residencial Antonio Gonzales, CEP 14.403-833",
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "10:00"
+          },
+          {
+            "dayOfWeek": "Quinta-feira",
+            "time": "19:30"
+          }
+        ]
       }
     ],
     "massNotes": [],
     "forania": "Nossa Senhora Aparecida",
-    "latitude": -20.5381768,
-    "longitude": -47.4009795,
+    "latitude": -20.5675795,
+    "longitude": -47.3790938,
     "coordinatesVerified": false,
-    "coordinatesPrecision": "city"
+    "coordinatesPrecision": "address"
   },
   {
     "id": 2049,
@@ -466,10 +666,10 @@
       "Dias 22 de cada mês, 15h (exceto quinta-feira, sabádo e domingo)"
     ],
     "forania": "Nossa Senhora da Conceição",
-    "latitude": -20.5381768,
-    "longitude": -47.4009795,
+    "latitude": -20.533303,
+    "longitude": -47.3954183,
     "coordinatesVerified": false,
-    "coordinatesPrecision": "city"
+    "coordinatesPrecision": "address"
   },
   {
     "id": 2050,
@@ -497,35 +697,79 @@
     "chapels": [
       {
         "name": "Capela Nossa Senhora Aparecida",
-        "address": "CEP: 13.360-000 - Distrito de Capivari"
+        "address": "CEP: 13.360-000 - Distrito de Capivari",
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "08:00"
+          }
+        ]
       },
       {
         "name": "Capela São Benedito",
-        "address": "Praça Eugênio do Carmo, 01, CEP 14.505-000 - São Benedito da Cachoeirinha - Missa: Sábado às 19h"
+        "address": "Praça Eugênio do Carmo, 01, CEP 14.505-000 - São Benedito da Cachoeirinha",
+        "masses": [
+          {
+            "dayOfWeek": "Sábado",
+            "time": "19:00"
+          }
+        ]
       },
       {
         "name": "Capela São Pedro e São Paulo",
-        "address": "Rua José Carrer, S/N - Jardim Guanabara, CEP: 14.500-000 - Missa: Quinta-feira às 19h e Domingo às 09h30"
+        "address": "Rua José Carrer, S/N - Jardim Guanabara, CEP: 14.500-000",
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "09:30"
+          },
+          {
+            "dayOfWeek": "Quinta-feira",
+            "time": "19:00"
+          }
+        ]
       },
       {
         "name": "Capela Nossa Senhora Aparecida",
-        "address": "Praça Sinhô Passos, 01 - Aparecida do Salto - Missa: Domingo às 10h"
+        "address": "Praça Sinhô Passos, 01 - Aparecida do Salto",
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "10:00"
+          }
+        ]
       },
       {
         "name": "Capela Nossa Senhora Aparecida",
-        "address": "Rua Sebastiana Monteiro Cassiano, CEP: 14.500-000"
+        "address": "Rua Sebastiana Monteiro Cassiano, CEP: 14.500-000",
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "08:00"
+          },
+          {
+            "dayOfWeek": "Quarta-feira",
+            "time": "19:00"
+          }
+        ]
       },
       {
         "name": "Capela Nossa Senhora do Rosário",
-        "address": "Largo do Rosário - Missa: Quinta-feira às 19h"
+        "address": "Largo do Rosário",
+        "masses": [
+          {
+            "dayOfWeek": "Quinta-feira",
+            "time": "19:00"
+          }
+        ]
       }
     ],
     "massNotes": [],
     "forania": "Beata Rita Amada de Jesus",
-    "latitude": -20.3366604,
-    "longitude": -47.7797924,
+    "latitude": -20.3392661,
+    "longitude": -47.7816308,
     "coordinatesVerified": false,
-    "coordinatesPrecision": "city"
+    "coordinatesPrecision": "address"
   },
   {
     "id": 2041,
@@ -549,23 +793,52 @@
     "chapels": [
       {
         "name": "Capela Santa Cruz",
-        "address": "Praça Santa Cruz, S/N - Santa Cruz, CEP: 14.415-000"
+        "address": "Praça Santa Cruz, S/N - Santa Cruz, CEP: 14.415-000",
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "07:30"
+          },
+          {
+            "dayOfWeek": "Quarta-feira",
+            "time": "19:00"
+          }
+        ]
       },
       {
         "name": "Capela São Sebastião",
-        "address": "Avenida Diamante, 1750 - Nova Sapucaí, CEP: 14.415-000"
+        "address": "Avenida Diamante, 1750 - Nova Sapucaí, CEP: 14.415-000",
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "07:30"
+          },
+          {
+            "dayOfWeek": "Quinta-feira",
+            "time": "19:00"
+          }
+        ]
       },
       {
         "name": "Comunidade do Lambari",
-        "address": "Missa: 1° Domingo 15h (meses pares)"
+        "address": null,
+        "massNotes": [
+          "1° Domingo 15h (meses pares)"
+        ]
       },
       {
         "name": "Comunidade da Cachoeira",
-        "address": "Missa: 2° Domingo 15h (meses pares)"
+        "address": null,
+        "massNotes": [
+          "2° Domingo 15h (meses pares)"
+        ]
       },
       {
         "name": "Comunidade do Palmital",
-        "address": "Missa: 3° Domingo 15h (meses pares)"
+        "address": null,
+        "massNotes": [
+          "3° Domingo 15h (meses pares)"
+        ]
       }
     ],
     "massNotes": [
@@ -573,10 +846,10 @@
       "2ª Terça-feira: missa no Lar São Vicente de Paulo15h"
     ],
     "forania": "Nossa Senhora Aparecida",
-    "latitude": -20.6395883,
-    "longitude": -47.28231,
+    "latitude": -20.6401665,
+    "longitude": -47.2819881,
     "coordinatesVerified": false,
-    "coordinatesPrecision": "city"
+    "coordinatesPrecision": "address"
   },
   {
     "id": 2051,
@@ -639,15 +912,30 @@
     "chapels": [
       {
         "name": "Capela Santo Antonio de Santana Galvão (Frei Galvão)",
-        "address": "Rua Dilco Rosa Faria, 2740 Jardim Pulicano - CEP 14.406-753"
+        "address": "Rua Dilco Rosa Faria, 2740 Jardim Pulicano - CEP 14.406-753",
+        "masses": [
+          {
+            "dayOfWeek": "Terça-feira",
+            "time": "19:30"
+          },
+          {
+            "dayOfWeek": "Sábado",
+            "time": "19:00"
+          }
+        ]
       },
       {
         "name": "Capela Nossa Senhora Aparecida do Bom Jardim",
-        "address": "Rodovia Nelson Nogueira, Km 6 - Bom Jardim - Obs: À direita na estrada Dona Gani - Missa: Domingo: 10h"
+        "address": "Rodovia Nelson Nogueira, Km 6 - Bom Jardim - Obs: À direita na estrada Dona Gani",
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "10:00"
+          }
+        ]
       }
     ],
     "massNotes": [
-      "Quata e quinta-feira : 19h30",
       "1ª sexta-feira do mês : 19h30",
       "Todo dia 13 de cada mês: 19h30 (suscetível a mudança)"
     ],
@@ -679,27 +967,66 @@
     "chapels": [
       {
         "name": "Capela São Vicente de Paulo",
-        "address": "Avenida G, s/n° - Jardim Boa Vista"
+        "address": "Avenida G, s/n° - Jardim Boa Vista",
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "07:30"
+          }
+        ],
+        "massNotes": [
+          "1ª Sexta-feira 19h"
+        ]
       },
       {
         "name": "Capela Santa Rita de Cássia",
-        "address": "Avenida X, s/n° - Praça Santa Rita"
+        "address": "Avenida X, s/n° - Praça Santa Rita",
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "09:30"
+          },
+          {
+            "dayOfWeek": "Domingo",
+            "time": "18:00"
+          },
+          {
+            "dayOfWeek": "Quarta-feira",
+            "time": "19:00"
+          }
+        ]
       },
       {
         "name": "Comunidade Santa Terezinha",
-        "address": "Rua 9, 1571 A – Jardim Parisi - Missa: Domingo: 08h"
+        "address": "Rua 9, 1571 A – Jardim Parisi",
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "08:00"
+          }
+        ]
       },
       {
         "name": "Comunidade Santa Zita e Santo Antônio",
-        "address": "Avenida M, 1106 – Jardim Siena"
+        "address": "Avenida M, 1106 – Jardim Siena",
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "08:00"
+          },
+          {
+            "dayOfWeek": "Quinta-feira",
+            "time": "19:00"
+          }
+        ]
       }
     ],
     "massNotes": [],
     "forania": "São Joaquim",
-    "latitude": -20.720278,
-    "longitude": -47.886667,
+    "latitude": -20.7169348,
+    "longitude": -47.8758427,
     "coordinatesVerified": false,
-    "coordinatesPrecision": "city"
+    "coordinatesPrecision": "address"
   },
   {
     "id": 2052,
@@ -726,23 +1053,41 @@
     "chapels": [
       {
         "name": "Capela Nossa Senhora de Guadalupe",
-        "address": "Rua João de Araujo Malheiros, 1060 - Vila São Sebastião. CEP: 14.406-681 - Missa: - Domingo: 08h30"
+        "address": "Rua João de Araujo Malheiros, 1060 - Vila São Sebastião. CEP: 14.406-681",
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "08:30"
+          }
+        ]
       },
       {
         "name": "Capela Santa Clara",
-        "address": "Rua Anésio Basílio dos Santos, 2030 - Jardim Palmeiras. CEP: 14.406-707 - Missa: - Domingo: 10h"
+        "address": "Rua Anésio Basílio dos Santos, 2030 - Jardim Palmeiras. CEP: 14.406-707",
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "10:00"
+          }
+        ]
       },
       {
         "name": "Capela Santa Maria dos Anjos",
-        "address": "Av. Nossa Senhora de Lourdes, 880 - Residencial Santa Clara. CEP: 14. 406-559 - Missa: - Sábado: 19h"
+        "address": "Av. Nossa Senhora de Lourdes, 880 - Residencial Santa Clara. CEP: 14. 406-559",
+        "masses": [
+          {
+            "dayOfWeek": "Sábado",
+            "time": "19:00"
+          }
+        ]
       }
     ],
     "massNotes": [],
     "forania": "Santa Gianna",
-    "latitude": -20.5381768,
-    "longitude": -47.4009795,
+    "latitude": -20.5297171,
+    "longitude": -47.4326319,
     "coordinatesVerified": false,
-    "coordinatesPrecision": "city"
+    "coordinatesPrecision": "address"
   },
   {
     "id": 2053,
@@ -771,33 +1116,91 @@
     "chapels": [
       {
         "name": "Capela São Lucas",
-        "address": "Rua Natal, 800 – Jardim Brasilândia. CEP 14.402-265"
+        "address": "Rua Natal, 800 – Jardim Brasilândia. CEP 14.402-265",
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "08:30"
+          },
+          {
+            "dayOfWeek": "Segunda-feira",
+            "time": "19:00"
+          }
+        ],
+        "massNotes": [
+          "1° Sexta-feira às 15h Adoração ao Santíssimo e 15h30 missa"
+        ]
       },
       {
         "name": "Capela São Francisco de Assis",
-        "address": "Av. Ricardo Alexsander de Andrade, 330 – Jardim São Francisco. CEP 14.402-600"
+        "address": "Av. Ricardo Alexsander de Andrade, 330 – Jardim São Francisco. CEP 14.402-600",
+        "masses": [
+          {
+            "dayOfWeek": "Terça-feira",
+            "time": "19:00"
+          },
+          {
+            "dayOfWeek": "Sábado",
+            "time": "19:00"
+          }
+        ],
+        "massNotes": [
+          "1° Sexta-feira às 15h30 Adoração ao Santíssimo e 16h missa"
+        ]
       },
       {
         "name": "Capela São Paulo",
-        "address": "Rua Gilberto de Aguilar,1381 – Jardim Paulistano I. CEP 14.402-410"
+        "address": "Rua Gilberto de Aguilar,1381 – Jardim Paulistano I. CEP 14.402-410",
+        "masses": [
+          {
+            "dayOfWeek": "Quarta-feira",
+            "time": "19:00"
+          },
+          {
+            "dayOfWeek": "Sábado",
+            "time": "19:00"
+          }
+        ],
+        "massNotes": [
+          "1ª sexta-feira 19h e Adoração ao Santíssimo"
+        ]
       },
       {
         "name": "Capela Divino Espírito Santo",
-        "address": "Rua Antônio Marcos, 3101– Jardim Palma CEP 14.401-083"
+        "address": "Rua Antônio Marcos, 3101– Jardim Palma CEP 14.401-083",
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "19:00"
+          },
+          {
+            "dayOfWeek": "Quinta-feira",
+            "time": "19:00"
+          }
+        ]
       },
       {
         "name": "Capela São Geraldo Magela (Rural) Paiolzinho",
-        "address": "Missa: Domingo às 17h - 1ª sexta-feira do mês 19h e Adoração ao Santíssimo"
+        "address": null,
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "17:00"
+          }
+        ],
+        "massNotes": [
+          "1ª sexta-feira do mês 19h e Adoração ao Santíssimo"
+        ]
       }
     ],
     "massNotes": [
       "1ª Sexta – feira do mês às 18h15 Adoração ao Santíssimo e 19h missa"
     ],
     "forania": "Nossa Senhora Aparecida",
-    "latitude": -20.5381768,
-    "longitude": -47.4009795,
+    "latitude": -20.5246244,
+    "longitude": -47.3588096,
     "coordinatesVerified": false,
-    "coordinatesPrecision": "city"
+    "coordinatesPrecision": "address"
   },
   {
     "id": 2066,
@@ -826,23 +1229,65 @@
     "chapels": [
       {
         "name": "Capela Nossa Senhora das Dores",
-        "address": "Rua Capitão Fernando Pereira Garcia, 1107. Jardim Aeroporto I. CEP 14.404-049"
+        "address": "Rua Capitão Fernando Pereira Garcia, 1107. Jardim Aeroporto I. CEP 14.404-049",
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "08:00"
+          },
+          {
+            "dayOfWeek": "Terça-feira",
+            "time": "19:00"
+          },
+          {
+            "dayOfWeek": "Sexta-feira",
+            "time": "19:00"
+          },
+          {
+            "dayOfWeek": "Sábado",
+            "time": "19:00"
+          }
+        ]
       },
       {
         "name": "Capela Santa Catarina de Sena",
-        "address": "Rua Dr Fernando Costa, 500. Parque Universitário. CEP: 14.404-623"
+        "address": "Rua Dr Fernando Costa, 500. Parque Universitário. CEP: 14.404-623",
+        "masses": [
+          {
+            "dayOfWeek": "Quarta-feira",
+            "time": "19:00"
+          },
+          {
+            "dayOfWeek": "Sábado",
+            "time": "18:00"
+          }
+        ]
       },
       {
         "name": "Capela São João Bosco",
-        "address": "Av. Euclides Vieira Coelho, 2800 - Jardim Alvorada. CEP 14.404-000"
+        "address": "Av. Euclides Vieira Coelho, 2800 - Jardim Alvorada. CEP 14.404-000",
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "09:30"
+          },
+          {
+            "dayOfWeek": "Domingo",
+            "time": "18:00"
+          },
+          {
+            "dayOfWeek": "Quinta-feira",
+            "time": "19:00"
+          }
+        ]
       }
     ],
     "massNotes": [],
     "forania": "Nossa Senhora Aparecida",
-    "latitude": -20.5381768,
-    "longitude": -47.4009795,
+    "latitude": -20.5792777,
+    "longitude": -47.3737508,
     "coordinatesVerified": false,
-    "coordinatesPrecision": "city"
+    "coordinatesPrecision": "address"
   },
   {
     "id": 2054,
@@ -866,7 +1311,10 @@
     "chapels": [
       {
         "name": "Capela Nossa Senhora das Graças",
-        "address": "Bairro Caetitú"
+        "address": "Bairro Caetitú",
+        "massNotes": [
+          "2º e 4º Domingo 9h30"
+        ]
       }
     ],
     "massNotes": [],
@@ -901,19 +1349,35 @@
     "chapels": [
       {
         "name": "Capela Santa Paulina",
-        "address": "Rua Nilton Rodrigues Coelho, s.n - Res. Santa Mônica"
+        "address": "Rua Nilton Rodrigues Coelho, s.n - Res. Santa Mônica",
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "09:30"
+          },
+          {
+            "dayOfWeek": "Quinta-feira",
+            "time": "19:00"
+          }
+        ]
       },
       {
         "name": "Capela Jesus Misericordioso - Parque do Mirante",
-        "address": "Avenida da Graviola, 530. - Missa: Domingo: 8h"
+        "address": "Avenida da Graviola, 530.",
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "08:00"
+          }
+        ]
       }
     ],
     "massNotes": [],
     "forania": "Santa Gianna",
-    "latitude": -20.5381768,
-    "longitude": -47.4009795,
+    "latitude": -20.5031949,
+    "longitude": -47.3904652,
     "coordinatesVerified": false,
-    "coordinatesPrecision": "city"
+    "coordinatesPrecision": "address"
   },
   {
     "id": 2056,
@@ -941,27 +1405,118 @@
     "chapels": [
       {
         "name": "Capela Nossa Senhora Auxiliadora",
-        "address": "Av. Dr. Abrahão Brickmann, 2675 - Jd. Luiza I - CEP - 14.407-010 - Fones: (16)3703-5767 - (16) 99388-2359"
+        "address": "Av. Dr. Abrahão Brickmann, 2675 - Jd. Luiza I - CEP - 14.407-010 - Fones: (16)3703-5767 - (16) 99388-2359",
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "07:30"
+          },
+          {
+            "dayOfWeek": "Domingo",
+            "time": "17:30"
+          },
+          {
+            "dayOfWeek": "Quinta-feira",
+            "time": "19:30"
+          },
+          {
+            "dayOfWeek": "Sábado",
+            "time": "19:00"
+          }
+        ]
       },
       {
         "name": "Capela Nossa Senhora Do Rosário",
-        "address": "Rua José Josué da Silva, 1199 - Jd. Vera Cruz I - CEP - 14.407-488"
+        "address": "Rua José Josué da Silva, 1199 - Jd. Vera Cruz I - CEP - 14.407-488",
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "09:00"
+          },
+          {
+            "dayOfWeek": "Domingo",
+            "time": "19:00"
+          },
+          {
+            "dayOfWeek": "Segunda-feira",
+            "time": "07:00"
+          },
+          {
+            "dayOfWeek": "Segunda-feira",
+            "time": "19:30"
+          },
+          {
+            "dayOfWeek": "Terça-feira",
+            "time": "07:00"
+          },
+          {
+            "dayOfWeek": "Terça-feira",
+            "time": "19:30"
+          },
+          {
+            "dayOfWeek": "Quarta-feira",
+            "time": "07:00"
+          },
+          {
+            "dayOfWeek": "Quarta-feira",
+            "time": "19:30"
+          },
+          {
+            "dayOfWeek": "Quinta-feira",
+            "time": "07:00"
+          },
+          {
+            "dayOfWeek": "Quinta-feira",
+            "time": "19:30"
+          },
+          {
+            "dayOfWeek": "Sábado",
+            "time": "19:00"
+          }
+        ],
+        "massNotes": [
+          "* Quinta as 15h00 Adoração ao Santíssimo Sacramento"
+        ]
       },
       {
         "name": "Capela Nossa Senhora De Fátima",
-        "address": "Av. Pastor Joaquim Honório Tostes, 4500 - Jdm Paineiras - CEP - 14.407-756"
+        "address": "Av. Pastor Joaquim Honório Tostes, 4500 - Jdm Paineiras - CEP - 14.407-756",
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "09:30"
+          },
+          {
+            "dayOfWeek": "Domingo",
+            "time": "19:30"
+          },
+          {
+            "dayOfWeek": "Quarta-feira",
+            "time": "19:30"
+          }
+        ]
       },
       {
         "name": "Capela Nossa Senhora Do Carmo",
-        "address": "Rua Professora Vanda Gonzaga, 1481, Recanto Capitão Heliodoro."
+        "address": "Rua Professora Vanda Gonzaga, 1481, Recanto Capitão Heliodoro.",
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "17:30"
+          },
+          {
+            "dayOfWeek": "Sábado",
+            "time": "17:30"
+          }
+        ]
       }
     ],
     "massNotes": [],
     "forania": "Santa Gianna",
-    "latitude": -20.5381768,
-    "longitude": -47.4009795,
+    "latitude": -20.4858137,
+    "longitude": -47.424918,
     "coordinatesVerified": false,
-    "coordinatesPrecision": "city"
+    "coordinatesPrecision": "address"
   },
   {
     "id": 2057,
@@ -990,11 +1545,27 @@
     "chapels": [
       {
         "name": "Capela Nossa Senhora Aparecida",
-        "address": "Rua Conceição de Souza Barbosa, 530 Jd. Zelinda"
+        "address": "Rua Conceição de Souza Barbosa, 530 Jd. Zelinda",
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "10:00"
+          }
+        ]
       },
       {
         "name": "Capela São Rafael",
-        "address": "Rua Caetano Dal Sasso, 151 Pq. Das Esmeraldas"
+        "address": "Rua Caetano Dal Sasso, 151 Pq. Das Esmeraldas",
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "08:30"
+          },
+          {
+            "dayOfWeek": "Quarta-feira",
+            "time": "19:15"
+          }
+        ]
       }
     ],
     "massNotes": [
@@ -1002,10 +1573,10 @@
       "Todo dia 22 às 19:15 Missa de Santa Rita"
     ],
     "forania": "Nossa Senhora da Conceição",
-    "latitude": -20.5381768,
-    "longitude": -47.4009795,
+    "latitude": -20.5394278,
+    "longitude": -47.4274065,
     "coordinatesVerified": false,
-    "coordinatesPrecision": "city"
+    "coordinatesPrecision": "address"
   },
   {
     "id": 2058,
@@ -1034,10 +1605,10 @@
       "Primeira terça- feira do mês: Missa nas casas Domingo: 8h, 10h30, 19h"
     ],
     "forania": "Santa Gianna",
-    "latitude": -20.5381768,
-    "longitude": -47.4009795,
+    "latitude": -20.5009735,
+    "longitude": -47.3706184,
     "coordinatesVerified": false,
-    "coordinatesPrecision": "city"
+    "coordinatesPrecision": "address"
   },
   {
     "id": 2059,
@@ -1064,11 +1635,39 @@
     "chapels": [
       {
         "name": "Capela Nossa Senhora de Lourdes",
-        "address": "Rua Dr. ChaficFacury, nº 3021, Primo Meneghetti, 14.403-680"
+        "address": "Rua Dr. ChaficFacury, nº 3021, Primo Meneghetti, 14.403-680",
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "10:00"
+          },
+          {
+            "dayOfWeek": "Domingo",
+            "time": "17:30"
+          },
+          {
+            "dayOfWeek": "Quinta-feira",
+            "time": "19:00"
+          }
+        ]
       },
       {
         "name": "Capela São José Operário",
-        "address": "Rua Pedro Pucci, 3237 - Vila Scarabucci, 14403-649"
+        "address": "Rua Pedro Pucci, 3237 - Vila Scarabucci, 14403-649",
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "08:30"
+          },
+          {
+            "dayOfWeek": "Domingo",
+            "time": "18:30"
+          },
+          {
+            "dayOfWeek": "Terça-feira",
+            "time": "19:00"
+          }
+        ]
       }
     ],
     "massNotes": [
@@ -1077,10 +1676,10 @@
       "Missa Votiva a Santa Rita todo dia 22 de cada mês, às 19h, exceto no sábado que continua às 18h30"
     ],
     "forania": "Nossa Senhora Aparecida",
-    "latitude": -20.5381768,
-    "longitude": -47.4009795,
+    "latitude": -20.5450938,
+    "longitude": -47.3945065,
     "coordinatesVerified": false,
-    "coordinatesPrecision": "city"
+    "coordinatesPrecision": "address"
   },
   {
     "id": 2060,
@@ -1104,39 +1703,93 @@
     "chapels": [
       {
         "name": "Capela Nossa Senhora Aparecida",
-        "address": "Rua Vicente Moreira, 51 - CEP - 14 540-000"
+        "address": "Rua Vicente Moreira, 51 - CEP - 14 540-000",
+        "masses": [
+          {
+            "dayOfWeek": "Sábado",
+            "time": "19:00"
+          }
+        ]
       },
       {
         "name": "Capela Santa Cruz",
-        "address": "Rua Manoel Pedro Pimentel, 1320 - Vila Gomes - CEP - 14 540-000 - Missa: Sábado às 17h"
+        "address": "Rua Manoel Pedro Pimentel, 1320 - Vila Gomes - CEP - 14 540-000",
+        "masses": [
+          {
+            "dayOfWeek": "Sábado",
+            "time": "17:00"
+          }
+        ]
       },
       {
         "name": "Capela Santo Antonio",
-        "address": "Rua Custódio Garcia, 305 - Conj.Hab. Ricardo Bozola - 14.540-000 - Missa: Domingo 19h"
+        "address": "Rua Custódio Garcia, 305 - Conj.Hab. Ricardo Bozola - 14.540-000",
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "19:00"
+          }
+        ]
       },
       {
         "name": "Capela São Geraldo",
-        "address": "Avenida Dois - Usina Junqueira - 14.540-000 - Missa: Domingo às 08h"
+        "address": "Avenida Dois - Usina Junqueira - 14.540-000",
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "08:00"
+          }
+        ]
       },
       {
         "name": "Comunidade Santo Ântonio de Santana Galvão",
-        "address": "Rua Dr. Antônio Ribeiro Soares, 465 - Conj. Hab. Evaristo Rodrigues Nunes - CEP - 14.540-000 - Missa: Domingo 19h"
+        "address": "Rua Dr. Antônio Ribeiro Soares, 465 - Conj. Hab. Evaristo Rodrigues Nunes - CEP - 14.540-000",
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "19:00"
+          }
+        ]
       },
       {
         "name": "Comunidade Santo Ezequiel Moreno",
-        "address": "Rua José Franciscon, 184 - Conj. Hab. Assad Salim - CEP - 14.540-000 - Missa: Sábado 19h"
+        "address": "Rua José Franciscon, 184 - Conj. Hab. Assad Salim - CEP - 14.540-000",
+        "masses": [
+          {
+            "dayOfWeek": "Sábado",
+            "time": "19:00"
+          }
+        ]
       },
       {
         "name": "Comunidade São Bento",
-        "address": "Rua Francisco Alves Pereira, s/nº - CEP - 14.540-000 - Missa: Domingo 9h30"
+        "address": "Rua Francisco Alves Pereira, s/nº - CEP - 14.540-000",
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "09:30"
+          }
+        ]
       },
       {
         "name": "Comunidade Nossa Senhora Das Graças",
-        "address": "Rua Rosina Basile Bortoleto, s/nº - - Conj. Hab. Waldir Dib Mattar - CEP - 14.540-000 - Missa: Domingo 10h"
+        "address": "Rua Rosina Basile Bortoleto, s/nº - - Conj. Hab. Waldir Dib Mattar - CEP - 14.540-000",
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "10:00"
+          }
+        ]
       },
       {
         "name": "Comunidade Santos Reis",
-        "address": "Rua Juybá Rodrigues Sora, s/º - Conj. Hab.Alceu Molina - CEP - 14.540-000 - Missa: Sábado 19h"
+        "address": "Rua Juybá Rodrigues Sora, s/º - Conj. Hab.Alceu Molina - CEP - 14.540-000",
+        "masses": [
+          {
+            "dayOfWeek": "Sábado",
+            "time": "19:00"
+          }
+        ]
       },
       {
         "name": "Comunidade João Paulo II",
@@ -1148,19 +1801,58 @@
       },
       {
         "name": "Capela Nossa Senhora Da Abadia",
-        "address": "Rua Cel. Francisco Martins, 717 - Centro - CEP - 14540-000 - Missa: Terça à Sexta 7h"
+        "address": "Rua Cel. Francisco Martins, 717 - Centro - CEP - 14540-000",
+        "masses": [
+          {
+            "dayOfWeek": "Terça-feira",
+            "time": "07:00"
+          },
+          {
+            "dayOfWeek": "Quarta-feira",
+            "time": "07:00"
+          },
+          {
+            "dayOfWeek": "Quinta-feira",
+            "time": "07:00"
+          },
+          {
+            "dayOfWeek": "Sexta-feira",
+            "time": "07:00"
+          }
+        ]
       },
       {
         "name": "Capela da Ressurreição",
-        "address": "Missa: Segunda 15h"
+        "address": null,
+        "masses": [
+          {
+            "dayOfWeek": "Segunda-feira",
+            "time": "15:00"
+          }
+        ]
       },
       {
         "name": "Capela Mãe Peregrina",
-        "address": "Rua Nicolau Nassif, 112 - Jardim Madrugada (creche), CEP: 14.540-000 - Missa: Domingo: 08h"
+        "address": "Rua Nicolau Nassif, 112 - Jardim Madrugada (creche), CEP: 14.540-000",
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "08:00"
+          }
+        ]
       },
       {
         "name": "Capela São João Batista",
-        "address": "Missa: Domingo: 19h - Fazenda Aliança (zona rural) - Rodovia Anhanguera Km 441"
+        "address": "Fazenda Aliança (zona rural)",
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "19:00"
+          }
+        ],
+        "massNotes": [
+          "Rodovia Anhanguera Km 441 - Missa: Último sábado do mês às 17h"
+        ]
       }
     ],
     "massNotes": [],
@@ -1195,15 +1887,33 @@
     "chapels": [
       {
         "name": "Capela Nossa Senhora Aparecida",
-        "address": "Rua Dr. Paulo de Lima Correia, 709, CEP: 14.660-000"
+        "address": "Rua Dr. Paulo de Lima Correia, 709, CEP: 14.660-000",
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "09:30"
+          }
+        ]
       },
       {
         "name": "Capela São José",
-        "address": "Rua José Vilela Nunes Sobrinho, s/n, CEP: 14.660-000 - Missa: Domingo às 08h"
+        "address": "Rua José Vilela Nunes Sobrinho, s/n, CEP: 14.660-000",
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "08:00"
+          }
+        ]
       },
       {
         "name": "Capela Santo Antônio",
-        "address": "Missa: Domingo às 08h"
+        "address": null,
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "08:00"
+          }
+        ]
       }
     ],
     "massNotes": [],
@@ -1239,7 +1949,17 @@
     "chapels": [
       {
         "name": "Capela Santo Tomás de Aquino",
-        "address": "Av. Marginal Francisco José da Silva, 1250. Residencial São Tomáz, Franca. - Quinta-feira: 19h - Domingo: 10h"
+        "address": "Av. Marginal Francisco José da Silva, 1250. Residencial São Tomáz, Franca.",
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "10:00"
+          },
+          {
+            "dayOfWeek": "Quinta-feira",
+            "time": "19:00"
+          }
+        ]
       }
     ],
     "massNotes": [
@@ -1248,10 +1968,10 @@
       "Toda 1° sexta-feira do mês: Missa do Sagrado Coração de Jesus às 07h e às 18h."
     ],
     "forania": "Santa Gianna",
-    "latitude": -20.5381768,
-    "longitude": -47.4009795,
+    "latitude": -20.5046521,
+    "longitude": -47.4009643,
     "coordinatesVerified": false,
-    "coordinatesPrecision": "city"
+    "coordinatesPrecision": "address"
   },
   {
     "id": 2063,
@@ -1277,31 +1997,67 @@
     "chapels": [
       {
         "name": "Capela Nossa Senhora Aparecida - Canindé",
-        "address": "Missa: Segunda, quarta e quinta-feira: 19h00"
+        "address": null,
+        "masses": [
+          {
+            "dayOfWeek": "Segunda-feira",
+            "time": "19:00"
+          },
+          {
+            "dayOfWeek": "Quarta-feira",
+            "time": "19:00"
+          },
+          {
+            "dayOfWeek": "Quinta-feira",
+            "time": "19:00"
+          }
+        ]
       },
       {
         "name": "Comunidade dos Três Reis",
-        "address": "Missa: Sexta-feira, 19h00"
+        "address": null,
+        "masses": [
+          {
+            "dayOfWeek": "Sexta-feira",
+            "time": "19:00"
+          }
+        ]
       },
       {
         "name": "Comunidade Nossa Senhora do Bom Conselho - Brejão",
-        "address": "Missa: 1ª e 3ª Quinta-feira, 19h00"
+        "address": null,
+        "massNotes": [
+          "1ª e 3ª Quinta-feira, 19h00"
+        ]
       },
       {
         "name": "Comunidade Nossa Senhora Aparecida - Paraíso",
-        "address": "Missa: Última quarta feira do mês, 19h00"
+        "address": null,
+        "massNotes": [
+          "Última quarta feira do mês, 19h00"
+        ]
       },
       {
         "name": "Comunidade Nossa Senhora Aparecida - Aramina",
-        "address": "Missa : Sábado, 19h30 - Domingo, 19h00"
+        "address": null,
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "19:00"
+          },
+          {
+            "dayOfWeek": "Sábado",
+            "time": "19:30"
+          }
+        ]
       }
     ],
     "massNotes": [],
     "forania": "Beata Rita Amada de Jesus",
-    "latitude": -20.0876144,
-    "longitude": -47.789201,
+    "latitude": -20.0887905,
+    "longitude": -47.7864789,
     "coordinatesVerified": false,
-    "coordinatesPrecision": "city"
+    "coordinatesPrecision": "address"
   },
   {
     "id": 2065,
@@ -1358,29 +2114,93 @@
     "chapels": [
       {
         "name": "Igreja Histórica",
-        "address": "Rua Tuffy Jorge, 478, Vila Formosa, 14405-146"
+        "address": "Rua Tuffy Jorge, 478, Vila Formosa, 14405-146",
+        "masses": [
+          {
+            "dayOfWeek": "Segunda-feira",
+            "time": "06:00"
+          },
+          {
+            "dayOfWeek": "Segunda-feira",
+            "time": "19:00"
+          },
+          {
+            "dayOfWeek": "Terça-feira",
+            "time": "06:00"
+          },
+          {
+            "dayOfWeek": "Quarta-feira",
+            "time": "06:00"
+          },
+          {
+            "dayOfWeek": "Quinta-feira",
+            "time": "06:00"
+          },
+          {
+            "dayOfWeek": "Sexta-feira",
+            "time": "06:00"
+          },
+          {
+            "dayOfWeek": "Sexta-feira",
+            "time": "19:00"
+          },
+          {
+            "dayOfWeek": "Sábado",
+            "time": "06:00"
+          }
+        ]
       },
       {
         "name": "Capela Nossa Senhora do Sagrado Coração",
-        "address": "Rua Abrão Jorge, 3469 - Jardim Guanabara - CEP: 14.405-397"
+        "address": "Rua Abrão Jorge, 3469 - Jardim Guanabara - CEP: 14.405-397",
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "10:00"
+          },
+          {
+            "dayOfWeek": "Quarta-feira",
+            "time": "19:00"
+          }
+        ]
       },
       {
         "name": "Capela São Paulo",
-        "address": "Rua Antônio Bernardes Pinto, 4620 - Vl, Chico Júlio - CEP: 14.405-233"
+        "address": "Rua Antônio Bernardes Pinto, 4620 - Vl, Chico Júlio - CEP: 14.405-233",
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "08:30"
+          },
+          {
+            "dayOfWeek": "Terça-feira",
+            "time": "19:00"
+          }
+        ]
       },
       {
         "name": "Capela São Padre Pio",
-        "address": "Rua: Francisco Naline, 3699 - Parque São Jorge"
+        "address": "Rua: Francisco Naline, 3699 - Parque São Jorge",
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "10:00"
+          },
+          {
+            "dayOfWeek": "Quinta-feira",
+            "time": "19:00"
+          }
+        ]
       }
     ],
     "massNotes": [
       "Quinta às 15h, na Matriz : Missa e novena de Nª Srª do Perpétuo Socorro"
     ],
     "forania": "Santa Gianna",
-    "latitude": -20.5381768,
-    "longitude": -47.4009795,
+    "latitude": -20.5251897,
+    "longitude": -47.4078802,
     "coordinatesVerified": false,
-    "coordinatesPrecision": "city"
+    "coordinatesPrecision": "address"
   },
   {
     "id": 2068,
@@ -1408,23 +2228,49 @@
     "chapels": [
       {
         "name": "Capela N. Sra Mãe da Divina Providência",
-        "address": "Rua Wanderlei Riscolino da Silva, 1220 - Jardim Cambuí - CEP - 14.409-682"
+        "address": "Rua Wanderlei Riscolino da Silva, 1220 - Jardim Cambuí - CEP - 14.409-682",
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "19:00"
+          }
+        ]
       },
       {
         "name": "Capela Santa Cruz",
-        "address": "Avenida Monteiro Lobato, 800 - Miramontes - CEP - 14.409-500"
+        "address": "Avenida Monteiro Lobato, 800 - Miramontes - CEP - 14.409-500",
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "08:00"
+          },
+          {
+            "dayOfWeek": "Terça-feira",
+            "time": "19:30"
+          }
+        ]
       },
       {
         "name": "Capela São Miguel",
-        "address": "Rua José Mafas, 991 - Parque do Horto"
+        "address": "Rua José Mafas, 991 - Parque do Horto",
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "09:30"
+          },
+          {
+            "dayOfWeek": "Quarta-feira",
+            "time": "19:30"
+          }
+        ]
       }
     ],
     "massNotes": [],
     "forania": "Santa Gianna",
-    "latitude": -20.5381768,
-    "longitude": -47.4009795,
+    "latitude": -20.4763681,
+    "longitude": -47.3954777,
     "coordinatesVerified": false,
-    "coordinatesPrecision": "city"
+    "coordinatesPrecision": "address"
   },
   {
     "id": 2069,
@@ -1450,7 +2296,17 @@
     "chapels": [
       {
         "name": "Capela Sagrado Coração de Jesus",
-        "address": "Rua Alípio Resende de Araújo, 2105, Jardim Aeroporto II"
+        "address": "Rua Alípio Resende de Araújo, 2105, Jardim Aeroporto II",
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "09:30"
+          },
+          {
+            "dayOfWeek": "Sábado",
+            "time": "19:00"
+          }
+        ]
       }
     ],
     "massNotes": [
@@ -1486,19 +2342,46 @@
     "chapels": [
       {
         "name": "Capela Santa Dorothea",
-        "address": "Rua Urias Alves Taveira, nº 6571. Residencial Ana Dorothea"
+        "address": "Rua Urias Alves Taveira, nº 6571. Residencial Ana Dorothea",
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "10:00"
+          },
+          {
+            "dayOfWeek": "Quinta-feira",
+            "time": "19:00"
+          }
+        ]
+      },
+      {
+        "name": "Capela São Cristovão",
+        "address": "Rua Jerônimo Machado Silva,n°6119. Jardim Paraty",
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "09:30"
+          },
+          {
+            "dayOfWeek": "Quinta-feira",
+            "time": "19:00"
+          }
+        ]
       },
       {
         "name": "Capela Nossa Senhora do Carmo",
-        "address": "2ª Quarta-feira do mês, às 19h30. - Av. São Vicente, 7316 – Residencial Zanetti (a missa é celebrada na casa de leigos)"
+        "address": "Av. São Vicente, 7316 – Residencial Zanetti (a missa é celebrada na casa de leigos)",
+        "massNotes": [
+          "2ª Quarta-feira do mês, às 19h30."
+        ]
       }
     ],
     "massNotes": [],
     "forania": "Nossa Senhora Aparecida",
-    "latitude": -20.5381768,
-    "longitude": -47.4009795,
+    "latitude": -20.5551752,
+    "longitude": -47.3736741,
     "coordinatesVerified": false,
-    "coordinatesPrecision": "city"
+    "coordinatesPrecision": "address"
   },
   {
     "id": 2257,
@@ -1525,19 +2408,39 @@
     "chapels": [
       {
         "name": "Capela Imaculada Conceição",
-        "address": "Avenida Perimetral, S/N. CEP: 14.500-000"
+        "address": "Avenida Perimetral, S/N. CEP: 14.500-000",
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "17:00"
+          },
+          {
+            "dayOfWeek": "Quarta-feira",
+            "time": "19:30"
+          }
+        ]
       },
       {
         "name": "Capela Sagrado Coração de Jesus",
-        "address": "Rua: Nobuo Sakemi, S/N. CEP: 14.500-000"
+        "address": "Rua: Nobuo Sakemi, S/N. CEP: 14.500-000",
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "07:30"
+          },
+          {
+            "dayOfWeek": "Sexta-feira",
+            "time": "19:30"
+          }
+        ]
       }
     ],
     "massNotes": [],
     "forania": "Beata Rita Amada de Jesus",
-    "latitude": -20.3366604,
-    "longitude": -47.7797924,
+    "latitude": -20.3303312,
+    "longitude": -47.7864469,
     "coordinatesVerified": false,
-    "coordinatesPrecision": "city"
+    "coordinatesPrecision": "address"
   },
   {
     "id": 2071,
@@ -1564,23 +2467,68 @@
     "chapels": [
       {
         "name": "Capela Santo Antônio",
-        "address": "Rua Clotilde Torres Penedo, 100 - Jardim Paraíso, CEP: 14.600-000"
+        "address": "Rua Clotilde Torres Penedo, 100 - Jardim Paraíso, CEP: 14.600-000",
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "09:30"
+          },
+          {
+            "dayOfWeek": "Sexta-feira",
+            "time": "19:30"
+          }
+        ]
       },
       {
         "name": "Capela São Benedito",
-        "address": "Praça Mário Lano, s/n - Residencial Espigão, CEP: 14.600-000"
+        "address": "Praça Mário Lano, s/n - Residencial Espigão, CEP: 14.600-000",
+        "masses": [
+          {
+            "dayOfWeek": "Quarta-feira",
+            "time": "19:30"
+          },
+          {
+            "dayOfWeek": "Sábado",
+            "time": "18:30"
+          }
+        ]
       },
       {
         "name": "Capela São Pedro e São Paulo",
-        "address": "Rua José Chaves, S/N – Pedro Chediach, CEP: 14.600-000"
+        "address": "Rua José Chaves, S/N – Pedro Chediach, CEP: 14.600-000",
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "17:00"
+          },
+          {
+            "dayOfWeek": "Terça-feira",
+            "time": "19:30"
+          }
+        ]
       },
       {
         "name": "Capela Senhor Bom Jesus da Lapa",
-        "address": "Rua Sergipe, 2540 - Lapa Nova, CEP: 14.600-000"
+        "address": "Rua Sergipe, 2540 - Lapa Nova, CEP: 14.600-000",
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "08:00"
+          },
+          {
+            "dayOfWeek": "Quinta-feira",
+            "time": "19:30"
+          }
+        ]
       },
       {
         "name": "Capela Santo Hilário - Rural",
-        "address": "Missa: 1⁰ Domingo do mês 10he30 - Obs: Todos os sábados missa nas Irmãs às 09h; 1ª sexta-feira do mês missa no Asilo às 15h e última sexta-feira do mês, missa na Santa Casa às 15h."
+        "address": null,
+        "massNotes": [
+          "1⁰ Domingo do mês 10he30",
+          "Obs: Todos os sábados missa nas Irmãs às 09h",
+          "1ª sexta-feira do mês missa no Asilo às 15h e última sexta-feira do mês, missa na Santa Casa às 15h."
+        ]
       }
     ],
     "massNotes": [
@@ -1590,10 +2538,10 @@
       "1ª Sexta-feira do mês missa Sagrado Coração de Jesus"
     ],
     "forania": "São Joaquim",
-    "latitude": -20.5814993,
-    "longitude": -47.8608238,
+    "latitude": -20.5816756,
+    "longitude": -47.8610379,
     "coordinatesVerified": false,
-    "coordinatesPrecision": "city"
+    "coordinatesPrecision": "address"
   },
   {
     "id": 2072,
@@ -1619,7 +2567,10 @@
     "chapels": [
       {
         "name": "Capela Santa Rita de Cássia",
-        "address": "Bairro do Buritizinho"
+        "address": "Bairro do Buritizinho",
+        "massNotes": [
+          "1º, 3º e 5º Domingo 9h"
+        ]
       }
     ],
     "massNotes": [
@@ -1629,10 +2580,10 @@
       "Capela Nossa Senhora de Fátima, Vila Marta às 19h30"
     ],
     "forania": "São Joaquim",
-    "latitude": -20.5934194,
-    "longitude": -47.6416942,
+    "latitude": -20.5935875,
+    "longitude": -47.6403949,
     "coordinatesVerified": false,
-    "coordinatesPrecision": "city"
+    "coordinatesPrecision": "address"
   },
   {
     "id": 2073,
@@ -1657,39 +2608,95 @@
     "chapels": [
       {
         "name": "Capela do Hospital Beneficiente Santo Antôni o",
-        "address": "Rua 3, S/N - Centro, CEP: 14.620-000 - Missa : 2ª Quinta-feira do mês às 18h"
+        "address": "Rua 3, S/N - Centro, CEP: 14.620-000",
+        "massNotes": [
+          "2ª Quinta-feira do mês às 18h"
+        ]
       },
       {
         "name": "Capela Mãe Rainha",
-        "address": "Rua 30, s/n - Jardim Teixeira, CEP: 14.620-000"
+        "address": "Rua 30, s/n - Jardim Teixeira, CEP: 14.620-000",
+        "masses": [
+          {
+            "dayOfWeek": "Terça-feira",
+            "time": "19:30"
+          },
+          {
+            "dayOfWeek": "Sábado",
+            "time": "19:30"
+          }
+        ]
       },
       {
         "name": "Capela Nossa Senhora Aparecida",
-        "address": "Rua 26, nº 1182 - Jardim Cidade Alta, CEP: 14.620-000 - Missa : Domingo 8h"
+        "address": "Rua 26, nº 1182 - Jardim Cidade Alta, CEP: 14.620-000",
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "08:00"
+          }
+        ]
       },
       {
         "name": "Capela Sagrada Família",
-        "address": "Rua 16, nº 701 - Centro, CEP: 14.620-000 - Missa: Quarta-feira às 07h"
+        "address": "Rua 16, nº 701 - Centro, CEP: 14.620-000",
+        "masses": [
+          {
+            "dayOfWeek": "Quarta-feira",
+            "time": "07:00"
+          }
+        ]
       },
       {
         "name": "Capela Santa Genoveva",
-        "address": "Praça Mário Furtado, S/N - Centro, CEP: 14.620-000 - Missa : Sexta-feira 19h"
+        "address": "Praça Mário Furtado, S/N - Centro, CEP: 14.620-000",
+        "masses": [
+          {
+            "dayOfWeek": "Sexta-feira",
+            "time": "19:00"
+          }
+        ]
       },
       {
         "name": "Capela Santa Luzia",
-        "address": "Avenida 9, nº 40, CEP: 14.620-000 - Missa: Domingo 10h"
+        "address": "Avenida 9, nº 40, CEP: 14.620-000",
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "10:00"
+          }
+        ]
       },
       {
         "name": "Capela São Francisco de Assis",
-        "address": "Rua 28 - Jardim Francisco, CEP: 14.620-000 - Missa : Domingo 8h30"
+        "address": "Rua 28 - Jardim Francisco, CEP: 14.620-000",
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "08:30"
+          }
+        ]
       },
       {
         "name": "Capela São João Batista",
-        "address": "Rua 5, nº 1641 - Jardim Nova Orlândia, CEP: 14.620-000"
+        "address": "Rua 5, nº 1641 - Jardim Nova Orlândia, CEP: 14.620-000",
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "19:00"
+          },
+          {
+            "dayOfWeek": "Quinta-feira",
+            "time": "19:30"
+          }
+        ]
       },
       {
         "name": "Capela do Cemitério",
-        "address": "Missa : 1ª Quinta-feira do mês às 18h"
+        "address": null,
+        "massNotes": [
+          "1ª Quinta-feira do mês às 18h"
+        ]
       }
     ],
     "massNotes": [
@@ -1697,10 +2704,10 @@
       "Sábado: 17h30, 18h30, 20h (CNC)"
     ],
     "forania": "São Joaquim",
-    "latitude": -20.720278,
-    "longitude": -47.886667,
+    "latitude": -20.72058,
+    "longitude": -47.8873872,
     "coordinatesVerified": false,
-    "coordinatesPrecision": "city"
+    "coordinatesPrecision": "address"
   },
   {
     "id": 2074,
@@ -1724,31 +2731,58 @@
     "chapels": [
       {
         "name": "Capela Nossa Senhora da Guadalupe",
-        "address": "Vila São Sebaastião - Missa: Domingo às 08h30"
+        "address": "Vila São Sebaastião",
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "08:30"
+          }
+        ]
       },
       {
         "name": "Capela Santa Clara",
-        "address": "Rua Anésio Basílio dos Santos, 2030 - Jardim Palmeiras - Missa: Domingo às 10h"
+        "address": "Rua Anésio Basílio dos Santos, 2030 - Jardim Palmeiras",
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "10:00"
+          }
+        ]
       },
       {
         "name": "Capela Santa Maria dos Anjos",
-        "address": "Av. Nossa Senhora de Lourdes - Residencial Santa Clara - Missa: Sábado às 19h"
+        "address": "Av. Nossa Senhora de Lourdes - Residencial Santa Clara",
+        "masses": [
+          {
+            "dayOfWeek": "Sábado",
+            "time": "19:00"
+          }
+        ]
       },
       {
         "name": "Capela Santo Antônio Santana Galvão",
-        "address": "Rua Dillco Rosa Faria, n. 274 - Jardim Pulicano - Missa: Sábado às 19h"
+        "address": "Rua Dillco Rosa Faria, n. 274 - Jardim Pulicano",
+        "masses": [
+          {
+            "dayOfWeek": "Sábado",
+            "time": "19:00"
+          }
+        ]
       },
       {
         "name": "Capela Nossa Senhora Aparecida",
-        "address": "Bom Jardim - Missa: 1ª Terça-feira às 20h"
+        "address": "Bom Jardim",
+        "massNotes": [
+          "1ª Terça-feira às 20h"
+        ]
       }
     ],
     "massNotes": [],
     "forania": "Santa Gianna",
-    "latitude": -20.5381768,
-    "longitude": -47.4009795,
+    "latitude": -20.5323316,
+    "longitude": -47.4191655,
     "coordinatesVerified": false,
-    "coordinatesPrecision": "city"
+    "coordinatesPrecision": "address"
   },
   {
     "id": 2075,
@@ -1778,21 +2812,41 @@
     "chapels": [
       {
         "name": "Capela Santa Teresinha do Menino Jesus",
-        "address": "Rua. Dr. Agnelo Morato, 1210 – Prolongamento do Jardim Flórida CEP: 14.403-276"
+        "address": "Rua. Dr. Agnelo Morato, 1210 – Prolongamento do Jardim Flórida CEP: 14.403-276",
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "10:00"
+          },
+          {
+            "dayOfWeek": "Quinta-feira",
+            "time": "19:30"
+          }
+        ]
       },
       {
         "name": "Capela São João Paulo II",
-        "address": "Av. José Marcelo Leite, 2080 – Parque dos Lima"
+        "address": "Av. José Marcelo Leite, 2080 – Parque dos Lima",
+        "masses": [
+          {
+            "dayOfWeek": "Terça-feira",
+            "time": "19:00"
+          },
+          {
+            "dayOfWeek": "Sábado",
+            "time": "18:30"
+          }
+        ]
       }
     ],
     "massNotes": [
       "Sábado: Comunidades Caminho Neo-Catecumenal às 19h30"
     ],
     "forania": "Nossa Senhora Aparecida",
-    "latitude": -20.5381768,
-    "longitude": -47.4009795,
+    "latitude": -20.5614852,
+    "longitude": -47.3941926,
     "coordinatesVerified": false,
-    "coordinatesPrecision": "city"
+    "coordinatesPrecision": "address"
   },
   {
     "id": 2076,
@@ -1826,10 +2880,10 @@
       "Todo dia 22 de cada mês: Missa em louvor a Santa Rita com benção das rosas"
     ],
     "forania": "Nossa Senhora da Conceição",
-    "latitude": -20.5381768,
-    "longitude": -47.4009795,
+    "latitude": -20.5344028,
+    "longitude": -47.4113684,
     "coordinatesVerified": false,
-    "coordinatesPrecision": "city"
+    "coordinatesPrecision": "address"
   },
   {
     "id": 2077,
@@ -1858,10 +2912,10 @@
     "chapels": [],
     "massNotes": [],
     "forania": "Beata Rita Amada de Jesus",
-    "latitude": -20.3104773,
-    "longitude": -47.5915669,
+    "latitude": -20.3118067,
+    "longitude": -47.5893697,
     "coordinatesVerified": false,
-    "coordinatesPrecision": "city"
+    "coordinatesPrecision": "address"
   },
   {
     "id": 2078,
@@ -1888,15 +2942,36 @@
     "chapels": [
       {
         "name": "Capela Nossa Senhora Aparecida",
-        "address": "Rua Jordão Idelfonso Pereira Martins, s/n. Vila Pires. - Missa: Domingo, 08h"
+        "address": "Rua Jordão Idelfonso Pereira Martins, s/n. Vila Pires.",
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "08:00"
+          }
+        ]
       },
       {
         "name": "Capela Senhor Bom Jesus da Lapa",
-        "address": "Praça José Pedro Figueiredo, s/n. Vila Vitória. - Missa: Domingo, 09h30"
+        "address": "Praça José Pedro Figueiredo, s/n. Vila Vitória.",
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "09:30"
+          }
+        ]
       },
       {
         "name": "Capela São Pedro",
-        "address": "Praça São Pedro, 190. Pioneiros, CEP: 14.580-000 - Missa : Sexta-feira, 19h - Centro Catequético Santa Rita"
+        "address": "Praça São Pedro, 190. Pioneiros, CEP: 14.580-000",
+        "masses": [
+          {
+            "dayOfWeek": "Sexta-feira",
+            "time": "19:00"
+          }
+        ],
+        "massNotes": [
+          "Centro Catequético Santa Rita - Rodovia Guará – Ribeirão Corrente, s/n - Missa: Sábado às 18h30 Eucaristia do CaminhoNeocatecumenal"
+        ]
       }
     ],
     "massNotes": [],
@@ -1934,25 +3009,47 @@
     "chapels": [
       {
         "name": "Capela Santo Expedito",
-        "address": "Rua João Luiz Facirolli, 2411 - Jardim Pinheiros II, CEP: 14.407-365"
+        "address": "Rua João Luiz Facirolli, 2411 - Jardim Pinheiros II, CEP: 14.407-365",
+        "masses": [
+          {
+            "dayOfWeek": "Terça-feira",
+            "time": "19:30"
+          },
+          {
+            "dayOfWeek": "Sábado",
+            "time": "19:00"
+          }
+        ]
       },
       {
         "name": "Capela Nossa Senhora de Lourdes",
-        "address": "Av. Wanderlei Mancini, 1830 – Parque Vicente Leporace I, CEP: 14.407-325"
+        "address": "Av. Wanderlei Mancini, 1830 – Parque Vicente Leporace I, CEP: 14.407-325",
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "09:00"
+          }
+        ]
       },
       {
         "name": "Capela Santa Filomena",
-        "address": "Rua Antônio Rúbio Herreiro, 441 – Parque Vicente Leporace II, CEP: 14.407-047"
+        "address": "Rua Antônio Rúbio Herreiro, 441 – Parque Vicente Leporace II, CEP: 14.407-047",
+        "masses": [
+          {
+            "dayOfWeek": "Domingo",
+            "time": "10:30"
+          }
+        ]
       }
     ],
     "massNotes": [
       "Sábado: (Salão Paroquial) Missa Cominidade Neocatecumenal: 18h"
     ],
     "forania": "Santa Gianna",
-    "latitude": -20.5381768,
-    "longitude": -47.4009795,
+    "latitude": -20.5034365,
+    "longitude": -47.4174317,
     "coordinatesVerified": false,
-    "coordinatesPrecision": "city"
+    "coordinatesPrecision": "address"
   },
   {
     "id": 2064,
@@ -1987,10 +3084,10 @@
       "19h: Santa Missa"
     ],
     "forania": "Nossa Senhora da Conceição",
-    "latitude": -20.5381768,
-    "longitude": -47.4009795,
+    "latitude": -20.5257681,
+    "longitude": -47.3869109,
     "coordinatesVerified": false,
-    "coordinatesPrecision": "city"
+    "coordinatesPrecision": "address"
   },
   {
     "id": 2080,
@@ -2027,9 +3124,9 @@
     ],
     "massNotes": [],
     "forania": "Nossa Senhora da Conceição",
-    "latitude": -20.5381768,
-    "longitude": -47.4009795,
+    "latitude": -20.5503289,
+    "longitude": -47.4053,
     "coordinatesVerified": false,
-    "coordinatesPrecision": "city"
+    "coordinatesPrecision": "address"
   }
 ]

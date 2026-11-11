@@ -32,6 +32,8 @@ App da Diocese de Franca: API REST (`backend/`) + app Expo/React Native com buil
 - Deploy da API: imagem `ghcr.io/juninmd/diocese-franca-api` (`backend/Dockerfile`, workflow `docker.yml`, push só na master); manifestos em `juninmd/app-charts/diocese-franca` (ArgoCD) em `https://diocese-franca.antonio-code.duckdns.org`. O app usa essa URL fora de dev; web em localhost usa `http://localhost:3000`.
 - Dados remotos no app: use `useResource`/hooks de `mobile/src/hooks/useData.ts` (cache stale-while-revalidate em `services/cache.ts`); não chame `api.ts` direto em telas. Próxima missa é calculada no aparelho (`utils/massTime.computeNextMass`); no backend, `utils/nextMass` usa o fuso America/Sao_Paulo.
 - Backend: rotas leem o catálogo via `utils/catalog.getCatalog()` (cache por `mtime`); respostas de dados levam `Cache-Control` (`src/middleware/cache.ts`).
+- Capelas: `src/utils/chapelParser.ts` extrai endereço e horários próprios (`chapels[].masses` `{ dayOfWeek, time }` + `chapels[].massNotes` para horários irregulares como "1º domingo do mês"). Ficam só em `churches.json` (não entram em `masses.json`).
+- Coordenadas: `src/utils/geocode.ts` geocodifica o endereço da matriz (Nominatim, 1 req/s) com cache em `data/addressCoords.json` (chave = id; só reconsulta se o endereço mudar; `manual: true` fixa a coordenada). Resultado a mais de 12 km do centro da cidade é descartado. `coordinatesPrecision` = `address` ou `city` (fallback).
 - Parsers: HTML do site às vezes é colado do Word; `htmlText` trata quebra de linha do código-fonte como espaço. Ao mexer em `massParser`/`parishParser`, valide contra páginas reais (ids 2014–2265) além dos fixtures.
 
 ## Nao fazer

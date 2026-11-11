@@ -23,6 +23,8 @@ export interface SocialMedia {
 export interface Chapel {
   name: string;
   address?: string | null;
+  masses?: { dayOfWeek: string; time: string }[];
+  massNotes?: string[];
 }
 
 export interface Church {

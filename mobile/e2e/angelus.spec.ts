@@ -9,5 +9,5 @@ test('Home screen - Ângelus reminder', async ({ page, context }) => {
   const angelusButton = page.getByText(/Lembrete\s*Ângelus/i);
   await angelusButton.click();
 
-  await expect(page.getByText(/Lembrete do Ângelus configurado/i)).toBeVisible({ timeout: 10000 });
+  await expect(page.getByText(/Lembrete do Ângelus configurado para (hoje|amanhã) às (12|18):00/i)).toBeVisible({ timeout: 10000 });
 });

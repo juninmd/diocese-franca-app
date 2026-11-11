@@ -110,7 +110,7 @@ curl http://localhost:3000/api/churches
 
 ### Obter detalhes de uma igreja
 ```bash
-curl http://localhost:3000/api/churches/1
+curl http://localhost:3000/api/churches/2080
 ```
 
 ### Listar missas de domingo
@@ -120,12 +120,12 @@ curl http://localhost:3000/api/masses/by-day/domingo
 
 ### Listar missas de uma igreja específica
 ```bash
-curl http://localhost:3000/api/masses/by-church/1
+curl http://localhost:3000/api/masses/by-church/2080
 ```
 
 ### Listar igrejas próximas a uma coordenada
 ```bash
-curl "http://localhost:3000/api/churches/nearby?lat=-20.5396&lng=-47.4014"
+curl "http://localhost:3000/api/churches/nearby?lat=-20.5503&lng=-47.4053"
 ```
 
 ## Estrutura de Dados
@@ -133,35 +133,36 @@ curl "http://localhost:3000/api/churches/nearby?lat=-20.5396&lng=-47.4014"
 ### Church (Igreja)
 ```json
 {
-  "id": 1,
-  "name": "Catedral Nossa Senhora da Conceição da Franca",
-  "address": "Praça Nossa Senhora da Conceição, 85 - Centro",
+  "id": 2080,
+  "name": "Sé Catedral Nossa Senhora da Conceição",
+  "address": "Praça Nossa Senhora da Conceição, S/N - Centro",
   "city": "Franca",
   "state": "SP",
-  "zipCode": "14400-670",
-  "phone": "(16) 3711-1400",
-  "description": "A Catedral é a igreja principal da Diocese de Franca",
-  "image": "https://via.placeholder.com/400x300?text=Catedral",
-  "latitude": -20.5396,
-  "longitude": -47.4014,
-  "coordinatesVerified": false
+  "zipCode": "14400-970",
+  "phone": "(16) 3721-4085",
+  "image": "https://www.diocesefranca.org.br/images/20210413021455_33.jpg",
+  "forania": "Nossa Senhora da Conceição",
+  "latitude": -20.5503289,
+  "longitude": -47.4053,
+  "coordinatesVerified": false,
+  "coordinatesPrecision": "address"
 }
 ```
 
-> **Nota sobre `latitude`/`longitude`:** as coordenadas atuais são aproximações a partir do endereço textual de cada igreja (`coordinatesVerified: false`), pois este ambiente de desenvolvimento não teve acesso à internet para geocodificá-las com uma API real (Google Geocoding, Nominatim, etc.). Antes de confiar nelas para navegação, geocode os endereços reais e marque `coordinatesVerified: true`.
+> **`coordinatesPrecision`:** `address` = endereço da matriz geocodificado (OpenStreetMap Nominatim, cache em `data/addressCoords.json`); `city` = centro da cidade (fallback quando o endereço não foi encontrado). `chapels[].masses`/`massNotes` trazem os horários próprios de cada capela.
 
 `GET /api/churches/nearby` acrescenta a cada igreja:
 ```json
 {
-  "distanceKm": 1.3,
+  "distanceKm": 0,
   "nextMass": {
-    "id": 10,
-    "churchId": 2,
-    "dayOfWeek": "Domingo",
-    "time": "08:00",
-    "type": "Missa Dominical",
-    "startsAt": "2026-08-23T11:00:00.000Z",
-    "startsInMinutes": 247
+    "id": 271,
+    "churchId": 2080,
+    "dayOfWeek": "Quarta-feira",
+    "time": "19:00",
+    "type": "Missa Semanal",
+    "startsAt": "2026-11-11T22:00:00.000Z",
+    "startsInMinutes": 377
   }
 }
 ```
@@ -170,21 +171,26 @@ curl "http://localhost:3000/api/churches/nearby?lat=-20.5396&lng=-47.4014"
 ```json
 {
   "id": 1,
-  "name": "Dom Pedro Luiz Stringhini",
+  "name": "Dom Paulo Roberto Beloto",
   "title": "Bispo Diocesano",
-  "churchId": 1,
-  "email": "bispo@diocesefranca.org.br",
-  "phone": "(16) 3711-1400",
-  "bio": "Bispo da Diocese de Franca desde 2014.",
-  "image": "https://via.placeholder.com/200x200?text=Bispo"
+  "churchId": 2080,
+  "churchIds": [
+    2080
+  ],
+  "email": null,
+  "phone": "(16) 3701-0222",
+  "bio": "4º Bispo Diocesano de Franca, nascido em Adamantina/SP (09/04/1957), com posse em 15/12/2013.",
+  "image": "https://www.diocesefranca.org.br/images/20210403003119_bispo.png",
+  "birthDate": "09/04/1957",
+  "ordinationDate": "29/06/1986"
 }
 ```
 
 ### Mass (Missa)
 ```json
 {
-  "id": 1,
-  "churchId": 1,
+  "id": 262,
+  "churchId": 2080,
   "dayOfWeek": "Domingo",
   "time": "07:00",
   "type": "Missa Dominical"

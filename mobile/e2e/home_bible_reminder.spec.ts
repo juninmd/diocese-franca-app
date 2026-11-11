@@ -14,11 +14,11 @@ test.describe('Home Screen Bible Reminder', () => {
     await page.waitForTimeout(1000);
 
     // Find and click the Lembrete Bíblia button
-    const bibleButton = page.locator('div').filter({ hasText: /Lembrete.*Bíblia/is }).first();
+    const bibleButton = page.getByText(/Lembrete\s*Bíblia/i).first();
+    await bibleButton.evaluate((el) => el.scrollIntoView({ block: 'center', inline: 'center' }));
     await bibleButton.click({ force: true });
 
-    // Wait a bit for the async permission check to finish
-    await page.waitForTimeout(1000);
-
+    // Agenda para o próximo 07:00 real (relógio de Franca)
+    await expect(page.getByText(/Lembrete bíblico configurado para (hoje|amanhã) às 07:00/i).first()).toBeVisible({ timeout: 10000 });
   });
 });

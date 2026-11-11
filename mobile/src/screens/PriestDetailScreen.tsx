@@ -2,6 +2,7 @@ import React from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
 import { usePriest } from '../hooks/useData';
 import { scheduleReminder } from '../services/ReminderService';
+import { everyDay, nextReminder } from '../utils/reminderTime';
 import { useToast } from '../context/ToastContext';
 import { Text, EmptyState } from '../components/ui';
 import { DetailSkeleton } from '../components/Skeleton';
@@ -30,12 +31,14 @@ export default function PriestDetailScreen({ route, navigation }: PriestsStackSc
 
   const handleConfessionReminder = async () => {
     try {
+      // Próximas 9h (relógio de Franca): horário comercial para procurar a paróquia.
+      const when = nextReminder(everyDay('09:00'))!;
       const scheduled = await scheduleReminder({
         title: 'Lembrete Confissão',
         body: 'Tempo para confissão com ' + priest?.name,
-        seconds: 5,
+        seconds: when.seconds,
       });
-      if (scheduled) toast.success('Lembrete configurado para daqui a 5 segundos!');
+      if (scheduled) toast.success(`Lembrete configurado para ${when.label}.`);
       else toast.error('Puxa, sem permissão de notificação não conseguimos lembrar você.');
     } catch (err) {
       toast.error('Não foi possível agendar o lembrete.');
