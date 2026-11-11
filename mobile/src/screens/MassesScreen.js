@@ -49,7 +49,7 @@ export default function MassesScreen({ navigation, route }) {
         seconds: 5,
         data: { massId: item.id },
       });
-      if (!ok) return toast.error('Permissão de notificação negada.');
+      if (!ok) return toast.error('Puxa, sem permissão de notificação não conseguimos lembrar você.');
       setReminders((r) => ({ ...r, [item.id]: true }));
       toast.success('Lembrete configurado para daqui a 5 segundos!');
     } catch (err) {

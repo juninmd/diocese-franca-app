@@ -34,7 +34,7 @@ export default function PriestDetailScreen({ route, navigation }) {
         seconds: 5,
       });
       if (scheduled) toast.success('Lembrete configurado para daqui a 5 segundos!');
-      else toast.error('Permissão de notificação negada.');
+      else toast.error('Puxa, sem permissão de notificação não conseguimos lembrar você.');
     } catch (err) {
       toast.error('Não foi possível agendar o lembrete.');
     }

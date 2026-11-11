@@ -2,7 +2,7 @@ import { useEffect, useState, useMemo, useCallback } from 'react';
 import { Share } from 'react-native';
 import { getNearbyChurches } from '../../services/api';
 import { useChurches } from '../../hooks/useData';
-import { LocationService } from '../../services/LocationService';
+import { LocationService, LOCATION_MESSAGES } from '../../services/LocationService';
 import { FavoritesService } from '../../services/FavoritesService';
 import { useToast } from '../../context/ToastContext';
 
@@ -53,9 +53,9 @@ export function useChurchesList(initialForania = null) {
   const loadNearbyChurches = async () => {
     setNearbyLoading(true);
     setNearbyError(null);
-    const { granted, coords } = await LocationService.getCurrentPosition();
+    const { granted, coords, reason } = await LocationService.getCurrentPosition();
     if (!granted || !coords) {
-      setNearbyError('Puxa, precisamos da sua localização para mostrar as igrejas mais próximas. Verifique a permissão de localização nas configurações.');
+      setNearbyError(LOCATION_MESSAGES[reason] || LOCATION_MESSAGES.denied);
       setNearbyLoading(false);
       return;
     }

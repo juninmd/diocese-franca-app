@@ -1,6 +1,9 @@
 import { Platform } from 'react-native';
 import * as Notifications from 'expo-notifications';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { ensureNotificationPermission, CHANNEL_ID } from './permissions';
+
+const T = Notifications.SchedulableTriggerInputTypes;
 
 // Na web o expo-notifications não agenda: usamos timer + Notification API do navegador.
 const scheduleOnWeb = ({ title, body, seconds }) => {
@@ -11,17 +14,23 @@ const scheduleOnWeb = ({ title, body, seconds }) => {
   }, seconds * 1000);
 };
 
+// Gatilhos com `type` explícito (obrigatório no expo-notifications atual) e no canal do app.
+const inSeconds = (seconds) => ({ type: T.TIME_INTERVAL, seconds: Math.max(1, seconds), channelId: CHANNEL_ID });
+const daily = (hour, minute) => ({ type: T.DAILY, hour, minute, channelId: CHANNEL_ID });
+// weekday: 1 = domingo ... 7 = sábado
+const weekly = (weekday, hour, minute) => ({ type: T.WEEKLY, weekday, hour, minute, channelId: CHANNEL_ID });
+
 // Agenda uma notificação local; sempre verifica a permissão antes.
 // Retorna true quando o lembrete foi agendado.
 export async function scheduleReminder({ title, body, seconds, data }) {
   try {
-    const { status } = await Notifications.requestPermissionsAsync();
-    if (status !== 'granted') return false;
+    const { granted } = await ensureNotificationPermission();
+    if (!granted) return false;
     if (Platform.OS === 'web') {
       scheduleOnWeb({ title, body, seconds });
       return true;
     }
-    await Notifications.scheduleNotificationAsync({ content: { title, body, data }, trigger: { seconds } });
+    await Notifications.scheduleNotificationAsync({ content: { title, body, data, sound: true }, trigger: inSeconds(seconds) });
     return true;
   } catch (error) {
     console.error('Failed to schedule reminder:', error);
@@ -32,20 +41,29 @@ export async function scheduleReminder({ title, body, seconds, data }) {
 const ANGELUS = { title: 'Hora do Ângelus 🙏', body: 'O Anjo do Senhor anunciou a Maria...' };
 
 // Lembretes recorrentes; cada um é agendado uma única vez (a chave fica no AsyncStorage).
+// Chaves "v2": as anteriores usavam gatilho de calendário, que falha no Android.
 const RECURRING_REMINDERS = [
-  { key: 'hasScheduledDailyReminder', content: { title: 'Lembrete Diário 🙏', body: 'Não se esqueça de reservar um momento para oração.' }, trigger: { hour: 8, minute: 0, repeats: true } },
-  { key: 'hasScheduledWeekendReminder', content: { title: 'Fim de semana chegou! 🙏', body: 'Confira os horários de missa da sua paróquia.' }, trigger: { weekday: 6, hour: 18, minute: 0, repeats: true } },
-  { key: 'hasScheduledAngelusNoon', content: ANGELUS, trigger: { hour: 12, minute: 0, repeats: true } },
-  { key: 'hasScheduledAngelusEvening', content: ANGELUS, trigger: { hour: 18, minute: 0, repeats: true } },
+  { key: 'reminder:v2:daily', content: { title: 'Lembrete Diário 🙏', body: 'Não se esqueça de reservar um momento para oração.' }, trigger: daily(8, 0) },
+  { key: 'reminder:v2:weekend', content: { title: 'Fim de semana chegou! 🙏', body: 'Confira os horários de missa da sua paróquia.' }, trigger: weekly(7, 9, 0) },
+  { key: 'reminder:v2:angelusNoon', content: ANGELUS, trigger: daily(12, 0) },
+  { key: 'reminder:v2:angelusEvening', content: ANGELUS, trigger: daily(18, 0) },
 ];
 
-// Pede permissão e agenda a mensagem de boas-vindas e os lembretes recorrentes (uma vez por instalação).
+// Na abertura do app: pede permissão (sem insistir se o usuário bloqueou) e agenda
+// a boas-vindas e os lembretes recorrentes, uma vez por instalação.
 export async function setupRecurringReminders() {
-  const { status } = await Notifications.requestPermissionsAsync();
-  if (status !== 'granted') return;
+  if (Platform.OS === 'web') return;
+  const { granted } = await ensureNotificationPermission({ explain: false });
+  if (!granted) return;
+
+  // Remove agendamentos antigos (formato v1) antes de reagendar no formato novo.
+  if (!(await AsyncStorage.getItem('reminder:v2:migrated'))) {
+    await Notifications.cancelAllScheduledNotificationsAsync();
+    await AsyncStorage.setItem('reminder:v2:migrated', 'true');
+  }
 
   if (!(await AsyncStorage.getItem('hasSeenWelcomeNotification'))) {
-    await Notifications.scheduleNotificationAsync({ content: { title: 'Bem-vindo!', body: 'Que a paz esteja com você.' }, trigger: { seconds: 2 } });
+    await Notifications.scheduleNotificationAsync({ content: { title: 'Bem-vindo!', body: 'Que a paz esteja com você.' }, trigger: inSeconds(2) });
     await AsyncStorage.setItem('hasSeenWelcomeNotification', 'true');
   }
   for (const { key, content, trigger } of RECURRING_REMINDERS) {

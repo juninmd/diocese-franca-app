@@ -3,7 +3,7 @@ import { View, ScrollView, RefreshControl, StyleSheet } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { getNearbyChurches } from '../services/api';
 import { useChurches, usePriests, useMasses, useNews } from '../hooks/useData';
-import { LocationService } from '../services/LocationService';
+import { LocationService, LOCATION_MESSAGES } from '../services/LocationService';
 import { scheduleReminder } from '../services/ReminderService';
 import { useToast } from '../context/ToastContext';
 import { HomeHero } from '../components/home/HomeHero';
@@ -31,9 +31,9 @@ export default function HomeScreen({ navigation }) {
 
   const findNearestChurch = async () => {
     setNearest({ church: null, loading: true, error: null });
-    const { granted, coords } = await LocationService.getCurrentPosition();
+    const { granted, coords, reason } = await LocationService.getCurrentPosition();
     if (!granted || !coords) {
-      setNearest({ church: null, loading: false, error: 'Puxa, permita o acesso à localização para descobrir a igreja mais próxima de você.' });
+      setNearest({ church: null, loading: false, error: LOCATION_MESSAGES[reason] || LOCATION_MESSAGES.denied });
       return;
     }
     try {
@@ -62,7 +62,7 @@ export default function HomeScreen({ navigation }) {
   const remindNews = async (item) => {
     const ok = await scheduleReminder({ title: 'Lembrete de Leitura 📖', body: item.title, seconds: 10, data: { url: item.link } });
     if (ok) toast.success('Lembrete configurado para daqui a 10 segundos!');
-    else toast.error('Permissão de notificação negada.');
+    else toast.error('Puxa, sem permissão de notificação não conseguimos lembrar você.');
   };
 
   const go = (tab) => () => navigation.navigate(tab);

@@ -11,7 +11,7 @@ export const emailDiocese = (toast) => openExternalUrl(`mailto:${DIOCESE_EMAIL}`
 const reminderAction = (toast, { title, body, success, kind = 'success' }) => async () => {
   const ok = await scheduleReminder({ title, body, seconds: 5 });
   if (ok) toast[kind](success);
-  else toast.error('Permissão para notificações negada.');
+  else toast.error('Puxa, sem permissão de notificação não conseguimos lembrar você.');
 };
 
 export function buildQuickActions({ navigation, toast }) {

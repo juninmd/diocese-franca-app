@@ -10,7 +10,7 @@ export function useChurchActions(church) {
   const remind = async (reminder, successMessage) => {
     const scheduled = await scheduleReminder(reminder);
     if (scheduled) toast.success(successMessage);
-    else toast.error('Permissão de notificação negada.');
+    else toast.error('Puxa, sem permissão de notificação não conseguimos lembrar você.');
   };
 
   return {
