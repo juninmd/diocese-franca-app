@@ -53,6 +53,13 @@ describe('geocode por endereço', () => {
     const { churches } = buildCatalog([p(1, 'Rua A, 1'), p(2, 'Rua nova')], { 'Franca|SP': [-20.5, -47.4] }, null, [], new Map(), new Map(), addr);
     expect(churches.map((c) => [c.latitude, c.longitude, c.coordinatesPrecision])).toEqual([[-20.53, -47.39, 'address'], [-20.5, -47.4, 'city']]);
   });
+
+  it('coordenada fixada à mão (manual) vale mesmo com endereço diferente e respeita a precisão', () => {
+    const p = { sourceId: 3, name: 'P3', city: 'Franca', state: 'SP', address: 'Rua X, 10', clergy: [], masses: [] } as unknown as ParsedParish;
+    const addr = { 3: { address: 'Rua X', latitude: -20.51, longitude: -47.42, manual: true, precision: 'street' as const } };
+    const { churches } = buildCatalog([p], { 'Franca|SP': [-20.5, -47.4] }, null, [], new Map(), new Map(), addr);
+    expect([churches[0].latitude, churches[0].longitude, churches[0].coordinatesPrecision]).toEqual([-20.51, -47.42, 'street']);
+  });
 });
 
 describe('bispo', () => {

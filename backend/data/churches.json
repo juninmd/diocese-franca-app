@@ -168,10 +168,10 @@
     ],
     "massNotes": [],
     "forania": "São Joaquim",
-    "latitude": -20.5814993,
-    "longitude": -47.8608238,
+    "latitude": -20.601023,
+    "longitude": -47.873864,
     "coordinatesVerified": false,
-    "coordinatesPrecision": "city"
+    "coordinatesPrecision": "address"
   },
   {
     "id": 2042,
@@ -587,10 +587,10 @@
       "1ª Sexta de cada mês: 19h"
     ],
     "forania": "Santa Gianna",
-    "latitude": -20.403569,
-    "longitude": -47.420915,
+    "latitude": -20.406359,
+    "longitude": -47.420707,
     "coordinatesVerified": false,
-    "coordinatesPrecision": "city"
+    "coordinatesPrecision": "address"
   },
   {
     "id": 2047,
@@ -882,10 +882,10 @@
       "Missas Votivas conforme avisos semanais."
     ],
     "forania": "Beata Rita Amada de Jesus",
-    "latitude": -20.1933264,
-    "longitude": -47.7097165,
+    "latitude": -20.191923,
+    "longitude": -47.709081,
     "coordinatesVerified": false,
-    "coordinatesPrecision": "city"
+    "coordinatesPrecision": "address"
   },
   {
     "id": 2230,
@@ -940,10 +940,10 @@
       "Todo dia 13 de cada mês: 19h30 (suscetível a mudança)"
     ],
     "forania": "Santa Gianna",
-    "latitude": -20.5381768,
-    "longitude": -47.4009795,
+    "latitude": -20.513112,
+    "longitude": -47.426087,
     "coordinatesVerified": false,
-    "coordinatesPrecision": "city"
+    "coordinatesPrecision": "street"
   },
   {
     "id": 2017,
@@ -1857,10 +1857,10 @@
     ],
     "massNotes": [],
     "forania": "Beata Rita Amada de Jesus",
-    "latitude": -20.0411748,
-    "longitude": -47.7476682,
+    "latitude": -20.038586,
+    "longitude": -47.747686,
     "coordinatesVerified": false,
-    "coordinatesPrecision": "city"
+    "coordinatesPrecision": "address"
   },
   {
     "id": 2061,
@@ -1918,10 +1918,10 @@
     ],
     "massNotes": [],
     "forania": "São Joaquim",
-    "latitude": -20.769612,
-    "longitude": -47.836873,
+    "latitude": -20.772132,
+    "longitude": -47.838437,
     "coordinatesVerified": false,
-    "coordinatesPrecision": "city"
+    "coordinatesPrecision": "address"
   },
   {
     "id": 2062,
@@ -2083,10 +2083,10 @@
     "chapels": [],
     "massNotes": [],
     "forania": "Beata Rita Amada de Jesus",
-    "latitude": -20.0811589,
-    "longitude": -47.4210736,
+    "latitude": -20.081156,
+    "longitude": -47.421073,
     "coordinatesVerified": false,
-    "coordinatesPrecision": "city"
+    "coordinatesPrecision": "address"
   },
   {
     "id": 2067,
@@ -2313,10 +2313,10 @@
       "1ª Sexta do mês 19h00"
     ],
     "forania": "Nossa Senhora Aparecida",
-    "latitude": -20.5381768,
-    "longitude": -47.4009795,
+    "latitude": -20.58876,
+    "longitude": -47.371506,
     "coordinatesVerified": false,
-    "coordinatesPrecision": "city"
+    "coordinatesPrecision": "street"
   },
   {
     "id": 2070,
@@ -2976,10 +2976,10 @@
     ],
     "massNotes": [],
     "forania": "São Joaquim",
-    "latitude": -20.4290496,
-    "longitude": -47.8250067,
+    "latitude": -20.42836,
+    "longitude": -47.824717,
     "coordinatesVerified": false,
-    "coordinatesPrecision": "city"
+    "coordinatesPrecision": "address"
   },
   {
     "id": 2079,

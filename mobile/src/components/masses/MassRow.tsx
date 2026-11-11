@@ -16,6 +16,8 @@ interface MassRowProps {
 
 export function MassRow({ item, isNext, past, reminderSet, onOpenChurch, onRemind }: MassRowProps) {
   const church = item.church?.name;
+  // Missa de capela: mostra a capela e, embaixo, a paróquia a que pertence.
+  const place = item.chapel ? item.chapel.name : church;
   return (
     <View style={[styles.row, isNext && styles.rowNext, past && styles.past]}>
       <TouchableOpacity
@@ -23,19 +25,19 @@ export function MassRow({ item, isNext, past, reminderSet, onOpenChurch, onRemin
         style={styles.main}
         disabled={!item.church}
         accessibilityRole="button"
-        accessibilityLabel={`Missa às ${item.time}${church ? `, ${church}` : ''}${isNext ? ', próxima' : ''}`}
+        accessibilityLabel={`Missa às ${item.time}${place ? `, ${place}` : ''}${item.chapel && church ? ` (${church})` : ''}${isNext ? ', próxima' : ''}`}
         onPress={() => { if (item.church) onOpenChurch(item.church.id); }}
       >
         <Text numberOfLines={1} style={[styles.time, isNext && { color: colors.primary }]}>{item.time}</Text>
         <View style={styles.info}>
-          {church ? <Text variant="label" style={styles.church}>{church}</Text> : null}
-          <Text variant="caption">{item.type}{isNext ? ' · próxima' : ''}</Text>
+          {place ? <Text variant="label" style={styles.church}>{place}</Text> : null}
+          <Text variant="caption">{item.chapel && church ? `${church} · ` : ''}{item.type}{isNext ? ' · próxima' : ''}</Text>
         </View>
       </TouchableOpacity>
       <IconButton
         icon={reminderSet ? 'notifications' : 'notifications-outline'}
         active={reminderSet}
-        label={`Lembrar das ${item.time}${church ? ' · ' + church : ''}`}
+        label={`Lembrar das ${item.time}${place ? ' · ' + place : ''}`}
         onPress={() => onRemind(item)}
       />
     </View>

@@ -51,7 +51,7 @@ export default function MassesScreen({ navigation, route }: RootTabScreenProps<'
       if (!when) return;
       const ok = await scheduleReminder({
         title: 'Lembrete de Missa',
-        body: `Missa às ${item.time}${item.church ? ' na ' + item.church.name : ''}`,
+        body: `Missa às ${item.time}${item.chapel ? ' na ' + item.chapel.name : item.church ? ' na ' + item.church.name : ''}`,
         seconds: when.seconds,
         data: { massId: item.id },
       });

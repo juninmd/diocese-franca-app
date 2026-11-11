@@ -10,9 +10,15 @@ const withChurch = (mass: Mass, churchesById: Map<number, Church>) => {
   return { ...mass, church: church ? { id: church.id, name: church.name, address: church.address } : null };
 };
 
+// Matriz + capelas por padrão; `?chapels=false` devolve só as missas da matriz.
+const listFor = (req: express.Request): Mass[] => {
+  const { masses, allMasses } = getCatalog();
+  return String(req.query.chapels).toLowerCase() === 'false' ? masses : allMasses;
+};
+
 router.get('/', (req, res) => {
-  const { masses, churchesById } = getCatalog();
-  const data = masses.map((mass) => withChurch(mass, churchesById));
+  const { churchesById } = getCatalog();
+  const data = listFor(req).map((mass) => withChurch(mass, churchesById));
   res.json({ success: true, count: data.length, data });
 });
 
@@ -41,8 +47,8 @@ router.get('/by-church/:churchId', validateId('churchId'), (req, res) => {
 
 router.get('/by-day/:day', validateDay, (req, res) => {
   const canonicalDay = req.canonicalDay || String(req.params.day).toLowerCase();
-  const { masses, churchesById } = getCatalog();
-  const data = masses
+  const { churchesById } = getCatalog();
+  const data = listFor(req)
     .filter((m) => (m.dayOfWeek || '').toLowerCase() === canonicalDay.toLowerCase())
     .map((mass) => withChurch(mass, churchesById));
 

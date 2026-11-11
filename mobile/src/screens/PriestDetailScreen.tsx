@@ -101,7 +101,7 @@ export default function PriestDetailScreen({ route, navigation }: PriestsStackSc
               last
               icon="time-outline"
               label="Lembrete Confissão"
-              value="Configurar alerta (5s)"
+              value="Configurar alerta (9h)"
               trailing="notifications-outline"
               onPress={handleConfessionReminder}
             />
