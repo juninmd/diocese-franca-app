@@ -47,10 +47,10 @@ jobs:
           path: mobile/android/app/build/outputs/apk/release/app-release.apk
           retention-days: 30
       - name: Publicar APK com link direto (Release)
-        if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+        if: github.event_name != 'pull_request'
         env:
           GH_TOKEN: ${{ github.token }}
-          TAG: ${{ github.event_name == 'pull_request' && 'apk-preview' || 'apk-latest' }}
+          TAG: apk-latest
         run: |
           cp android/app/build/outputs/apk/release/app-release.apk diocese-franca.apk
           if ! gh release view "$TAG" >/dev/null 2>&1; then
