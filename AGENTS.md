@@ -3,15 +3,16 @@
 App da Diocese de Franca: API REST (`backend/`) + app Expo/React Native com build web (`mobile/`). Dados raspados de https://diocesefranca.org.br/.
 
 ## Stack
-- Backend: Node.js, Express 5, Axios, Cheerio, html-entities, Jest + Supertest. CommonJS. pnpm.
-- Mobile: Expo SDK 54, React Native, React Navigation 7, expo-notifications, expo-location, Playwright (E2E). pnpm.
+- Backend: TypeScript (strict) em `backend/src`, Node.js, Express 5, Axios, Cheerio, html-entities, Jest (ts-jest) + Supertest. Compila para `dist/` (`pnpm build`). pnpm.
+- Mobile: TypeScript (strict, `.ts`/`.tsx`), Expo SDK 54, React Native, React Navigation 7, expo-notifications, expo-location, Playwright (E2E em TS). pnpm.
 
 ## Comandos (a partir da raiz)
-- API: `cd backend && pnpm install && pnpm start` (porta `PORT`, padrao 3000)
+- API: `cd backend && pnpm install && pnpm build && pnpm start` (porta `PORT`, padrao 3000); em dev `pnpm dev` (tsx watch)
+- Typecheck: `cd backend && pnpm typecheck` e `cd mobile && pnpm typecheck` (gate no CI: `typecheck.yml`)
 - Testes backend: `cd backend && pnpm test` (118 testes, 14 suites; inclui integridade dos JSONs em `data/`)
-- Scraper: `cd backend && node scraper.js` e `node scripts/syncDiocese.js` (precisam de rede e reescrevem `backend/data/*.json`). O scraper extrai notícias (data = carimbo `AAAAMMDDHHMMSS_` do nome da imagem), funções clericais expandidas (Bispo, Pároco, Vigário Geral, Vigário Episcopal, Vigário Paroquial, Chanceler, Diretor Espiritual, Pároco Emérito, Padre Auxiliar, Assessor Diocesano, Diácono Colaborador, Colaborador, etc.), redes sociais (Facebook, Instagram, YouTube, WhatsApp), capelas/comunidades/santuários/mosteiros/conventos vinculados, foranias territoriais da diocese, horários de atendimento do clero em qualquer seção da paróquia, expediente de secretaria flexibilizado para 45 paróquias, telefone local com DDD 16 e enriquecimento biográfico dinâmico do clero (com paginação completa até a última página do CMS, matching ortográfico e fonético resiliente, datas de nascimento, ordenação e fotos oficiais para 69 clérigos). Ele nunca sobrescreve um JSON com resultado vazio/muito menor (`utils/fileStore.writeIfSane`) e preserva ids de padres (favoritos do app dependem deles).
+- Scraper: `cd backend && pnpm scrape` e `pnpm sync:diocese` (precisam de rede e reescrevem `backend/data/*.json`). O scraper extrai notícias (data = carimbo `AAAAMMDDHHMMSS_` do nome da imagem), funções clericais expandidas (Bispo, Pároco, Vigário Geral, Vigário Episcopal, Vigário Paroquial, Chanceler, Diretor Espiritual, Pároco Emérito, Padre Auxiliar, Assessor Diocesano, Diácono Colaborador, Colaborador, etc.), redes sociais (Facebook, Instagram, YouTube, WhatsApp), capelas/comunidades/santuários/mosteiros/conventos vinculados, foranias territoriais da diocese, horários de atendimento do clero em qualquer seção da paróquia, expediente de secretaria flexibilizado para 45 paróquias, telefone local com DDD 16 e enriquecimento biográfico dinâmico do clero (com paginação completa até a última página do CMS, matching ortográfico e fonético resiliente, datas de nascimento, ordenação e fotos oficiais para 69 clérigos). Ele nunca sobrescreve um JSON com resultado vazio/muito menor (`utils/fileStore.writeIfSane`) e preserva ids de padres (favoritos do app dependem deles).
 - Mobile: `cd mobile && pnpm install && pnpm start`
-- E2E: `cd mobile && npx expo export -p web && npx playwright test` (precisa da API em :3000 com dados reais; inclui `offline_cache.spec.js`, `foranias_and_clergy.spec.js` e `scraper_enhanced.spec.js`) (serve `dist` na 3001; regrava `mobile/screenshots/`)
+- E2E: `cd mobile && npx expo export -p web && npx playwright test` (precisa da API em :3000 com dados reais; inclui `offline_cache.spec.ts`, `foranias_and_clergy.spec.ts` e `scraper_enhanced.spec.ts`) (serve `dist` na 3001; regrava `mobile/screenshots/`)
 - Lint: nao existe linter configurado.
 
 ## Gates de CI
@@ -19,22 +20,23 @@ App da Diocese de Franca: API REST (`backend/`) + app Expo/React Native com buil
 - `release-drafter.yml` so atualiza o rascunho de release.
 
 ## Convencoes
-- Arquivos curtos (limite informal de ~180 linhas), um modulo por responsabilidade: rotas em `backend/routes`, utilitarios em `backend/utils`.
+- Arquivos curtos (limite informal de ~180 linhas), um modulo por responsabilidade: rotas em `backend/src/routes`, utilitarios em `backend/src/utils`.
+- Tipos de dominio: `backend/src/types.ts` (API) e `mobile/src/types.ts` (app); rotas da navegacao em `mobile/src/navigation/types.ts`. Evite `any`.
 - Complementos manuais de dados ficam em `backend/data/depara.json`; o scraper nao os sobrescreve.
 - Notificacoes: sempre `await Notifications.requestPermissionsAsync()` antes de `scheduleNotificationAsync()`.
 - Estados vazios/erro com tom acolhedor ("Puxa, ..."); `activeOpacity={0.8}` em toques de listas e detalhes.
 - Locators do Playwright com regex (`getByText(/Diocese de Franca/i)`): React Native Web quebra texto multilinha.
-- Tokens de design em `mobile/src/theme/index.js` (UI "Vitral Vivo"): claro/escuro conforme o sistema e `colors.primary` na cor do tempo litúrgico (`theme/liturgy.js`), ambos resolvidos na abertura do app. Texto sobre `primary` usa `colors.onPrimary`; heróis escuros usam `colors.hero*`. Fontes: Fraunces (títulos) + Manrope (interface).
-- Animações: use `FadeIn`/`PressableScale`/`Pop`/`Pulse` de `components/ui/Motion.js` (respeitam "reduzir movimento" via `hooks/useReduceMotion`). Busca universal: `useSearch().open()` (`context/SearchContext.js`).
+- Tokens de design em `mobile/src/theme/index.ts` (UI "Vitral Vivo"): claro/escuro conforme o sistema e `colors.primary` na cor do tempo litúrgico (`theme/liturgy.ts`), ambos resolvidos na abertura do app. Texto sobre `primary` usa `colors.onPrimary`; heróis escuros usam `colors.hero*`. Fontes: Fraunces (títulos) + Manrope (interface).
+- Animações: use `FadeIn`/`PressableScale`/`Pop`/`Pulse` de `components/ui/Motion.tsx` (respeitam "reduzir movimento" via `hooks/useReduceMotion`). Busca universal: `useSearch().open()` (`context/SearchContext.tsx`).
 - APK: workflow `android-apk.yml` (expo prebuild + `gradlew assembleRelease`) publica o artefato e a Release de link fixo: `releases/download/apk-latest/diocese-franca.apk` (master) e `apk-preview` (PRs).
 - Deploy da API: imagem `ghcr.io/juninmd/diocese-franca-api` (`backend/Dockerfile`, workflow `docker.yml`, push só na master); manifestos em `juninmd/app-charts/diocese-franca` (ArgoCD) em `https://diocese-franca.antonio-code.duckdns.org`. O app usa essa URL fora de dev; web em localhost usa `http://localhost:3000`.
-- Dados remotos no app: use `useResource`/hooks de `mobile/src/hooks/useData.js` (cache stale-while-revalidate em `services/cache.js`); não chame `api.js` direto em telas. Próxima missa é calculada no aparelho (`utils/massTime.computeNextMass`); no backend, `utils/nextMass` usa o fuso America/Sao_Paulo.
-- Backend: rotas leem o catálogo via `utils/catalog.getCatalog()` (cache por `mtime`); respostas de dados levam `Cache-Control` (`middleware/cache.js`).
+- Dados remotos no app: use `useResource`/hooks de `mobile/src/hooks/useData.ts` (cache stale-while-revalidate em `services/cache.ts`); não chame `api.ts` direto em telas. Próxima missa é calculada no aparelho (`utils/massTime.computeNextMass`); no backend, `utils/nextMass` usa o fuso America/Sao_Paulo.
+- Backend: rotas leem o catálogo via `utils/catalog.getCatalog()` (cache por `mtime`); respostas de dados levam `Cache-Control` (`src/middleware/cache.ts`).
 - Parsers: HTML do site às vezes é colado do Word; `htmlText` trata quebra de linha do código-fonte como espaço. Ao mexer em `massParser`/`parishParser`, valide contra páginas reais (ids 2014–2265) além dos fixtures.
 
 ## Nao fazer
 - Nao commitar `.env`; use `.env.example` e so nomes de variaveis.
-- Nao hardcodar outra URL de API fora de `mobile/src/services/api.js` (a variavel `API_BASE_URL` do `.env.example` do mobile ainda nao e lida).
+- Nao hardcodar outra URL de API fora de `mobile/src/services/api.ts` (a variavel `API_BASE_URL` do `.env.example` do mobile ainda nao e lida).
 - Nao editar lockfiles (`pnpm-lock.yaml`) a mao.
 - Nao usar mocks no lugar de dados reais nos testes de integracao/E2E.
 

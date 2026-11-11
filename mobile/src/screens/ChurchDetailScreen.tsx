@@ -1,0 +1,80 @@
+import React from 'react';
+import { View, ScrollView, StyleSheet } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { EmptyState } from '../components/ui';
+import { DetailSkeleton } from '../components/Skeleton';
+import { DetailHero } from '../components/churches/DetailHero';
+import { ChurchIntro } from '../components/churches/ChurchIntro';
+import { NextMassCard } from '../components/churches/NextMassCard';
+import { ActionTiles } from '../components/churches/ActionTiles';
+import { MassSchedule } from '../components/churches/MassSchedule';
+import { ClergyCard } from '../components/churches/ClergyCard';
+import { ChurchNotes } from '../components/churches/ChurchNotes';
+import { ChapelsList } from '../components/churches/ChapelsList';
+import { useChurchDetail } from '../components/churches/useChurchDetail';
+import { useChurchActions } from '../components/churches/useChurchActions';
+import { colors } from '../theme';
+import type { ChurchesStackScreenProps } from '../navigation/types';
+
+export default function ChurchDetailScreen({ route, navigation }: ChurchesStackScreenProps<'ChurchDetail'>) {
+  const insets = useSafeAreaInsets();
+  const { church, loading, error, isFavorite, reload, toggleFavorite } = useChurchDetail(route.params.churchId);
+  const actions = useChurchActions(church);
+
+  let body;
+  if (loading) {
+    body = <DetailSkeleton />;
+  } else if (error || !church) {
+    body = (
+      <EmptyState
+        icon="alert-circle-outline"
+        message={error || 'Puxa, não encontramos a igreja'}
+        actionLabel="Tentar Novamente"
+        onAction={reload}
+      />
+    );
+  } else {
+    const { priest, phone } = church;
+    body = (
+      <>
+        <ChurchIntro church={church} />
+        {church.nextMass ? <NextMassCard nextMass={church.nextMass} onRemind={actions.remindMass} /> : null}
+        <ActionTiles
+          phone={church.phone}
+          onMap={actions.openMap}
+          onCall={() => { if (phone) actions.call(phone); }}
+          onVisit={actions.remindVisit}
+        />
+        {church.masses?.length ? <MassSchedule masses={church.masses} nextMass={church.nextMass} /> : null}
+        <ChurchNotes church={church} />
+        {church.chapels?.length ? <ChapelsList chapels={church.chapels} /> : null}
+        {priest ? (
+          <ClergyCard
+            priest={priest}
+            team={(church.clergy || []).filter((p) => p.id !== priest.id)}
+            onEmail={actions.email}
+            onCall={actions.call}
+          />
+        ) : null}
+      </>
+    );
+  }
+
+  return (
+    <ScrollView style={styles.container} contentContainerStyle={{ paddingBottom: 110 }} showsVerticalScrollIndicator={false}>
+      <DetailHero
+        image={church && church.image}
+        topInset={insets.top}
+        onBack={() => navigation.goBack()}
+        isFavorite={isFavorite}
+        onToggleFavorite={church && !loading ? toggleFavorite : undefined}
+      />
+      <View style={styles.sheet}>{body}</View>
+    </ScrollView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: { flex: 1, backgroundColor: colors.bg },
+  sheet: { marginTop: -34, minHeight: 400, borderTopLeftRadius: 32, borderTopRightRadius: 32, backgroundColor: colors.bg, paddingTop: 24, paddingHorizontal: 20, gap: 20 },
+});

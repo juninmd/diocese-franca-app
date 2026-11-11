@@ -1,0 +1,60 @@
+import React from 'react';
+import { View, TouchableOpacity, StyleSheet } from 'react-native';
+import { Text, Pill, IconButton, Pop } from '../ui';
+import { ChurchPhoto } from './ChurchPhoto';
+import { colors, radius } from '../../theme';
+import { formatNextMass, formatDistance } from '../../utils/massTime';
+import type { ChurchListItem } from '../../types';
+
+// Cartão de igreja da lista: miniatura em arco, nome em serifa, etiquetas de distância e próxima missa.
+interface ChurchCardProps {
+  church: ChurchListItem;
+  isFavorite: boolean;
+  onPress: () => void;
+  onToggleFavorite: () => void;
+  onShare: () => void;
+}
+
+export function ChurchCard({ church, isFavorite, onPress, onToggleFavorite, onShare }: ChurchCardProps) {
+  const distance = formatDistance(church.distanceKm);
+  return (
+    <View style={styles.wrap}>
+      <TouchableOpacity activeOpacity={0.8} accessibilityRole="button" accessibilityLabel={`${church.name}, ${church.city}`} onPress={onPress} style={styles.card}>
+        <ChurchPhoto uri={church.image} style={styles.thumb} />
+        <View style={styles.body}>
+          <View style={styles.top}>
+            <Text variant="overline" numberOfLines={1} style={styles.city}>{church.city}/{church.state}</Text>
+            <Text variant="heading" numberOfLines={3}>{church.name}</Text>
+            <Text variant="caption" numberOfLines={2}>{church.address}</Text>
+          </View>
+          <View style={styles.pills}>
+            {distance ? <Pill tone="sand" label={distance} /> : null}
+            {church.nextMass ? <Pill label={`Próxima missa: ${formatNextMass(church.nextMass)}`} /> : null}
+          </View>
+        </View>
+      </TouchableOpacity>
+      <View style={styles.actions}>
+        <Pop trigger={isFavorite}>
+          <IconButton
+            icon={isFavorite ? 'heart' : 'heart-outline'}
+            label={`${isFavorite ? 'Remover dos favoritos' : 'Favoritar'}: ${church.name}`}
+            onPress={onToggleFavorite}
+            active={isFavorite}
+          />
+        </Pop>
+        <IconButton icon="share-outline" label={`Compartilhar: ${church.name}`} onPress={onShare} />
+      </View>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  wrap: { position: 'relative' },
+  card: { flexDirection: 'row', gap: 14, padding: 12, borderRadius: 24, backgroundColor: colors.surface, borderWidth: 1, borderColor: colors.line },
+  thumb: { width: 84, minHeight: 108, borderTopLeftRadius: 42, borderTopRightRadius: 42, borderBottomLeftRadius: radius.md, borderBottomRightRadius: radius.md },
+  body: { flex: 1, minWidth: 0, justifyContent: 'space-between', gap: 8 },
+  top: { gap: 4, paddingRight: 52 },
+  city: { color: colors.primary },
+  pills: { flexDirection: 'row', flexWrap: 'wrap', gap: 6 },
+  actions: { position: 'absolute', top: 6, right: 6, gap: 4 },
+});
