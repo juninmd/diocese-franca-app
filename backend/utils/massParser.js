@@ -7,7 +7,13 @@ const TOKENS = new RegExp(`(${DAY_KEYS.join('|')})|\\b(a|ate)\\b|${TIME_SOURCE}`
 const JOINERS = /\ba\b|\bate\b|\be\b|[,&]/g;
 
 const normalize = (text) =>
-  text.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[-–\s]*feira/g, '');
+  text
+    .normalize('NFD')
+    .replace(/[̀-ͯ]/g, '')
+    .toLowerCase()
+    .replace(/[-–\s]*feiras?/g, '')
+    // plural: "Quintas-feiras", "Domingos", "Sábados"
+    .replace(new RegExp(`\\b(${DAY_KEYS.join('|')})s\\b`, 'g'), '$1');
 
 const pad = (n) => String(n).padStart(2, '0');
 

@@ -4,6 +4,7 @@ const { parseParish, SITE } = require('./parishParser');
 const { htmlToText } = require('./htmlText');
 const { readJson, writeJson } = require('./fileStore');
 const { crawlForanias, crawlClergyDirectory } = require('./dioceseEnricher');
+const { addressCoords } = require('./geocode');
 
 const FIRST_ID = 2014;
 const LAST_ID = 2265;
@@ -89,9 +90,12 @@ async function cityCoords(cities, { log = console } = {}) {
 }
 
 // `previousPriests` (priests.json atual) preserva os ids: o app guarda favoritos por id de padre.
-function buildCatalog(parishes, coords, bishop, previousPriests = [], foraniaMap = new Map(), clergyDirectory = new Map()) {
+// `addrCoords` (geocode.addressCoords) tem precedência sobre o centro da cidade.
+function buildCatalog(parishes, coords, bishop, previousPriests = [], foraniaMap = new Map(), clergyDirectory = new Map(), addrCoords = {}) {
   const churches = parishes.map(({ sourceId, clergy, masses, ...p }) => {
-    const [latitude, longitude] = coords[`${p.city}|${p.state}`] || [null, null];
+    const precise = addrCoords[String(sourceId)];
+    const usePrecise = precise && (precise.address === p.address || precise.manual);
+    const [latitude, longitude] = usePrecise ? [precise.latitude, precise.longitude] : coords[`${p.city}|${p.state}`] || [null, null];
     const forania = foraniaMap.get(sourceId) || null;
     return {
       id: sourceId,
@@ -100,7 +104,7 @@ function buildCatalog(parishes, coords, bishop, previousPriests = [], foraniaMap
       latitude,
       longitude,
       coordinatesVerified: false,
-      coordinatesPrecision: 'city',
+      coordinatesPrecision: usePrecise ? 'address' : 'city',
     };
   });
 
@@ -213,7 +217,8 @@ async function scrapeCatalogData({ log = console, ...crawlOptions } = {}) {
   ]);
   if (!parishes.length) return { churches: [], masses: [], priests: [] };
   const coords = await cityCoords([...new Set(parishes.map((p) => `${p.city}|${p.state}`))], { log });
-  return buildCatalog(parishes, coords, bishop, readJson('priests.json', []), foraniaMapResult || new Map(), clergyDirResult || new Map());
+  const addrCoords = await addressCoords(parishes.map((p) => ({ ...p, id: p.sourceId })), coords, { log });
+  return buildCatalog(parishes, coords, bishop, readJson('priests.json', []), foraniaMapResult || new Map(), clergyDirResult || new Map(), addrCoords);
 }
 
 module.exports = { scrapeCatalogData, buildCatalog, crawlParishes, parseBishop, cityCoords, normalizeName, pageUrl, FIRST_ID, LAST_ID };
