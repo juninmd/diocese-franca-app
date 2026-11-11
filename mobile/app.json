@@ -30,7 +30,16 @@
       "edgeToEdgeEnabled": true,
       "permissions": [
         "ACCESS_COARSE_LOCATION",
-        "ACCESS_FINE_LOCATION"
+        "ACCESS_FINE_LOCATION",
+        "POST_NOTIFICATIONS",
+        "RECEIVE_BOOT_COMPLETED",
+        "VIBRATE"
+      ],
+      "blockedPermissions": [
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.SYSTEM_ALERT_WINDOW",
+        "android.permission.RECORD_AUDIO"
       ]
     },
     "web": {
@@ -41,14 +50,16 @@
       [
         "expo-location",
         {
-          "locationWhenInUsePermission": "Usamos sua localização para mostrar as igrejas mais próximas de você e os horários de missa mais próximos."
+          "locationWhenInUsePermission": "Usamos sua localização para mostrar as igrejas mais próximas de você e os horários de missa mais próximos.",
+          "isAndroidBackgroundLocationEnabled": false
         }
       ],
       [
         "expo-notifications",
         {
           "icon": "./assets/icon.png",
-          "color": "#7A1E2C"
+          "color": "#2F6B4F",
+          "defaultChannel": "lembretes"
         }
       ],
       "expo-font"

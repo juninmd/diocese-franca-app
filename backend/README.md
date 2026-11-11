@@ -56,21 +56,22 @@ A API utiliza `express-rate-limit` para prevenir abuso e ataques de negação de
 `news.json`, `churches.json`, `priests.json` e `masses.json` são gerados a partir de diocesefranca.org.br:
 
 ```bash
-node scraper.js               # notícias + catálogo (requer rede)
-node scripts/syncDiocese.js   # só o catálogo (paróquias, clero, missas e data/cityCoords.json)
+pnpm scrape         # notícias + catálogo (requer rede) — src/scraper.ts via tsx
+pnpm sync:diocese   # só o catálogo (paróquias, clero, missas e data/cityCoords.json)
+# após `pnpm build`: node dist/scraper.js / node dist/scripts/syncDiocese.js
 ```
 
-- `utils/newsParser.js`: notícias da home. A data vem do carimbo `AAAAMMDDHHMMSS_` no nome da imagem
+- `src/utils/newsParser.ts`: notícias da home. A data vem do carimbo `AAAAMMDDHHMMSS_` no nome da imagem
   (a home não exibe data); sem carimbo válido o item fica sem data em vez de usar "hoje".
-- `utils/parishParser.js` / `utils/massParser.js`: extraem paróquia, clero e horários semanais
+- `src/utils/parishParser.ts` / `src/utils/massParser.ts`: extraem paróquia, clero e horários semanais
   (horários irregulares viram `massNotes`). O HTML das paróquias às vezes é colado do Word (quebras de
-  linha dentro de rótulos, "LOCAL E CONTATO" em maiúsculas): `utils/htmlText.js` trata quebras do código-fonte
+  linha dentro de rótulos, "LOCAL E CONTATO" em maiúsculas): `src/utils/htmlText.ts` trata quebras do código-fonte
   como espaço e só `<br>`/blocos quebram linha.
-- `utils/catalogBuilder.js`: monta churches/priests/masses. Um padre em várias paróquias é um único
+- `src/utils/catalogBuilder.ts`: monta churches/priests/masses. Um padre em várias paróquias é um único
   registro (`churchIds`); ids de padres são preservados entre execuções (o app guarda favoritos por id).
-- `utils/http.js`: GET com retries/backoff. `utils/fileStore.js`: escrita atômica e `writeIfSane` — o scraper
+- `src/utils/http.ts`: GET com retries/backoff. `src/utils/fileStore.ts`: escrita atômica e `writeIfSane` — o scraper
   **não** sobrescreve um JSON com lista vazia ou que encolheu mais de 40% (site fora do ar / layout alterado).
-- `data/depara.json`: ajustes manuais por id, mesclados por `utils/applyDepara.js` (via `utils/catalog.js`).
+- `data/depara.json`: ajustes manuais por id, mesclados por `src/utils/applyDepara.ts` (via `src/utils/catalog.ts`).
 
 ## Cache
 
@@ -88,8 +89,14 @@ pnpm install
 
 ## Executar o servidor
 
+O código é TypeScript (`src/`, tipos de domínio em `src/types.ts`) compilado para `dist/`.
+
 ```bash
-pnpm start
+pnpm build       # tsc: src/ -> dist/
+pnpm start       # node dist/index.js
+pnpm dev         # tsx watch src/index.ts (sem build)
+pnpm typecheck   # tsc --noEmit no código e nos testes
+pnpm test        # Jest + ts-jest (tests/*.test.ts)
 ```
 
 O servidor estará disponível em `http://localhost:3000`
@@ -186,7 +193,7 @@ curl "http://localhost:3000/api/churches/nearby?lat=-20.5396&lng=-47.4014"
 
 ## Tecnologias
 
-- Node.js
+- Node.js + TypeScript
 - Express
 - CORS
 - Helmet
