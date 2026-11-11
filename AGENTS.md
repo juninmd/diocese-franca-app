@@ -26,14 +26,15 @@ App da Diocese de Franca: API REST (`backend/`) + app Expo/React Native com buil
 - Locators do Playwright com regex (`getByText(/Diocese de Franca/i)`): React Native Web quebra texto multilinha.
 - Tokens de design em `mobile/src/theme/index.js` (UI "Vitral Vivo"): claro/escuro conforme o sistema e `colors.primary` na cor do tempo litúrgico (`theme/liturgy.js`), ambos resolvidos na abertura do app. Texto sobre `primary` usa `colors.onPrimary`; heróis escuros usam `colors.hero*`. Fontes: Fraunces (títulos) + Manrope (interface).
 - Animações: use `FadeIn`/`PressableScale`/`Pop`/`Pulse` de `components/ui/Motion.js` (respeitam "reduzir movimento" via `hooks/useReduceMotion`). Busca universal: `useSearch().open()` (`context/SearchContext.js`).
-- APK: workflow `android-apk.yml` (expo prebuild + `gradlew assembleRelease`) publica o artefato `diocese-franca-apk`.
+- APK: workflow `android-apk.yml` (expo prebuild + `gradlew assembleRelease`) publica o artefato e a Release de link fixo: `releases/download/apk-latest/diocese-franca.apk` (master) e `apk-preview` (PRs).
+- Deploy da API: imagem `ghcr.io/juninmd/diocese-franca-api` (`backend/Dockerfile`, workflow `docker.yml`, push só na master); manifestos em `juninmd/app-charts/diocese-franca` (ArgoCD) em `https://diocese-franca.antonio-code.duckdns.org`. O app usa essa URL fora de dev; web em localhost usa `http://localhost:3000`.
 - Dados remotos no app: use `useResource`/hooks de `mobile/src/hooks/useData.js` (cache stale-while-revalidate em `services/cache.js`); não chame `api.js` direto em telas. Próxima missa é calculada no aparelho (`utils/massTime.computeNextMass`); no backend, `utils/nextMass` usa o fuso America/Sao_Paulo.
 - Backend: rotas leem o catálogo via `utils/catalog.getCatalog()` (cache por `mtime`); respostas de dados levam `Cache-Control` (`middleware/cache.js`).
 - Parsers: HTML do site às vezes é colado do Word; `htmlText` trata quebra de linha do código-fonte como espaço. Ao mexer em `massParser`/`parishParser`, valide contra páginas reais (ids 2014–2265) além dos fixtures.
 
 ## Nao fazer
 - Nao commitar `.env`; use `.env.example` e so nomes de variaveis.
-- Nao hardcodar outra URL de API sem atualizar `mobile/src/services/api.js` (a variavel `API_BASE_URL` do `.env.example` do mobile ainda nao e lida).
+- Nao hardcodar outra URL de API fora de `mobile/src/services/api.js` (a variavel `API_BASE_URL` do `.env.example` do mobile ainda nao e lida).
 - Nao editar lockfiles (`pnpm-lock.yaml`) a mao.
 - Nao usar mocks no lugar de dados reais nos testes de integracao/E2E.
 

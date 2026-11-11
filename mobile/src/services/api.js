@@ -1,10 +1,11 @@
 import axios from 'axios';
 import { setOnline } from './connection';
 
-// Update this URL to your backend API URL
-// For development, you can use: http://localhost:3000
-// For production, use your deployed backend URL
-const API_BASE_URL = 'http://localhost:3000';
+// Produção: API publicada no cluster (manifestos em juninmd/app-charts/diocese-franca).
+// Na web servida em localhost (dev/E2E) usa a API local na porta 3000.
+const PROD_API = 'https://diocese-franca.antonio-code.duckdns.org';
+const isLocalWeb = typeof window !== 'undefined' && window.location && /^(localhost|127\.0\.0\.1)$/.test(window.location.hostname || '');
+const API_BASE_URL = isLocalWeb || (typeof __DEV__ !== 'undefined' && __DEV__) ? 'http://localhost:3000' : PROD_API;
 
 export const api = axios.create({
   baseURL: API_BASE_URL,

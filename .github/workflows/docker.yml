@@ -1,0 +1,22 @@
+name: Build and Push Docker Image
+
+on:
+  push:
+    branches: [master]
+    paths: ['backend/**', '.github/workflows/docker.yml']
+  pull_request:
+    paths: ['backend/**', '.github/workflows/docker.yml']
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions: { contents: read, packages: write }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: juninmd/base-actions/docker-build-push@main
+        with:
+          image-name: juninmd/diocese-franca-api
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          context: backend
+          push: ${{ github.event_name != 'pull_request' }}
