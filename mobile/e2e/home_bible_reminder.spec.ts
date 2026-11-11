@@ -17,8 +17,7 @@ test.describe('Home Screen Bible Reminder', () => {
     const bibleButton = page.locator('div').filter({ hasText: /Lembrete.*Bíblia/is }).first();
     await bibleButton.click({ force: true });
 
-    // Wait a bit for the async permission check to finish
-    await page.waitForTimeout(1000);
-
+    // Agenda para o próximo 07:00 real (relógio de Franca)
+    await expect(page.getByText(/Lembrete bíblico configurado para (hoje|amanhã) às 07:00/i).first()).toBeVisible({ timeout: 10000 });
   });
 });

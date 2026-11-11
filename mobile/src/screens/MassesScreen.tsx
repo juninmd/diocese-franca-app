@@ -3,6 +3,7 @@ import { View, ScrollView, RefreshControl, StyleSheet } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useMasses } from '../hooks/useData';
 import { scheduleReminder } from '../services/ReminderService';
+import { nextReminder } from '../utils/reminderTime';
 import { useToast } from '../context/ToastContext';
 import { ListSkeleton } from '../components/Skeleton';
 import { Text, EmptyState, FadeIn, IconButton } from '../components/ui';
@@ -45,15 +46,18 @@ export default function MassesScreen({ navigation, route }: RootTabScreenProps<'
 
   const remind = async (item: MassWithChurch) => {
     try {
+      // Avisa 30 min antes da próxima ocorrência desta missa (relógio de Franca).
+      const when = nextReminder([item], 30);
+      if (!when) return;
       const ok = await scheduleReminder({
         title: 'Lembrete de Missa',
         body: `Missa às ${item.time}${item.church ? ' na ' + item.church.name : ''}`,
-        seconds: 5,
+        seconds: when.seconds,
         data: { massId: item.id },
       });
       if (!ok) return void toast.error('Puxa, sem permissão de notificação não conseguimos lembrar você.');
       setReminders((r) => ({ ...r, [item.id]: true }));
-      toast.success('Lembrete configurado para daqui a 5 segundos!');
+      toast.success(`Vamos avisar ${when.label} (30 min antes da missa).`);
     } catch (err) {
       console.error(err);
       toast.error('Não foi possível agendar o lembrete.');

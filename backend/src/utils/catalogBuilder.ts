@@ -60,12 +60,13 @@ export async function crawlParishes({ firstId = FIRST_ID, lastId = LAST_ID, log 
   return parishes.sort((a, b) => a.name.localeCompare(b.name, 'pt-BR'));
 }
 
-export async function parseBishop(log: Logger = console): Promise<Bishop | null> {
-  const html = await fetchHtml(pageUrl(BISHOP_PAGE_ID), { log });
+/** Página "Bispo atual" -> Bishop (datas lidas da página, nunca fixas no código). */
+export function parseBishopPage(html: string): Bishop | null {
   const text = htmlToText(html);
   const name = (text.match(/Bispo atual\s*-\s*(Dom [^\n]+)/) || [])[1];
   if (!name) return null;
   const born = (text.match(/Nascido em ([^-\n]+)- (\d{2}\/\d{2}\/\d{4})/) || []).slice(1);
+  const ordained = (text.match(/Ordenado Presb[ií]tero:\s*(\d{2}\/\d{2}\/\d{4})/i) || [])[1];
   const seat = (text.match(/Nomeado Bispo de Franca[^\n]*\n\s*Posse:\s*(\d{2}\/\d{2}\/\d{4})/) || [])[1];
   const phone = (text.match(/Fone:\s*(\(\d{2}\)\s?\d{4}-\d{4})/) || [])[1];
   const ordinal = (text.match(/(\d+)º Bispo Diocesano/) || [])[1];
@@ -76,7 +77,11 @@ export async function parseBishop(log: Logger = console): Promise<Bishop | null>
     born.length ? `nascido em ${born[0].trim()} (${born[1]})` : '',
     seat ? `com posse em ${seat}` : '',
   ].filter(Boolean).join(', ') + '.';
-  return { name: name.trim(), phone: phone || null, bio, image };
+  return { name: name.trim(), phone: phone || null, bio, image, birthDate: born[1] || null, ordinationDate: ordained || null };
+}
+
+export async function parseBishop(log: Logger = console): Promise<Bishop | null> {
+  return parseBishopPage(await fetchHtml(pageUrl(BISHOP_PAGE_ID), { log }));
 }
 
 // Coordenadas por cidade (Photon/OpenStreetMap), em cache no repositório. Precisão: cidade.
@@ -155,8 +160,8 @@ export function buildCatalog(
       phone: bishop.phone,
       bio: bishop.bio,
       image: bishop.image || null,
-      birthDate: '09/04/1957',
-      ordinationDate: '15/12/2013',
+      birthDate: bishop.birthDate || null,
+      ordinationDate: bishop.ordinationDate || null,
       churchIds: [SEAT_ID],
     });
   }

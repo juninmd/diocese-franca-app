@@ -5,6 +5,7 @@ import { getNearbyChurches } from '../services/api';
 import { useChurches, usePriests, useMasses, useNews } from '../hooks/useData';
 import { LocationService, LOCATION_MESSAGES } from '../services/LocationService';
 import { scheduleReminder } from '../services/ReminderService';
+import { everyDay, nextReminder } from '../utils/reminderTime';
 import { useToast } from '../context/ToastContext';
 import { HomeHero } from '../components/home/HomeHero';
 import { FadeIn } from '../components/ui';
@@ -63,8 +64,10 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Home'>) {
   };
 
   const remindNews = async (item: NewsItem) => {
-    const ok = await scheduleReminder({ title: 'Lembrete de Leitura 📖', body: item.title, seconds: 10, data: { url: item.link } });
-    if (ok) toast.success('Lembrete configurado para daqui a 10 segundos!');
+    // Leitura com calma, à noite (20h no relógio de Franca).
+    const when = nextReminder(everyDay('20:00'))!;
+    const ok = await scheduleReminder({ title: 'Lembrete de Leitura 📖', body: item.title, seconds: when.seconds, data: { url: item.link } });
+    if (ok) toast.success(`Lembrete de leitura configurado para ${when.label}!`);
     else toast.error('Puxa, sem permissão de notificação não conseguimos lembrar você.');
   };
 

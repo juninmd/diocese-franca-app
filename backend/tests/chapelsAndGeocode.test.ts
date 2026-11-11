@@ -1,7 +1,7 @@
 import { parseChapels } from '../src/utils/chapelParser';
 import { parseMassLines } from '../src/utils/massParser';
 import { cleanAddress, queriesFor } from '../src/utils/geocode';
-import { buildCatalog } from '../src/utils/catalogBuilder';
+import { buildCatalog, parseBishopPage } from '../src/utils/catalogBuilder';
 import type { ParsedParish } from '../src/types';
 
 describe('capelas com horários próprios', () => {
@@ -30,6 +30,10 @@ describe('capelas com horários próprios', () => {
     ]);
   });
 
+  it('tolera "Quata" (erro de digitação do site) como quarta-feira', () => {
+    expect(parseMassLines(['Quata e quinta-feira : 19h30']).masses.map((m) => m.dayOfWeek)).toEqual(['Quarta-feira', 'Quinta-feira']);
+  });
+
   it('aceita dias no plural', () => {
     expect(parseMassLines(['Domingos e Quartas-feiras: 19h']).masses.map((m) => m.dayOfWeek)).toEqual(['Domingo', 'Quarta-feira']);
   });
@@ -48,5 +52,13 @@ describe('geocode por endereço', () => {
     const addr = { 1: { address: 'Rua A, 1', latitude: -20.53, longitude: -47.39 }, 2: { address: 'Rua antiga', latitude: 1, longitude: 1 } };
     const { churches } = buildCatalog([p(1, 'Rua A, 1'), p(2, 'Rua nova')], { 'Franca|SP': [-20.5, -47.4] }, null, [], new Map(), new Map(), addr);
     expect(churches.map((c) => [c.latitude, c.longitude, c.coordinatesPrecision])).toEqual([[-20.53, -47.39, 'address'], [-20.5, -47.4, 'city']]);
+  });
+});
+
+describe('bispo', () => {
+  it('lê nascimento e ordenação presbiteral da página (não a data de posse)', () => {
+    const html = `<p>Bispo atual - Dom Fulano de Tal</p><p>4º Bispo Diocesano</p><p>Nascido em Adamantina/SP - 09/04/1957</p>
+      <p>Ordenado Presbítero: 29/06/1986</p><p>Ordenado Bispo: 04/02/2006</p><p>Nomeado Bispo de Franca/SP - 23/10/2013</p><p>Posse: 15/12/2013</p><p>Fone: (16) 3701-0222</p>`;
+    expect(parseBishopPage(html)).toMatchObject({ name: 'Dom Fulano de Tal', birthDate: '09/04/1957', ordinationDate: '29/06/1986', phone: '(16) 3701-0222' });
   });
 });

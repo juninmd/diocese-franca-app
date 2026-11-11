@@ -6,9 +6,8 @@ test('ui interaction uses toast and triggers local notification schedule', async
   await expect(page.getByText(/Diocese de Franca/i).first()).toBeVisible({ timeout: 10000 });
   await page.waitForTimeout(1000);
 
-  // React Native Web does not render pure text properly with newlines in text locators easily.
-  // We will locate the 'div' element that has the text 'Lembrete', 'Teste', '(5s)' by using getByText with regex.
-  await page.getByText(/Lembrete\s*Teste\s*\(5s\)/i).first().click({ force: true });
+  // Lembrete do Ângelus: agenda para o próximo 12:00/18:00 real (não mais um teste de 5s).
+  await page.getByText(/Lembrete\s*Ângelus/i).first().click({ force: true });
 
   // Wait a bit for the async permission check to finish
   await page.waitForTimeout(1000);
@@ -17,12 +16,8 @@ test('ui interaction uses toast and triggers local notification schedule', async
   await page.locator('div:text-is("Padres")').first().click({ force: true });
   await page.waitForTimeout(2000);
 
-  // Click the notification bell on the first mass item.
-  // There could be multiple elements or it might be empty if the API is down, so we check if there are mass cards first.
-  const notificationButton = page.getByText(/Lembrete configurado para daqui a 5 segundos!/i);
-  // It's possible the list is empty during playwright tests depending on seed.
-  // The test just asserts that we don't crash when interacting with UI.
-  // The fact that we navigated without error is good.
+  // Navegou sem erro: os botões de "Lembrete Teste (5s)" não existem mais.
+  await expect(page.getByText(/Lembrete\s*Teste/i)).toHaveCount(0);
 });
 
 test('priest detail local notification scheduling works', async ({ page, context }) => {
@@ -46,6 +41,6 @@ test('priest detail local notification scheduling works', async ({ page, context
       await lembreteButton.evaluate((el) => el.scrollIntoView({ block: 'center' }));
       await lembreteButton.click({ force: true });
       await page.waitForTimeout(1000);
-      await expect(page.getByText(/Lembrete configurado para daqui a 5 segundos!/i).first()).toBeVisible();
+      await expect(page.getByText(/Lembrete configurado para (hoje|amanhã) às 09:00/i).first()).toBeVisible();
   }
 });

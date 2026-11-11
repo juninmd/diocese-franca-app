@@ -22,8 +22,8 @@ describe('openExternalUrl helper', () => {
     it('permite esquemas válidos (https, http, tel, mailto)', () => {
       expect(isAllowedScheme('https://www.diocesefranca.org.br')).toBe(true);
       expect(isAllowedScheme('http://www.diocesefranca.org.br')).toBe(true);
-      expect(isAllowedScheme('tel:1637111400')).toBe(true);
-      expect(isAllowedScheme('mailto:contato@diocesefranca.org.br')).toBe(true);
+      expect(isAllowedScheme('tel:1637212294')).toBe(true);
+      expect(isAllowedScheme('mailto:curia@diocesefranca.org.br')).toBe(true);
     });
 
     it('recusa esquemas perigosos (javascript, data, intent, file)', () => {

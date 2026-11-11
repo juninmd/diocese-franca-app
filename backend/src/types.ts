@@ -150,6 +150,10 @@ export interface Bishop {
   phone: string | null;
   bio: string;
   image?: string | null;
+  /** dd/mm/aaaa, da página "Bispo atual" */
+  birthDate?: string | null;
+  /** ordenação presbiteral (dd/mm/aaaa) */
+  ordinationDate?: string | null;
 }
 
 /** Entrada do diretório de clero (páginas de padres e diáconos do site). */

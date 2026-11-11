@@ -4,6 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { Text } from '../ui';
 import { colors, radius } from '../../theme';
 import type { IconName } from '../../types';
+import { DIOCESE_CONTACT } from './quickActionItems';
 
 const Row = ({ icon, label, value, onPress }: { icon: IconName; label: string; value: string; onPress?: () => void }) => (
   <TouchableOpacity activeOpacity={0.8} style={styles.row} onPress={onPress} disabled={!onPress}>
@@ -19,10 +20,10 @@ export function ContactCard({ onCall, onEmail }: { onCall: () => void; onEmail: 
   return (
     <View style={styles.card}>
       <Text variant="title">Contato da Diocese</Text>
-      <Row icon="call-outline" label="Telefone" value="(16) 3711-1400" onPress={onCall} />
-      <Row icon="mail-outline" label="Email" value="contato@diocesefranca.org.br" onPress={onEmail} />
-      <Row icon="location-outline" label="Endereço" value="Praça Nossa Senhora da Conceição, 85 - Centro" />
-      <Text variant="caption" style={styles.footer}>Franca - SP, 14400-670 · Paróquia em Cristo</Text>
+      <Row icon="call-outline" label="Telefone" value={DIOCESE_CONTACT.phone} onPress={onCall} />
+      <Row icon="mail-outline" label="Email" value={DIOCESE_CONTACT.email} onPress={onEmail} />
+      <Row icon="location-outline" label="Endereço" value={DIOCESE_CONTACT.address} />
+      <Text variant="caption" style={styles.footer}>{DIOCESE_CONTACT.cityLine} · Paróquia em Cristo</Text>
     </View>
   );
 }
