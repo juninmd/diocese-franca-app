@@ -132,7 +132,7 @@ export function buildCatalog(
       latitude,
       longitude,
       coordinatesVerified: false,
-      coordinatesPrecision: usePrecise ? 'address' : 'city',
+      coordinatesPrecision: usePrecise ? precise.precision || 'address' : 'city',
     };
   });
 

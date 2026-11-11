@@ -64,7 +64,7 @@ export interface Church extends Omit<ParsedParish, 'sourceId' | 'clergy' | 'mass
   latitude: number | null;
   longitude: number | null;
   coordinatesVerified: boolean;
-  /** 'address' (geocode do endereço da matriz) ou 'city' (centro da cidade) */
+  /** 'address' (endereço da matriz), 'street' (só a rua) ou 'city' (centro da cidade) */
   coordinatesPrecision: string;
 }
 
@@ -90,6 +90,8 @@ export interface Mass {
   dayOfWeek: string;
   time: string;
   type: string;
+  /** presente quando a missa é numa capela/comunidade da paróquia (não na matriz) */
+  chapel?: { name: string; address: string | null };
 }
 
 /** Dia e horário bastam para calcular a próxima missa. */
@@ -134,6 +136,8 @@ export interface Catalog {
   churches: Church[];
   priests: Priest[];
   masses: Mass[];
+  /** missas da matriz (masses.json) + das capelas (churches.json), para /api/masses */
+  allMasses: Mass[];
   churchesById: Map<number, Church>;
   massesByChurch: Map<number, Mass[]>;
 }

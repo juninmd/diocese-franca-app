@@ -46,7 +46,7 @@ function NewsCard({ item, onOpen, onRemind }: NewsCardProps) {
       </TouchableOpacity>
       <TouchableOpacity activeOpacity={0.8} accessibilityRole="button" style={styles.remind} onPress={() => onRemind(item)}>
         <Ionicons name="alarm-outline" size={16} color={colors.primary} />
-        <Text variant="label" style={styles.remindText}>Lembrar de Ler (10s)</Text>
+        <Text variant="label" style={styles.remindText}>Lembrar de ler às 20h</Text>
       </TouchableOpacity>
     </View>
   );

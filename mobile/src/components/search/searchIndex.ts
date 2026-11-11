@@ -46,7 +46,7 @@ export function searchAll({ query, churches = [], priests = [], masses = [] }: S
   if (t) {
     const prefix = `${t[1].padStart(2, '0')}:${t[2] || ''}`;
     masses.filter((m) => m.time?.startsWith(prefix)).slice(0, 12).forEach((m) =>
-      out.push({ key: `m${m.id}`, kind: 'mass', title: `${m.time} · ${byId[m.churchId]?.name || 'Missa'}`, subtitle: `${m.dayOfWeek} · ${m.type}`, id: m.churchId, day: m.dayOfWeek }));
+      out.push({ key: `m${m.id}`, kind: 'mass', title: `${m.time} · ${m.chapel?.name || byId[m.churchId]?.name || 'Missa'}`, subtitle: `${m.dayOfWeek} · ${m.type}`, id: m.churchId, day: m.dayOfWeek }));
   }
   return out.slice(0, limit);
 }

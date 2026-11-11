@@ -60,6 +60,8 @@ export interface Mass {
   dayOfWeek: string;
   time: string;
   type: string;
+  /** missa numa capela/comunidade da paróquia (só em /api/masses e /by-day) */
+  chapel?: { name: string; address: string | null };
 }
 
 /** Item de `/api/masses` e `/api/masses/by-day`: missa com a igreja resumida. */

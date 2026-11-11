@@ -153,6 +153,26 @@ describe('Masses API', () => {
       const mass = res.body.data[0];
       expect(mass).toHaveProperty('church');
     });
+
+    it('includes chapel masses (with chapel name) unless ?chapels=false', async () => {
+      const all = await request(app).get('/api/masses');
+      const onlyMain = await request(app).get('/api/masses?chapels=false');
+      const chapel = all.body.data.filter((m: Mass) => m.chapel);
+      expect(chapel.length).toBeGreaterThan(0);
+      expect(all.body.count).toBe(onlyMain.body.count + chapel.length);
+      expect(onlyMain.body.data.some((m: Mass) => m.chapel)).toBe(false);
+      chapel.forEach((m: Mass & { church: { id: number } | null }) => {
+        expect(m.chapel!.name).toBeTruthy();
+        expect(m.church?.id).toBe(m.churchId);
+        expect(m.id).toBeGreaterThan(100000);
+      });
+      expect(new Set(all.body.data.map((m: Mass) => m.id)).size).toBe(all.body.count);
+    });
+
+    it('by-church keeps only the parish (matriz) masses', async () => {
+      const res = await request(app).get('/api/masses/by-church/2015');
+      expect(res.body.data.some((m: Mass) => m.chapel)).toBe(false);
+    });
   });
 
   describe('GET /api/masses/by-church/:churchId', () => {

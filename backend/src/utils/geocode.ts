@@ -11,6 +11,8 @@ export interface AddressCoord {
   /** fixa a coordenada mesmo que o endereço mude */
   manual?: boolean;
   source?: string;
+  /** 'street' quando só a rua foi localizada (padrão: 'address') */
+  precision?: 'address' | 'street';
 }
 export type AddressCoords = Record<string, AddressCoord>;
 export interface GeocodeTarget {

@@ -9,6 +9,13 @@
     "latitude": -20.5455051,
     "longitude": -47.4118438
   },
+  "2016": {
+    "address": "Praça Nossa Senhora Aparecida, s/n° - João Paulo II",
+    "latitude": -20.601023,
+    "longitude": -47.873864,
+    "manual": true,
+    "source": "OSM: Matriz Nossa Senhora Aparecida"
+  },
   "2017": {
     "address": "Avenida E, 400 - Praça Cristo Rei",
     "latitude": -20.7169348,
@@ -39,6 +46,13 @@
     "latitude": -20.5315124,
     "longitude": -47.3833157
   },
+  "2046": {
+    "address": "Praça Nossa Senhora da Abadia  - s/n - Praça Central",
+    "latitude": -20.406359,
+    "longitude": -47.420707,
+    "manual": true,
+    "source": "OSM: Igreja Matriz Nossa Senhora da Abadia"
+  },
   "2047": {
     "address": "Avenida João Batista Paula Silva, 471 - Recanto Elimar II",
     "latitude": -20.5675795,
@@ -53,6 +67,13 @@
     "address": "Praça Hélvio Nunes da Silva - 193",
     "latitude": -20.3392661,
     "longitude": -47.7816308
+  },
+  "2051": {
+    "address": "Rua Washington Luiz, n°570 - Centro",
+    "latitude": -20.191923,
+    "longitude": -47.709081,
+    "manual": true,
+    "source": "OSM: Igreja Católica de Buritizal (Rua Washington Luís)"
   },
   "2052": {
     "address": "R Almirante Barroso, 955 - Jardim Dermínio",
@@ -90,6 +111,20 @@
     "longitude": -47.3945065,
     "source": "missas-franca"
   },
+  "2060": {
+    "address": "Praça Santa Rita - 110",
+    "latitude": -20.038586,
+    "longitude": -47.747686,
+    "manual": true,
+    "source": "OSM: Igreja Matriz de Igarapava"
+  },
+  "2061": {
+    "address": "Praça Santa Rita, 177 - Centro",
+    "latitude": -20.772132,
+    "longitude": -47.838437,
+    "manual": true,
+    "source": "OSM: Igreja Santa Rita"
+  },
   "2062": {
     "address": "Rua Paulo Francisco Queiroz Arruda, 760 - Jd. Redentor",
     "latitude": -20.5046521,
@@ -105,6 +140,13 @@
     "latitude": -20.5257681,
     "longitude": -47.3869109
   },
+  "2065": {
+    "address": "Praça 24 de Dezembro, 80 - Centro",
+    "latitude": -20.081156,
+    "longitude": -47.421073,
+    "manual": true,
+    "source": "OSM: Praça 24 de Dezembro (matriz na praça)"
+  },
   "2066": {
     "address": "Rua Antonio Pedro Ferreira, n°796 - Jardim Aeroporto I",
     "latitude": -20.5792777,
@@ -119,6 +161,14 @@
     "address": "Av Teodomiro Ramos, 760 - City Petrópolis",
     "latitude": -20.4763681,
     "longitude": -47.3954777
+  },
+  "2069": {
+    "address": "Rua Dom Bernardo José Bueno Mielle, 1714 - Jardim Aeroporto III",
+    "latitude": -20.58876,
+    "longitude": -47.371506,
+    "manual": true,
+    "source": "OSM: Rua Dom Bernardo José Bueno Miele (~150 m)",
+    "precision": "street"
   },
   "2070": {
     "address": "Rua José Deocleciano Ribeiro, 4611 - Jardim Noêmia",
@@ -160,6 +210,13 @@
     "latitude": -20.3118067,
     "longitude": -47.5893697
   },
+  "2078": {
+    "address": "Praça Nove de Julho - s/n° Centro",
+    "latitude": -20.42836,
+    "longitude": -47.824717,
+    "manual": true,
+    "source": "OSM: Praça Nove de Julho (matriz na praça)"
+  },
   "2079": {
     "address": "Rua Iracy Pereira Goulart, 3309 - Jardim Tropical I",
     "latitude": -20.5034365,
@@ -170,6 +227,14 @@
     "latitude": -20.5503289,
     "longitude": -47.4053,
     "source": "missas-franca"
+  },
+  "2230": {
+    "address": "Rua Lisete Coelho Lourenço, 2060 - Residencial Meireles",
+    "latitude": -20.513112,
+    "longitude": -47.426087,
+    "manual": true,
+    "source": "OSM: trecho final da Av. Lisete Coelho Lourenço (~300 m)",
+    "precision": "street"
   },
   "2257": {
     "address": "Rua Payaguas - 826",
