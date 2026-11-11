@@ -6,7 +6,7 @@ import { colors, radius } from '../../theme';
 
 // Botões em 4 tons: primary (vinho), gold (sobre vinho), outline, outlineLight (sobre vinho).
 const tones = {
-  primary: { bg: colors.primary, fg: colors.surface, border: colors.primary },
+  primary: { bg: colors.primary, fg: colors.onPrimary, border: colors.primary },
   gold: { bg: colors.goldLight, fg: colors.onGold, border: colors.goldLight },
   outline: { bg: 'transparent', fg: colors.primary, border: colors.primary },
   outlineLight: { bg: 'transparent', fg: colors.cream, border: 'rgba(251,244,230,0.5)' },
@@ -30,7 +30,7 @@ export function Button({ label, icon, tone = 'primary', onPress, style }) {
 // Botão circular de ícone (48px) com rótulo de acessibilidade obrigatório.
 export function IconButton({ icon, label, onPress, active, onDark, color }) {
   const bg = onDark ? 'rgba(251,244,230,0.16)' : active ? colors.primary : colors.tint;
-  const fg = color || (onDark ? colors.cream : active ? colors.surface : colors.primary);
+  const fg = color || (onDark ? colors.cream : active ? colors.onPrimary : colors.primary);
   return (
     <TouchableOpacity
       activeOpacity={0.8}

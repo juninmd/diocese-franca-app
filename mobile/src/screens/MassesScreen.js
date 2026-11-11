@@ -5,7 +5,9 @@ import { useMasses } from '../hooks/useData';
 import { scheduleReminder } from '../services/ReminderService';
 import { useToast } from '../context/ToastContext';
 import { ListSkeleton } from '../components/Skeleton';
-import { Text, EmptyState } from '../components/ui';
+import { Text, EmptyState, FadeIn, IconButton } from '../components/ui';
+import { NowLine } from '../components/masses/NowLine';
+import { useSearch } from '../context/SearchContext';
 import { DayStrip } from '../components/masses/DayStrip';
 import { MassRow } from '../components/masses/MassRow';
 import { TypeFilter } from '../components/masses/TypeFilter';
@@ -19,6 +21,7 @@ const EMPTY_MSG = 'Puxa, não encontramos missas para esses filtros. Vamos tenta
 export default function MassesScreen({ navigation, route }) {
   const insets = useSafeAreaInsets();
   const toast = useToast();
+  const search = useSearch();
   const today = DAY_NAMES[new Date().getDay()];
   const resource = useMasses();
   const masses = resource.data || EMPTY;
@@ -65,6 +68,7 @@ export default function MassesScreen({ navigation, route }) {
     (selectedDay === 'all' || m.dayOfWeek === selectedDay) && (massType === 'all' || m.type === massType))), [masses, selectedDay, massType]);
   const types = useMemo(() => [...new Set(masses.map((m) => m.type))], [masses]);
   const nextId = useMemo(() => findNextMassId(masses), [masses]);
+  const nowHHMM = new Date().toTimeString().slice(0, 5);
   const hasFilters = selectedDay !== 'all' || massType !== 'all';
   const openChurch = (churchId) => navigation.navigate('Churches', { screen: 'ChurchDetail', params: { churchId } });
 
@@ -87,8 +91,11 @@ export default function MassesScreen({ navigation, route }) {
           <Text variant="title">{dayTitle(day)}</Text>
           <Text variant="caption">{data.length} {data.length === 1 ? 'missa' : 'missas'}</Text>
         </View>
-        {data.map((item) => (
-          <MassRow key={item.id} item={item} isNext={item.id === nextId} reminderSet={!!reminders[item.id]} onOpenChurch={openChurch} onRemind={remind} />
+        {data.map((item, i) => (
+          <FadeIn key={item.id} index={i} style={styles.item}>
+            {item.id === nextId ? <NowLine /> : null}
+            <MassRow item={item} isNext={item.id === nextId} past={day === today && item.time < nowHHMM} reminderSet={!!reminders[item.id]} onOpenChurch={openChurch} onRemind={remind} />
+          </FadeIn>
         ))}
       </View>
     ));
@@ -101,11 +108,15 @@ export default function MassesScreen({ navigation, route }) {
       showsVerticalScrollIndicator={false}
       refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} colors={[colors.primary]} tintColor={colors.primary} />}
     >
-      <View style={styles.titleBox}>
-        <Text variant="display">Horários de missa</Text>
-        <Text variant="body" style={{ color: colors.muted }}>
-          {new Date().toLocaleDateString('pt-BR', { month: 'long', year: 'numeric' })} · toda a diocese
-        </Text>
+      <View style={styles.titleRow}>
+        <View style={styles.titleBox}>
+          <Text variant="overline">Toda a diocese</Text>
+          <Text variant="display">Horários de missa</Text>
+          <Text variant="body" style={{ color: colors.muted }}>
+            {new Date().toLocaleDateString('pt-BR', { month: 'long', year: 'numeric' })} · toda a diocese
+          </Text>
+        </View>
+        <IconButton icon="search" label="Busca universal" onPress={search.open} />
       </View>
       <DayStrip days={weekDays()} selected={selectedDay} onSelect={setSelectedDay} />
       <TypeFilter
@@ -123,7 +134,9 @@ export default function MassesScreen({ navigation, route }) {
 const styles = StyleSheet.create({
   screen: { flex: 1, backgroundColor: colors.bg },
   content: { paddingHorizontal: space.xl, paddingBottom: 110, gap: 18 },
-  titleBox: { gap: space.xs },
+  titleRow: { flexDirection: 'row', alignItems: 'flex-start', gap: 12 },
+  titleBox: { flex: 1, gap: space.xs },
+  item: { gap: 10 },
   list: { gap: 10 },
   sectionHead: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'baseline' },
 });

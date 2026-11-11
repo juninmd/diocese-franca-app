@@ -8,6 +8,8 @@ export function withFont(style) {
   let family;
   if (fontFamily === fonts.serif) {
     family = weight >= 600 ? fonts.serifBold : fonts.serif;
+  } else if (weight >= 800) {
+    family = fonts.sansHeavy;
   } else if (weight >= 700) {
     family = fonts.sansBold;
   } else if (weight >= 600) {

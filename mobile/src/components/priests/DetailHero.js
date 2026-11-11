@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Text, ArchArt } from '../ui';
+import { Text, ArchArt, FadeIn } from '../ui';
 import { colors, radius } from '../../theme';
 import { PriestAvatar } from './PriestAvatar';
 
@@ -11,7 +11,7 @@ export function DetailHero({ priest }) {
       <View pointerEvents="none" style={styles.art}>
         <ArchArt width={90} color={colors.goldLight} />
       </View>
-      <PriestAvatar name={priest.name} image={priest.image} size={88} bg={colors.goldLight} color={colors.onGold} />
+      <FadeIn distance={0} style={styles.ring}><PriestAvatar name={priest.name} image={priest.image} size={96} bg={colors.primary} color={colors.onPrimary} /></FadeIn>
       <Text variant="overline" style={{ color: colors.goldLight }}>{priest.title}</Text>
       <Text variant="display" style={styles.name}>{priest.name}</Text>
       {(priest.birthDate || priest.ordinationDate) && (
@@ -30,6 +30,7 @@ export function DetailHero({ priest }) {
 
 const styles = StyleSheet.create({
   card: { overflow: 'hidden', borderRadius: radius.xl, backgroundColor: colors.primaryDark, padding: 24, gap: 10 },
+  ring: { alignSelf: 'flex-start', padding: 3, borderRadius: 60, borderWidth: 3, borderColor: colors.goldLight },
   art: { position: 'absolute', right: -4, bottom: -8, opacity: 0.3 },
   name: { color: colors.cream, fontSize: 30, lineHeight: 34 },
   datesRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, marginTop: 4 },

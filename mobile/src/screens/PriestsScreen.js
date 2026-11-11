@@ -5,7 +5,8 @@ import { usePriests } from '../hooks/useData';
 import { FavoritesService } from '../services/FavoritesService';
 import { useToast } from '../context/ToastContext';
 import { ListSkeleton } from '../components/Skeleton';
-import { Text } from '../components/ui';
+import { Text, FadeIn, IconButton } from '../components/ui';
+import { useSearch } from '../context/SearchContext';
 import { BishopCard } from '../components/priests/BishopCard';
 import { PriestCard } from '../components/priests/PriestCard';
 import { PriestsFilters } from '../components/priests/PriestsFilters';
@@ -18,6 +19,7 @@ const matches = (p, q) =>
   [p.name, p.title, p.email, p.church && p.church.city].some((field) => field && field.toLowerCase().includes(q));
 
 export default function PriestsScreen({ navigation }) {
+  const search = useSearch();
   const resource = usePriests();
   const priests = resource.data || EMPTY;
   const [refreshing, setRefreshing] = useState(false);
@@ -84,9 +86,13 @@ export default function PriestsScreen({ navigation }) {
 
   const header = (
     <View style={styles.header}>
-      <View style={{ gap: 4 }}>
-        <Text variant="display">Clero</Text>
-        <Text variant="body" style={{ color: colors.muted }}>Bispo e párocos da Diocese de Franca</Text>
+      <View style={styles.titleRow}>
+        <View style={{ gap: 4, flex: 1 }}>
+          <Text variant="overline">{priests.length ? `${priests.length} clérigos` : 'Diocese de Franca'}</Text>
+          <Text variant="display">Clero</Text>
+          <Text variant="body" style={{ color: colors.muted }}>Bispo e párocos da Diocese de Franca</Text>
+        </View>
+        <IconButton icon="search" label="Busca universal" onPress={search.open} />
       </View>
       <PriestsFilters
         loading={resource.loading && !refreshing}
@@ -108,13 +114,13 @@ export default function PriestsScreen({ navigation }) {
         <FlatList
           data={parishPriests}
           keyExtractor={(item) => item.id.toString()}
-          renderItem={({ item }) => <PriestCard {...cardProps(item)} />}
+          renderItem={({ item, index }) => <FadeIn index={index}><PriestCard {...cardProps(item)} /></FadeIn>}
           contentContainerStyle={styles.list}
           showsVerticalScrollIndicator={false}
           ListHeaderComponent={
             <View style={styles.listHeader}>
               {header}
-              {bishop && <BishopCard {...cardProps(bishop)} />}
+              {bishop && <FadeIn><BishopCard {...cardProps(bishop)} /></FadeIn>}
               {parishPriests.length > 0 && <Text variant="title">Párocos</Text>}
             </View>
           }
@@ -138,6 +144,7 @@ const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: colors.bg },
   pad: { paddingHorizontal: 20 },
   header: { gap: 16 },
+  titleRow: { flexDirection: 'row', alignItems: 'flex-start', gap: 12 },
   list: { paddingHorizontal: 20, paddingBottom: 110, gap: 12 },
   listHeader: { gap: 20, marginBottom: 4 },
 });
