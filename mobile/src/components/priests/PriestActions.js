@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, TouchableOpacity, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { Pop } from '../ui/Motion';
 import { colors } from '../../theme';
 
 function MiniButton({ icon, label, onPress, color }) {
@@ -23,12 +24,12 @@ export function PriestActions({ name, isFavorite, onFavorite, onShare, onDark })
   const fav = onDark ? colors.goldLight : colors.primary;
   return (
     <View>
-      <MiniButton
+      <Pop trigger={isFavorite}><MiniButton
         icon={isFavorite ? 'heart' : 'heart-outline'}
         label={isFavorite ? `Remover ${name} dos favoritos` : `Favoritar ${name}`}
         color={isFavorite ? fav : idle}
         onPress={onFavorite}
-      />
+      /></Pop>
       <MiniButton icon="share-outline" label={`Compartilhar ${name}`} color={idle} onPress={onShare} />
     </View>
   );

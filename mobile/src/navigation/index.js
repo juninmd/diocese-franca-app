@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
+import { NavigationContainer, DefaultTheme, DarkTheme, createNavigationContainerRef } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
@@ -12,7 +12,10 @@ import PriestDetailScreen from '../screens/PriestDetailScreen';
 import MassesScreen from '../screens/MassesScreen';
 import { FloatingTabBar } from '../components/FloatingTabBar';
 import { NetworkStatus } from '../components/NetworkStatus';
-import { colors } from '../theme';
+import { colors, isDark } from '../theme';
+import { SearchProvider } from '../context/SearchContext';
+
+export const navigationRef = createNavigationContainerRef();
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -20,8 +23,8 @@ const Tab = createBottomTabNavigator();
 const stackOptions = { headerShown: false, cardStyle: { backgroundColor: colors.bg } };
 
 const navTheme = {
-  ...DefaultTheme,
-  colors: { ...DefaultTheme.colors, background: colors.bg, card: colors.surface, text: colors.ink, primary: colors.primary, border: colors.line },
+  ...(isDark ? DarkTheme : DefaultTheme),
+  colors: { ...(isDark ? DarkTheme : DefaultTheme).colors, background: colors.bg, card: colors.surface, text: colors.ink, primary: colors.primary, border: colors.line },
 };
 
 function ChurchesStack() {
@@ -47,8 +50,8 @@ function TabNavigator() {
     <Tab.Navigator tabBar={(props) => <FloatingTabBar {...props} />} screenOptions={{ headerShown: false }}>
       <Tab.Screen name="Home" component={HomeScreen} options={{ title: 'Início', tabBarLabel: 'Início' }} />
       <Tab.Screen name="Churches" component={ChurchesStack} options={{ title: 'Igrejas', tabBarLabel: 'Igrejas' }} />
-      <Tab.Screen name="Priests" component={PriestsStack} options={{ title: 'Padres', tabBarLabel: 'Padres' }} />
       <Tab.Screen name="Masses" component={MassesScreen} options={{ title: 'Horários', tabBarLabel: 'Missas' }} />
+      <Tab.Screen name="Priests" component={PriestsStack} options={{ title: 'Padres', tabBarLabel: 'Padres' }} />
     </Tab.Navigator>
   );
 }
@@ -57,8 +60,10 @@ export default function Navigation() {
   return (
     <View style={{ flex: 1, backgroundColor: colors.bg }}>
       <NetworkStatus />
-      <NavigationContainer theme={navTheme}>
-        <TabNavigator />
+      <NavigationContainer ref={navigationRef} theme={navTheme}>
+        <SearchProvider navigationRef={navigationRef}>
+          <TabNavigator />
+        </SearchProvider>
       </NavigationContainer>
     </View>
   );

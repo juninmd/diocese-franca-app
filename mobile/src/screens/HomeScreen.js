@@ -6,8 +6,9 @@ import { useChurches, usePriests, useMasses, useNews } from '../hooks/useData';
 import { LocationService } from '../services/LocationService';
 import { scheduleReminder } from '../services/ReminderService';
 import { useToast } from '../context/ToastContext';
-import { HomeHeader } from '../components/home/HomeHeader';
-import { NearestChurchCard } from '../components/home/NearestChurchCard';
+import { HomeHero } from '../components/home/HomeHero';
+import { FadeIn } from '../components/ui';
+import { useSearch } from '../context/SearchContext';
 import { StatsRow } from '../components/home/StatsRow';
 import { NewsCarousel } from '../components/home/NewsCarousel';
 import { QuickActions } from '../components/home/QuickActions';
@@ -19,6 +20,7 @@ import { colors } from '../theme';
 export default function HomeScreen({ navigation }) {
   const insets = useSafeAreaInsets();
   const toast = useToast();
+  const search = useSearch();
   const churches = useChurches();
   const priests = usePriests();
   const masses = useMasses();
@@ -70,21 +72,22 @@ export default function HomeScreen({ navigation }) {
     <View style={styles.container}>
       <ScrollView
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={[styles.content, { paddingTop: insets.top + 24 }]}
+        contentContainerStyle={styles.scroll}
         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} colors={[colors.primary]} tintColor={colors.primary} />}
       >
-        <HomeHeader onRefresh={onRefresh} />
-        <NearestChurchCard church={nearest.church} loading={nearest.loading} error={nearest.error} onFind={findNearestChurch} onOpen={openChurch} />
-        <StatsRow
+        <HomeHero topInset={insets.top} onRefresh={onRefresh} onSearch={search.open} nearest={nearest} onFind={findNearestChurch} onOpen={openChurch} />
+        <View style={styles.content}>
+        <FadeIn index={3}><StatsRow
           items={[
             { label: 'Paróquias', value: count(churches), onPress: go('Churches') },
             { label: 'Padres', value: count(priests), onPress: go('Priests') },
             { label: 'Missas/semana', value: count(masses), onPress: go('Masses') },
           ]}
-        />
-        <NewsCarousel news={news.data || []} loading={news.loading} onOpen={openNews} onRemind={remindNews} error={!!news.error} onRetry={() => news.reload()} />
-        <QuickActions items={buildQuickActions({ navigation, toast })} />
-        <ContactCard onCall={() => callDiocese(toast)} onEmail={() => emailDiocese(toast)} />
+        /></FadeIn>
+        <FadeIn index={4}><QuickActions items={buildQuickActions({ navigation, toast })} /></FadeIn>
+        <FadeIn index={5}><NewsCarousel news={news.data || []} loading={news.loading} onOpen={openNews} onRemind={remindNews} error={!!news.error} onRetry={() => news.reload()} /></FadeIn>
+        <FadeIn index={6}><ContactCard onCall={() => callDiocese(toast)} onEmail={() => emailDiocese(toast)} /></FadeIn>
+        </View>
       </ScrollView>
     </View>
   );
@@ -92,5 +95,6 @@ export default function HomeScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: colors.bg },
-  content: { paddingHorizontal: 20, paddingBottom: 120, gap: 24 },
+  scroll: { paddingBottom: 130 },
+  content: { paddingHorizontal: 20, paddingTop: 24, gap: 28 },
 });

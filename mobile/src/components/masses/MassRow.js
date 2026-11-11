@@ -4,10 +4,10 @@ import { Text, IconButton } from '../ui';
 import { colors, radius, fonts } from '../../theme';
 
 // Linha de uma missa: horário em serifa, igreja + tipo e sino de lembrete.
-export function MassRow({ item, isNext, reminderSet, onOpenChurch, onRemind }) {
+export function MassRow({ item, isNext, past, reminderSet, onOpenChurch, onRemind }) {
   const church = item.church?.name;
   return (
-    <View style={[styles.row, isNext && styles.rowNext]}>
+    <View style={[styles.row, isNext && styles.rowNext, past && styles.past]}>
       <TouchableOpacity
         activeOpacity={0.8}
         style={styles.main}
@@ -34,7 +34,8 @@ export function MassRow({ item, isNext, reminderSet, onOpenChurch, onRemind }) {
 
 const styles = StyleSheet.create({
   row: { flexDirection: 'row', alignItems: 'center', gap: 14, paddingVertical: 14, paddingLeft: 16, paddingRight: 8, borderRadius: 22, backgroundColor: colors.surface, borderWidth: 1, borderColor: colors.line },
-  rowNext: { backgroundColor: '#FBEFEE', borderColor: '#E4BFC2' },
+  past: { opacity: 0.55 },
+  rowNext: { backgroundColor: colors.tint, borderColor: colors.primary },
   main: { flex: 1, minWidth: 0, flexDirection: 'row', alignItems: 'center', gap: 12 },
   time: { width: 84, flexShrink: 0, fontFamily: fonts.serif, fontSize: 26, fontWeight: '600', letterSpacing: -0.3, color: colors.ink, fontVariant: ['tabular-nums'] },
   info: { flex: 1, minWidth: 0, gap: 3 },

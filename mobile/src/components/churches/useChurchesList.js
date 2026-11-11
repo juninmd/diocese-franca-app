@@ -12,13 +12,16 @@ const matches = (church, query) =>
   [church.name, church.address, church.city].some((field) => (field || '').toLowerCase().includes(query));
 
 // Estado e ações da lista de igrejas: busca, filtros (todas/favoritas/perto), favoritos e compartilhamento.
-export function useChurchesList() {
+export function useChurchesList(initialForania = null) {
   const resource = useChurches();
   const churches = resource.data || EMPTY;
   const [refreshing, setRefreshing] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [favorites, setFavorites] = useState([]);
   const [filterMode, setFilterMode] = useState('all'); // 'all' | 'favorites' | 'nearby'
+  const [forania, setForania] = useState(initialForania);
+  useEffect(() => { if (initialForania) setForania(initialForania); }, [initialForania]);
+  const foranias = useMemo(() => [...new Set(churches.map((c) => c.forania).filter(Boolean))].sort(), [churches]);
   const [nearbyChurches, setNearbyChurches] = useState([]);
   const [nearbyLoading, setNearbyLoading] = useState(false);
   const [nearbyError, setNearbyError] = useState(null);
@@ -42,9 +45,10 @@ export function useChurchesList() {
       : filterMode === 'favorites'
         ? churches.filter((c) => favorites.includes(c.id))
         : churches;
+    const byForania = forania ? baseList.filter((c) => c.forania === forania) : baseList;
     const query = searchQuery.trim().toLowerCase();
-    return query === '' ? baseList : baseList.filter((c) => matches(c, query));
-  }, [searchQuery, churches, filterMode, favorites, nearbyChurches]);
+    return query === '' ? byForania : byForania.filter((c) => matches(c, query));
+  }, [searchQuery, churches, filterMode, favorites, nearbyChurches, forania]);
 
   const loadNearbyChurches = async () => {
     setNearbyLoading(true);
@@ -105,7 +109,7 @@ export function useChurchesList() {
 
   return {
     churches, filteredChurches, favorites, loading: resource.loading, refreshing, error, stale: resource.stale,
-    searchQuery, setSearchQuery, filterMode, selectFilterMode,
+    searchQuery, setSearchQuery, filterMode, selectFilterMode, forania, setForania, foranias,
     nearbyChurches, nearbyLoading, nearbyError, loadNearbyChurches,
     onRefresh, toggleFavorite, shareChurch,
   };

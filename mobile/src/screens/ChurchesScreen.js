@@ -6,11 +6,14 @@ import { ChurchCard } from '../components/churches/ChurchCard';
 import { ChurchesHeader } from '../components/churches/ChurchesHeader';
 import { ChurchesEmpty } from '../components/churches/ChurchesEmpty';
 import { useChurchesList } from '../components/churches/useChurchesList';
+import { FadeIn } from '../components/ui';
+import { useSearch } from '../context/SearchContext';
 import { colors } from '../theme';
 
-export default function ChurchesScreen({ navigation }) {
+export default function ChurchesScreen({ navigation, route }) {
   const insets = useSafeAreaInsets();
-  const list = useChurchesList();
+  const list = useChurchesList(route?.params?.forania || null);
+  const search = useSearch();
   const showSkeleton = list.loading && !list.refreshing;
 
   const header = (
@@ -23,6 +26,10 @@ export default function ChurchesScreen({ navigation }) {
       filterMode={list.filterMode}
       onFilter={list.selectFilterMode}
       loading={showSkeleton}
+      foranias={list.foranias}
+      forania={list.forania}
+      onForania={list.setForania}
+      onOpenSearch={search.open}
     />
   );
 
@@ -31,7 +38,9 @@ export default function ChurchesScreen({ navigation }) {
       <FlatList
         data={showSkeleton ? [] : list.filteredChurches}
         keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => (
+        initialNumToRender={50} // catálogo pequeno (~45): renderiza tudo e evita buracos ao rolar rápido
+        renderItem={({ item, index }) => (
+          <FadeIn index={index}>
           <ChurchCard
             church={item}
             isFavorite={list.favorites.includes(item.id)}
@@ -39,6 +48,7 @@ export default function ChurchesScreen({ navigation }) {
             onToggleFavorite={() => list.toggleFavorite(item)}
             onShare={() => list.shareChurch(item)}
           />
+          </FadeIn>
         )}
         ItemSeparatorComponent={Separator}
         ListHeaderComponent={header}

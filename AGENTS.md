@@ -24,7 +24,9 @@ App da Diocese de Franca: API REST (`backend/`) + app Expo/React Native com buil
 - Notificacoes: sempre `await Notifications.requestPermissionsAsync()` antes de `scheduleNotificationAsync()`.
 - Estados vazios/erro com tom acolhedor ("Puxa, ..."); `activeOpacity={0.8}` em toques de listas e detalhes.
 - Locators do Playwright com regex (`getByText(/Diocese de Franca/i)`): React Native Web quebra texto multilinha.
-- Tokens de design em `mobile/src/theme/index.js`.
+- Tokens de design em `mobile/src/theme/index.js` (UI "Vitral Vivo"): claro/escuro conforme o sistema e `colors.primary` na cor do tempo litúrgico (`theme/liturgy.js`), ambos resolvidos na abertura do app. Texto sobre `primary` usa `colors.onPrimary`; heróis escuros usam `colors.hero*`. Fontes: Fraunces (títulos) + Manrope (interface).
+- Animações: use `FadeIn`/`PressableScale`/`Pop`/`Pulse` de `components/ui/Motion.js` (respeitam "reduzir movimento" via `hooks/useReduceMotion`). Busca universal: `useSearch().open()` (`context/SearchContext.js`).
+- APK: workflow `android-apk.yml` (expo prebuild + `gradlew assembleRelease`) publica o artefato `diocese-franca-apk`.
 - Dados remotos no app: use `useResource`/hooks de `mobile/src/hooks/useData.js` (cache stale-while-revalidate em `services/cache.js`); não chame `api.js` direto em telas. Próxima missa é calculada no aparelho (`utils/massTime.computeNextMass`); no backend, `utils/nextMass` usa o fuso America/Sao_Paulo.
 - Backend: rotas leem o catálogo via `utils/catalog.getCatalog()` (cache por `mtime`); respostas de dados levam `Cache-Control` (`middleware/cache.js`).
 - Parsers: HTML do site às vezes é colado do Word; `htmlText` trata quebra de linha do código-fonte como espaço. Ao mexer em `massParser`/`parishParser`, valide contra páginas reais (ids 2014–2265) além dos fixtures.

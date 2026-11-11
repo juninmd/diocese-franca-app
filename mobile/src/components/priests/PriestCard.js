@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, TouchableOpacity, StyleSheet } from 'react-native';
 import { Text, IconButton } from '../ui';
-import { colors, radius } from '../../theme';
+import { colors, radius, avatarPalette } from '../../theme';
 import { PriestAvatar } from './PriestAvatar';
 import { PriestActions } from './PriestActions';
 import { openCall } from './priestUtils';
@@ -11,7 +11,7 @@ export function PriestCard({ priest, isFavorite, onOpen, onFavorite, onShare }) 
   return (
     <View style={styles.card}>
       <TouchableOpacity activeOpacity={0.8} accessibilityRole="button" accessibilityLabel={`${priest.name}, ${priest.title}`} style={styles.main} onPress={onOpen}>
-        <PriestAvatar name={priest.name} image={priest.image} />
+        <View style={styles.ring}><PriestAvatar name={priest.name} image={priest.image} bg={avatarPalette[priest.id % avatarPalette.length]} color="#FFFFFF" /></View>
         <View style={styles.info}>
           <Text variant="label" style={styles.name} numberOfLines={3}>{priest.name}</Text>
           <Text variant="caption" numberOfLines={2}>{priest.title}{priest.church && priest.church.city ? ` · ${priest.church.city}` : ''}</Text>
@@ -40,5 +40,6 @@ const styles = StyleSheet.create({
   },
   main: { flex: 1, flexDirection: 'row', alignItems: 'center', gap: 12, minHeight: 52 },
   info: { flex: 1, gap: 2 },
+  ring: { padding: 2, borderRadius: 30, borderWidth: 2, borderColor: colors.goldLight },
   name: { fontSize: 16, lineHeight: 20 },
 });

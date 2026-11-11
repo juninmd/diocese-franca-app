@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, TouchableOpacity, StyleSheet } from 'react-native';
-import { Text, Pill, IconButton } from '../ui';
+import { Text, Pill, IconButton, Pop } from '../ui';
 import { ChurchPhoto } from './ChurchPhoto';
 import { colors, radius } from '../../theme';
 import { formatNextMass, formatDistance } from '../../utils/massTime';
@@ -25,12 +25,14 @@ export function ChurchCard({ church, isFavorite, onPress, onToggleFavorite, onSh
         </View>
       </TouchableOpacity>
       <View style={styles.actions}>
-        <IconButton
-          icon={isFavorite ? 'heart' : 'heart-outline'}
-          label={`${isFavorite ? 'Remover dos favoritos' : 'Favoritar'}: ${church.name}`}
-          onPress={onToggleFavorite}
-          active={isFavorite}
-        />
+        <Pop trigger={isFavorite}>
+          <IconButton
+            icon={isFavorite ? 'heart' : 'heart-outline'}
+            label={`${isFavorite ? 'Remover dos favoritos' : 'Favoritar'}: ${church.name}`}
+            onPress={onToggleFavorite}
+            active={isFavorite}
+          />
+        </Pop>
         <IconButton icon="share-outline" label={`Compartilhar: ${church.name}`} onPress={onShare} />
       </View>
     </View>
@@ -40,7 +42,7 @@ export function ChurchCard({ church, isFavorite, onPress, onToggleFavorite, onSh
 const styles = StyleSheet.create({
   wrap: { position: 'relative' },
   card: { flexDirection: 'row', gap: 14, padding: 12, borderRadius: 24, backgroundColor: colors.surface, borderWidth: 1, borderColor: colors.line },
-  thumb: { width: 84, minHeight: 108, borderRadius: radius.md },
+  thumb: { width: 84, minHeight: 108, borderTopLeftRadius: 42, borderTopRightRadius: 42, borderBottomLeftRadius: radius.md, borderBottomRightRadius: radius.md },
   body: { flex: 1, minWidth: 0, justifyContent: 'space-between', gap: 8 },
   top: { gap: 4, paddingRight: 52 },
   city: { color: colors.primary },

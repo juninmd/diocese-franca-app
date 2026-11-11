@@ -2,16 +2,16 @@ import React, { createContext, useContext, useState, useCallback, useMemo } from
 import { View, StyleSheet, Animated, TouchableOpacity } from 'react-native';
 import { RawText as Text } from '../components/ui/Text';
 import { Ionicons } from '@expo/vector-icons';
-import { colors } from '../theme';
+import { colors, isDark } from '../theme';
 
 const ToastContext = createContext(null);
 
 const TOAST_DURATION = 3000;
 const TOAST_TYPES = {
   success: { icon: 'checkmark-circle', color: colors.greenInk, bg: colors.greenTint },
-  error: { icon: 'alert-circle', color: colors.danger, bg: '#F9E3E1' },
+  error: { icon: 'alert-circle', color: colors.danger, bg: isDark ? '#3A1D1D' : '#F9E3E1' },
   info: { icon: 'information-circle', color: colors.primary, bg: colors.tint },
-  warning: { icon: 'warning', color: '#7A5A16', bg: '#F6EBCF' },
+  warning: { icon: 'warning', color: isDark ? '#E6C477' : '#7A5A16', bg: isDark ? '#302818' : '#F6EBCF' },
 };
 
 let toastHandler = null;

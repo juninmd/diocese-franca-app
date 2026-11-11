@@ -20,8 +20,8 @@ export function EmptyState({ icon = 'sparkles-outline', message, actionLabel, on
 }
 
 const styles = StyleSheet.create({
-  box: { alignItems: 'center', gap: 12, padding: 24, borderRadius: radius.xl, borderWidth: 1.5, borderStyle: 'dashed', borderColor: '#CDBFA8' },
+  box: { alignItems: 'center', gap: 12, padding: 24, borderRadius: radius.xl, borderWidth: 1.5, borderStyle: 'dashed', borderColor: colors.line },
   message: { textAlign: 'center', color: colors.muted },
   button: { minHeight: TOUCH, paddingHorizontal: 20, borderRadius: radius.md, backgroundColor: colors.primary, justifyContent: 'center' },
-  buttonText: { color: colors.surface },
+  buttonText: { color: colors.onPrimary },
 });
