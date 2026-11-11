@@ -84,6 +84,12 @@
     "latitude": -20.5009735,
     "longitude": -47.3706184
   },
+  "2059": {
+    "address": "Alameda Arminda Nogueira, 1735 - Vila Industrial",
+    "latitude": -20.5450938,
+    "longitude": -47.3945065,
+    "source": "missas-franca"
+  },
   "2062": {
     "address": "Rua Paulo Francisco Queiroz Arruda, 760 - Jd. Redentor",
     "latitude": -20.5046521,
@@ -158,6 +164,12 @@
     "address": "Rua Iracy Pereira Goulart, 3309 - Jardim Tropical I",
     "latitude": -20.5034365,
     "longitude": -47.4174317
+  },
+  "2080": {
+    "address": "Praça Nossa Senhora da Conceição, S/N - Centro",
+    "latitude": -20.5503289,
+    "longitude": -47.4053,
+    "source": "missas-franca"
   },
   "2257": {
     "address": "Rua Payaguas - 826",
