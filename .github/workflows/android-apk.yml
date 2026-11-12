@@ -47,7 +47,7 @@ jobs:
           path: mobile/android/app/build/outputs/apk/release/app-release.apk
           retention-days: 30
       - name: Publicar APK com link direto (Release)
-        if: github.event_name != 'pull_request'
+        if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/master')
         env:
           GH_TOKEN: ${{ github.token }}
           TAG: apk-latest
