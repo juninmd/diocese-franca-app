@@ -83,7 +83,12 @@ app.get('/api/health', noStore, (req, res) => {
   });
 });
 
+// Só para exercitar o tratador de erros; em produção a rota não existe (cai no 404).
 app.get('/api/test-error', (req, res, next) => {
+  if (process.env.NODE_ENV === 'production') {
+    next();
+    return;
+  }
   next(new Error('Erro de teste interno detalhado'));
 });
 

@@ -323,6 +323,13 @@ describe('Error Handler', () => {
     consoleErrorSpy.mockRestore();
   });
 
+  it('não expõe a rota de erro de teste em produção (404)', async () => {
+    process.env.NODE_ENV = 'production';
+    const res = await request(app).get('/api/test-error');
+    expect(res.statusCode).toBe(404);
+    expect(res.body.error).toBe('Not Found');
+  });
+
   it('responde com a mensagem de erro quando NODE_ENV === "development"', async () => {
     process.env.NODE_ENV = 'development';
     const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
