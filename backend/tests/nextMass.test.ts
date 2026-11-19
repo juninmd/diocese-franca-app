@@ -58,4 +58,11 @@ describe('findNextMass', () => {
   it('missa no minuto atual começa em 0 min', () => {
     expect(findNextMass(masses, new Date('2024-01-03T19:00:30-03:00'))!.startsInMinutes).toBe(0);
   });
+
+  it('mantém cada fuso independente ao reaproveitar o formatador', () => {
+    const now = new Date('2024-01-03T21:30:00Z'); // 18:30 em Brasília, 06:30 de quinta em Tóquio
+    const sp = () => findNextMass(masses, now, 'America/Sao_Paulo')!.startsInMinutes;
+    const tokyo = () => findNextMass(masses, now, 'Asia/Tokyo')!.startsInMinutes;
+    expect([sp(), tokyo(), sp()]).toEqual([30, 36 * 60 + 30, 30]);
+  });
 });
