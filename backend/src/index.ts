@@ -83,14 +83,12 @@ app.get('/api/health', noStore, (req, res) => {
   });
 });
 
-// Só para exercitar o tratador de erros; em produção a rota não existe (cai no 404).
-app.get('/api/test-error', (req, res, next) => {
-  if (process.env.NODE_ENV === 'production') {
-    next();
-    return;
-  }
-  next(new Error('Erro de teste interno detalhado'));
-});
+// Só para exercitar o tratador de erros; em produção a rota nem é registrada (cai no 404).
+if (process.env.NODE_ENV !== 'production') {
+  app.get('/api/test-error', (req, res, next) => {
+    next(new Error('Erro de teste interno detalhado'));
+  });
+}
 
 // Os dados só mudam quando o scraper roda: clientes e proxies podem reutilizar (ETag + max-age).
 app.use('/api/churches', cacheControl({ maxAge: 300 }), churchesRouter);

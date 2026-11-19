@@ -324,8 +324,13 @@ describe('Error Handler', () => {
   });
 
   it('não expõe a rota de erro de teste em produção (404)', async () => {
+    // A rota é registrada na importação, então o app precisa ser carregado já em produção.
     process.env.NODE_ENV = 'production';
-    const res = await request(app).get('/api/test-error');
+    let prodApp: typeof app | undefined;
+    jest.isolateModules(() => {
+      prodApp = require('../src/index');
+    });
+    const res = await request(prodApp!).get('/api/test-error');
     expect(res.statusCode).toBe(404);
     expect(res.body.error).toBe('Not Found');
   });
