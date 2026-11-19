@@ -14,9 +14,20 @@ const MINUTES_PER_WEEK = 7 * 24 * 60;
 // Os horários são de Franca/SP; o servidor pode rodar em UTC, então o relógio é lido neste fuso.
 export const DIOCESE_TIMEZONE = 'America/Sao_Paulo';
 
+// Criar um Intl.DateTimeFormat é caro e /nearby chama findNextMass uma vez por igreja: reaproveita por fuso.
+const formatters = new Map<string, Intl.DateTimeFormat>();
+const formatterFor = (timeZone: string): Intl.DateTimeFormat => {
+  let formatter = formatters.get(timeZone);
+  if (!formatter) {
+    formatter = new Intl.DateTimeFormat('en-US', { timeZone, weekday: 'short', hour: 'numeric', minute: 'numeric', hourCycle: 'h23' });
+    formatters.set(timeZone, formatter);
+  }
+  return formatter;
+};
+
 // Dia da semana e minuto do dia de `date` no fuso informado.
 const clockIn = (date: Date, timeZone: string): { day: number; minutes: number } => {
-  const parts = new Intl.DateTimeFormat('en-US', { timeZone, weekday: 'short', hour: 'numeric', minute: 'numeric', hourCycle: 'h23' })
+  const parts = formatterFor(timeZone)
     .formatToParts(date)
     .reduce<Record<string, string>>((acc, p) => ({ ...acc, [p.type]: p.value }), {});
   return { day: WEEKDAYS.indexOf(parts.weekday), minutes: Number(parts.hour) * 60 + Number(parts.minute) };
