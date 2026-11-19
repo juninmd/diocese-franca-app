@@ -63,6 +63,9 @@
         }
       ],
       "expo-font"
-    ]
+    ],
+    "experiments": {
+      "baseUrl": "/diocese-franca-app"
+    }
   }
 }
