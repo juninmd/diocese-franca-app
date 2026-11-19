@@ -41,7 +41,7 @@ Aplicativo completo para a Diocese de Franca com backend API REST e app React Na
 ## Novidades Implementadas
 
 ### Mobile
-- Deploy web 100% funcional no Netlify com Metro bundler suportando `react-native-web`.
+- Deploy web no GitHub Pages ([juninmd.github.io/diocese-franca-app](https://juninmd.github.io/diocese-franca-app/)) com Metro bundler suportando `react-native-web`.
 - Lembrete diário às 08:00 configurado na Home usando `expo-notifications`.
 - Adição de Notificações Locais (`expo-notifications`) para as interações de agendamento: "Lembrete Confissão" em Detalhes do Padre, notificações em horários de missas (`MassesScreen.js`), e em Detalhes da Igreja ("Agendar Visita").
 - empty/error states de toda a aplicação (Home, Listas, Detalhes) padronizados com tom acolhedor e empático ("Puxa,...").
@@ -127,7 +127,6 @@ diocese-franca-app/
 
 - Node.js 20+ (validado com Node 24) e [pnpm](https://pnpm.io/) (cada pacote tem `pnpm-lock.yaml`)
 - Para os testes E2E: navegador Chromium do Playwright (`npx playwright install chromium`)
-- Para o deploy manual: conta Netlify (`deploy.sh` usa `npx netlify deploy`)
 
 ## Configuração
 
@@ -189,8 +188,7 @@ Não há linter configurado no repositório (nenhum script `lint` em `backend/` 
   - **Identificador de Pacote (iOS & Android):** `br.org.diocesefranca.app`
   - **Plugins de Notificação:** `expo-notifications` configurado com ícone `./assets/icon.png` e cor de destaque `#7A1E2C` (vinho litúrgico).
   - **Tema:** Mantido em `userInterfaceStyle: "light"` enquanto não há suporte completo a tema escuro.
-- **Web (Netlify):** `netlify.toml` roda `cd mobile && pnpm install && npx expo export -p web` e publica `mobile/dist`, com redirect `/*` para `/index.html`.
-- **Manual:** `./deploy.sh` faz o mesmo build e executa `npx netlify deploy --prod --dir=dist`.
+- **Web (GitHub Pages):** `.github/workflows/pages.yml` roda `npx expo export -p web` em `mobile/` a cada push no `master` e publica `mobile/dist` em https://juninmd.github.io/diocese-franca-app/. O subcaminho vem de `experiments.baseUrl` no `mobile/app.json`, e `404.html` é cópia do `index.html` (fallback de SPA).
 - **Backend:** não há Dockerfile nem pipeline de deploy no repositório; rode `pnpm start` no ambiente de destino.
 
 ## Gates de CI

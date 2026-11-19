@@ -1,0 +1,23 @@
+name: Deploy GitHub Pages
+
+on:
+  push:
+    branches: [master]
+    paths: ['mobile/**', '.github/workflows/pages.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  pages:
+    uses: juninmd/base-actions/.github/workflows/reusable-pages.yml@main
+    with:
+      build-command: >-
+        cd mobile &&
+        npx -y pnpm@10.34.5 install --frozen-lockfile &&
+        npx expo export -p web &&
+        cp dist/index.html dist/404.html
+      artifact-path: mobile/dist
