@@ -323,6 +323,18 @@ describe('Error Handler', () => {
     consoleErrorSpy.mockRestore();
   });
 
+  it('não expõe a rota de erro de teste em produção (404)', async () => {
+    // A rota é registrada na importação, então o app precisa ser carregado já em produção.
+    process.env.NODE_ENV = 'production';
+    let prodApp: typeof app | undefined;
+    jest.isolateModules(() => {
+      prodApp = require('../src/index');
+    });
+    const res = await request(prodApp!).get('/api/test-error');
+    expect(res.statusCode).toBe(404);
+    expect(res.body.error).toBe('Not Found');
+  });
+
   it('responde com a mensagem de erro quando NODE_ENV === "development"', async () => {
     process.env.NODE_ENV = 'development';
     const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
