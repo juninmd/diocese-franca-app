@@ -13,3 +13,9 @@ export const noStore: RequestHandler = (req, res, next) => {
   res.set('Cache-Control', 'no-store');
   next();
 };
+
+// Resposta com tempo relativo ao agora (próxima missa em N minutos): o cliente sempre revalida.
+export const noCache: RequestHandler = (req, res, next) => {
+  res.set('Cache-Control', 'no-cache');
+  next();
+};

@@ -1,5 +1,6 @@
 import express from 'express';
 import { getCatalog } from '../utils/catalog';
+import { noCache } from '../middleware/cache';
 import { validateId, validateCoords } from '../middleware/validation';
 import { distanceInKm } from '../utils/geo';
 import { findNextMass } from '../utils/nextMass';
@@ -21,7 +22,7 @@ router.get('/', (req, res) => {
 });
 
 // Rota registrada antes de "/:id" para não ser capturada por validateId('id').
-router.get('/nearby', validateCoords, (req, res) => {
+router.get('/nearby', validateCoords, noCache, (req, res) => {
   // validateCoords sempre preenche req.coords antes de chegar aqui.
   const { latitude, longitude } = req.coords!;
   const { churches, massesByChurch } = getCatalog();
@@ -46,7 +47,7 @@ router.get('/nearby', validateCoords, (req, res) => {
   });
 });
 
-router.get('/:id', validateId('id'), (req, res) => {
+router.get('/:id', validateId('id'), noCache, (req, res) => {
   const churchId = parseInt(String(req.params.id));
   const { churchesById, massesByChurch, priests } = getCatalog();
   const church = churchesById.get(churchId);
