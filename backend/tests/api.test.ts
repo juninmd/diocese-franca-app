@@ -270,6 +270,18 @@ describe('Cache HTTP e news', () => {
     expect(second.statusCode).toBe(304);
   });
 
+  it('respostas com "próxima missa" relativa ao agora não ficam em cache', async () => {
+    // startsInMinutes congela na hora da resposta: servida de cache, a contagem regressiva fica atrasada.
+    const nearby = await request(app).get('/api/churches/nearby?lat=-20.53&lng=-47.4');
+    expect(nearby.body.nearest.nextMass).toHaveProperty('startsInMinutes');
+    expect(nearby.headers['cache-control']).toBe('no-cache');
+    const id = nearby.body.nearest.id;
+    const detail = await request(app).get(`/api/churches/${id}`);
+    expect(detail.headers['cache-control']).toBe('no-cache');
+    // o catálogo continua com cache longo
+    expect((await request(app).get('/api/churches')).headers['cache-control']).toMatch(/max-age=300/);
+  });
+
   it('GET /api/news devolve notícias com data de atualização', async () => {
     const res = await request(app).get('/api/news');
     expect(res.statusCode).toBe(200);
