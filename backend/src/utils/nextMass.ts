@@ -25,12 +25,19 @@ const formatterFor = (timeZone: string): Intl.DateTimeFormat => {
   return formatter;
 };
 
-// Dia da semana e minuto do dia de `date` no fuso informado.
+// Dia da semana e minuto do dia de `date` no fuso informado. O resultado só muda a cada minuto
+// (fusos têm deslocamento em minutos inteiros) e /nearby pergunta o mesmo minuto para cada igreja:
+// guarda a última resposta para não repetir o formatToParts, que domina o custo da rota.
+let lastClock: { key: string; clock: { day: number; minutes: number } } | null = null;
 const clockIn = (date: Date, timeZone: string): { day: number; minutes: number } => {
+  const key = `${Math.floor(date.getTime() / 60000)}|${timeZone}`;
+  if (lastClock?.key === key) return lastClock.clock;
   const parts = formatterFor(timeZone)
     .formatToParts(date)
     .reduce<Record<string, string>>((acc, p) => ({ ...acc, [p.type]: p.value }), {});
-  return { day: WEEKDAYS.indexOf(parts.weekday), minutes: Number(parts.hour) * 60 + Number(parts.minute) };
+  const clock = { day: WEEKDAYS.indexOf(parts.weekday), minutes: Number(parts.hour) * 60 + Number(parts.minute) };
+  lastClock = { key, clock };
+  return clock;
 };
 
 /**
