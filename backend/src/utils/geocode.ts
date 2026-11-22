@@ -81,10 +81,12 @@ export async function addressCoords(
     if (cached && (cached.address === church.address || cached.manual)) continue;
     const center = cityCoords[`${church.city}|${church.state}`];
     let hit: [number, number] | null = null;
+    let failed = false;
     for (const query of queriesFor(church)) {
       try {
         hit = await lookup(query, center);
       } catch (error) {
+        failed = true;
         log.warn(`Geocode falhou para ${church.name}: ${(error as Error).message}`);
       }
       await sleep(delayMs);
@@ -93,7 +95,8 @@ export async function addressCoords(
     if (hit) {
       cache[key] = { address: church.address, latitude: hit[0], longitude: hit[1] };
       changed = true;
-    } else if (cached) {
+    } else if (cached && !failed) {
+      // falha de rede não prova que o endereço não existe: mantém o cache e tenta na próxima
       delete cache[key]; // endereço mudou e o novo não foi encontrado: volta ao centro da cidade
       changed = true;
     }
