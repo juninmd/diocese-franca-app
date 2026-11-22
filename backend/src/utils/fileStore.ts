@@ -9,7 +9,11 @@ export function readJson<T = unknown>(file: string): T | undefined;
 export function readJson<T>(file: string, fallback?: T): T | undefined {
   try {
     return JSON.parse(fs.readFileSync(path.join(DATA_DIR, file), 'utf8')) as T;
-  } catch {
+  } catch (error) {
+    // Ausente é esperado; ilegível ou corrompido precisa aparecer no log, senão a API serve o fallback calada.
+    if ((error as NodeJS.ErrnoException).code !== 'ENOENT') {
+      console.error(`[data] ${file} ilegível, usando o valor padrão: ${(error as Error).message}`);
+    }
     return fallback;
   }
 }

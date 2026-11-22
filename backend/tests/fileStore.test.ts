@@ -44,3 +44,27 @@ describe('readCached', () => {
     expect(readCached(FILE, [], 0)).toEqual([1, 2]);
   });
 });
+
+describe('readJson', () => {
+  it('avisa no log quando o JSON está corrompido em vez de servir o fallback em silêncio', () => {
+    // Um churches.json truncado deixava a API respondendo listas vazias sem nenhum sinal.
+    const error = jest.spyOn(console, 'error').mockImplementation(() => undefined);
+    try {
+      fs.writeFileSync(target, '[{"id": 1,');
+      expect(readJson(FILE, [])).toEqual([]);
+      expect(error).toHaveBeenCalledWith(expect.stringContaining(FILE));
+    } finally {
+      error.mockRestore();
+    }
+  });
+
+  it('arquivo ausente usa o fallback sem log de erro', () => {
+    const error = jest.spyOn(console, 'error').mockImplementation(() => undefined);
+    try {
+      expect(readJson(FILE, ['vazio'])).toEqual(['vazio']);
+      expect(error).not.toHaveBeenCalled();
+    } finally {
+      error.mockRestore();
+    }
+  });
+});
