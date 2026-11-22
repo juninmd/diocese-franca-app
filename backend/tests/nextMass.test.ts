@@ -65,4 +65,10 @@ describe('findNextMass', () => {
     const tokyo = () => findNextMass(masses, now, 'Asia/Tokyo')!.startsInMinutes;
     expect([sp(), tokyo(), sp()]).toEqual([30, 36 * 60 + 30, 30]);
   });
+
+  it('relê o relógio quando o minuto muda (cache do último minuto)', () => {
+    const at = (iso: string) => findNextMass(masses, new Date(iso))!.startsInMinutes;
+    expect([at('2024-01-03T19:00:10-03:00'), at('2024-01-03T19:00:59-03:00'), at('2024-01-03T19:01:00-03:00')])
+      .toEqual([0, 0, 2 * 24 * 60 - 1]);
+  });
 });
